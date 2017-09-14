@@ -34,7 +34,8 @@ CSC490_React
 now, from the CSC490_React folder, npm install to get all the node modules installed
 at this point you can type "npm start" and webpack will build in dev mode and you can edit the code and see changes in the browser at port 8080
 
-in order to build the code for production, run "webpack" from the CSC490_React folder, and it will update the dist/ folder in projectGit/CSC490-Project/dist
+
+in order to build the code for production, first comment out the marked code lines in src/index.js and webpack.config.js then run "webpack" from the CSC490_React folder, and it will update the dist/ folder in projectGit/CSC490-Project/dist
 now you can move into the CSC490-Project folder:
    - 'git pull' to make sure you have the latest changes from the group project
    - 'git add .' to include the contents of the dist/ folder that were just updated
