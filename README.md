@@ -36,9 +36,9 @@ at this point you can type "npm start" and webpack will build in dev mode and yo
 
 in order to build the code for production, run "webpack" from the CSC490_React folder, and it will update the dist/ folder in projectGit/CSC490-Project/dist
 now you can move into the CSC490-Project folder:
-    'git pull' to make sure you have the latest changes from the group project
-    'git add .' to include the contents of the dist/ folder that were just updated
-    'git commit -m "some short relevant message"' to commit files
-    'git push -u origin master' to upload the pulled files plus the new dist/ contents to the main group repo
+   - 'git pull' to make sure you have the latest changes from the group project
+   - 'git add .' to include the contents of the dist/ folder that were just updated
+   - 'git commit -m "some short relevant message"' to commit files
+   - 'git push -u origin master' to upload the pulled files plus the new dist/ contents to the main group repo
 
 This should all work! If it doesn't, or there is any confusion at all, let me know and we'll figure it out.
