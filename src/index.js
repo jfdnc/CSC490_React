@@ -9,4 +9,4 @@ ReactDOM.render(
 );
 
 //comment out before building
-module.hot.accept();
+//module.hot.accept();

@@ -1,9 +1,9 @@
 module.exports = {
   entry: [
-    //comment out two lines before building
+    /**comment out two lines before building
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
-    //
+    **/
     './src/index.js'
   ],
   module: {
@@ -11,7 +11,13 @@ module.exports = {
       test: /.\jsx?$/,
       exclude: /node_modules/,
       loader: 'react-hot-loader!babel-loader'
-    }]
+    },{
+    test: /\.(jpg|png|svg)$/,
+    loader: 'file-loader',
+    options: {
+      name: '[path][name].[hash].[ext]',
+    },
+},]
   },
   resolve: {
     extensions: ['*', '.js', '.jsx']

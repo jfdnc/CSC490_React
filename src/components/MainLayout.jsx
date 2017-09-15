@@ -2,10 +2,10 @@ import React from 'react'
 import DropDown from './DropDown.jsx'
 import ContentContainer from './ContentContainer.jsx'
 import { Glyphicon } from 'react-bootstrap'
+import gso_bg from '../assets/gso_downtown.jpg'
 
 export default class MainLayout extends React.Component {
   constructor(props){
-    console.log(props)
     super(props)
     this.state = {
       menuVisible: false,
@@ -17,12 +17,19 @@ export default class MainLayout extends React.Component {
     this.toggleMenu = this.toggleMenu.bind(this)
   }
 
+  componentDidMount(){
+    document.getElementById("splash").style.backgroundImage = `url(${gso_bg})`
+  }
+
   toggleMenu(){
+    var dropDownMenu = document.getElementById("dropdown-menu")
     if(this.state.menuVisible){
-      document.getElementById("dropdown-menu").style.display = "none"
+      dropDownMenu.style.display = "none"
+      dropDownMenu.style.height = "0px"
       this.setState({menuVisible:!this.state.menuVisible,dropdownGlyph:"align-justify"})
     } else {
-      document.getElementById("dropdown-menu").style.display = "initial"
+      dropDownMenu.style.display = "initial"
+      dropDownMenu.style.height = "180px"
       this.setState({menuVisible:!this.state.menuVisible,dropdownGlyph:"remove"})
     }
   }
@@ -44,12 +51,12 @@ export default class MainLayout extends React.Component {
         <ContentContainer />
         <div id="footer">
           <div id="footer-links">
-            <div id="footer-about">About</div>
-            <div id="footer-contact">Contact</div>
-            <div id="footer-tou">Terms of Use</div>
+            <div id="footer-about" className="footer-link">About</div>
+            <div id="footer-contact" className="footer-link">Contact</div>
+            <div id="footer-tou" className="footer-link">Terms of Use</div>
             <div id="social-links">
-              <div id="fb-link" className="social-link"></div>
-              <div id="tw-link" className="social-link"></div>
+              <div id="fb-link" className="social-link"><i className="fa fa-facebook-square"/></div>
+              <div id="tw-link" className="social-link"><i className="fa fa-twitter-square"/></div>
             </div>
           </div>
           <div id="footer-side-info">
