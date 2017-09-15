@@ -1,5 +1,10 @@
 import React from 'react'
-import { Glyphicon } from 'react-bootstrap'
+import { Glyphicon, Modal } from 'react-bootstrap'
+import Register from './Register.jsx'
+import Login from './Login.jsx'
+import About from './About.jsx'
+import Contact from './Contact.jsx'
+
 
 export default class DropDown extends React.Component{
   constructor(props){
@@ -7,15 +12,26 @@ export default class DropDown extends React.Component{
     this.state = {
       menuItemExpanded: false,
       dropdownGlyph: "chevron-right",
+      modalContent: null
     }
 
     this.menuClick = this.menuClick.bind(this)
-    this.setChevron = this.setChevron.bind(this)
+    this.updateDropdown = this.updateDropdown.bind(this)
     this.removeMenuItems = this.removeMenuItems.bind(this)
     this.expandRegister = this.expandRegister.bind(this)
     this.expandLogin = this.expandLogin.bind(this)
     this.expandAbout = this.expandAbout.bind(this)
     this.expandContact = this.expandContact.bind(this)
+  }
+
+  componentDidMount(){
+    var ddicon = document.getElementById("dropdown-menu-icon")
+    ddicon.addEventListener("click", () => {
+      if(this.props.menuVisible){
+        this.setState({menuItemExpanded: false})
+        this.updateDropdown(this.state.menuItemExpanded)
+      }
+    })
   }
 
   componentWillReceiveProps(props){
@@ -25,7 +41,7 @@ export default class DropDown extends React.Component{
   }
 
   menuClick(item){
-    this.setChevron(!this.state.menuItemExpanded)
+    this.updateDropdown(!this.state.menuItemExpanded)
     this.setState({menuItemExpanded: !this.state.menuItemExpanded})
     var menu_ids = ["menu-reg","menu-log","menu-abt","menu-con"]
     switch(item){
@@ -35,6 +51,7 @@ export default class DropDown extends React.Component{
       } else {
       this.replaceMenuItems(menu_ids.filter(id => id != "menu-reg"))
       }
+      this.expandRegister()
       break
       case "login":
       if(!this.state.menuItemExpanded){
@@ -42,6 +59,7 @@ export default class DropDown extends React.Component{
       } else {
       this.replaceMenuItems(menu_ids.filter(id => id != "menu-log"))
       }
+      this.expandLogin()
       break
       case "about":
       if(!this.state.menuItemExpanded){
@@ -49,6 +67,7 @@ export default class DropDown extends React.Component{
       } else {
       this.replaceMenuItems(menu_ids.filter(id => id != "menu-abt"))
       }
+      this.expandAbout()
       break
       case "contact":
       if(!this.state.menuItemExpanded){
@@ -56,12 +75,22 @@ export default class DropDown extends React.Component{
       } else {
       this.replaceMenuItems(menu_ids.filter(id => id != "menu-con"))
       }
+      this.expandContact()
       break
     }
   }
 
-  setChevron(menuExpanded){
+  updateDropdown(menuExpanded){
+    var dropDown, contentIds
+
     this.setState({dropdownGlyph: menuExpanded ? "chevron-down" : "chevron-right"})
+    dropDown = document.getElementById("dropdown-menu")
+    dropDown.style.height = menuExpanded ? "100vh" : "180px"
+    dropDown.style.background = menuExpanded ? "rgba(0,0,0,0.7)" : "#fff"
+    contentIds = ["content-div", "splash" , "footer"]
+    contentIds.map(id => {
+      document.getElementById(id).style.filter = menuExpanded ? "blur(5px)" : "none"
+    })
   }
 
   removeMenuItems(ids){
@@ -76,16 +105,16 @@ export default class DropDown extends React.Component{
   }
 
   expandRegister(ids){
-
+    this.setState({modalContent: <Register />})
   }
   expandLogin(ids){
-
+    this.setState({modalContent: <Login />})
   }
   expandAbout(ids){
-
+    this.setState({modalContent: <About />})
   }
   expandContact(ids){
-
+    this.setState({modalContent: <Contact />})
   }
 
   render(){
@@ -96,6 +125,11 @@ export default class DropDown extends React.Component{
           <div className="list-item" id="menu-log" onClick={() => this.menuClick("login")}>Log In   <Glyphicon glyph={this.state.dropdownGlyph} className="pull-right"/></div>
           <div className="list-item" id="menu-abt" onClick={() => this.menuClick("about")}>About    <Glyphicon glyph={this.state.dropdownGlyph} className="pull-right"/></div>
           <div className="list-item" id="menu-con" onClick={() => this.menuClick("contact")}>Contact  <Glyphicon glyph={this.state.dropdownGlyph} className="pull-right"/></div>
+          <Modal id="menu-modal" backdrop={false} animation={false} show={this.state.menuItemExpanded}>
+            <Modal.Body>
+              {this.state.modalContent}
+            </Modal.Body>
+          </Modal>
         </div>
       </div>
     )

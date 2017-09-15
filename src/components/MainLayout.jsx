@@ -1,7 +1,7 @@
 import React from 'react'
 import DropDown from './DropDown.jsx'
 import ContentContainer from './ContentContainer.jsx'
-import { Glyphicon } from 'react-bootstrap'
+import { Glyphicon, Collapse } from 'react-bootstrap'
 import gso_bg from '../assets/gso_downtown.jpg'
 
 export default class MainLayout extends React.Component {
@@ -10,7 +10,7 @@ export default class MainLayout extends React.Component {
     this.state = {
       menuVisible: false,
       dropdownGlyph: "align-justify",
-      message: "eVol is super awesome!",
+      message: <em>'eVol is super awesome!' - The Dalai Lama</em>,
       appName: props.name
     }
 
@@ -48,7 +48,7 @@ export default class MainLayout extends React.Component {
         </div>
 
         <div id="splash">
-          <div id="splash-message">{this.state.appName}</div>
+          <div id="splash-message">{this.state.message}</div>
         </div>
         <ContentContainer />
         <div id="footer">
