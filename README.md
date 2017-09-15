@@ -11,25 +11,25 @@ To build and upload React code to the main group project:
 at this point, your file structure should look like this:
 
 CSC490_React
-    node_modules/
-        ...(lots of modules)
-    src/
-        components/
-            ...(several React files)
-        index.js
-    projectGit/
-        CSC490-Project
-            dist/
-                bundle.js
-                index.css
-                index.html
-            node_modules
-            index.js
-            package.json
-    .gitignore (which is ignoring projectGit)
-    README.md
-    package.json
-    webpack.config.js
+   - node_modules/
+       - ...(lots of modules)
+   - src/
+       - components/
+           - ...(several React files)
+       - index.js
+   - projectGit/
+       - CSC490-Project
+           - dist/
+               - bundle.js
+               - index.css
+               - index.html
+           - node_modules
+           - index.js
+           - package.json
+   - .gitignore (which is ignoring projectGit)
+   - README.md
+   - package.json
+   - webpack.config.js
 
 now, from the CSC490_React folder, npm install to get all the node modules installed
 at this point you can type "npm start" and webpack will build in dev mode and you can edit the code and see changes in the browser at port 8080
