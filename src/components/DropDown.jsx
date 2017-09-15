@@ -87,7 +87,7 @@ export default class DropDown extends React.Component{
     dropDown = document.getElementById("dropdown-menu")
     dropDown.style.height = menuExpanded ? "100vh" : "180px"
     dropDown.style.background = menuExpanded ? "rgba(0,0,0,0.7)" : "#fff"
-    contentIds = ["content-div", "splash" , "footer"]
+    contentIds = ["content-div", "splash", "log-buttons" , "footer"]
     contentIds.map(id => {
       document.getElementById(id).style.filter = menuExpanded ? "blur(5px)" : "none"
     })

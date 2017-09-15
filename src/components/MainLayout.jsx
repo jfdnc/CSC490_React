@@ -9,6 +9,8 @@ export default class MainLayout extends React.Component {
     super(props)
     this.state = {
       menuVisible: false,
+      regJump: false,
+      logJump: false,
       dropdownGlyph: "align-justify",
       message: <em>'eVol is super awesome!' - The Dalai Lama</em>,
       appName: props.name
@@ -21,7 +23,15 @@ export default class MainLayout extends React.Component {
     document.getElementById("splash").style.backgroundImage = `url(${gso_bg})`
   }
 
-  toggleMenu(){
+  toggleMenu(jmp){
+    if(jmp == "reg"){
+      this.setState({regJump: true})
+    } else if(jmp == "log"){
+      this.setState({logJump: true})
+    } else {
+      this.setState({regJump: false, logJump: false})
+    }
+
     var dropDownMenu = document.getElementById("dropdown-menu"),
         menu_ids = ["menu-reg","menu-log","menu-abt","menu-con"]
     if(this.state.menuVisible){
@@ -44,11 +54,15 @@ export default class MainLayout extends React.Component {
           <div id="dropdown-menu-icon" onClick={this.toggleMenu}>
             <Glyphicon glyph={this.state.dropdownGlyph}/>
           </div>
-          <DropDown menuVisible={this.state.menuVisible}/>
+          <DropDown menuVisible={this.state.menuVisible} regJump={this.state.regJump} logJump={this.state.logJump}/>
         </div>
 
         <div id="splash">
           <div id="splash-message">{this.state.message}</div>
+        </div>
+        <div id="log-buttons">
+          <div id="sign-up" className="log-button" onClick={() => this.toggleMenu("reg")}>Sign Up</div>
+          <div id="log-in" className="log-button"  onClick={() => this.toggleMenu("log")}>Log In</div>
         </div>
         <ContentContainer />
         <div id="footer">
