@@ -94,7 +94,6 @@ export default class CategoryCarousel extends React.Component{
   }
 
   render(){
-    console.log(this.state.currCategory)
     return(
       <div id="category-carousel">
       <div id="carousel-header">I want to help...</div>

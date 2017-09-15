@@ -22,7 +22,8 @@ export default class MainLayout extends React.Component {
   }
 
   toggleMenu(){
-    var dropDownMenu = document.getElementById("dropdown-menu")
+    var dropDownMenu = document.getElementById("dropdown-menu"),
+        menu_ids = ["menu-reg","menu-log","menu-abt","menu-con"]
     if(this.state.menuVisible){
       dropDownMenu.style.display = "none"
       dropDownMenu.style.height = "0px"
@@ -30,6 +31,7 @@ export default class MainLayout extends React.Component {
     } else {
       dropDownMenu.style.display = "initial"
       dropDownMenu.style.height = "180px"
+      menu_ids.map(id => document.getElementById(id).style.display = "block")
       this.setState({menuVisible:!this.state.menuVisible,dropdownGlyph:"remove"})
     }
   }
@@ -42,7 +44,7 @@ export default class MainLayout extends React.Component {
           <div id="dropdown-menu-icon" onClick={this.toggleMenu}>
             <Glyphicon glyph={this.state.dropdownGlyph}/>
           </div>
-          <DropDown />
+          <DropDown menuVisible={this.state.menuVisible}/>
         </div>
 
         <div id="splash">
