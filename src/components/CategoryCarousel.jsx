@@ -106,11 +106,12 @@ export default class CategoryCarousel extends React.Component{
   }
   submitZipSearch(e){
     e.preventDefault()
+    console.log('TestStore contents before update',this.state.testData)
     //timeout simulate wait for server talk
     setTimeout(()=>{
-      testAction('something!')
-      console.log(this.state.testData)
-    }, 2000)
+      testAction('new data')
+      console.log('TestStore contents after update',this.state.testData)
+    }, 4000)
   }
 
   render(){
