@@ -1,5 +1,11 @@
 import React from 'react'
 import { Carousel } from 'react-bootstrap'
+//importing TestStore to receive information
+import TestStore from '../data/TestStore'
+//importing actions to send actions to dispatcher
+import { testAction } from '../actions/TestActions'
+
+//images for carousel
 import paws from '../assets/animals.svg'
 import elderly from '../assets/elderly.svg'
 import homeless from '../assets/homeless.svg'
@@ -21,6 +27,7 @@ export default class CategoryCarousel extends React.Component{
         "kids"
       ],
       currCategoryIndex: 0,
+      testData: TestStore.getAll()
     }
     this.state.currCategory = this.state.volCategories[this.state.currCategoryIndex]
 
@@ -28,6 +35,15 @@ export default class CategoryCarousel extends React.Component{
     this.setCurrentCategory = this.setCurrentCategory.bind(this)
     this.submitZipSearch = this.submitZipSearch.bind(this)
   }
+
+  componentWillMount(){
+    TestStore.on("change", () => {
+      this.setState({
+        testData: TestStore.getAll()
+      })
+    })
+  }
+
   populateCarousel(){
     return(
       <div id="carousel-container" onClick={this.setCurrentCategory}>
@@ -90,7 +106,11 @@ export default class CategoryCarousel extends React.Component{
   }
   submitZipSearch(e){
     e.preventDefault()
-    console.log("sending zip stuff?!?!")
+    //timeout simulate wait for server talk
+    setTimeout(()=>{
+      testAction('something!')
+      console.log(this.state.testData)
+    }, 2000)
   }
 
   render(){

@@ -7,8 +7,6 @@ export default class MainContent extends React.Component{
 
 }
 
-
-
   render(){
     return(
       <div id="main-content-wrap">
