@@ -1,11 +1,26 @@
 import React from 'react'
 import CategoryCarousel from './CategoryCarousel.jsx'
+import VolOpStore from '../data/VolOpStore'
+//importing actions to send actions to dispatcher
+import * as TestActions from '../actions/TestActions'
 
 export default class MainContent extends React.Component{
   constructor(props){
     super(props)
 
+    this.state = {
+      name: "John"
+    }
+
 }
+
+componentWillMount(){
+    VolOpStore.on("change", () => {
+      this.setState({
+        name: VolOpStore.getName()
+      })
+    })
+  }
 
   render(){
     return(
@@ -14,7 +29,7 @@ export default class MainContent extends React.Component{
           <CategoryCarousel />
         </div>
         <div className="main-content">
-          <h1>Cool things happening here!</h1>
+          <h1>{this.state.name}</h1>
         </div>
         <div className="main-content">
           <h1>And also here!</h1>

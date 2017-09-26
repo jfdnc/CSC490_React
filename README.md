@@ -1,5 +1,5 @@
 # CSC490_React
-React code for CSC490 senior project
+React code for CSC490 senior project (FALL 2017)
 
 To build and upload React code to the main group project:
 

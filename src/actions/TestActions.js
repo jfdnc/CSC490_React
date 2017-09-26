@@ -11,3 +11,12 @@ export function testAction(text){
     text
   })
 }
+
+export function changeName(text){
+	console.log("changeName: text="+text)
+  dispatcher.dispatch({
+    //only use actions from ActionTypes - consistent communication!
+    type: ActionTypes.NEW_NAME,
+    text: text
+  })
+}

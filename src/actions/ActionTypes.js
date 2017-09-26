@@ -5,6 +5,7 @@ that can be sent from view components
 
 const ActionTypes = {
   TEST_ACTION: 'TEST_ACTION',
+  NEW_NAME: 'NEW_NAME'
   /* TODO: figure out actual app actions
 
   **ideas**

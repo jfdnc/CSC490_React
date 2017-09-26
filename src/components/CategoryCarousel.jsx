@@ -3,7 +3,7 @@ import { Carousel } from 'react-bootstrap'
 //importing TestStore to receive information
 import TestStore from '../data/TestStore'
 //importing actions to send actions to dispatcher
-import { testAction } from '../actions/TestActions'
+import * as TestActions from '../actions/TestActions'
 
 //images for carousel
 import paws from '../assets/animals.svg'
@@ -107,11 +107,16 @@ export default class CategoryCarousel extends React.Component{
   submitZipSearch(e){
     e.preventDefault()
     console.log('TestStore contents before update',this.state.testData)
+    console.log("text from GUI="+document.getElementById('SearchText').value)
+    TestActions.changeName(document.getElementById('SearchText').value)
+
     //timeout simulate wait for server talk
+    /*
     setTimeout(()=>{
       testAction('new data')
       console.log('TestStore contents after update',this.state.testData)
     }, 4000)
+    */
   }
 
   render(){
@@ -121,7 +126,7 @@ export default class CategoryCarousel extends React.Component{
       {this.populateCarousel()}
         <form id="zip-input-form">
           <div id="zip-wrapper">
-            <input type="text" name="fname"/>
+            <input id="SearchText" type="text" name="fname"/>
             <input type="submit" value="Search" className="btn" onClick={this.submitZipSearch}/>
           </div>
         </form>
