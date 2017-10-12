@@ -10,7 +10,12 @@ const UserActionTypes = {
   LOG_OUT: 'LOG_OUT',
   //display actions
   DISPLAY_ABOUT: 'DISPLAY_ABOUT',
-  DISPLAY_CONTACT: 'DISPLAY_CONTACT'
+  DISPLAY_CONTACT: 'DISPLAY_CONTACT',
+  //user unique actions
+  VIEW_VOLOP_USER: 'VIEW_VOLOP_USER',
+  SAVE_VOLOP: 'SAVE_VOLOP',
+  SHARE_VOLOP: 'SHARE_VOLOP',
+  EDIT_PREFS: 'EDIT_PREFS',
 }
 
 export default UserActionTypes

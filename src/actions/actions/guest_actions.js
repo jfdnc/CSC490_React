@@ -4,37 +4,6 @@ this file will contain actions for UI components to emit
 import dispatcher from '../../data/Dispatcher'
 import GuestActionTypes from '../types/GuestActionTypes'
 
-//display registration page
-export function displayRegister(){
-  dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
-    type: GuestActionTypes.DISPLAY_REGISTER
-  })
-}
-//display login page
-export function displayLogin(){
-  dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
-    type: GuestActionTypes.DISPLAY_LOGIN
-  })
-}
-
-//display about page
-export function displayAbout(){
-  dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
-    type: GuestActionTypes.DISPLAY_ABOUT
-  })
-}
-
-//display contact page
-export function displayContact(){
-  dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
-    type: GuestActionTypes.DISPLAY_CONTACT
-  })
-}
-
 //return t/f on loggedIn state
 export function getLogState(){
   dispatcher.dispatch({
@@ -63,6 +32,38 @@ export function logInUser(){
   })
 }
 
+//display login page
+export function displayLogin(){
+  dispatcher.dispatch({
+    //only use actions from ActionTypes - consistent communication!
+    type: GuestActionTypes.DISPLAY_LOGIN
+  })
+}
+
+//display registration page
+export function displayRegister(){
+  dispatcher.dispatch({
+    //only use actions from ActionTypes - consistent communication!
+    type: GuestActionTypes.DISPLAY_REGISTER
+  })
+}
+
+//display about page
+export function displayAbout(){
+  dispatcher.dispatch({
+    //only use actions from ActionTypes - consistent communication!
+    type: GuestActionTypes.DISPLAY_ABOUT
+  })
+}
+
+//display contact page
+export function displayContact(){
+  dispatcher.dispatch({
+    //only use actions from ActionTypes - consistent communication!
+    type: GuestActionTypes.DISPLAY_CONTACT
+  })
+}
+
 //return volOps object array based on given category and zip
 export function catZipSearch(){
   dispacher.dispatch({
@@ -72,13 +73,14 @@ export function catZipSearch(){
 
 /* to export all functions
 export default {
+  getLogState,
+  getUserType,
+  logInOrg,
+  logInUser,
   displayLogin,
   displayRegister,
   displayAbout,
   displayContact,
-  getLogState,
-  getUserType,
-  logInOrg,
-  logInUser
+  catZipSearch
 }
 */
