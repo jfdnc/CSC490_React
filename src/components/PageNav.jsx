@@ -1,10 +1,10 @@
 import React from 'react'
 import { Glyphicon, Collapse, Modal } from 'react-bootstrap'
-import LogStore from '../data/LogStore'
+import LogStore from '../data/stores/LogStore'
 import { displayRegister,
          displayLogin,
          displayAbout,
-         displayContact } from '../actions/display_actions'
+         displayContact } from '../actions/actions/guest_actions'
 
 export default class PageNav extends React.Component{
   constructor(props){

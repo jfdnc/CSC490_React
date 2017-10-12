@@ -1,5 +1,5 @@
 //for receiving actions via dispatcher
-import dispatcher from './Dispatcher'
+import dispatcher from '../Dispatcher'
 //for emitting events to UI components concerned with this store
 import { EventEmitter } from 'events'
 

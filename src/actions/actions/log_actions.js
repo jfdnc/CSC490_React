@@ -2,7 +2,7 @@
 this file will contain actions for UI components to emit
 */
 import dispatcher from '../data/Dispatcher'
-import ActionTypes from './ActionTypes'
+import ActionTypes from '../types/ActionTypes'
 
 //return t/f on loggedIn state
 export function getLogState(){
@@ -38,7 +38,7 @@ export function logOut(){
   })
 }
 
-/*
+/* to export all functions
 export default {
   getLogState,
   getUserType,

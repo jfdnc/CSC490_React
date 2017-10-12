@@ -1,5 +1,5 @@
 import React from 'react'
-import LogStore from '../data/LogStore'
+import LogStore from '../data/stores/LogStore'
 import PageNav from './PageNav'
 import { Glyphicon } from 'react-bootstrap'
 import GuestView from './GuestView'
