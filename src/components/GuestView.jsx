@@ -7,6 +7,11 @@ export default class GuestView extends React.Component{
       <div id='guest-view' className='view-container'>
         <h1>Guest Home View</h1>
         <CategoryCarousel />
+                <CategoryCarousel />
+                        <CategoryCarousel />
+                                <CategoryCarousel />
+                                        <CategoryCarousel />
+                                                <CategoryCarousel />
       </div>
     )
   }

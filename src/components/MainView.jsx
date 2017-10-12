@@ -10,6 +10,8 @@ import Login from './Login'
 import About from './About'
 import Contact from './Contact'
 
+import { BrowserRouter,Route } from 'react-router-dom'
+
 
 export default class MainView extends React.Component {
   constructor(props){
