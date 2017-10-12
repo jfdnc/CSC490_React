@@ -72,6 +72,7 @@ export default class MainView extends React.Component {
   }
 
   toggleMenu(){
+    document.getElementById('menu').style.visibility = 'visible'
   }
 
   render(){
@@ -84,8 +85,9 @@ export default class MainView extends React.Component {
               <Glyphicon glyph="align-justify"/>
             </div>
         </div>
-
-        {this.state.currentView}
+        <div id="content-container">
+          {this.state.currentView}
+        </div>
 
         <div id="footer-wrap">
           <div id="footer-links">
