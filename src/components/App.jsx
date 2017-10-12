@@ -1,11 +1,11 @@
 import React from 'react'
-import MainLayout from './MainLayout.jsx'
+import MainView from './MainView.jsx'
 
 export default class App extends React.Component {
   render(){
     return(
       <div id='app-container'>
-        <MainLayout name="eVol" />
+        <MainView name="eVol" />
       </div>
     )
   }

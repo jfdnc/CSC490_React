@@ -8,7 +8,7 @@ export default class Contact extends React.Component {
 
   render(){
     return(
-      <div>
+      <div id='contact-view' className='view-container'>
         CONTACT PAGE GOES HERE
       </div>
     )

@@ -8,7 +8,7 @@ export default class About extends React.Component {
 
   render(){
     return(
-      <div>
+      <div id='about-view' className='view-container'>
         ABOUT PAGE GOES HERE
       </div>
     )

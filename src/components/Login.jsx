@@ -8,7 +8,7 @@ export default class Login extends React.Component {
 
   render(){
     return(
-      <div>
+      <div id='login-view' className='view-container'>
         LOGIN PAGE GOES HERE
       </div>
     )

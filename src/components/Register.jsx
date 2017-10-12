@@ -8,7 +8,7 @@ export default class Register extends React.Component {
 
   render(){
     return(
-      <div>
+      <div id='register-view' className='view-container'>
         REGISTRATION PAGE GOES HERE
       </div>
     )

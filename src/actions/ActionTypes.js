@@ -4,20 +4,16 @@ that can be sent from view components
 */
 
 const ActionTypes = {
-  TEST_ACTION: 'TEST_ACTION',
-  /* TODO: figure out actual app actions
-
-  **ideas**
-  CAT_ZIP_SEARCH
-  REGISTER_NEW
-  REGISTER_NEW_FB
-  LOG_IN
-  LOG_IN_FB
-  LOG_OUT
-  UPDATE_USER_INFO
-  SAVE_VOL_OP
-
-  */
+  //Log actions
+  GET_LOG_STATE: 'GET_LOG_STATE',
+  GET_USER_TYPE: 'GET_USER_TYPE',
+  LOG_IN_ORG: 'LOG_IN_ORG',
+  LOG_IN_USER: 'LOG_IN_USER',
+  LOG_OUT: 'LOG_OUT',
+  DISPLAY_LOGIN: 'DISPLAY_LOGIN',
+  DISPLAY_REGISTER: 'DISPLAY_REGISTER',
+  DISPLAY_ABOUT: 'DISPLAY_ABOUT',
+  DISPLAY_CONTACT: 'DISPLAY_CONTACT'
 }
 
 export default ActionTypes
