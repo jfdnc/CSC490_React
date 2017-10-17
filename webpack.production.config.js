@@ -14,14 +14,26 @@ var config = {
         filename: 'bundle.js'
     },
     module: {
-        loaders: [{
-            test: /\.jsx$/,
-            loader: 'babel-loader',
-            exclude: [nodeModulesPath]
-        },{
-            test: /\.css$/,
-            loader: 'style!css'
-        }]
+        loaders: [
+            {
+                test: /\.jsx?$/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015', 'react']
+                },
+                exclude: [nodeModulesPath]
+            },
+            {
+                test: /\.css$/,
+                loader: 'style!css'
+            },
+            {
+                test: /\.(jpg|png|svg)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[hash].[ext]'
+                }
+            }]
     }
 };
 
