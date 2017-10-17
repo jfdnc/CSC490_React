@@ -1,5 +1,5 @@
 import React from 'react'
-import LogStore from '../data/stores/LogStore'
+import DisplayStore from '../data/stores/DisplayStore'
 import PageNav from './PageNav'
 import { Glyphicon } from 'react-bootstrap'
 import GuestView from './GuestView'
@@ -9,32 +9,42 @@ import Register from './Register'
 import Login from './Login'
 import About from './About'
 import Contact from './Contact'
+import { displayHome,
+         displayAbout,
+         displayContact } from '../actions/actions/display_actions'
 
 import { BrowserRouter,Route } from 'react-router-dom'
+import { CSSTransition } from 'react-transition-group'
 
 
 export default class MainView extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      loggedIn: LogStore.getLogState(),
-      userType: LogStore.getUserType(),
+      loggedIn: DisplayStore.getLogState(),
+      userType: DisplayStore.getUserType(),
       menuOpen: false,
     }
 
     this.loadView = this.loadView.bind(this)
     this.toggleMenu = this.toggleMenu.bind(this)
-    this.displayHome = this.displayHome.bind(this)
+    this.logMain = this.logMain.bind(this)
+  }
+
+  //for debugging in main window -- REMOVE for general use
+  logMain(){
+    console.log(this.state)
+    this.toggleMenu()
   }
 
   componentWillMount(){
     this.setState({currentView: this.loadView()})
 
-    LogStore.on("change", () => {
+    DisplayStore.on("change", () => {
       this.setState({
-        loggedIn: LogStore.getLogState(),
-        userType: LogStore.getUserType(),
-        currentView: this.loadView(LogStore.getUserType())
+        loggedIn: DisplayStore.getLogState(),
+        userType: DisplayStore.getUserType(),
+        currentView: this.loadView(DisplayStore.getUserType())
       })
     })
   }
@@ -67,10 +77,6 @@ export default class MainView extends React.Component {
     }
   }
 
-  displayHome(){
-    LogStore.displayHome('guest')
-  }
-
   toggleMenu(){
     document.getElementById('menu').style.visibility = 'visible'
   }
@@ -79,20 +85,22 @@ export default class MainView extends React.Component {
     return(
       <div id='main-container'>
         <div id="header-wrap">
-            <div id="header-logo" onClick={this.displayHome} >{this.props.name}</div>
+            <div id="header-logo" onClick={displayHome} >{this.props.name}</div>
+            <button style={{'highlightSelect':'none','boxShadow':'none','border':'none','background':'red','width':'20px','height':'10px', 'position':'absolute'}}onClick={this.logMain}></button>
             <PageNav />
             <div id="menu-icon" onClick={this.toggleMenu}>
               <Glyphicon glyph="align-justify"/>
             </div>
         </div>
+
         <div id="content-container">
           {this.state.currentView}
         </div>
 
         <div id="footer-wrap">
           <div id="footer-links">
-            <div id="footer-about" className="footer-link">About</div>
-            <div id="footer-contact" className="footer-link">Contact</div>
+            <div id="footer-about" className="footer-link" onClick={displayAbout}>About</div>
+            <div id="footer-contact" className="footer-link" onClick={displayContact}>Contact</div>
             <div id="footer-tou" className="footer-link">Terms of Use</div>
             <div id="social-links">
               <div id="fb-link" className="social-link"><i className="fa fa-facebook-square"/></div>

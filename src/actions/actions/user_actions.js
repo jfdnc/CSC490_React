@@ -26,22 +26,6 @@ export function logOut(){
   })
 }
 
-//display about page
-export function displayAbout(){
-  dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
-    type: UserActionTypes.DISPLAY_ABOUT
-  })
-}
-
-//display contact page
-export function displayContact(){
-  dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
-    type: UserActionTypes.DISPLAY_CONTACT
-  })
-}
-
 //return more info about selected volop for user view
 export function viewVolopUser(){
   dispatcher.dispatch({
@@ -75,8 +59,6 @@ export default {
   getLogState,
   getUserType,
   logOut,
-  displayAbout,
-  displayContact,
   viewVolopUser,
   saveVolop,
   shareVolop,

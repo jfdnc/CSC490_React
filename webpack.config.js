@@ -30,5 +30,5 @@ module.exports = {
   devServer: {
     contentBase: './projectGit/CSC490-Project/dist',
     hot: true
-  }
+  },
 };

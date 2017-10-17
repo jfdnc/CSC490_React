@@ -26,22 +26,6 @@ export function logOut(){
   })
 }
 
-//display about page
-export function displayAbout(){
-  dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
-    type: OrgActionTypes.DISPLAY_ABOUT
-  })
-}
-
-//display contact page
-export function displayContact(){
-  dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
-    type: OrgActionTypes.DISPLAY_CONTACT
-  })
-}
-
 //display contact page
 export function createVolop(){
   dispatcher.dispatch({
@@ -94,13 +78,11 @@ export function editOrgInfo(){
 
 }
 
-/* to export all functions
+/*to export all functions
 export default {
   getLogState,
   getUserType,
   logOut,
-  displayAbout,
-  displayContact,
   createVolop,
   deleteVolop,
   updateVolop,
@@ -109,4 +91,3 @@ export default {
   VIEW_ORG_INFO,
   editOrgInfo
 }
-*/

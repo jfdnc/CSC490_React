@@ -1,25 +1,25 @@
 import React from 'react'
 import { Glyphicon, Collapse, Modal } from 'react-bootstrap'
-import LogStore from '../data/stores/LogStore'
+import DisplayStore from '../data/stores/DisplayStore'
 import { displayRegister,
          displayLogin,
          displayAbout,
-         displayContact } from '../actions/actions/guest_actions'
+         displayContact } from '../actions/actions/display_actions'
 
 export default class PageNav extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      userType: LogStore.getUserType(),
+      userType: DisplayStore.getUserType(),
     }
 
     this.handleClick = this.handleClick.bind(this)
   }
 
   componentWillMount(){
-    LogStore.on("change", () => {
+    DisplayStore.on("change", () => {
       this.setState({
-        userType: LogStore.getUserType()
+        userType: DisplayStore.getUserType()
       })
     })
   }

@@ -47,7 +47,7 @@ export default class CategoryCarousel extends React.Component{
           <Carousel.Item>
           <h1>NON-PROFITS</h1>
           <div className="carousel-icon">
-            <i className="fa fa-heart"/>
+            <i className="fa fa-heart" style={{'color':'#000'}}/>
           </div>
           </Carousel.Item>
           <Carousel.Item>
