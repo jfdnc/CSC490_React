@@ -1,6 +1,8 @@
 import React from 'react'
 import CategoryCarousel from './CategoryCarousel'
 import { CSSTransition } from 'react-transition-group'
+import { Button } from 'react-bootstrap'
+import { displayRegister, displayLogin } from '../actions/actions/display_actions'
 
 export default class GuestView extends React.Component{
   render(){
@@ -12,8 +14,13 @@ export default class GuestView extends React.Component{
         classNames="fade"
         timeout={300}>
         <div id='guest-view' className='view-container'>
-          <h1>Guest Home View</h1>
-          <CategoryCarousel />
+          <div id='guest-left'>
+            <Button bsSize='large' onClick={displayRegister}>Register</Button>
+            <Button bsSize='large' onClick={displayLogin}>Log In</Button>
+          </div>
+          <div id='guest-right'>
+            <CategoryCarousel />
+          </div>
         </div>
       </CSSTransition>
     )

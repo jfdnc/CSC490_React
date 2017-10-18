@@ -86,6 +86,7 @@ export default class MainView extends React.Component {
       <div id='main-container'>
         <div id="header-wrap">
             <div id="header-logo" onClick={displayHome} >{this.props.name}</div>
+            {/*log button -- remove later */}
             <button style={{'highlightSelect':'none','boxShadow':'none','border':'none','background':'red','width':'20px','height':'10px', 'position':'absolute'}}onClick={this.logMain}></button>
             <PageNav />
             <div id="menu-icon" onClick={this.toggleMenu}>

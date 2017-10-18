@@ -317,7 +317,12 @@ form>div{
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
-  #guest-view>#category-carousel{
+  #guest-left{
+    position: relative;
+    margin-top: 56px;
+    grid-column: 1;
+  }
+  #guest-right{
     position: relative;
     margin-top: 56px;
     grid-column: 2;
