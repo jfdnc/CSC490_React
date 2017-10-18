@@ -1,20 +1,20 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
 
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _elementType = require('prop-types-extra/lib/elementType');
+
+var _elementType2 = _interopRequireDefault(_elementType);
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
 
 var _Portal = require('./Portal');
 
@@ -27,10 +27,6 @@ var _Position2 = _interopRequireDefault(_Position);
 var _RootCloseWrapper = require('./RootCloseWrapper');
 
 var _RootCloseWrapper2 = _interopRequireDefault(_RootCloseWrapper);
-
-var _elementType = require('react-prop-types/lib/elementType');
-
-var _elementType2 = _interopRequireDefault(_elementType);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51,7 +47,7 @@ var Overlay = function (_React$Component) {
   function Overlay(props, context) {
     _classCallCheck(this, Overlay);
 
-    var _this = _possibleConstructorReturn(this, (Overlay.__proto__ || Object.getPrototypeOf(Overlay)).call(this, props, context));
+    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props, context));
 
     _this.handleHidden = function () {
       _this.setState({ exited: true });
@@ -68,92 +64,87 @@ var Overlay = function (_React$Component) {
     return _this;
   }
 
-  _createClass(Overlay, [{
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      if (nextProps.show) {
-        this.setState({ exited: false });
-      } else if (!nextProps.transition) {
-        // Otherwise let handleHidden take care of marking exited.
-        this.setState({ exited: true });
-      }
+  Overlay.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    if (nextProps.show) {
+      this.setState({ exited: false });
+    } else if (!nextProps.transition) {
+      // Otherwise let handleHidden take care of marking exited.
+      this.setState({ exited: true });
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _props = this.props;
-      var container = _props.container;
-      var containerPadding = _props.containerPadding;
-      var target = _props.target;
-      var placement = _props.placement;
-      var shouldUpdatePosition = _props.shouldUpdatePosition;
-      var rootClose = _props.rootClose;
-      var children = _props.children;
-      var Transition = _props.transition;
+  };
 
-      var props = _objectWithoutProperties(_props, ['container', 'containerPadding', 'target', 'placement', 'shouldUpdatePosition', 'rootClose', 'children', 'transition']);
+  Overlay.prototype.render = function render() {
+    var _props = this.props,
+        container = _props.container,
+        containerPadding = _props.containerPadding,
+        target = _props.target,
+        placement = _props.placement,
+        shouldUpdatePosition = _props.shouldUpdatePosition,
+        rootClose = _props.rootClose,
+        children = _props.children,
+        Transition = _props.transition,
+        props = _objectWithoutProperties(_props, ['container', 'containerPadding', 'target', 'placement', 'shouldUpdatePosition', 'rootClose', 'children', 'transition']);
 
-      // Don't un-render the overlay while it's transitioning out.
+    // Don't un-render the overlay while it's transitioning out.
 
 
-      var mountOverlay = props.show || Transition && !this.state.exited;
-      if (!mountOverlay) {
-        // Don't bother showing anything if we don't have to.
-        return null;
-      }
+    var mountOverlay = props.show || Transition && !this.state.exited;
+    if (!mountOverlay) {
+      // Don't bother showing anything if we don't have to.
+      return null;
+    }
 
-      var child = children;
+    var child = children;
 
-      // Position is be inner-most because it adds inline styles into the child,
-      // which the other wrappers don't forward correctly.
+    // Position is be inner-most because it adds inline styles into the child,
+    // which the other wrappers don't forward correctly.
+    child = _react2.default.createElement(
+      _Position2.default,
+      { container: container, containerPadding: containerPadding, target: target, placement: placement, shouldUpdatePosition: shouldUpdatePosition },
+      child
+    );
+
+    if (Transition) {
+      var onExit = props.onExit,
+          onExiting = props.onExiting,
+          onEnter = props.onEnter,
+          onEntering = props.onEntering,
+          onEntered = props.onEntered;
+
+      // This animates the child node by injecting props, so it must precede
+      // anything that adds a wrapping div.
+
       child = _react2.default.createElement(
-        _Position2.default,
-        { container: container, containerPadding: containerPadding, target: target, placement: placement, shouldUpdatePosition: shouldUpdatePosition },
-        child
-      );
-
-      if (Transition) {
-        var onExit = props.onExit;
-        var onExiting = props.onExiting;
-        var onEnter = props.onEnter;
-        var onEntering = props.onEntering;
-        var onEntered = props.onEntered;
-
-        // This animates the child node by injecting props, so it must precede
-        // anything that adds a wrapping div.
-
-        child = _react2.default.createElement(
-          Transition,
-          {
-            'in': props.show,
-            transitionAppear: true,
-            onExit: onExit,
-            onExiting: onExiting,
-            onExited: this.onHiddenListener,
-            onEnter: onEnter,
-            onEntering: onEntering,
-            onEntered: onEntered
-          },
-          child
-        );
-      }
-
-      // This goes after everything else because it adds a wrapping div.
-      if (rootClose) {
-        child = _react2.default.createElement(
-          _RootCloseWrapper2.default,
-          { onRootClose: props.onHide },
-          child
-        );
-      }
-
-      return _react2.default.createElement(
-        _Portal2.default,
-        { container: container },
+        Transition,
+        {
+          'in': props.show,
+          transitionAppear: true,
+          onExit: onExit,
+          onExiting: onExiting,
+          onExited: this.onHiddenListener,
+          onEnter: onEnter,
+          onEntering: onEntering,
+          onEntered: onEntered
+        },
         child
       );
     }
-  }]);
+
+    // This goes after everything else because it adds a wrapping div.
+    if (rootClose) {
+      child = _react2.default.createElement(
+        _RootCloseWrapper2.default,
+        { onRootClose: props.onHide },
+        child
+      );
+    }
+
+    return _react2.default.createElement(
+      _Portal2.default,
+      { container: container },
+      child
+    );
+  };
 
   return Overlay;
 }(_react2.default.Component);

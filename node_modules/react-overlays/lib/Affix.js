@@ -1,12 +1,8 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _classnames = require('classnames');
 
@@ -32,6 +28,10 @@ var _requestAnimationFrame = require('dom-helpers/util/requestAnimationFrame');
 
 var _requestAnimationFrame2 = _interopRequireDefault(_requestAnimationFrame);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -39,10 +39,6 @@ var _react2 = _interopRequireDefault(_react);
 var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _addEventListener = require('./utils/addEventListener');
 
@@ -78,7 +74,7 @@ var Affix = function (_React$Component) {
   function Affix(props, context) {
     _classCallCheck(this, Affix);
 
-    var _this = _possibleConstructorReturn(this, (Affix.__proto__ || Object.getPrototypeOf(Affix)).call(this, props, context));
+    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props, context));
 
     _this.onWindowScroll = function () {
       _this.onUpdate();
@@ -95,9 +91,9 @@ var Affix = function (_React$Component) {
         return;
       }
 
-      var _this$props = _this.props;
-      var offsetTop = _this$props.offsetTop;
-      var viewportOffsetTop = _this$props.viewportOffsetTop;
+      var _this$props = _this.props,
+          offsetTop = _this$props.offsetTop,
+          viewportOffsetTop = _this$props.viewportOffsetTop;
 
       var scrollTop = (0, _scrollTop2.default)((0, _ownerWindow2.default)(_this));
       var positionTopMin = scrollTop + (viewportOffsetTop || 0);
@@ -175,80 +171,73 @@ var Affix = function (_React$Component) {
     return _this;
   }
 
-  _createClass(Affix, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var _this2 = this;
+  Affix.prototype.componentDidMount = function componentDidMount() {
+    var _this2 = this;
 
-      this._isMounted = true;
+    this._isMounted = true;
 
-      this._windowScrollListener = (0, _addEventListener2.default)((0, _ownerWindow2.default)(this), 'scroll', function () {
-        return _this2.onWindowScroll();
-      });
-      this._documentClickListener = (0, _addEventListener2.default)((0, _ownerDocument2.default)(this), 'click', function () {
-        return _this2.onDocumentClick();
-      });
+    this._windowScrollListener = (0, _addEventListener2.default)((0, _ownerWindow2.default)(this), 'scroll', function () {
+      return _this2.onWindowScroll();
+    });
+    this._documentClickListener = (0, _addEventListener2.default)((0, _ownerDocument2.default)(this), 'click', function () {
+      return _this2.onDocumentClick();
+    });
 
+    this.onUpdate();
+  };
+
+  Affix.prototype.componentWillReceiveProps = function componentWillReceiveProps() {
+    this._needPositionUpdate = true;
+  };
+
+  Affix.prototype.componentDidUpdate = function componentDidUpdate() {
+    if (this._needPositionUpdate) {
+      this._needPositionUpdate = false;
       this.onUpdate();
     }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps() {
-      this._needPositionUpdate = true;
-    }
-  }, {
-    key: 'componentDidUpdate',
-    value: function componentDidUpdate() {
-      if (this._needPositionUpdate) {
-        this._needPositionUpdate = false;
-        this.onUpdate();
-      }
-    }
-  }, {
-    key: 'componentWillUnmount',
-    value: function componentWillUnmount() {
-      this._isMounted = false;
+  };
 
-      if (this._windowScrollListener) {
-        this._windowScrollListener.remove();
-      }
-      if (this._documentClickListener) {
-        this._documentClickListener.remove();
-      }
+  Affix.prototype.componentWillUnmount = function componentWillUnmount() {
+    this._isMounted = false;
+
+    if (this._windowScrollListener) {
+      this._windowScrollListener.remove();
     }
-  }, {
-    key: 'render',
-    value: function render() {
-      var child = _react2.default.Children.only(this.props.children);
-      var _child$props = child.props;
-      var className = _child$props.className;
-      var style = _child$props.style;
-      var _state = this.state;
-      var affixed = _state.affixed;
-      var position = _state.position;
-      var top = _state.top;
-
-      var positionStyle = { position: position, top: top };
-
-      var affixClassName = void 0;
-      var affixStyle = void 0;
-      if (affixed === 'top') {
-        affixClassName = this.props.topClassName;
-        affixStyle = this.props.topStyle;
-      } else if (affixed === 'bottom') {
-        affixClassName = this.props.bottomClassName;
-        affixStyle = this.props.bottomStyle;
-      } else {
-        affixClassName = this.props.affixClassName;
-        affixStyle = this.props.affixStyle;
-      }
-
-      return _react2.default.cloneElement(child, {
-        className: (0, _classnames2.default)(affixClassName, className),
-        style: _extends({}, positionStyle, affixStyle, style)
-      });
+    if (this._documentClickListener) {
+      this._documentClickListener.remove();
     }
-  }]);
+  };
+
+  Affix.prototype.render = function render() {
+    var child = _react2.default.Children.only(this.props.children);
+    var _child$props = child.props,
+        className = _child$props.className,
+        style = _child$props.style;
+    var _state = this.state,
+        affixed = _state.affixed,
+        position = _state.position,
+        top = _state.top;
+
+    var positionStyle = { position: position, top: top };
+
+    var affixClassName = void 0;
+    var affixStyle = void 0;
+    if (affixed === 'top') {
+      affixClassName = this.props.topClassName;
+      affixStyle = this.props.topStyle;
+    } else if (affixed === 'bottom') {
+      affixClassName = this.props.bottomClassName;
+      affixStyle = this.props.bottomStyle;
+    } else {
+      affixClassName = this.props.affixClassName;
+      affixStyle = this.props.affixStyle;
+    }
+
+    return _react2.default.cloneElement(child, {
+      className: (0, _classnames2.default)(affixClassName, className),
+      style: _extends({}, positionStyle, affixStyle, style)
+    });
+  };
 
   return Affix;
 }(_react2.default.Component);
