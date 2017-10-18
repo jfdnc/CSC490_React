@@ -252,17 +252,21 @@ body{
 #onsite{
   grid-row: 1/2;
   min-height: 512px;
+  padding: 10px;
   border-right: 1px solid rgba(0,0,0,0.3);
+}
+.tab-content{
+  padding-top:10px;
+}
+form>div{
 }
 #offsite{
   grid-row: 2/3;
   border-left: 1px solid rgba(0,0,0,0.3);
 }
 #register-view > #onsite {
-  background: blue;
 }
 #register-view > #offsite {
-  background: green;
 }
 #login-view > #onsite {
   background: red;
