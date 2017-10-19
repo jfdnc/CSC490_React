@@ -7,6 +7,25 @@ export default class Login extends React.Component {
   constructor(props){
     super(props)
 
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit(e){
+    e.preventDefault()
+
+    var inputArr = [],
+        inputObj = {},
+        inputs = document.getElementsByClassName('form-control')
+    for(let i=0; i<inputs.length; i++){
+      inputs[i].value ? inputArr.push(inputs[i].value) : null
+    }
+
+    inputObj = {
+      email: inputArr[0],
+      pw: inputArr[1]
+    }
+
+    console.log(inputObj)
   }
 
   render(){

@@ -10,7 +10,8 @@ class DisplayStore extends EventEmitter {
     //initial log info
     this.displayInfo = {
       loggedIn: false,
-      userType: "guest"
+      userType: "guest",
+      displayType: "guest"
     }
   }
 
@@ -19,13 +20,13 @@ class DisplayStore extends EventEmitter {
   }
 
   getUserType(){
-    return this.displayInfo.userType
+    return this.displayInfo.displayType
   }
 
   displayHome(type){
     this.displayInfo = {
       loggedIn: this.displayInfo.loggedIn,
-      userType: type
+      displayType: type
     }
     this.emit("change")
   }
@@ -33,7 +34,7 @@ class DisplayStore extends EventEmitter {
   displayRegister(){
     this.displayInfo = {
       loggedIn: this.displayInfo.loggedIn,
-      userType: 'register'
+      displayType: 'register'
     }
     this.emit("change")
   }
@@ -41,7 +42,7 @@ class DisplayStore extends EventEmitter {
   displayLogin(){
     this.displayInfo = {
       loggedIn: this.displayInfo.loggedIn,
-      userType: 'login'
+      displayType: 'login'
     }
     this.emit("change")
   }
@@ -49,7 +50,7 @@ class DisplayStore extends EventEmitter {
   displayAbout(){
     this.displayInfo = {
       loggedIn: this.displayInfo.loggedIn,
-      userType: 'about'
+      displayType: 'about'
     }
     this.emit("change")
   }
@@ -57,7 +58,7 @@ class DisplayStore extends EventEmitter {
   displayContact(){
     this.displayInfo = {
       loggedIn: this.displayInfo.loggedIn,
-      userType: 'contact'
+      displayType: 'contact'
     }
     this.emit("change")
   }
