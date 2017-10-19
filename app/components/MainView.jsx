@@ -13,7 +13,6 @@ import { displayHome,
          displayAbout,
          displayContact } from '../actions/actions/display_actions'
 
-import { BrowserRouter,Route } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 
 

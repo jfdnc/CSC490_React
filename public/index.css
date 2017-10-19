@@ -258,8 +258,7 @@ body{
 .tab-content{
   padding-top:10px;
 }
-form>div{
-}
+
 #offsite{
   grid-row: 2/3;
   border-left: 1px solid rgba(0,0,0,0.3);
@@ -268,11 +267,11 @@ form>div{
 }
 #register-view > #offsite {
 }
-#login-view > #onsite {
-  background: red;
+#login-view > #onsite > .form-horizontal {
+  position: relative;
+  margin: auto;
 }
 #login-view > #offsite {
-  background: purple;
 }
 .fade-enter{
   opacity: 0;

@@ -42,7 +42,6 @@ export default class Register extends React.Component {
     } else {
       console.log('enter values in all fields!')
     }
-
   }
 
   render(){
@@ -56,6 +55,7 @@ export default class Register extends React.Component {
         <div id='register-view' className='view-container'>
           <div id='onsite'>
             <Tabs defaultActiveKey={1} id='registration-tabs'>
+              {/*user fields*/}
               <Tab eventKey={1} title='User' >
                 <Form horizontal onSubmit={this.handleSubmit} >
                   <FormGroup>
@@ -99,6 +99,7 @@ export default class Register extends React.Component {
                   <Button type='submit' bsStyle='primary'>Submit</Button>
                 </Form>
               </Tab>
+              {/*org fields*/}
               <Tab eventKey={2} title='Organization'>
               <Form onSubmit={this.handleSubmit}>
               <FormGroup>
