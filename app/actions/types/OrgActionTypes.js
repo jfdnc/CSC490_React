@@ -8,9 +8,6 @@ const OrgActionTypes = {
   GET_LOG_STATE: 'GET_LOG_STATE',
   GET_USER_TYPE: 'GET_USER_TYPE',
   LOG_OUT: 'LOG_OUT',
-  //display actions
-  DISPLAY_ABOUT: 'DISPLAY_ABOUT',
-  DISPLAY_CONTACT: 'DISPLAY_CONTACT',
   //org unique actions
   CREATE_VOLOP: 'CREATE_VOLOP',
   DELETE_VOLOP: 'DELETE_VOLOP',
