@@ -2,9 +2,6 @@ var express = require('express');
 var path = require('path');
 var httpProxy = require('http-proxy');
 var mongoose = require('mongoose');
-var Organization = require('./app/models/orgModel');
-var User = require('./app/models/userModel');
-var VolOp = require('./app/models/volOpModel');
 
 var proxy = httpProxy.createProxyServer();
 var app = express();
@@ -15,11 +12,12 @@ var publicPath = path.resolve(__dirname, 'public');
 
 app.use(express.static(publicPath));
 
-// We only want to run the workflow when not in production
+// initialize routes
+app.use('/api', require('./app/routes/api'));
+
+// We only want to run webpack when not in production
 if (!isProduction) {
 
-    // We require the bundler inside the if block because
-    // it is only needed in a development environment.
     var bundle = require('./server/bundle.js');
     bundle();
 
@@ -36,6 +34,7 @@ if (!isProduction) {
 //Establish remote db connection
 mongoose.connect('mongodb://admin:csc490@108.234.184.90/admin');
 var db= mongoose.connection;
+mongoose.Promise = global.Promise;
 
 //Check for DB connection errors
 db.on('error', function(err){
@@ -46,35 +45,6 @@ db.on('error', function(err){
 db.once('open', function(){
     console.log('Connected to MongoDB.')
 });
-
-//API Routing
-app.get('/api/organization', function (req,res){
-    Organization.getOrg(function (err, organization){
-        if(err){
-            throw err;
-        }
-        res.json(organization);
-    });
-});
-
-app.get('/api/user', function (req,res){
-    User.getUser(function (err, user){
-        if(err){
-            throw err;
-        }
-        res.json(user);
-    });
-});
-
-app.get('/api/volop', function (req,res){
-    VolOp.getVolOp(function (err, volOp){
-        if(err){
-            throw err;
-        }
-        res.json(volOp);
-    })
-});
-
 
 // It is important to catch any errors from the proxy or the
 // server will crash. An example of this is connecting to the
