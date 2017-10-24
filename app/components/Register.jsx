@@ -3,6 +3,7 @@ import { CSSTransition } from 'react-transition-group'
 import { Tabs, Tab, Form, ControlLabel,
          FormGroup, FormControl, Col, Button } from 'react-bootstrap'
 import { displayHome } from '../actions/actions/display_actions'
+import { createUser } from '../actions/actions/user_actions'
 
 export default class Register extends React.Component {
   constructor(props){
@@ -27,7 +28,8 @@ export default class Register extends React.Component {
         eMail: inputArr[3],
         pw: inputArr[4]
       }
-      console.log(inputObj)
+      //console.log(inputObj)
+      createUser(inputObj)
       displayHome()
     } else if(inputArr.length == 5){
       inputObj = {

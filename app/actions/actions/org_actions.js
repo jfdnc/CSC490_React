@@ -76,8 +76,6 @@ export function editOrgInfo(){
   })
 }
 
-}
-
 /*to export all functions
 export default {
   getLogState,
@@ -91,3 +89,4 @@ export default {
   VIEW_ORG_INFO,
   editOrgInfo
 }
+*/
