@@ -64,6 +64,10 @@ body{
   margin: auto;
   cursor: pointer;
 }
+
+#page-nav{
+  background-color: white;
+}
 #guest-view{
 }
 
@@ -254,6 +258,9 @@ body{
   min-height: 512px;
   padding: 10px;
   border-right: 1px solid rgba(0,0,0,0.3);
+}
+#user-reg{
+  padding: 10px;
 }
 .tab-content{
   padding-top:10px;

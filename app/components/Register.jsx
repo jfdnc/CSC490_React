@@ -1,7 +1,6 @@
 import React from 'react'
 import { CSSTransition } from 'react-transition-group'
-import { Tabs, Tab, Form, ControlLabel,
-         FormGroup, FormControl, Col, Button } from 'react-bootstrap'
+import { Tabs, Tab, Row, Input } from 'react-materialize'
 import { displayHome } from '../actions/actions/display_actions'
 
 export default class Register extends React.Component {
@@ -54,92 +53,18 @@ export default class Register extends React.Component {
         timeout={300}>
         <div id='register-view' className='view-container'>
           <div id='onsite'>
-            <Tabs defaultActiveKey={1} id='registration-tabs'>
-              {/*user fields*/}
-              <Tab eventKey={1} title='User' >
-                <Form horizontal onSubmit={this.handleSubmit} >
-                  <FormGroup>
-                    <Col componentClass={ControlLabel} sm={4}>
-                      First Name:
-                    </Col>
-                    <Col sm={8}>
-                      <FormControl placeholder='First Name...'></FormControl>
-                    </Col>
-                    <Col componentClass={ControlLabel} sm={4}>
-                      Last Name:
-                    </Col>
-                    <Col sm={8}>
-                      <FormControl placeholder='Last Name...'></FormControl>
-                    </Col>
-                    <Col componentClass={ControlLabel} sm={4}>
-                      ZIP Code:
-                    </Col>
-                    <Col sm={8}>
-                      <FormControl placeholder='zip/postal code'></FormControl>
-                    </Col>
-                    <Col componentClass={ControlLabel} sm={4}>
-                      E-mail:
-                    </Col>
-                    <Col sm={8}>
-                      <FormControl placeholder='email@example.com'></FormControl>
-                    </Col>
-                    <Col componentClass={ControlLabel} sm={4}>
-                      Password:
-                    </Col>
-                    <Col sm={8}>
-                      <FormControl placeholder='Password'></FormControl>
-                    </Col>
-                    <Col componentClass={ControlLabel} sm={4}>
-                      Confirm Password
-                    </Col>
-                    <Col sm={8}>
-                      <FormControl placeholder='Password'></FormControl>
-                    </Col>
-                  </FormGroup>
-                  <Button type='submit' bsStyle='primary'>Submit</Button>
-                </Form>
+            <Tabs className='reg-forms'>
+              <Tab id='user-reg' title='user-reg' active>
+              <Row>
+                <Input s={6} label="First Name" />
+                <Input s={6} label="Last Name" />
+                <Input s={12} label="disabled" defaultValue="I am not editable" disabled />
+                <Input type="password" label="password" s={12} />
+                <Input type="email" label="Email" s={12} />
+              </Row>
               </Tab>
-              {/*org fields*/}
-              <Tab eventKey={2} title='Organization'>
-              <Form onSubmit={this.handleSubmit}>
-              <FormGroup>
-              <Col componentClass={ControlLabel} sm={4}>
-                Name:
-              </Col>
-              <Col sm={8}>
-                <FormControl placeholder='Organization Name'></FormControl>
-              </Col>
-              <FormGroup controlId="formControlsTextarea">
-                <Col sm={4}>
-                  <ControlLabel>Organization Description</ControlLabel>
-                </Col>
-                <Col sm={8}>
-                  <FormControl componentClass="textarea" placeholder="..." />
-                </Col>
-                <Col componentClass={ControlLabel} sm={4}>
-                  Phone:
-                </Col>
-                <Col sm={8}>
-                  <FormControl placeholder='(123) 555-6789'></FormControl>
-                </Col>
-                <Col componentClass={ControlLabel} sm={4}>
-                  E-mail:
-                </Col>
-                <Col sm={8}>
-                  <FormControl placeholder='email@example.com'></FormControl>
-                </Col>
-                <Col componentClass={ControlLabel} sm={4}>
-                  Contact Name:
-                </Col>
-                <Col sm={8}>
-                  <FormControl placeholder='Joe Helpful'></FormControl>
-                </Col>
-              </FormGroup>
-              <Button type='submit' bsStyle='primary'>Submit</Button>
-              </FormGroup>
+              <Tab title='org-reg'>Test 2</Tab>
 
-              </Form>
-              </Tab>
             </Tabs>
           </div>
           <div id='offsite'>
