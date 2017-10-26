@@ -13,11 +13,11 @@ class UserStore extends EventEmitter {
     }
 
     handleActions(action) {
-        console.log(action);
-        switch (action.type) {
-            case 'CREATE_USER':
-                this.createUser(action.user);
-                break
+      console.log(action);
+      switch (action.type) {
+        case 'CREATE_USER':
+            this.createUser(action.user);
+            break
         }
     }
 }
