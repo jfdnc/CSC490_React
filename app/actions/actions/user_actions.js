@@ -60,7 +60,7 @@ export function createUser(user){
     type: UserActionTypes.CREATE_USER,
     user: user
   })
-    axios.post('/api/users', {
+    axios.post('localhost:3000/api/users', {
       email: 'email@email.com'
     })
         .then(function(res){
