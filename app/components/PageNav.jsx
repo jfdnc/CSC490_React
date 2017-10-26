@@ -45,10 +45,10 @@ export default class PageNav extends React.Component{
   render(){
     return(
       <Navbar id='page-nav'>
-        <NavItem onClick={() => {event.preventDefault();this.handleClick('reg')}}>Register</NavItem>
-        <NavItem onClick={() => this.handleClick('log')}>Login</NavItem>
-        <NavItem onClick={() => this.handleClick('abt')}>About</NavItem>
-        <NavItem onClick={() => this.handleClick('ctc')}>Contact</NavItem>
+        <NavItem onClick={(e) => {e.preventDefault();this.handleClick('reg')}}>Register</NavItem>
+        <NavItem onClick={(e) => {e.preventDefault();this.handleClick('log')}}>Login</NavItem>
+        <NavItem onClick={(e) => {e.preventDefault();this.handleClick('abt')}}>About</NavItem>
+        <NavItem onClick={(e) => {e.preventDefault();this.handleClick('ctc')}}>Contact</NavItem>
       </Navbar>
     )
   }
