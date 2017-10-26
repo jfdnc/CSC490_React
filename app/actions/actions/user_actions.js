@@ -52,7 +52,12 @@ export function editPrefs(){
   })
 }
 
-
+export function createUser(user){
+  dispatcher.dispatch({
+    type: UserActionTypes.CREATE_USER,
+    user: user
+  })
+}
 
 /* to export all functions
 export default {

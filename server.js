@@ -33,6 +33,7 @@ if (!isProduction) {
 
 //Establish remote db connection
 mongoose.connect('mongodb://admin:csc490@108.234.184.90/admin');
+//mongoose.connect('mongodb://admin:csc490@192.168.1.102/admin');
 var db= mongoose.connection;
 mongoose.Promise = global.Promise;
 
