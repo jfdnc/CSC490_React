@@ -91,7 +91,9 @@ router.get('/users/:id', function(req, res, next){
 
 // add a new user to the db
 router.post('/users', function(req, res, next){
-    User.create(req.body).then(function(user){
+    var newUser = new User(req.body)
+    console.log(req.body)
+    newUser.save().then(function(user){
         res.send(user);
     }).catch(next);
 });
