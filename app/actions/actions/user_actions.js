@@ -52,7 +52,7 @@ export function editPrefs(){
   })
 }
 
-}
+
 
 /* to export all functions
 export default {
