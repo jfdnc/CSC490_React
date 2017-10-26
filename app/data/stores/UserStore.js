@@ -10,7 +10,6 @@ class UserStore extends EventEmitter {
     }
 
     createUser(user){
-        console.log(user)
     }
 
     handleActions(action) {
