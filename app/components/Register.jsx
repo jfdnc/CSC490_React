@@ -23,8 +23,8 @@ export default class Register extends React.Component {
     }
     if(inputArr.length == 6){
       inputObj = {
-        first_name: inputArr[0],
-        last_name: inputArr[1],
+        firstName: inputArr[0],
+        lastName: inputArr[1],
         zipCode: inputArr[2],
         email: inputArr[3],
         pwHash: inputArr[4]

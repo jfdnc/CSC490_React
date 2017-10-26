@@ -5,38 +5,39 @@ var Organization = require('./orgModel');
 
 // VolOps schema(required fields????)
 var volOpSchema = new mongoose.Schema({
-    pkey: {type: String, unique: true, index: true},
-    org: {
-        type: mongoose.Schema.ObjectId, ref: 'Organization'
+    orgName: {
+        type: String,
+        required: [true, 'volOp.orgName field required']
     },
     volOpName: String,
     volOpDescription: String,
     volOpSpotsAvailable: Number,
     volOpAddress: {
-        type: mongoose.Schema.ObjectId, ref: 'Address'
+      street: {
+        type: String,
+        required: [true, 'volOp.volOpAddress.street field is required']
+      },
+      city: {
+        type: String,
+        required: [true, 'volOp.volOpAddress.city field is required']
+      },
+      state: {
+        type: String,
+        required: [true, 'volOp.volOpAddress.state field is required']
     },
+    zip: {
+      type: String,
+      required: [true, 'volOp.volOpAddress.zip field required']
+    }
+  },
     volOpOngoing: Boolean,
     volOpStartDate: String,
     volOpEndDate: String,
     volOpTod: String,
-    volOpDetails: {
-        detail1: String,
-        detai12: String,
-        detail3: String,
-        detail4: String,
-        detail5: String,
-    },
-    volOpCategories: {
-        category1: String,
-        category2: String,
-        category3: String,
-        category4: String
-    }
+    volOpDetails: [String],
+    volOpCategories: [String]
 });
 
 var VolOp = module.exports = mongoose.model('VolOp', volOpSchema);
 
-module.exports.getVolOp = function (callback){
-
-    VolOp.find(callback);
-};
+module.exports = VolOp;
