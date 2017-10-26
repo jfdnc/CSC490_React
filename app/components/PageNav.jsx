@@ -5,6 +5,7 @@ import { displayRegister,
          displayLogin,
          displayAbout,
          displayContact } from '../actions/actions/display_actions'
+import { Navbar, NavItem } from 'react-materialize'
 
 export default class PageNav extends React.Component{
   constructor(props){
@@ -43,14 +44,12 @@ export default class PageNav extends React.Component{
 
   render(){
     return(
-      <div id="menu">
-        <ul>
-          <li onClick={() => this.handleClick('reg')}>Register</li>
-          <li onClick={() => this.handleClick('log')}>Login</li>
-          <li onClick={() => this.handleClick('abt')}>About</li>
-          <li onClick={() => this.handleClick('ctc')}>Contact</li>
-        </ul>
-      </div>
+      <Navbar id='page-nav'>
+        <NavItem onClick={(e) => {e.preventDefault();this.handleClick('reg')}}>Register</NavItem>
+        <NavItem onClick={(e) => {e.preventDefault();this.handleClick('log')}}>Login</NavItem>
+        <NavItem onClick={(e) => {e.preventDefault();this.handleClick('abt')}}>About</NavItem>
+        <NavItem onClick={(e) => {e.preventDefault();this.handleClick('ctc')}}>Contact</NavItem>
+      </Navbar>
     )
   }
 }
