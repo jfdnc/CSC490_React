@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var httpProxy = require('http-proxy');
 var mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 var proxy = httpProxy.createProxyServer();
 var app = express();
@@ -11,6 +12,10 @@ var port = isProduction ? process.env.PORT : 3000;
 var publicPath = path.resolve(__dirname, 'public');
 
 app.use(express.static(publicPath));
+
+// set up body-parser middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // initialize routes
 app.use('/api', require('./app/routes/api'));
@@ -33,7 +38,6 @@ if (!isProduction) {
 
 //Establish remote db connection
 mongoose.connect('mongodb://admin:csc490@108.234.184.90/admin');
-//mongoose.connect('mongodb://admin:csc490@192.168.1.102/admin');
 var db= mongoose.connection;
 mongoose.Promise = global.Promise;
 
