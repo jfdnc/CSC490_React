@@ -4,6 +4,9 @@ this file will contain actions for UI components to emit
 import dispatcher from '../../data/Dispatcher'
 import UserActionTypes from '../types/UserActionTypes'
 
+var axios = require('axios')
+//const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+
 //return t/f on loggedIn state
 export function getLogState(){
   dispatcher.dispatch({
@@ -57,6 +60,15 @@ export function createUser(user){
     type: UserActionTypes.CREATE_USER,
     user: user
   })
+    axios.post('/api/users', {
+      email: 'email@email.com'
+    })
+        .then(function(res){
+          console.log("API CALL")
+        })
+        .catch(function(err){
+          console.log(err)
+        })
 }
 
 /* to export all functions
