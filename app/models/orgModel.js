@@ -6,8 +6,22 @@ var orgSchema = new mongoose.Schema({
     pkey: {type: String, unique: true, index: true},
     orgName: String,
     orgAddress: {
-        type: mongoose.Schema.ObjectId, ref: 'Address'
-    },
+      street: {
+        type: String,
+        required: [true, 'organization.orgAddress.street field is required']
+      },
+      city: {
+        type: String,
+        required: [true, 'organization.orgAddress.city field is required']
+      },
+      state: {
+        type: String,
+        required: [true, 'organization.orgAddress.state field is required']
+      },
+      zip: {
+        type: String,
+        required: [true, 'organization.orgAddress.zip field required']
+      }},
     orgDescription: String,
     orgPhone: String,
     orgEmail: String,
@@ -16,7 +30,4 @@ var orgSchema = new mongoose.Schema({
 
 var Organization = module.exports = mongoose.model('Organization', orgSchema);
 
-module.exports.getOrg = function (callback){
-
-    Organization.find(callback);
-};
+module.export = Organization;

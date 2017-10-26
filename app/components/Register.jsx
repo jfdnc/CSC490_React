@@ -23,11 +23,11 @@ export default class Register extends React.Component {
     }
     if(inputArr.length == 6){
       inputObj = {
-        fName: inputArr[0],
-        lName: inputArr[1],
-        zip: inputArr[2],
-        eMail: inputArr[3],
-        pw: inputArr[4]
+        firstName: inputArr[0],
+        lastName: inputArr[1],
+        zipCode: inputArr[2],
+        email: inputArr[3],
+        pwHash: inputArr[4]
       }
       createUser(inputObj)
       displayHome()

@@ -1,29 +1,22 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const VolOp = require('./volOpModel');
 
-var VolOp = require('./volOpModel');
-
-// User schema (required fields????)
-var userSchema = new mongoose.Schema({
-    pkey: {type: String, unique: true},
-    first_name: String,
-    last_name: String,
+// create user schema and model
+const UserSchema = new Schema({
+    firstName: String,
+    lastName: String,
     zipCode: Number,
-    email: {type: String, unique: true, index: true},
-    pwHash: String,
-    preferences: {
-        category1: String, //to match volOpCategories
-        category2: String,
-        category3: String,
-        category4: String
+    email: {
+      type: String,
+      required: [true, 'user.email field is required'],
+      unique: true
     },
-    savedVolOps: {
-        type: mongoose.Schema.ObjectId, ref: 'VolOp'
-    }
+    pwHash: String,
+    preferences: [String],
+    savedVolOps: [String] // store id of volOp
 });
 
-var User = module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('user', UserSchema);
 
-module.exports.getUser = function (callback){
-
-    User.find(callback);
-};
+module.exports = User;
