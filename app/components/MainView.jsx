@@ -1,7 +1,8 @@
 import React from 'react'
-import DisplayStore from '../data/stores/DisplayStore'
-import PageNav from './PageNav'
 import { Glyphicon } from 'react-bootstrap'
+import DisplayStore from '../data/stores/DisplayStore'
+import { displayAbout, displayContact, updateDisplayUserType } from '../actions/display_actions'
+import PageNav from './PageNav'
 import GuestView from './GuestView'
 import UserView from './UserView'
 import OrgView from './OrgView'
@@ -9,79 +10,67 @@ import Register from './Register'
 import Login from './Login'
 import About from './About'
 import Contact from './Contact'
-import { displayHome,
-         displayAbout,
-         displayContact } from '../actions/actions/display_actions'
-
 
 export default class MainView extends React.Component {
   constructor(props){
     super(props)
+
     this.state = {
-      loggedIn: DisplayStore.getLogState(),
-      userType: DisplayStore.getUserType(),
-      menuOpen: false,
+      displayState: {},
+      currentView: ""
     }
 
     this.loadView = this.loadView.bind(this)
-    this.toggleMenu = this.toggleMenu.bind(this)
-    this.logMain = this.logMain.bind(this)
-  }
-
-  //for debugging in main window -- REMOVE for general use
-  logMain(){
-    console.log(this.state)
-    this.toggleMenu()
   }
 
   componentWillMount(){
-    this.setState({currentView: this.loadView()})
+    let displayState = DisplayStore.getAll()
+      this.setState({
+        displayState: displayState,
+        currentView: this.loadView(displayState.displayType)
+    })
 
     DisplayStore.on("change", () => {
+      let displayState = DisplayStore.getAll()
       this.setState({
-        loggedIn: DisplayStore.getLogState(),
-        userType: DisplayStore.getUserType(),
-        currentView: this.loadView(DisplayStore.getUserType())
+        displayState: displayState,
+        currentView: this.loadView(displayState.displayType)
       })
     })
   }
 
-  loadView(type){
-    switch(type){
+  loadView(displayType){
+    switch(displayType){
       case 'guest':
-        return <GuestView />
+        return <GuestView {...this.state}/>
         break
       case 'user':
-        return <UserView />
+        return <UserView {...this.state}/>
         break
       case 'org':
-        return <OrgView />
+        return <OrgView {...this.state}/>
         break
       case 'register':
-        return <Register />
+        return <Register {...this.state}/>
         break
       case 'login':
-        return <Login />
+        return <Login {...this.state}/>
         break
       case 'about':
-        return <About />
+        return <About {...this.state}/>
         break
       case 'contact':
-        return <Contact />
+        return <Contact {...this.state}/>
         break
       default:
-        return <GuestView />
+        return <GuestView {...this.state} />
     }
-  }
-
-  toggleMenu(){
-    document.getElementById('menu').style.visibility = 'visible'
   }
 
   render(){
     return(
       <div id='main-container'>
-        <PageNav />
+        <PageNav userType={this.state.displayState.userType}/>
         <div id="content-container">
           {this.state.currentView}
         </div>

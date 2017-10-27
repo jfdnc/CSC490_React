@@ -2,20 +2,20 @@
 import dispatcher from '../Dispatcher'
 //for emitting events to UI components concerned with this store
 import { EventEmitter } from 'events'
-import UserActionTypes from "../../actions/types/UserActionTypes";
+import UserActionTypes from '../../action_types/UserActionTypes'
 
 class UserStore extends EventEmitter {
     constructor(props) {
         super(props)
+
     }
 
     createUser(user){
     }
 
     handleActions(action) {
-      console.log(action);
       switch (action.type) {
-        case 'CREATE_USER':
+        case UserActionTypes.CREATE_USER:
             this.createUser(action.user);
             break
         }

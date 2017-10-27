@@ -1,3 +1,5 @@
+/**************chage to material carousel from bootstrap carousel*/
+
 import React from 'react'
 import { Carousel } from 'react-bootstrap'
 

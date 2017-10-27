@@ -7,7 +7,7 @@ export default class VolOpListing extends React.Component{
 
   render(){
     return(
-      <div> SOMETHING </div>
+      <div> VolOp Listing </div>
     )
   }
 }

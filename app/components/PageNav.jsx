@@ -1,55 +1,60 @@
 import React from 'react'
-import { Glyphicon, Collapse, Modal } from 'react-bootstrap'
-import DisplayStore from '../data/stores/DisplayStore'
 import { displayRegister,
          displayLogin,
          displayAbout,
-         displayContact } from '../actions/actions/display_actions'
+         displayContact } from '../actions/display_actions'
 import { Navbar, NavItem } from 'react-materialize'
 
-export default class PageNav extends React.Component{
-  constructor(props){
-    super(props)
-    this.state = {
-      userType: DisplayStore.getUserType(),
-    }
-
-    this.handleClick = this.handleClick.bind(this)
+const PageNav = (props) => {
+  let navTypes
+  switch(props.userType){
+    case 'guest':
+      navTypes = ['Register', 'Login', 'About', 'Contact']
+    break
+    case 'user':
+      navTypes = ['About', 'Contact']
+    break
+    case 'org':
+      navTypes = ['About', 'Contact']
+    break
   }
 
-  componentWillMount(){
-    DisplayStore.on("change", () => {
-      this.setState({
-        userType: DisplayStore.getUserType()
-      })
-    })
-  }
-
-  handleClick(type){
-    switch(type){
-      case 'reg':
+  const handleClick = (type) => {
+    switch(type) {
+      case 'Register':
         displayRegister()
         break
-      case 'log':
+      case 'Login':
         displayLogin()
         break
-      case 'abt':
+      case 'About':
         displayAbout()
         break
-      case 'ctc':
+      case 'Contact':
         displayContact()
         break
     }
   }
 
-  render(){
+  const mapNavHeaders = (headerList) => {
     return(
-      <Navbar id='page-nav'>
-        <NavItem onClick={(e) => {e.preventDefault();this.handleClick('reg')}}>Register</NavItem>
-        <NavItem onClick={(e) => {e.preventDefault();this.handleClick('log')}}>Login</NavItem>
-        <NavItem onClick={(e) => {e.preventDefault();this.handleClick('abt')}}>About</NavItem>
-        <NavItem onClick={(e) => {e.preventDefault();this.handleClick('ctc')}}>Contact</NavItem>
-      </Navbar>
+      headerList.map((headerItem, i) => {
+        return(
+          <NavItem key={i} onClick={(e) => {
+            e.preventDefault()
+            handleClick(`${headerItem}`)}}>{headerItem}</NavItem>
+        )
+      })
     )
   }
+
+    return(
+      <Navbar id='page-nav'>
+        {
+          mapNavHeaders(navTypes)
+        }
+      </Navbar>
+    )
 }
+
+export default PageNav

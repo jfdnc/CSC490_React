@@ -2,62 +2,108 @@
 import dispatcher from '../Dispatcher'
 //for emitting events to UI components concerned with this store
 import { EventEmitter } from 'events'
+import DisplayActionTypes from '../../action_types/DisplayActionTypes'
 
 class DisplayStore extends EventEmitter {
   constructor(props){
     super(props)
 
     //initial log info
-    this.displayInfo = {
+    this.displayState = {
       loggedIn: false,
-      userType: "guest",
-      displayType: "guest"
+      //userType: 'guest',
+      displayType: 'guest',
+      userType: 'guest'
+      //userType: 'user'
     }
   }
 
   getLogState(){
-    return this.displayInfo.loggedIn
+    return this.displayState.loggedIn
+  }
+
+  getDisplayType(){
+    return this.displayState.displayType
   }
 
   getUserType(){
-    return this.displayInfo.displayType
+    return this.displayState.userType
   }
 
-  displayHome(type){
-    this.displayInfo = {
-      loggedIn: this.displayInfo.loggedIn,
-      displayType: type
+  getAll(){
+    return this.displayState
+  }
+
+  //call on log in or log out
+  updateDisplayUserType(newUserType){
+    let prevUserType = this.displayState.userType
+
+    if(newUserType == 'guest' && prevUserType != 'guest'){
+      this.displayState = {
+        loggedIn: false,
+        userType: 'guest',
+        displayType: 'guest',
+      }
+      this.emit('change')
+    } else if(newUserType == 'user' && prevUserType == 'guest'){
+        this.displayState = {
+          loggedIn: true,
+          userType: 'user',
+          displayType: 'user',
+        }
+        this.emit('change')
+    } else if(newUserType == 'org' && prevUserType == 'guest'){
+        this.displayState = {
+          loggedIn: true,
+          userType: 'org',
+          displayType: 'org',
+        }
+        this.emit('change')
+    } else {
+      console.log('error in updateDisplayUserType')
+    }
+  }
+
+  displayHome(){
+    this.displayState = {
+      loggedIn: this.displayState.loggedIn,
+      userType: this.displayState.userType,
+      displayType: this.displayState.userType
     }
     this.emit("change")
   }
 
   displayRegister(){
-    this.displayInfo = {
-      loggedIn: this.displayInfo.loggedIn,
+    this.displayState = {
+      loggedIn: this.displayState.loggedIn,
+      userType: this.displayState.userType,
       displayType: 'register'
     }
     this.emit("change")
   }
 
   displayLogin(){
-    this.displayInfo = {
-      loggedIn: this.displayInfo.loggedIn,
+    this.displayState = {
+      loggedIn: this.displayState.loggedIn,
+      userType: this.displayState.userType,
       displayType: 'login'
     }
     this.emit("change")
   }
 
   displayAbout(){
-    this.displayInfo = {
-      loggedIn: this.displayInfo.loggedIn,
+    this.displayState = {
+      loggedIn: this.displayState.loggedIn,
+      userType: this.displayState.userType,
       displayType: 'about'
     }
     this.emit("change")
   }
 
   displayContact(){
-    this.displayInfo = {
-      loggedIn: this.displayInfo.loggedIn,
+    this.displayState = {
+      loggedIn: this.displayState.loggedIn,
+      userType: this.displayState.userType,
       displayType: 'contact'
     }
     this.emit("change")
@@ -68,27 +114,26 @@ class DisplayStore extends EventEmitter {
   */
   handleActions(action){
     switch(action.type){
-      case 'GET_LOG_STATE':
-        this.getLogState()
-        break
-      case 'GET_USER_TYPE':
-        this.getUserType()
-        break
-      case 'DISPLAY_HOME':
+      case DisplayActionTypes.UPDATE_DISPLAY_USER_TYPE:
+        this.updateDisplayUserType(action.newUserType)
+      break
+      case DisplayActionTypes.DISPLAY_HOME:
         this.displayHome()
-        break
-      case 'DISPLAY_REGISTER':
+      break
+      case DisplayActionTypes.DISPLAY_REGISTER:
         this.displayRegister()
-        break
-      case 'DISPLAY_LOGIN':
+      break
+      case DisplayActionTypes.DISPLAY_LOGIN:
         this.displayLogin()
-        break
-      case 'DISPLAY_ABOUT':
+      break
+      case DisplayActionTypes.DISPLAY_ABOUT:
         this.displayAbout()
-        break
-      case 'DISPLAY_CONTACT':
+      break
+      case DisplayActionTypes.DISPLAY_CONTACT:
         this.displayContact()
-        break
+      break
+      default:
+      break
     }
   }
 }
