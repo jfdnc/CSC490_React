@@ -1,8 +1,8 @@
 /*
 this file will contain actions for UI components to emit
 */
-import dispatcher from '../../data/Dispatcher'
-import OrgActionTypes from '../types/OrgActionTypes'
+import dispatcher from '../data/Dispatcher'
+import OrgActionTypes from '../action_types/OrgActionTypes'
 
 //return t/f on loggedIn state
 export function getLogState(){

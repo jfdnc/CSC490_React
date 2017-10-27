@@ -1,9 +1,8 @@
 /*
 this file will contain actions for UI components to emit
 */
-import dispatcher from '../../data/Dispatcher'
-import UserActionTypes from '../types/UserActionTypes'
-import axios from 'axios'
+import dispatcher from '../data/Dispatcher'
+import UserActionTypes from '../action_types/UserActionTypes'
 
 //const config = { headers: { 'Content-Type': 'multipart/form-data' } };
 
