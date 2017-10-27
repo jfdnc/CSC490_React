@@ -18,8 +18,7 @@ const Register = (props) => {
         inputObj.lastName,
         inputObj.zipCode,
         inputObj.email,
-        inputObj.pw,
-        inputObj.pwCheck ] = [...inputArr]
+        inputObj.pw ] = [...inputArr]
 
         //testing -- remove
         console.log('registering user with info:', inputObj)
