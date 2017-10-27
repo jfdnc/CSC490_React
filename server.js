@@ -1,15 +1,19 @@
-var express = require('express');
-var path = require('path');
-var httpProxy = require('http-proxy');
-var mongoose = require('mongoose');
+const express = require('express');
+const path = require('path');
+const httpProxy = require('http-proxy');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+const config = require('./config');
 
-var proxy = httpProxy.createProxyServer();
-var app = express();
+// load models and connect to db
+require('./app/models').connect(config.dbUri);
 
-var isProduction = process.env.NODE_ENV === 'production';
-var port = isProduction ? process.env.PORT : 3000;
-var publicPath = path.resolve(__dirname, 'public');
+const proxy = httpProxy.createProxyServer();
+const app = express();
+
+const isProduction = process.env.NODE_ENV === 'production';
+const port = isProduction ? process.env.PORT : 3000;
+const publicPath = path.resolve(__dirname, 'public');
 
 app.use(express.static(publicPath));
 
@@ -17,13 +21,29 @@ app.use(express.static(publicPath));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// set up passport middleware
+app.use(passport.initialize());
+
+// load passport strategies
+const localSignupStrategy = require('./server/passport/local-signup');
+const localLoginStrategy = require('./server/passport/local-login');
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
+
+// set up authentication middleware
+const authCheckMiddleware = require('./server/middleware/auth-check');
+app.use('/api', authCheckMiddleware);
+
 // initialize routes
-app.use('/api', require('./app/routes/api'));
+const authRoutes = require('./app/routes/auth');
+const apiRoutes = require('./app/routes/api');
+app.use('/auth', authRoutes);
+app.use('/api', apiRoutes);
 
 // We only want to run webpack when not in production
 if (!isProduction) {
 
-    var bundle = require('./server/bundle.js');
+    const bundle = require('./server/bundle.js');
     bundle();
 
     // Any requests to localhost:3000/build is proxied
@@ -35,22 +55,6 @@ if (!isProduction) {
     });
 
 }
-
-//Establish remote db connection
-//mongoose.connect('mongodb://admin:csc490@192.168.1.102/admin')
-mongoose.connect('mongodb://admin:csc490@108.234.184.90/admin');
-var db= mongoose.connection;
-mongoose.Promise = global.Promise;
-
-//Check for DB connection errors
-db.on('error', function(err){
-    console.log(err);
-});
-
-//Check DB connection
-db.once('open', function(){
-    console.log('Connected to MongoDB.')
-});
 
 // It is important to catch any errors from the proxy or the
 // server will crash. An example of this is connecting to the
