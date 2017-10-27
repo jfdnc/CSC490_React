@@ -45,26 +45,14 @@ router.delete('/organizations/:id', function(req, res, next){
 });
 
 // ---USER---
-/*
-// get a list of users from the db
-router.get('/users', function(req, res, next){
-    User.get(function (err, users){
-        if(err){
-            throw err;
-        }
-        var allUsers = users.map(user => {
-            return { id: user.id, email: user.email }
-        });
-        res.json(allUsers);
-    })
-});
-*/
-
 
 // get a list of all users from the db
 router.get('/users', function(req, res, next){
   User.find().then(function(user){
-    res.send(user);
+      var allUsers = user.map(user => {
+          return { firstName: user.firstName, lastName: user.lastName, email: user.email }
+      })
+    res.send(allUsers);
   });
 });
 
@@ -81,7 +69,6 @@ router.post('/users', function(req, res, next){
     User.create(req.body).then(function(user){
         res.send(user);
     }).catch(next);
-    console.log(req.body)
 });
 
 // update a user in the db

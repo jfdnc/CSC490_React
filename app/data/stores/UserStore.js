@@ -7,10 +7,13 @@ import UserActionTypes from '../../action_types/UserActionTypes'
 class UserStore extends EventEmitter {
     constructor(props) {
         super(props)
-
+      
+        this.user = {}
     }
 
     createUser(user){
+        this.user = user
+        this.emit("change")
     }
 
     handleActions(action) {
