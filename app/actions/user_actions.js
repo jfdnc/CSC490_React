@@ -55,7 +55,7 @@ export function editPrefs(){
 }
 
 export function createUser(user){
-    let myReq = new Request('/api/users', {method:'POST', body: JSON.stringify(user),
+    let myReq = new Request('/auth/signup', {method:'POST', body: JSON.stringify(user),
         headers: {"Content-Type": "application/json"}})
     fetch(myReq)
         .then(function(res){
