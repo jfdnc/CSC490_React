@@ -72,6 +72,37 @@ export function createUser(user){
 
 }
 
+export function addToCalendar(volOp){
+
+/*
+    var eventObj = {
+    'start' : new Date(),
+    'end' : new Date("13 June,2015"),
+    'title' : 'Annual trip',
+    'description' : 'Lets enjoy and relax',
+    'id' : 'wdcwe76234e127eugb', //Some unique identifier
+    'organiser' : {'name' : 'Sakshi Tyagi', 'email':'sakshi.tyagi@tothenew.com'},
+    'location' : 'Goa'
+}
+*/
+
+    let myReq = new Request('/auth/signup', {method:'POST', body: JSON.stringify(volOp),
+        headers: {"Content-Type": "application/json"}})
+    fetch(myReq)
+        .then(function(res){
+            console.log(res)
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+
+    dispatcher.dispatch({
+        type: UserActionTypes.CREATE_USER,
+        user: user
+    })
+
+}
+
 /* to export all functions
 export default {
   getLogState,
