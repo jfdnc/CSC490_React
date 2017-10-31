@@ -25,7 +25,8 @@ var orgSchema = new mongoose.Schema({
     orgDescription: String,
     orgPhone: String,
     orgEmail: String,
-    orgContactPerson: String
+    orgContactPerson: String,
+    orgVolOps: [mongoose.Schema.ObjectId]
 });
 
 var Organization = module.exports = mongoose.model('Organization', orgSchema);

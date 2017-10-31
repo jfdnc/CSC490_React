@@ -15,7 +15,7 @@ const UserSchema = new Schema({
     },
     pwHash: String,
     preferences: [String],
-    savedVolOps: [String] // store id of volOp
+    savedVolOps: [mongoose.Schema.ObjectId] // store id of volOp
 });
 
 // Compare the passed password with the value in the database
