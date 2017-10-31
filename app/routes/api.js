@@ -36,6 +36,16 @@ router.put('/organizations/:id', function(req, res, next){
     });
 });
 
+// update an organization's orgVolOps in db
+router.put('/organizations/:orgId/:volOpId', function(req, res, next){
+  Organization.findByIdAndUpdate({_id: req.params.orgId},
+    {$push: {orgVolOps: req.params.volOpId}}).then(function(){
+      Organization.findOne({_id: req.params.orgId}).then(function(organization){
+        res.send(organization);
+      });
+    });
+});
+
 // delete an address from the db
 router.delete('/organizations/:id', function(req, res, next){
     Organization.findByIdAndRemove({_id: req.params.id}).then(function(address){
@@ -69,6 +79,16 @@ router.put('/users/:id', function(req, res, next){
         User.findOne({_id: req.params.id}).then(function(user){
             res.send(user);
         });
+    });
+});
+
+// update a user's savedVolOps in db
+router.put('/users/:userId/:volOpId', function(req, res, next){
+  User.findByIdAndUpdate({_id: req.params.userId},
+    {$push: {savedVolOps: req.params.volOpId}}).then(function(){
+      User.findOne({_id: req.params.userId}).then(function(user){
+        res.send(user);
+      });
     });
 });
 
