@@ -6,7 +6,7 @@ const passport = require('passport');
 const config = require('./config');
 
 // load models and connect to db
-require('./app/models').connect(config.dbUriMario);
+require('./app/models').connect(config.dbUri);
 
 const proxy = httpProxy.createProxyServer();
 const app = express();
