@@ -3,26 +3,26 @@ import Fade from './Fade'
 import { updateDisplayUserType } from '../actions/display_actions'
 import { Form, FormGroup, FormControl,
          Col, ControlLabel, Button} from 'react-bootstrap'
+import { loginUser } from '../actions/user_actions'
 
 
 const Login =  (props) => {
 
   const handleSubmit = () => {
-    let inputs = document.getElementsByClassName('form-control')
+    let inputArr = [],
+        inputObj = {},
+        inputs = document.getElementsByClassName('form-control')
+    for(let i=0; i<inputs.length; i++){
+        inputs[i].value ? inputArr.push(inputs[i].value) : null
+    }
 
     if(inputs.length == 2){
-      let [email, pw] = [...inputs]
+      [inputObj.email, inputObj.pwHash] = [...inputArr]
 
-      /*****************************/
-      //just for testing, NOT how this will be actually implemented
-      //this will 'log in' for UI purposes before we have auth0 and all that
-      //stuff set up
-      if(email.value == 'user'){
-        updateDisplayUserType('user')
-      } else if (email.value == 'org'){
-        updateDisplayUserType('org')
-      }
-      /****************************/
+      const email = encodeURIComponent(inputObj.email);
+      const password = encodeURIComponent(inputObj.pwHash);
+      const formData = `email=${email}&pwHash=${password}`;
+      loginUser(formData)
 
       //do sanity checking here and then submit to user and org store
       //console.log(email.value, pw.value)

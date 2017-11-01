@@ -8,11 +8,18 @@ class UserStore extends EventEmitter {
     constructor(props) {
         super(props)
       
-        this.user = {}
+        this.state({
+            user: {}
+        })
     }
 
     createUser(user){
-        this.user = user
+        this.setState.user = user
+        this.emit("change")
+    }
+
+    loginUser(user){
+        this.setState.user = user
         this.emit("change")
     }
 
@@ -20,6 +27,9 @@ class UserStore extends EventEmitter {
       switch (action.type) {
         case UserActionTypes.CREATE_USER:
             this.createUser(action.user);
+            break
+        case UserActionTypes.LOGIN_USER:
+            this.loginUser(action.user);
             break
         }
     }

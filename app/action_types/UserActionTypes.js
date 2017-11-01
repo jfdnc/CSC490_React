@@ -14,6 +14,7 @@ const UserActionTypes = {
   SHARE_VOLOP: 'SHARE_VOLOP',
   EDIT_PREFS: 'EDIT_PREFS',
   CREATE_USER: 'CREATE_USER',
+  LOGIN_USER: 'LOGIN_USER',
 }
 
 export default UserActionTypes

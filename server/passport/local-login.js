@@ -6,7 +6,7 @@ const config = require('../../config');
 // Return the passport local strategy object
 module.exports = new PassportLocalStrategy({
     usernameField: 'email',
-    passportField: 'pwHash',
+    passwordField: 'pwHash',
     session: false,
     passReqToCallback: true
 }, (req, email, pwHash, done) => {
@@ -21,14 +21,14 @@ module.exports = new PassportLocalStrategy({
 
         if(!user) {
             const error = new Error('Incorrect email or password');
-            error.name = 'IncorrectCredientialsError';
+            error.name = 'IncorrectCredentialsError';
 
             return done(error);
         }
 
         // Check if a hashed user's password is equal to the value in the database
         return user.comparePassword(userData.pwHash, (passwordErr, isMatch) => {
-            if(err){ return done(err); }
+            if(passwordErr){ return done(passwordErr); }
 
             if(!isMatch){
                 const error = new Error('Incorrect email or password');
@@ -48,7 +48,6 @@ module.exports = new PassportLocalStrategy({
                 lastName: user.lastName,
                 zipCode: user.zipCode
             };
-
             return done(null, token, data);
         });
     });

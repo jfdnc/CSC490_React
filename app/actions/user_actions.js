@@ -72,6 +72,25 @@ export function createUser(user){
 
 }
 
+export function loginUser(user){
+    //make API call to login user
+    const xhr = new XMLHttpRequest();
+    xhr.open('post', '/auth/login');
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.responseType = 'json';
+    if (xhr.status === 200) {
+        // success so save the token
+        localStorage.setItem('token', xhr.response.token);
+    }
+    xhr.send(user);
+
+    //send to dispatcher
+    dispatcher.dispatch({
+        type: UserActionTypes.LOGIN_USER,
+        user: user
+    })
+}
+
 /* to export all functions
 export default {
   getLogState,
