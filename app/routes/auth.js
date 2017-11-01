@@ -1,6 +1,7 @@
 const express = require('express');
 const validator = require('validator');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 
 const router = new express.Router();
 
@@ -106,7 +107,7 @@ router.post('/signup', (req, res, next) => {
 
         return res.status(200).json({
             success: true,
-            message: 'You have successfully signed up! Now you should be able to log in.'
+            message: 'You have successfully signed up! Now you should be able to log in.',
         });
     })(req, res, next);
 });
