@@ -78,17 +78,19 @@ export function loginUser(user){
     xhr.open('post', '/auth/login');
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
-    if (xhr.status === 200) {
-        // success so save the token
-        localStorage.setItem('token', xhr.response.token);
-    }
+    xhr.addEventListener('load', () => {
+        if (xhr.status === 200) {
+            // success so save the token
+            localStorage.setItem('token', xhr.response.token);
+
+            //send to dispatcher
+            dispatcher.dispatch({
+                type: UserActionTypes.LOGIN_USER,
+                user: xhr.response.user
+            })
+        }
+    });
     xhr.send(user);
-    console.log(xhr.response)
-    //send to dispatcher
-    dispatcher.dispatch({
-        type: UserActionTypes.LOGIN_USER,
-        user: user
-    })
 }
 
 /* to export all functions

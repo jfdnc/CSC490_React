@@ -4,7 +4,7 @@ import { updateDisplayUserType } from '../actions/display_actions'
 import { Form, FormGroup, FormControl,
          Col, ControlLabel, Button} from 'react-bootstrap'
 import { loginUser } from '../actions/user_actions'
-
+import * as UserStore from '../data/stores/UserStore'
 
 const Login =  (props) => {
 
