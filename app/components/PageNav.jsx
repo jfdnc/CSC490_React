@@ -2,7 +2,8 @@ import React from 'react'
 import { displayRegister,
          displayLogin,
          displayAbout,
-         displayContact } from '../actions/display_actions'
+         displayContact,
+         displayHome } from '../actions/display_actions'
 import { Navbar, NavItem } from 'react-materialize'
 
 const PageNav = (props) => {
@@ -20,6 +21,7 @@ const PageNav = (props) => {
   }
 
   const handleClick = (type) => {
+    console.log('clicked')
     switch(type) {
       case 'Register':
         displayRegister()
@@ -32,6 +34,9 @@ const PageNav = (props) => {
         break
       case 'Contact':
         displayContact()
+        break
+      case 'Home':
+        displayHome()
         break
     }
   }

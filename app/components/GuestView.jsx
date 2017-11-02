@@ -8,10 +8,11 @@ const GuestView = (props) => {
       <Fade>
         <div id='guest-view' className='view-container'>
           <div id='guest-left'>
-            <Button bsSize='large' onClick={displayRegister}>Register</Button>
-            <Button bsSize='large' onClick={displayLogin}>Log In</Button>
+            Category Carousel
           </div>
           <div id='guest-right'>
+          <Button bsSize='large' onClick={displayRegister}>Register</Button>
+          <Button bsSize='large' onClick={displayLogin}>Log In</Button>
           </div>
         </div>
       </Fade>
