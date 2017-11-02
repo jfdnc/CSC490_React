@@ -13,6 +13,10 @@ class UserStore extends EventEmitter {
         })
     }
 
+    getAll(){
+        return this.state
+    }
+
     createUser(user){
         this.setState.user = user
         this.emit("change")
@@ -29,6 +33,7 @@ class UserStore extends EventEmitter {
             this.createUser(action.user);
             break
         case UserActionTypes.LOGIN_USER:
+            console.log(action.user)
             this.loginUser(action.user);
             break
         }
