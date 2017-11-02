@@ -23,6 +23,7 @@ const Login =  (props) => {
       const password = encodeURIComponent(inputObj.pwHash);
       const formData = `email=${email}&pwHash=${password}`;
       loginUser(formData)
+      updateDisplayUserType('org')
 
       //do sanity checking here and then submit to user and org store
       //console.log(email.value, pw.value)

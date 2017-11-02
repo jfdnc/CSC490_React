@@ -12,10 +12,10 @@ const PageNav = (props) => {
       navTypes = ['Register', 'Login', 'About', 'Contact']
     break
     case 'user':
-      navTypes = ['About', 'Contact']
+      navTypes = ['Settings', 'Log Out']
     break
     case 'org':
-      navTypes = ['About', 'Contact']
+      navTypes = ['Settings', 'Log Out']
     break
   }
 
@@ -49,11 +49,14 @@ const PageNav = (props) => {
   }
 
     return(
-      <Navbar id='page-nav'>
+      <div>
+      <div id='nav-bar-strip'/>
+      <Navbar brand='eVol' id='page-nav' right>
         {
           mapNavHeaders(navTypes)
         }
       </Navbar>
+      </div>
     )
 }
 

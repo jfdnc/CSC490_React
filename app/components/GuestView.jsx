@@ -1,5 +1,4 @@
 import React from 'react'
-import CategoryCarousel from './CategoryCarousel'
 import Fade from './Fade'
 import { Button } from 'react-bootstrap'
 import { displayRegister, displayLogin } from '../actions/display_actions'
@@ -13,7 +12,6 @@ const GuestView = (props) => {
             <Button bsSize='large' onClick={displayLogin}>Log In</Button>
           </div>
           <div id='guest-right'>
-            <CategoryCarousel />
           </div>
         </div>
       </Fade>
