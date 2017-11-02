@@ -2,6 +2,7 @@ import React from 'react'
 import { Glyphicon } from 'react-bootstrap'
 import DisplayStore from '../data/stores/DisplayStore'
 import { displayAbout, displayContact, updateDisplayUserType } from '../actions/display_actions'
+import UserStore from '../data/stores/UserStore'
 import PageNav from './PageNav'
 import GuestView from './GuestView'
 import UserView from './UserView'
@@ -17,6 +18,7 @@ export default class MainView extends React.Component {
 
     this.state = {
       displayState: {},
+      userState: {},
       currentView: ""
     }
 
@@ -25,8 +27,11 @@ export default class MainView extends React.Component {
 
   componentWillMount(){
     let displayState = DisplayStore.getAll()
+    //get user obj if it exists
+    let userState = UserStore.getAll().user
       this.setState({
         displayState: displayState,
+        userState: userState,
         currentView: this.loadView(displayState.displayType)
     })
 
@@ -36,6 +41,14 @@ export default class MainView extends React.Component {
         displayState: displayState,
         currentView: this.loadView(displayState.displayType)
       })
+    })
+    //listen for changes to user state in store
+    UserStore.on("change", () => {
+      let userState = UserStore.getAll().user
+      this.setState({
+        userState: userState
+      })
+      //console.log(userState)
     })
   }
 
@@ -68,10 +81,17 @@ export default class MainView extends React.Component {
   }
 
   render(){
+    //testing data gathered from userstate
+    let [fname, lname, zip] = this.state.userState ?
+                             [ this.state.userState.firstName,
+                               this.state.userState.lastName,
+                               this.state.userState.zipCode ] : 'nothing yet'
     return(
       <div id='main-container'>
         <PageNav userType={this.state.displayState.userType}/>
         <div id="content-container">
+          {/*output user status*/}
+          <div>`Fname: {fname} Lname: {lname} ZIP: {zip}`</div>
           {this.state.currentView}
         </div>
 
