@@ -83,7 +83,7 @@ export function loginUser(user){
         localStorage.setItem('token', xhr.response.token);
     }
     xhr.send(user);
-
+    console.log(xhr.response)
     //send to dispatcher
     dispatcher.dispatch({
         type: UserActionTypes.LOGIN_USER,
