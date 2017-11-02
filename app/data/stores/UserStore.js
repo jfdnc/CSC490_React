@@ -7,10 +7,8 @@ import UserActionTypes from '../../action_types/UserActionTypes'
 class UserStore extends EventEmitter {
     constructor(props) {
         super(props)
-
-        this.state({
-            user: {}
-        })
+        
+        this.state = { user: {} }
     }
 
     getAll(){
@@ -18,12 +16,12 @@ class UserStore extends EventEmitter {
     }
 
     createUser(user){
-        this.setState.user = user
+        this.state.user = user
         this.emit("change")
     }
 
     loginUser(user){
-        this.setState.user = user
+        this.state.user = user
         this.emit("change")
     }
 
@@ -33,7 +31,6 @@ class UserStore extends EventEmitter {
             this.createUser(action.user);
             break
         case UserActionTypes.LOGIN_USER:
-            console.log(action.user)
             this.loginUser(action.user);
             break
         }
