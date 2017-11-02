@@ -16,7 +16,6 @@ const port = isProduction ? process.env.PORT : 3000;
 const publicPath = path.resolve(__dirname, 'public');
 
 app.use(express.static(publicPath));
-
 // set up body-parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,8 +36,10 @@ app.use('/api', authCheckMiddleware);
 // initialize routes
 const authRoutes = require('./app/routes/auth');
 const apiRoutes = require('./app/routes/api');
+const pageRoutes = require('./app/routes/approutes')
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
+app.use('/', pageRoutes)
 
 // We only want to run webpack when not in production
 if (!isProduction) {

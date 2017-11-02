@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const VolOp = require('./volOpModel');
-//const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 // create user schema and model
 const UserSchema = new Schema({
@@ -20,7 +20,7 @@ const UserSchema = new Schema({
 
 // Compare the passed password with the value in the database
 UserSchema.methods.comparePassword = function comparePassword(pwHash, callback) {
-    //bcrypt.compare(pwHash, this.pwHash, callback);
+    bcrypt.compare(pwHash, this.pwHash, callback);
 };
 
 // Generate hash

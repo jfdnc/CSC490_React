@@ -10,7 +10,7 @@ const PageNav = (props) => {
   let navTypes
   switch(props.userType){
     case 'guest':
-      navTypes = ['Register', 'Login', 'About', 'Contact']
+      navTypes = ['Volunteer Opportunities','Register', 'Login']
     break
     case 'user':
       navTypes = ['Settings', 'Log Out']

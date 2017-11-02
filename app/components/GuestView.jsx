@@ -11,8 +11,7 @@ const GuestView = (props) => {
             Category Carousel
           </div>
           <div id='guest-right'>
-          <Button bsSize='large' onClick={displayRegister}>Register</Button>
-          <Button bsSize='large' onClick={displayLogin}>Log In</Button>
+            Project Information
           </div>
         </div>
       </Fade>
