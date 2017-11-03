@@ -25,6 +25,11 @@ class UserStore extends EventEmitter {
         this.emit("change")
     }
 
+    logOut(){
+        this.state.user = {}
+        this.emit("change")
+    }
+
     handleActions(action) {
       switch (action.type) {
         case UserActionTypes.CREATE_USER:
@@ -33,6 +38,10 @@ class UserStore extends EventEmitter {
         case UserActionTypes.LOGIN_USER:
             this.loginUser(action.user);
             break
+        case UserActionTypes.LOG_OUT:
+            this.logOut();
+            break
+
         }
     }
 }

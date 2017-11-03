@@ -23,6 +23,9 @@ export function getUserType(){
 
 //return t/f on successful log out
 export function logOut(){
+    //remove the token from local storage
+    localStorage.removeItem('token')
+
     dispatcher.dispatch({
         type: UserActionTypes.LOG_OUT
     })
