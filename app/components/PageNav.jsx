@@ -5,12 +5,13 @@ import { displayRegister,
          displayContact,
          displayHome } from '../actions/display_actions'
 import { Navbar, NavItem } from 'react-materialize'
+import { logOut } from '../actions/user_actions'
 
 const PageNav = (props) => {
   let navTypes
   switch(props.userType){
     case 'guest':
-      navTypes = ['Volunteer Opportunities','Register', 'Login']
+      navTypes = ['Volunteer Opportunities','Register', 'Login', 'Logout']
     break
     case 'user':
       navTypes = ['Settings', 'Log Out']
@@ -28,6 +29,9 @@ const PageNav = (props) => {
         break
       case 'Login':
         displayLogin()
+        break
+      case 'Logout':
+        logOut()
         break
       case 'About':
         displayAbout()
