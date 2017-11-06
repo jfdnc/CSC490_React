@@ -4,11 +4,47 @@ const Address = require('../models/addressModel');
 const Organization = require('../models/orgModel');
 const User = require('../models/userModel');
 const VolOp = require('../models/volOpModel');
+const OrgRequest = require('../models/orgRequestModel');
+const nodemailer = require('nodemailer');
+
+// ---ORG REQUEST---
+
+//get a list of all requests from the db
+router.get('/orgrequests', function(req, res, next){
+    OrgRequest.find().then(function(orgRequest){
+        res.send({orgRequest});
+    });
+});
+
+//get a single request by id
+router.get('/orgrequests/:id', function(req, res, next){
+    OrgRequest.findById(req.params.id, function(err, orgRequest){
+        if(err){
+            res.send(err)
+        }
+        res.send(orgRequest)
+    });
+});
+
+//create a new document that holds org data needed for approval and email admin
+router.post('/orgrequests', function(req, res, next){
+   OrgRequest.create(req.body).then(function(orgRequest){
+       res.send(orgRequest);
+   }).catch(next);
+});
+
+//delete an org request
+router.delete('/orgrequests/:id', function(req, res, next){
+    OrgRequest.findByIdAndRemove(req.params.id).then(function(orgRequest){
+        res.send(orgRequest)
+    }).catch(next);
+});
 
 // ---ORGANIZATION---
+
 //get a list of organizations from the db
 router.get('/organizations', function(req, res, next){
-  Organization.findOne().then(function(organization){
+  Organization.find().then(function(organization){
     res.send({organization});
   });
 });
@@ -46,7 +82,7 @@ router.put('/organizations/:orgId/:volOpId', function(req, res, next){
     });
 });
 
-// delete an address from the db
+// delete an organization from the db
 router.delete('/organizations/:id', function(req, res, next){
     Organization.findByIdAndRemove({_id: req.params.id}).then(function(address){
         res.send(organization);
