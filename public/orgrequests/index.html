@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eVol - New Organization Requests</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+<body>
+<h1>Organization Registration Requests</h1>
+<div id="list"></div>
+
+<script>
+    //get all requests from db
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "/api/orgrequests");
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', () => {
+        if (xhr.status === 200) {
+            let content = "";
+            let orgList = xhr.response.orgRequest;
+
+            for(let i=0; i<orgList.length; i++){
+                let org = orgList[i];
+                content += "<p id='" + org._id + "'><b>Name: </b>" + org.orgName + "<br>" +
+                    "<b>Address: </b>" + org.orgAddress.street + ", " + org.orgAddress.city + ", " +
+                        org.orgAddress.state + " " + org.orgAddress.zip + "<br>" +
+                    "<b>Description: </b>" + org.orgDescription + "<br>" +
+                    "<b>Phone: </b>" + org.orgPhone + "<br>" +
+                    "<b>Email: </b>" + org.orgEmail + "<br>" +
+                    "<b>Contact Person: </b>" + org.orgContactPerson + "<br><br>" +
+                    "<input type='button' name='" + org._id + "' id='accept' value='Accept'>  " +
+                    "<input type='button' name='" + org._id + "' id='decline' value='Decline'></p><br>"
+            }
+            $('#list').html(content);
+        }
+        else {
+            $('#list').html("<b>Error: </b>Cannot retrieve data.");
+        }
+    });
+    xhr.send();
+
+    //fires when a button gets clicked
+    $('document').ready(function(){
+        $("input").click(function(e){
+            let btnName = e.target.name
+
+            if(e.target.id == 'accept'){
+                accept(btnName);
+            }
+            else if(e.target.id == 'decline'){
+                decline(btnName);
+            }
+        })
+    });
+
+    function accept(id) {
+        //get single request based off id
+        let myReq = new Request('/api/orgrequests/' + id, {method: 'GET', headers: {'Content-Type': 'application/json'}})
+        fetch(myReq)
+            .then(function(res) {
+                res.json().then(function(org){
+                    //post org data to organization collection
+                    let myReq1 = new Request('/api/organizations', {method: 'POST', body: JSON.stringify(org),
+                        headers: {"Content-Type": "application/json"}})
+                    fetch(myReq1)
+                        .then(function (res) {
+                            console.log(res)
+                        })
+                        .catch(function (err) {
+                            console.log(err)
+                        })
+
+                    //delete request
+                    let myReq2 = new Request('/api/orgrequests/' + id, {method: 'DELETE'})
+                    fetch(myReq2)
+                        .then(function(res){
+                            console.log(res)
+                        })
+                        .catch(function(err){
+                            console.log(err)
+                        })
+
+                    //send email to org notifying of approval
+                    let myReq3 = new Request('/emailApprove', {method: 'POST', body: JSON.stringify(org),
+                        headers: {'Content-Type': 'application/json'}})
+                    fetch(myReq3)
+                        .then(function(res){
+                            console.log(res)
+                        })
+                        .catch(function(err){
+                            console.log(err)
+                        })
+                })
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+        //hide request info from view
+        $('p#' + id).hide()
+    }
+
+    function decline(id){
+        //get single request based off id
+        let myReq = new Request('/api/orgrequests/' + id, {method: 'GET', headers: {'Content-Type': 'application/json'}})
+        fetch(myReq)
+            .then(function(res) {
+                res.json().then(function(org){
+                    let myReq2 = new Request('/api/orgrequests/' + id, {method: 'DELETE'})
+                    fetch(myReq2)
+                        .then(function(res){
+                            console.log(res)
+                        })
+                        .catch(function(err){
+                            console.log(err)
+                        })
+
+                    let myReq1 = new Request('/emailDecline', {method: 'POST', body: JSON.stringify(org),
+                        headers: {'Content-Type': 'application/json'}})
+                    fetch(myReq1)
+                        .then(function(res){
+                            console.log(res)
+                        })
+                        .catch(function(err){
+                            console.log(err)
+                        })
+                })
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+
+        //hide request info from view
+        $('p#' + id).hide()
+    }
+
+</script>
+</body>
+</html>

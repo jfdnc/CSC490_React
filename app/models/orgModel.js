@@ -3,7 +3,6 @@ var Address = require('./addressModel');
 
 // Organization schema
 var orgSchema = new mongoose.Schema({
-    pkey: {type: String, unique: true, index: true},
     orgName: String,
     orgAddress: {
       street: {
@@ -29,6 +28,4 @@ var orgSchema = new mongoose.Schema({
     orgVolOps: [mongoose.Schema.ObjectId]
 });
 
-var Organization = module.exports = mongoose.model('Organization', orgSchema);
-
-module.export = Organization;
+module.exports = mongoose.model('Organization', orgSchema);

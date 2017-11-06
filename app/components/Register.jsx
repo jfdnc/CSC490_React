@@ -4,6 +4,7 @@ import { Tabs, Tab, Form, ControlLabel,
          FormGroup, FormControl, Col, Button } from 'react-bootstrap'
 import { displayHome } from '../actions/display_actions'
 import { createUser } from '../actions/user_actions'
+import { createOrg } from '../actions/org_actions'
 
 const Register = (props) => {
   const handleSubmit = (userType) => {
@@ -27,16 +28,26 @@ const Register = (props) => {
       //function here to display modal, call displayHome() when closing that modal
       //information about next steps, check your email, etc
       displayHome()
-    } else if( userType == 'org' && inputArr.length == 5){
-      [ inputObj.orgName,
-        inputObj.description,
-        inputObj.phone,
-        inputObj.eMail,
-        inputObj.contactName ] = [...inputArr]
+    } else if( userType == 'org' && inputArr.length == 9){
+
+        inputObj = {
+          orgName: inputArr[0],
+          orgAddress: {
+            street: inputArr[1],
+            city: inputArr[2],
+            state: inputArr[3],
+            zip: inputArr[4]
+          },
+          orgDescription: inputArr[5],
+          orgPhone: inputArr[6],
+          orgEmail: inputArr[7],
+          orgContactPerson: inputArr[8]
+        };
 
       //testing -- remove
       console.log('sending org registration request info:', inputObj)
 
+        createOrg(inputObj)
       //function here to display modal, call displayHome() when closing that modal
       //information about next steps, check your email, etc
       displayHome()
@@ -104,6 +115,30 @@ const Register = (props) => {
             <Col sm={8}>
               <FormControl placeholder='Organization Name'></FormControl>
             </Col>
+            <Col componentClass={ControlLabel} sm={4}>
+              Street:
+            </Col>
+            <Col sm={8}>
+              <FormControl placeholder='Street Address'></FormControl>
+            </Col>
+              <Col componentClass={ControlLabel} sm={4}>
+                City:
+              </Col>
+              <Col sm={8}>
+                <FormControl placeholder='City'></FormControl>
+              </Col>
+              <Col componentClass={ControlLabel} sm={4}>
+                State:
+              </Col>
+              <Col sm={8}>
+                <FormControl placeholder='State'></FormControl>
+              </Col>
+              <Col componentClass={ControlLabel} sm={4}>
+                Zip:
+              </Col>
+              <Col sm={8}>
+                <FormControl placeholder='12345'></FormControl>
+              </Col>
             <FormGroup controlId="formControlsTextarea">
               <Col sm={4}>
                 <ControlLabel>Organization Description</ControlLabel>

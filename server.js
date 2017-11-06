@@ -30,8 +30,8 @@ passport.use('local-signup', localSignupStrategy);
 passport.use('local-login', localLoginStrategy);
 
 // set up authentication middleware
-const authCheckMiddleware = require('./server/middleware/auth-check');
-app.use('/api', authCheckMiddleware);
+//const authCheckMiddleware = require('./server/middleware/auth-check');
+//app.use('/api', authCheckMiddleware);
 
 // initialize routes
 const authRoutes = require('./app/routes/auth');
@@ -39,7 +39,7 @@ const apiRoutes = require('./app/routes/api');
 const pageRoutes = require('./app/routes/approutes')
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
-app.use('/', pageRoutes)
+app.use('/', pageRoutes);
 
 // We only want to run webpack when not in production
 if (!isProduction) {

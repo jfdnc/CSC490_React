@@ -19,61 +19,97 @@ export function getUserType(){
   })
 }
 
-//return t/f on successful log out
-export function logOut(){
+//Create a new volop in database
+export function createVolop(volOp){
+    let myReq = new Request('/api/volOps', {method:'POST', body: JSON.stringify(volOp),
+        headers: {"Content-Type": "application/json"}})
+    fetch(myReq)
+        .then(function(res){
+            console.log(res)
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+
   dispatcher.dispatch({
-    type: OrgActionTypes.LOG_OUT
+    type: OrgActionTypes.CREATE_VOLOP,
+    volOp: volOp
   })
 }
 
-//display contact page
-export function createVolop(){
-  dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
-    type: OrgActionTypes.CREATE_VOLOP
-  })
-}
-//display contact page
+//delete a volop from database
 export function deleteVolop(){
   dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
     type: OrgActionTypes.DELETE_VOLOP
   })
 }
-//display contact page
-export function updateVolop(){
+
+//update a volop in database
+export function updateVolop(volOp){
+    let myReq = new Request('/api/volOps/' + volOp._id, {method:'PUT', body: JSON.stringify(volOp),
+        headers: {"Content-Type": "application/json"}})
+    fetch(myReq)
+        .then(function(res){
+            console.log(res)
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+
   dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
-    type: OrgActionTypes.UPDATE_VOLOP
+    type: OrgActionTypes.UPDATE_VOLOP,
+    volOp: volOp
   })
 }
-//display contact page
+//view a volop
 export function viewVolopOrg(){
   dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
     type: OrgActionTypes.VIEW_VOLOP_ORG
   })
 }
-//display contact page
+//message previous volunteers (probably removing)
 export function msgVolunteer(){
   dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
     type: OrgActionTypes.MSG_VOLUNTEER
   })
 }
-//display contact page
+//view org info
 export function viewOrgInfo(){
   dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
     type: OrgActionTypes.VIEW_ORG_INFO
   })
 }
-//display contact page
+//edit org info
 export function editOrgInfo(){
   dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
     type: OrgActionTypes.EDIT_ORG_INFO
   })
+}
+
+//create an organization
+export function createOrg(org){
+    let myReq = new Request('/api/orgrequests', {method:'POST', body: JSON.stringify(org),
+        headers: {"Content-Type": "application/json"}})
+    fetch(myReq)
+        .then(function(res){
+            console.log(res)
+            let myReq1 = new Request('/emailRequest', {method: 'POST', body: JSON.stringify(org),
+                headers: {'Content-Type': 'application/json'}})
+            fetch(myReq1)
+                .then(function(res1){
+                    console.log(res1)
+                })
+                .catch(function(err1){
+                    console.log(err1)
+                })
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+
+    dispatcher.dispatch({
+        type: OrgActionTypes.CREATE_ORG,
+    })
 }
 
 /*to export all functions
