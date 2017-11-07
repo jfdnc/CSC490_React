@@ -59,4 +59,8 @@ module.exports = new PassportLocalStrategy({
             return done(null, token, data);
         });
     });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 6712f0381f98ad5ba0792320d51895d5e4a72014
