@@ -1,6 +1,7 @@
 import React from 'react'
-import { Tabs, Tab, Form, ControlLabel,
-         FormGroup, FormControl, Col, Button } from 'react-bootstrap'
+import { Form, ControlLabel,
+         FormGroup, FormControl, Col} from 'react-bootstrap'
+import { Tabs, Tab, Button } from 'react-materialize'
 import { createUser } from '../actions/user_actions'
 import { createOrg } from '../actions/org_actions'
 import Menu from './Menu'
@@ -21,7 +22,7 @@ const Register = (props) => {
         inputObj.pwHash ] = [...inputArr]
 
         //testing -- remove
-        console.log('registering user with info:', inputObj)
+        //console.log('registering user with info:', inputObj)
 
       createUser(inputObj)
     } else if( userType == 'org' && inputArr.length == 9){
@@ -56,7 +57,7 @@ const Register = (props) => {
         <div id='onsite'>
           <Tabs defaultActiveKey={1} id='registration-tabs'>
             {/*user fields*/}
-            <Tab eventKey={1} title='User' >
+            <Tab eventKey={1} title='User' active>
               <Form horizontal onSubmit={(e)=>{e.preventDefault();handleSubmit('user')}} >
                 <FormGroup>
                   <Col componentClass={ControlLabel} sm={4}>
@@ -96,7 +97,7 @@ const Register = (props) => {
                     <FormControl placeholder='Password'></FormControl>
                   </Col>
                 </FormGroup>
-                <Button type='submit' bsStyle='primary'>Submit</Button>
+                <Button type='submit'>Submit</Button>
               </Form>
             </Tab>
             {/*org fields*/}
@@ -159,7 +160,7 @@ const Register = (props) => {
                 <FormControl placeholder='Joe Helpful'></FormControl>
               </Col>
             </FormGroup>
-            <Button type='submit' bsStyle='primary'>Submit</Button>
+            <Button type='submit'>Submit</Button>
             </FormGroup>
 
             </Form>

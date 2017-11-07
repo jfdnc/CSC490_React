@@ -10,7 +10,7 @@ class Homepage extends Component {
 	render() {
 		return (
 			<div>
-        <Menu />
+				<Menu />
 				<h1>Homepage</h1>
 			</div>
 		);
