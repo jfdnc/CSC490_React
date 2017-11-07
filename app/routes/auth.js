@@ -47,8 +47,8 @@ function validateSignupForm(payload) {
     };
 }
 
-// Validate the login form
-function validateLoginForm(payload) {
+// Validate the User login form
+function validateUserLoginForm(payload) {
     const errors = {};
     let isFormValid = true;
     let message = '';
@@ -59,6 +59,33 @@ function validateLoginForm(payload) {
     }
 
     if (!payload || typeof payload.pwHash !== 'string' || payload.pwHash.trim().length === 0) {
+        isFormValid = false;
+        errors.password = 'Please provide your password.';
+    }
+
+    if (!isFormValid) {
+        message = 'Check the form for errors.';
+    }
+
+    return {
+        success: isFormValid,
+        message,
+        errors
+    };
+}
+
+// Validate the Org login form
+function validateOrgLoginForm(payload) {
+    const errors = {};
+    let isFormValid = true;
+    let message = '';
+
+    if (!payload || typeof payload.orgEmail !== 'string' || payload.orgEmail.trim().length === 0) {
+        isFormValid = false;
+        errors.email = 'Please provide your email address.';
+    }
+
+    if (!payload || typeof payload.orgPwHash !== 'string' || payload.orgPwHash.trim().length === 0) {
         isFormValid = false;
         errors.password = 'Please provide your password.';
     }
@@ -112,8 +139,8 @@ router.post('/signup', (req, res, next) => {
     })(req, res, next);
 });
 
-router.post('/login', (req, res, next) => {
-    const validationResult = validateLoginForm(req.body);
+router.post('/loginuser', (req, res, next) => {
+    const validationResult = validateUserLoginForm(req.body);
     if (!validationResult.success) {
         return res.status(400).json({
             success: false,
@@ -123,7 +150,7 @@ router.post('/login', (req, res, next) => {
     }
 
 
-    return passport.authenticate('local-login', (err, token, userData) => {
+    return passport.authenticate('local-login-user', (err, token, userData) => {
         if (err) {
             if (err.name === 'IncorrectCredentialsError') {
                 return res.status(400).json({
@@ -144,6 +171,42 @@ router.post('/login', (req, res, next) => {
             message: 'You have successfully logged in!',
             token,
             user: userData
+        });
+    })(req, res, next);
+});
+
+router.post('/loginorg', (req, res, next) => {
+    const validationResult = validateOrgLoginForm(req.body);
+    if (!validationResult.success) {
+        return res.status(400).json({
+            success: false,
+            message: validationResult.message,
+            errors: validationResult.errors
+        });
+    }
+
+
+    return passport.authenticate('local-login-org', (err, token, orgData) => {
+        if (err) {
+            if (err.name === 'IncorrectCredentialsError') {
+                return res.status(400).json({
+                    success: false,
+                    message: err.message
+                });
+            }
+
+            return res.status(400).json({
+                success: false,
+                message: 'Could not process the form.'
+            });
+        }
+
+
+        return res.json({
+            success: true,
+            message: 'You have successfully logged in!',
+            token,
+            org: orgData
         });
     })(req, res, next);
 });

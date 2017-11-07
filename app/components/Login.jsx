@@ -4,7 +4,9 @@ import { updateDisplayUserType } from '../actions/display_actions'
 import { Form, FormGroup, FormControl,
          Col, ControlLabel, Button} from 'react-bootstrap'
 import { loginUser } from '../actions/user_actions'
+import { loginOrg } from '../actions/org_actions'
 import * as UserStore from '../data/stores/UserStore'
+import * as OrgStore from '../data/stores/OrgStore'
 
 const Login =  (props) => {
 
@@ -16,24 +18,23 @@ const Login =  (props) => {
         inputs[i].value ? inputArr.push(inputs[i].value) : null
     }
 
-    if(inputs.length == 2){
+    if(inputs.length == 3){
       [inputObj.email, inputObj.pwHash] = [...inputArr]
+
+      let userType = inputArr[2]
 
       const email = encodeURIComponent(inputObj.email);
       const password = encodeURIComponent(inputObj.pwHash);
-      const formData = `email=${email}&pwHash=${password}`;
-      loginUser(formData)
-
-      //just for testing
-      switch(inputObj.email){
-        case 'user':
-        updateDisplayUserType('user')
-        break
-        case 'org':
-        updateDisplayUserType('org')
-        break
+      if(userType == 'user'){
+        const formData = `email=${email}&pwHash=${password}`;
+        console.log("Logging in user...")
+        loginUser(formData)
       }
-
+      else if(userType == 'org'){
+        const formData = `orgEmail=${email}&orgPwHash=${password}`;
+        console.log("Logging in organization...")
+        loginOrg(formData)
+      }
 
       //do sanity checking here and then submit to user and org store
       //console.log(email.value, pw.value)
@@ -60,6 +61,19 @@ const Login =  (props) => {
             <Col sm={8}>
               <FormControl placeholder='Password'></FormControl>
             </Col>
+
+            <FormGroup controlId="formControlsSelect">
+              <Col componentClass={ControlLabel} sm={4}>
+                User Type:
+              </Col>
+            <Col sm={7}>
+                <FormControl componentClass="select" placeholder="Select One">
+                  <option value="null">Select One...</option>
+                  <option value="user">User</option>
+                  <option value="org">Organization</option>
+                </FormControl>
+            </Col>
+              </FormGroup>
           </FormGroup>
           <Button type='submit' bsStyle='primary'>Submit</Button>
         </Form>

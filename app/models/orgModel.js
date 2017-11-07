@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Address = require('./addressModel');
+const bcrypt = require('bcrypt');
 
 // Organization schema
 var orgSchema = new mongoose.Schema({
@@ -24,8 +24,15 @@ var orgSchema = new mongoose.Schema({
     orgDescription: String,
     orgPhone: String,
     orgEmail: String,
+    orgWebsite: String,
     orgContactPerson: String,
+    orgPwHash: String,
     orgVolOps: [mongoose.Schema.ObjectId]
 });
+
+// Compare the passed password with the value in the database
+orgSchema.methods.comparePassword = function comparePassword(orgPwHash, callback) {
+    bcrypt.compare(orgPwHash, this.orgPwHash, callback);
+};
 
 module.exports = mongoose.model('Organization', orgSchema);

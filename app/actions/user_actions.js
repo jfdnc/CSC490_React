@@ -78,7 +78,7 @@ export function createUser(user){
 export function loginUser(user){
     //make API call to login user
     const xhr = new XMLHttpRequest();
-    xhr.open('post', '/auth/login');
+    xhr.open('post', '/auth/loginuser');
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
