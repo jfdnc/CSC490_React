@@ -112,6 +112,38 @@ export function createOrg(org){
     })
 }
 
+export function loginOrg(org){
+    //make API call to login user
+    const xhr = new XMLHttpRequest();
+    xhr.open('post', '/auth/loginorg');
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', () => {
+        if (xhr.status === 200) {
+            // success so save the token
+            localStorage.setItem('token', xhr.response.token);
+
+            //send to dispatcher
+            dispatcher.dispatch({
+                type: OrgActionTypes.LOGIN_USER,
+                org: xhr.response.org
+            })
+        }
+    });
+    xhr.send(org);
+}
+
+//return t/f on successful log out
+export function logOut(){
+    //remove the token from local storage
+    localStorage.removeItem('token')
+
+    dispatcher.dispatch({
+        type: OrgActionTypes.LOG_OUT
+    })
+}
+
+
 /*to export all functions
 export default {
   getLogState,

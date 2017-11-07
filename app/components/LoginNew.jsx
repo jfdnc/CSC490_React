@@ -1,11 +1,11 @@
 import React from 'react'
+import { updateDisplayUserType } from '../actions/display_actions'
 import { Form, FormGroup, FormControl,
          Col, ControlLabel, Button} from 'react-bootstrap'
 import { loginUser } from '../actions/user_actions'
 import { loginOrg } from '../actions/org_actions'
 import * as UserStore from '../data/stores/UserStore'
 import * as OrgStore from '../data/stores/OrgStore'
-import Menu from './Menu'
 
 const Login =  (props) => {
 
@@ -43,46 +43,45 @@ const Login =  (props) => {
   }
 
   return(
-    <div>
-    <Menu />
-    <div id='login-view' className='view-container'>
-    <div id='onsite'>
-      <Form horizontal onSubmit={(e) => {e.preventDefault(); handleSubmit()}} >
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={4}>
-            E-mail:
-          </Col>
-          <Col sm={8}>
-            <FormControl placeholder='email@example.com'></FormControl>
-          </Col>
-          <Col componentClass={ControlLabel} sm={4}>
-            Password:
-          </Col>
-          <Col sm={8}>
-            <FormControl placeholder='Password'></FormControl>
-          </Col>
-
-          <FormGroup controlId="formControlsSelect">
+    <Fade>
+      <div id='login-view' className='view-container'>
+      <div id='onsite'>
+        <Form horizontal onSubmit={(e) => {e.preventDefault(); handleSubmit()}} >
+          <FormGroup>
             <Col componentClass={ControlLabel} sm={4}>
-              User Type:
+              E-mail:
             </Col>
-          <Col sm={7}>
-              <FormControl componentClass="select" placeholder="Select One">
-                <option value="null">Select One...</option>
-                <option value="user">User</option>
-                <option value="org">Organization</option>
-              </FormControl>
-          </Col>
-            </FormGroup>
-        </FormGroup>
-        <Button type='submit' bsStyle='primary'>Submit</Button>
-      </Form>
-    </div>
-    <div id='offsite'>
-      offsite login
-    </div>
-    </div>
-    </div>
+            <Col sm={8}>
+              <FormControl placeholder='email@example.com'></FormControl>
+            </Col>
+            <Col componentClass={ControlLabel} sm={4}>
+              Password:
+            </Col>
+            <Col sm={8}>
+              <FormControl placeholder='Password'></FormControl>
+            </Col>
+
+            <FormGroup controlId="formControlsSelect">
+              <Col componentClass={ControlLabel} sm={4}>
+                User Type:
+              </Col>
+            <Col sm={7}>
+                <FormControl componentClass="select" placeholder="Select One">
+                  <option value="null">Select One...</option>
+                  <option value="user">User</option>
+                  <option value="org">Organization</option>
+                </FormControl>
+            </Col>
+              </FormGroup>
+          </FormGroup>
+          <Button type='submit' bsStyle='primary'>Submit</Button>
+        </Form>
+      </div>
+      <div id='offsite'>
+        offsite login
+      </div>
+      </div>
+    </Fade>
     )
 }
 

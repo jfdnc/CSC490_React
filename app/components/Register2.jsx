@@ -1,10 +1,10 @@
 import React from 'react'
-import { Form, ControlLabel,
-         FormGroup, FormControl, Col} from 'react-bootstrap'
-import { Tabs, Tab, Button } from 'react-materialize'
+import Fade from './Fade'
+import { Tabs, Tab, Form, ControlLabel,
+         FormGroup, FormControl, Col, Button } from 'react-bootstrap'
+import { displayHome } from '../actions/display_actions'
 import { createUser } from '../actions/user_actions'
 import { createOrg } from '../actions/org_actions'
-import Menu from './Menu'
 
 const Register = (props) => {
   const handleSubmit = (userType) => {
@@ -22,44 +22,49 @@ const Register = (props) => {
         inputObj.pwHash ] = [...inputArr]
 
         //testing -- remove
-        //console.log('registering user with info:', inputObj)
+        console.log('registering user with info:', inputObj)
 
       createUser(inputObj)
+      //function here to display modal, call displayHome() when closing that modal
+      //information about next steps, check your email, etc
+      displayHome()
     } else if( userType == 'org' && inputArr.length == 12){
 
-      inputObj = {
-        orgName: inputArr[0],
-        orgEmail: inputArr[1],
-        orgPwHash: inputArr[2],
-        orgAddress: {
-          street: inputArr[4],
-          city: inputArr[5],
-          state: inputArr[6],
-          zip: inputArr[7]
-        },
-        orgDescription: inputArr[8],
-        orgPhone: inputArr[9],
-        orgWebsite: inputArr[10],
-        orgContactPerson: inputArr[11]
-      };
+        inputObj = {
+          orgName: inputArr[0],
+          orgEmail: inputArr[1],
+          orgPwHash: inputArr[2],
+          orgAddress: {
+            street: inputArr[4],
+            city: inputArr[5],
+            state: inputArr[6],
+            zip: inputArr[7]
+          },
+          orgDescription: inputArr[8],
+          orgPhone: inputArr[9],
+          orgWebsite: inputArr[10],
+          orgContactPerson: inputArr[11]
+        };
 
       //testing -- remove
       console.log('sending org registration request info:', inputObj)
 
         createOrg(inputObj)
+      //function here to display modal, call displayHome() when closing that modal
+      //information about next steps, check your email, etc
+      displayHome()
     } else {
       console.log('enter values in all fields!')
     }
   }
 
   return(
-    <div>
-      <Menu />
+    <Fade>
       <div id='register-view' className='view-container'>
         <div id='onsite'>
           <Tabs defaultActiveKey={1} id='registration-tabs'>
             {/*user fields*/}
-            <Tab eventKey={1} title='User' active>
+            <Tab eventKey={1} title='User' >
               <Form horizontal onSubmit={(e)=>{e.preventDefault();handleSubmit('user')}} >
                 <FormGroup>
                   <Col componentClass={ControlLabel} sm={4}>
@@ -99,7 +104,7 @@ const Register = (props) => {
                     <FormControl placeholder='Password'></FormControl>
                   </Col>
                 </FormGroup>
-                <Button type='submit'>Submit</Button>
+                <Button type='submit' bsStyle='primary'>Submit</Button>
               </Form>
             </Tab>
             {/*org fields*/}
@@ -180,7 +185,7 @@ const Register = (props) => {
                 <FormControl placeholder='Joe Helpful'></FormControl>
               </Col>
             </FormGroup>
-            <Button type='submit'>Submit</Button>
+            <Button type='submit' bsStyle='primary'>Submit</Button>
             </FormGroup>
 
             </Form>
@@ -191,7 +196,7 @@ const Register = (props) => {
           offsite registration
         </div>
       </div>
-    </div>
+    </Fade>
   )
 }
 
