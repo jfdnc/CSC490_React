@@ -20,7 +20,7 @@ const Login =  (props) => {
     if(inputs.length == 3){
       [inputObj.email, inputObj.pwHash] = [...inputArr]
 
-      let userType = inputArr[2]
+      let userType = 'user'//inputArr[2]
 
       const email = encodeURIComponent(inputObj.email);
       const password = encodeURIComponent(inputObj.pwHash);
@@ -44,44 +44,44 @@ const Login =  (props) => {
 
   return(
     <div>
-    <Menu />
-    <div id='login-view' className='view-container'>
-    <div id='onsite'>
-      <Form horizontal onSubmit={(e) => {e.preventDefault(); handleSubmit()}} >
-        <FormGroup>
-          <Col componentClass={ControlLabel} sm={4}>
-            E-mail:
-          </Col>
-          <Col sm={8}>
-            <FormControl placeholder='email@example.com'></FormControl>
-          </Col>
-          <Col componentClass={ControlLabel} sm={4}>
-            Password:
-          </Col>
-          <Col sm={8}>
-            <FormControl placeholder='Password'></FormControl>
-          </Col>
-
-          <FormGroup controlId="formControlsSelect">
+      <Menu />
+      <div id='login-view' className='view-container'>
+      <div id='onsite'>
+        <Form horizontal onSubmit={(e) => {e.preventDefault(); handleSubmit()}} >
+          <FormGroup>
             <Col componentClass={ControlLabel} sm={4}>
-              User Type:
+              E-mail:
             </Col>
-          <Col sm={7}>
-              <FormControl componentClass="select" placeholder="Select One">
-                <option value="null">Select One...</option>
-                <option value="user">User</option>
-                <option value="org">Organization</option>
-              </FormControl>
-          </Col>
-            </FormGroup>
-        </FormGroup>
-        <Button type='submit' bsStyle='primary'>Submit</Button>
-      </Form>
-    </div>
-    <div id='offsite'>
-      offsite login
-    </div>
-    </div>
+            <Col sm={8}>
+              <FormControl placeholder='email@example.com'></FormControl>
+            </Col>
+            <Col componentClass={ControlLabel} sm={4}>
+              Password:
+            </Col>
+            <Col sm={8}>
+              <FormControl placeholder='Password'></FormControl>
+            </Col>
+
+            <FormGroup controlId="formControlsSelect">
+              <Col componentClass={ControlLabel} sm={4}>
+                User Type:
+              </Col>
+            <Col sm={7}>
+                <FormControl componentClass="select" placeholder="Select One">
+                  <option value="null">Select One...</option>
+                  <option value="user">User</option>
+                  <option value="org">Organization</option>
+                </FormControl>
+            </Col>
+              </FormGroup>
+          </FormGroup>
+          <Button type='submit' bsStyle='primary'>Submit</Button>
+        </Form>
+      </div>
+      <div id='offsite'>
+        offsite login
+      </div>
+      </div>
     </div>
     )
 }
