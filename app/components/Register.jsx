@@ -28,20 +28,22 @@ const Register = (props) => {
       //function here to display modal, call displayHome() when closing that modal
       //information about next steps, check your email, etc
       displayHome()
-    } else if( userType == 'org' && inputArr.length == 9){
+    } else if( userType == 'org' && inputArr.length == 12){
 
         inputObj = {
           orgName: inputArr[0],
+          orgEmail: inputArr[1],
+          orgPwHash: inputArr[2],
           orgAddress: {
-            street: inputArr[1],
-            city: inputArr[2],
-            state: inputArr[3],
-            zip: inputArr[4]
+            street: inputArr[4],
+            city: inputArr[5],
+            state: inputArr[6],
+            zip: inputArr[7]
           },
-          orgDescription: inputArr[5],
-          orgPhone: inputArr[6],
-          orgEmail: inputArr[7],
-          orgContactPerson: inputArr[8]
+          orgDescription: inputArr[8],
+          orgPhone: inputArr[9],
+          orgWebsite: inputArr[10],
+          orgContactPerson: inputArr[11]
         };
 
       //testing -- remove
@@ -116,6 +118,24 @@ const Register = (props) => {
               <FormControl placeholder='Organization Name'></FormControl>
             </Col>
             <Col componentClass={ControlLabel} sm={4}>
+              E-mail:
+            </Col>
+            <Col sm={8}>
+              <FormControl placeholder='email@example.com'></FormControl>
+            </Col>
+            <Col componentClass={ControlLabel} sm={4}>
+              Password:
+            </Col>
+            <Col sm={8}>
+              <FormControl placeholder='Password'></FormControl>
+            </Col>
+            <Col componentClass={ControlLabel} sm={4}>
+              Confirm Password
+            </Col>
+            <Col sm={8}>
+              <FormControl placeholder='Password'></FormControl>
+            </Col>
+            <Col componentClass={ControlLabel} sm={4}>
               Street:
             </Col>
             <Col sm={8}>
@@ -153,10 +173,10 @@ const Register = (props) => {
                 <FormControl placeholder='(123) 555-6789'></FormControl>
               </Col>
               <Col componentClass={ControlLabel} sm={4}>
-                E-mail:
+                Website:
               </Col>
               <Col sm={8}>
-                <FormControl placeholder='email@example.com'></FormControl>
+                <FormControl placeholder='www.yourwebsite.com'></FormControl>
               </Col>
               <Col componentClass={ControlLabel} sm={4}>
                 Contact Name:
