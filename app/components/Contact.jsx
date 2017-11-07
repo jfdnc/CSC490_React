@@ -1,13 +1,14 @@
 import React from 'react'
-import Fade from './Fade'
+import Menu from './Menu'
 
 const Contact = (props) => {
     return(
-      <Fade>
+      <div>
+        <Menu />
         <div id='contact-view' className='view-container'>
           CONTACT PAGE GOES HERE
         </div>
-      </Fade>
+      </div>
     )
 }
 

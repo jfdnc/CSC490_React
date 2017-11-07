@@ -1,13 +1,14 @@
 import React from 'react'
-import Fade from './Fade'
+import Menu from './Menu'
 
 const About = (props) => {
     return(
-      <Fade>
+      <div>
+        <Menu />
         <div id='about-view' className='view-container'>
           ABOUT PAGE GOES HERE
         </div>
-      </Fade>
+      </div>
     )
 }
 

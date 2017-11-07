@@ -1,10 +1,9 @@
 import React from 'react'
-import Fade from './Fade'
-import { updateDisplayUserType } from '../actions/display_actions'
 import { Form, FormGroup, FormControl,
          Col, ControlLabel, Button} from 'react-bootstrap'
 import { loginUser } from '../actions/user_actions'
 import * as UserStore from '../data/stores/UserStore'
+import Menu from './Menu'
 
 const Login =  (props) => {
 
@@ -24,17 +23,6 @@ const Login =  (props) => {
       const formData = `email=${email}&pwHash=${password}`;
       loginUser(formData)
 
-      //just for testing
-      switch(inputObj.email){
-        case 'user':
-        updateDisplayUserType('user')
-        break
-        case 'org':
-        updateDisplayUserType('org')
-        break
-      }
-
-
       //do sanity checking here and then submit to user and org store
       //console.log(email.value, pw.value)
     } else {
@@ -43,7 +31,8 @@ const Login =  (props) => {
   }
 
   return(
-    <Fade>
+    <div>
+    <Menu />
       <div id='login-view' className='view-container'>
       <div id='onsite'>
         <Form horizontal onSubmit={(e) => {e.preventDefault(); handleSubmit()}} >
@@ -68,7 +57,7 @@ const Login =  (props) => {
         offsite login
       </div>
       </div>
-    </Fade>
+    </div>
     )
 }
 

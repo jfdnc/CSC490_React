@@ -1,10 +1,9 @@
 import React from 'react'
-import Fade from './Fade'
 import { Tabs, Tab, Form, ControlLabel,
          FormGroup, FormControl, Col, Button } from 'react-bootstrap'
-import { displayHome } from '../actions/display_actions'
 import { createUser } from '../actions/user_actions'
 import { createOrg } from '../actions/org_actions'
+import Menu from './Menu'
 
 const Register = (props) => {
   const handleSubmit = (userType) => {
@@ -25,9 +24,6 @@ const Register = (props) => {
         console.log('registering user with info:', inputObj)
 
       createUser(inputObj)
-      //function here to display modal, call displayHome() when closing that modal
-      //information about next steps, check your email, etc
-      displayHome()
     } else if( userType == 'org' && inputArr.length == 9){
 
         inputObj = {
@@ -48,16 +44,14 @@ const Register = (props) => {
       console.log('sending org registration request info:', inputObj)
 
         createOrg(inputObj)
-      //function here to display modal, call displayHome() when closing that modal
-      //information about next steps, check your email, etc
-      displayHome()
     } else {
       console.log('enter values in all fields!')
     }
   }
 
   return(
-    <Fade>
+    <div>
+      <Menu />
       <div id='register-view' className='view-container'>
         <div id='onsite'>
           <Tabs defaultActiveKey={1} id='registration-tabs'>
@@ -176,7 +170,7 @@ const Register = (props) => {
           offsite registration
         </div>
       </div>
-    </Fade>
+    </div>
   )
 }
 
