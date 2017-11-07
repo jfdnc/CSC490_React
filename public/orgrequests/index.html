@@ -22,11 +22,12 @@
             for(let i=0; i<orgList.length; i++){
                 let org = orgList[i];
                 content += "<p id='" + org._id + "'><b>Name: </b>" + org.orgName + "<br>" +
+                    "<b>Email: </b>" + org.orgEmail + "<br>" +
                     "<b>Address: </b>" + org.orgAddress.street + ", " + org.orgAddress.city + ", " +
                         org.orgAddress.state + " " + org.orgAddress.zip + "<br>" +
                     "<b>Description: </b>" + org.orgDescription + "<br>" +
                     "<b>Phone: </b>" + org.orgPhone + "<br>" +
-                    "<b>Email: </b>" + org.orgEmail + "<br>" +
+                    "<b>Website: </b>" + org.orgWebsite + "<br>" +
                     "<b>Contact Person: </b>" + org.orgContactPerson + "<br><br>" +
                     "<input type='button' name='" + org._id + "' id='accept' value='Accept'>  " +
                     "<input type='button' name='" + org._id + "' id='decline' value='Decline'></p><br>"
