@@ -16,7 +16,8 @@ const OrgActionTypes = {
   MSG_VOLUNTEER: 'MSG_VOLUNTEER',
   VIEW_ORG_INFO: 'VIEW_ORG_INFO',
   EDIT_ORG_INFO: 'EDIT_ORG_INFO',
-  CREATE_ORG: 'CREATE_ORG'
+  CREATE_ORG: 'CREATE_ORG',
+  LOGIN_ORG: 'LOGIN_ORG'
 }
 
 export default OrgActionTypes

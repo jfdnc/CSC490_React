@@ -41,6 +41,11 @@ class OrgStore extends EventEmitter {
         this.emit("change")
     }
 
+    loginOrg(org){
+        this.state.org = org
+        this.emit("change")
+    }
+
     logout(){
         this.state.org = {}
         this.emit("change")
@@ -68,6 +73,9 @@ class OrgStore extends EventEmitter {
                 break
             case OrgActionTypes.LOG_OUT:
                 this.logout();
+                break
+            case OrgActionTypes.LOGIN_ORG:
+                this.loginOrg(action.org);
                 break
         }
     }
