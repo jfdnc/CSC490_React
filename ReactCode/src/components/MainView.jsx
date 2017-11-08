@@ -20,11 +20,16 @@ export default class MainView extends React.Component {
   }
 
   render(){
-    console.log(this.state)
+    let proparr = []
+    for(var property in this.state.userState){
+      if(this.state.userState.hasOwnProperty(property)){
+        proparr.push({propName:property,propContent:this.state.userState[property]})
+      }
+    }
     return(
       <div id='main-container'>
         <div id="content-container">
-          fucku
+          {proparr.map((prop,i) => <div key={i}>{prop.propName}:{prop.propContent}</div>)}
         </div>
       </div>
     )
