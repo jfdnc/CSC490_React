@@ -1,0 +1,38 @@
+{
+  "name": "csc490evol",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-scripts": "1.0.17",
+    "axios": "^0.16.2",
+    "bcrypt": "^1.0.3",
+    "express": "^4.16.2",
+    "file-loader": "^1.1.5",
+    "flux": "^3.1.3",
+    "http-proxy": "^1.16.2",
+    "jsonwebtoken": "^8.1.0",
+    "mongoose": "^4.12.3",
+    "nodemailer": "^4.3.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "react-bootstrap": "^0.31.3",
+    "react-materialize": "^1.0.16",
+    "react-transition-group": "^2.2.1",
+    "url-loader": "^0.6.2",
+    "validator": "^9.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "postbuild": "node postbuild.js",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "mv": "^2.1.1",
+    "react-router-dom": "^4.2.2"
+  }
+}
