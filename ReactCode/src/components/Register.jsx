@@ -70,7 +70,26 @@ const Register = (props) => {
             </Tab>
             {/*org fields*/}
             <Tab eventKey={2} title='Organization'>
-
+            <Row>
+              <Input s={6} label="Org Name"></Input>
+              <Input s={6} label="Org Email"></Input>
+            </Row>
+            <Input s={12} label="Password" type='password'></Input>
+            <Input s={12} label="Confirm Password" type='password'></Input>
+            <Row>
+              <Input s={6} label="Street"></Input>
+              <Input s={6} label="City"></Input>
+            </Row>
+            <Row>
+              <Input s={6} label="State"></Input>
+              <Input s={6} label="Zip"></Input>
+            </Row>
+              <Input s={12} label="Description" type='text'></Input>
+            <Row>
+              <Input s={6} label="Phone"></Input>
+              <Input s={6} label="Website"></Input>
+            </Row>
+            <Input s={12} label="Contact Name" type='text'></Input>
             <Button onClick={()=>handleSubmit('org')}>Submit</Button>
             </Tab>
           </Tabs>
