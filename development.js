@@ -12,7 +12,7 @@ const compiler = webpack(config);
 const configFile = require('./server/config')
 
 // load models and connect to db
-require('./app/models').connect(configFile.dbUriMario);
+require('./app/models').connect(configFile.dbUri);
 
 // set up body-parser middleware
 app.use(bodyParser.json());
