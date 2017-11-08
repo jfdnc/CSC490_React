@@ -9,11 +9,10 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 const config = require('./webpack.development.config.js');
 const compiler = webpack(config);
-
-const dbUri = "mongodb://admin:csc490@108.234.184.90/admin"
+const configFile = require('./server/config')
 
 // load models and connect to db
-require('./app/models').connect(dbUri);
+require('./app/models').connect(configFile.dbUriMario);
 
 // set up body-parser middleware
 app.use(bodyParser.json());
@@ -29,6 +28,10 @@ const localOrgLoginStrategy = require('./server/passport/local-login-org')
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login-user', localUserLoginStrategy);
 passport.use('local-login-org', localOrgLoginStrategy);
+
+// set up authentication middleware
+//const authCheckMiddleware = require('./server/middleware/auth-check');
+//app.use('/api', authCheckMiddleware);
 
 // initialize routes
 const authRoutes = require('./app/routes/auth');
