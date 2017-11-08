@@ -16,10 +16,12 @@ module.exports = new PassportLocalStrategy({
     };
 
     // Find an org by email address
-    return Organization.findOne({ orgEmail: orgData.orgEmail}, (err, org) => {
-        if(err){ return done(err); }
+    return Organization.findOne({orgEmail: orgData.orgEmail}, (err, org) => {
+        if (err) {
+            return done(err);
+        }
 
-        if(!org) {
+        if (!org) {
             const error = new Error('Incorrect email or password');
             error.name = 'IncorrectCredentialsError';
 
@@ -28,9 +30,11 @@ module.exports = new PassportLocalStrategy({
 
         // Check if a hashed org's password is equal to the value in the database
         return org.comparePassword(orgData.orgPwHash, (passwordErr, isMatch) => {
-            if(passwordErr){ return done(passwordErr); }
+            if (passwordErr) {
+                return done(passwordErr);
+            }
 
-            if(!isMatch){
+            if (!isMatch) {
                 const error = new Error('Incorrect email or password');
                 error.name = 'IncorrectCredentialsError';
 
@@ -59,8 +63,4 @@ module.exports = new PassportLocalStrategy({
             return done(null, token, data);
         });
     });
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> 6712f0381f98ad5ba0792320d51895d5e4a72014
