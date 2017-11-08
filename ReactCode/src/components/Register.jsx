@@ -72,7 +72,7 @@ const Register = (props) => {
             <Tab eventKey={2} title='Organization'>
             <Row>
               <Input s={6} label="Org Name"></Input>
-              <Input s={6} label="Org Email"></Input>
+              <Input s={6} label="Org Email" type='email' validate></Input>
             </Row>
             <Input s={12} label="Password" type='password'></Input>
             <Input s={12} label="Confirm Password" type='password'></Input>
@@ -84,7 +84,7 @@ const Register = (props) => {
               <Input s={6} label="State"></Input>
               <Input s={6} label="Zip"></Input>
             </Row>
-              <Input s={12} label="Description" type='text'></Input>
+              <Input s={12} label="Description" type='textarea'></Input>
             <Row>
               <Input s={6} label="Phone"></Input>
               <Input s={6} label="Website"></Input>
