@@ -1,5 +1,4 @@
 import React from 'react'
-import { Glyphicon } from 'react-bootstrap'
 import UserStore from '../data/stores/UserStore'
 
 export default class MainView extends React.Component {
