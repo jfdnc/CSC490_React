@@ -3,6 +3,7 @@ import dispatcher from '../Dispatcher'
 //for emitting events to UI components concerned with this store
 import { EventEmitter } from 'events'
 import UserActionTypes from '../../action_types/UserActionTypes'
+import _ from 'lodash'
 
 class UserStore extends EventEmitter {
     constructor(props) {
@@ -13,12 +14,16 @@ class UserStore extends EventEmitter {
         }
 
         if(typeof(Storage) !== "undefined"){
-          this.state = JSON.parse(localStorage.getItem('userObj'))
+          this.state.user = JSON.parse(localStorage.getItem('userObj'))
         }
     }
 
     getAll(){
-        return this.state
+      return this.state
+    }
+
+    isLoggedIn(){
+      return (!_.isEmpty(this.state.user))
     }
 
     createUser(user){
@@ -27,7 +32,7 @@ class UserStore extends EventEmitter {
     }
 
     loginUser(user){
-        this.state = user
+        this.state.user = user
         localStorage.setItem('userObj',JSON.stringify(user))
         this.emit("change")
     }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Navbar, NavItem } from 'react-materialize'
+import { Navbar, NavItem, Button } from 'react-materialize'
 import { logOut } from '../actions/user_actions'
 import UserStore from '../data/stores/UserStore'
 import OrgStore from '../data/stores/OrgStore'
@@ -22,8 +22,7 @@ let navTypesLoggedOut = [
     ],
     navTypesLoggedIn = [
     {
-      headerType: 'Log Out',
-      urlext: '/login'
+      headerType: 'Log Out'
     },{
       headerType: 'About',
       urlext: '/about'
@@ -45,32 +44,32 @@ export default class Menu extends React.Component{
   }
 
   componentWillMount(){
-    let userStoreState = UserStore.getAll(),
-        orgStoreState = OrgStore.getAll()
-
-    console.log(userStoreState,orgStoreState)
+    if(UserStore.isLoggedIn()){
+      this.setState({ userLoggedIn: true })
+    }
 
     UserStore.on('change',()=>{
-      if(UserStore.getAll().user){
+      if(UserStore.isLoggedIn()){
         this.setState({ userLoggedIn: true })
+      } else {
+        this.setState({ userLoggedIn: false })
       }
     })
-
-    OrgStore.on('change',()=>{
-      if(OrgStore.getAll().org){
-        this.setState({ userLoggedIn: true })
-      }
-    })
-
   }
 
 
   mapNavHeaders(headerList){
     return(
       headerList.map((headerItem, i) => {
-        return(
+        if(headerItem.headerType == 'Log Out'){
+          return (
+            <NavItem key={i} href={'/'} onClick={logOut}>{headerItem.headerType}</NavItem>
+          )
+        } else {
+          return(
             <NavItem key={i} href={headerItem.urlext}>{headerItem.headerType}</NavItem>
-        )
+          )
+        }
       })
     )
   }

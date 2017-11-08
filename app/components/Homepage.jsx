@@ -10,27 +10,20 @@ export default class Homepage extends React.Component{
     super(props)
 
     this.state = {
-      userStoreState: {},
-      orgStoreState: {}
+      userStoreState: {}
     }
 
   }
 
   componentWillMount(){
-    let initUserState = UserStore.getAll()
-    let initOrgState = OrgStore.getAll()
+    let initUserState = UserStore.getAll().user
 
     this.setState({
-      userStoreState: initUserState,
-      orgStoreState: initOrgState
+      userStoreState: initUserState
     })
 
     UserStore.on('change', () => {
-      this.setState({userStoreState: UserStore.getAll()})
-    })
-
-    OrgStore.on('change', () => {
-      this.setState({orgStoreState: OrgStore.getAll()})
+      this.setState({userStoreState: UserStore.getAll().user})
     })
   }
 
@@ -38,10 +31,11 @@ export default class Homepage extends React.Component{
     return (
       <div>
         <Menu />
-        First Name: {this.state.userStoreState.firstName}<br/>
-        Last Name: {this.state.userStoreState.lastName}<br/>
-        ZIP: {this.state.userStoreState.zipCode}<br/>
-        <Button onClick={()=> logOut()}/>
+        <div>
+          First Name: {this.state.userStoreState.firstName}<br/>
+          Last Name: {this.state.userStoreState.lastName}<br/>
+          ZIP: {this.state.userStoreState.zipCode}<br/>
+        </div>
       </div>
     )
   }

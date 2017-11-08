@@ -91,6 +91,8 @@ export function loginUser(user){
                 type: UserActionTypes.LOGIN_USER,
                 user: xhr.response.user
             })
+
+            window.location.replace('/')
         }
     });
     xhr.send(user);
