@@ -8,7 +8,13 @@ class UserStore extends EventEmitter {
     constructor(props) {
         super(props)
 
-        this.state = { user: {} }
+        this.state = {
+          user: {}
+        }
+
+        if(typeof(Storage) !== "undefined"){
+          this.state = JSON.parse(localStorage.getItem('userObj'))
+        }
     }
 
     getAll(){
@@ -16,17 +22,19 @@ class UserStore extends EventEmitter {
     }
 
     createUser(user){
-        this.state.user = user
+        //this.state.user = user
         this.emit("change")
     }
 
     loginUser(user){
-        this.state.user = user
+        this.state = user
+        localStorage.setItem('userObj',JSON.stringify(user))
         this.emit("change")
     }
 
     logOut(){
         this.state.user = {}
+        localStorage.removeItem('userObj')
         this.emit("change")
     }
 
@@ -46,10 +54,6 @@ class UserStore extends EventEmitter {
     }
 }
 
-/*
-create new instance of this store type to export
-files importing TestStore get this new instance of TestStore
-*/
 const userStore = new UserStore
 //register dispatcher to this store to handle action passing
 dispatcher.register(userStore.handleActions.bind(userStore))

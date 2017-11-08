@@ -5,17 +5,7 @@ import Register from './Register'
 import Login from './Login'
 import About from './About'
 import Contact from './Contact'
-
-class Homepage extends Component {
-	render() {
-		return (
-			<div>
-				<Menu />
-				<h1>Homepage</h1>
-			</div>
-		);
-	}
-}
+import Homepage from './Homepage'
 
 export default class App extends Component {
 	constructor(props) {
