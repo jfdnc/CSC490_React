@@ -21,7 +21,6 @@ class UserStore extends EventEmitter {
     }
 
     loginUser(user){
-        console.log(user)
         this.state.user = user
         this.emit("change")
     }

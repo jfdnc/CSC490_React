@@ -62,7 +62,6 @@ export default class PageNav extends React.Component{
   }
 
   componentWillMount(){
-
     let token    = localStorage.getItem('token')    || false,
         userInfo = localStorage.getItem('orgInfo')  || false,
         orgInfo  = localStorage.getItem('userInfo') || false
@@ -109,7 +108,6 @@ export default class PageNav extends React.Component{
   }
 
     render(){
-      console.log(this.state)
       let currNavTypes = this.state.userLoggedIn ? userNavTypes :
                          this.state.orgLoggedIn  ? orgNavTypes  :
                          guestNavTypes

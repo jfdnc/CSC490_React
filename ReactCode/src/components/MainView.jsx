@@ -6,13 +6,15 @@ import UserView from './UserView'
 import OrgView from './OrgView'
 import _ from 'lodash'
 
+import NewVolOp from './NewVolOp'
+
 export default class MainView extends React.Component {
   constructor(props){
     super(props)
 
     this.state = {
-      userState: {},
-      orgState: {}
+      userState: localStorage.getItem('userInfo') || {},
+      orgState: localStorage.getItem('orgInfo') || {}
     }
   }
 
@@ -59,11 +61,17 @@ export default class MainView extends React.Component {
     //just spitting it out for now, but we can use it for something!
     //likely we will just check if the objects are populated, and use
     //their properties by name... but whatever for right now.
+
+    let currView = !_.isEmpty(userState) ? <UserView /> :
+                   !_.isEmpty(orgState)  ? <OrgView />  :
+                   <GuestView />
+
     return(
+
       <div id='main-container'>
         <div id="content-container">
           {/*{proparr.map((prop,i) => <div key={i}>{prop.propName}:{prop.propContent}</div>)}*/}
-          <GuestView />
+          {currView}
         </div>
       </div>
     )
