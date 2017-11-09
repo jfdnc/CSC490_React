@@ -24,11 +24,13 @@ export function getUserType(){
 //return t/f on successful log out
 export function logOut(){
     //remove the token from local storage
-    localStorage.removeItem('token')
+    return new Promise((resolve, reject) =>{
+      localStorage.removeItem('token')
 
-    dispatcher.dispatch({
-        type: UserActionTypes.LOG_OUT
-    })
+      dispatcher.dispatch({
+          type: UserActionTypes.LOG_OUT
+      })
+  })
 }
 
 //return more info about selected volop for user view

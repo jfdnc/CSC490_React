@@ -13,6 +13,10 @@ class OrgStore extends EventEmitter {
         }
     }
 
+    getAll(){
+      return this.state
+    }
+
     createVolOp(volOp){
         this.state.volOp = volOp
         this.emit("change")
@@ -42,6 +46,7 @@ class OrgStore extends EventEmitter {
     }
 
     loginOrg(org){
+        console.log(org)
         this.state.org = org
         this.emit("change")
     }

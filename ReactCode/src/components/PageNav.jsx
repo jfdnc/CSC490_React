@@ -3,6 +3,7 @@ import { Navbar, NavItem } from 'react-materialize'
 import { NavLink, Route } from 'react-router-dom'
 import { logOut } from '../actions/user_actions'
 import UserStore from '../data/stores/UserStore'
+import OrgStore from '../data/stores/OrgStore'
 import _ from 'lodash'
 
 import MainView from './MainView'
@@ -25,8 +26,18 @@ let guestNavTypes = [
 ]
 let userNavTypes = [
     {
-      navText: 'Log Out',
-      logOut: logOut()
+      navText: 'Log Out'
+    },{
+      navUrl: '/about',
+      navText: 'About'
+    },{
+      navUrl: '/contact',
+      navText: 'Contact'
+    }
+]
+let orgNavTypes = [
+    {
+      navText: 'Log Out'
     },{
       navUrl: '/about',
       navText: 'About'
@@ -41,16 +52,22 @@ export default class PageNav extends React.Component{
     super(props)
 
     this.state = {
-      userLoggedIn: false
+      userLoggedIn: false,
+      orgLoggedIn: false
     }
 
     this.mapNavHeaders = this.mapNavHeaders.bind(this)
+    this.handleLogOut = this.handleLogOut.bind(this)
   }
 
   componentWillMount(){
     UserStore.on('change', () => {
       let loggedIn = !_.isEmpty(UserStore.getAll().user)
       this.setState({ userLoggedIn:loggedIn })
+    })
+    OrgStore.on('change', () => {
+      let loggedIn = !_.isEmpty(OrgStore.getAll().org)
+      this.setState({ orgLoggedIn:loggedIn })
     })
   }
 
@@ -59,7 +76,7 @@ export default class PageNav extends React.Component{
       headerList.map((headerItem, i) => {
         if(headerItem.navText == 'Log Out'){
           return(
-            <li key={i}><a key={i} onClick={headerItem.logOut}>{headerItem.navText}</a></li>
+            <li key={i}><a key={i} onClick={() => this.handleLogOut()}>{headerItem.navText}</a></li>
           )
         } else {
           return(
@@ -70,8 +87,15 @@ export default class PageNav extends React.Component{
     )
   }
 
+  handleLogOut(){
+    logOut()
+  }
+
     render(){
-      let currNavTypes = this.state.userLoggedIn ? userNavTypes : guestNavTypes
+      console.log(this.state)
+      let currNavTypes = this.state.userLoggedIn ? userNavTypes :
+                         this.state.orgLoggedIn  ? orgNavTypes  :
+                         guestNavTypes
       return(
         <div>
         <div id='nav-bar-strip'/>
