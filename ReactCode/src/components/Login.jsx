@@ -41,7 +41,7 @@ const Login =  (props) => {
       <div id='onsite'>
         <Row>
           <Input s={6} label="email" validate></Input>
-          <Input s={6} label="password" validate type='tel' type='password'></Input>
+          <Input s={6} label="password" validate type='password'></Input>
         </Row>
             <Col>
                 <Input type="select" label="User Type">
