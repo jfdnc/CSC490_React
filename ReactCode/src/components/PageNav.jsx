@@ -4,14 +4,9 @@ import { NavLink, Route } from 'react-router-dom'
 import { logOut } from '../actions/user_actions'
 import UserStore from '../data/stores/UserStore'
 import OrgStore from '../data/stores/OrgStore'
-import Register from './Register'
-import Login from './Login'
-import About from './About'
-import Contact from './Contact'
+import _ from 'lodash'
+
 import MainView from './MainView'
-import OrgView from './OrgView'
-import UserView from './UserView'
-import NewVolOp from './NewVolOp'
 
 
 let guestNavTypes = [
@@ -31,8 +26,18 @@ let guestNavTypes = [
 ]
 let userNavTypes = [
     {
-      navText: 'Log Out',
-      logOut: logOut()
+      navText: 'Log Out'
+    },{
+      navUrl: '/about',
+      navText: 'About'
+    },{
+      navUrl: '/contact',
+      navText: 'Contact'
+    }
+]
+let orgNavTypes = [
+    {
+      navText: 'Log Out'
     },{
       navUrl: '/about',
       navText: 'About'
@@ -48,25 +53,22 @@ export default class PageNav extends React.Component{
 
     this.state = {
       userLoggedIn: false,
-      userType: ''
+      orgLoggedIn: false
     }
 
     this.mapNavHeaders = this.mapNavHeaders.bind(this)
+    this.handleLogOut = this.handleLogOut.bind(this)
   }
 
   componentWillMount(){
-    let userLoggedIn = false
-    console.log(UserStore.getAll().user)
-    console.log(OrgStore.getAll().org)
-
     UserStore.on('change', () => {
-      console.log(UserStore.getAll().user)
+      let loggedIn = !_.isEmpty(UserStore.getAll().user)
+      this.setState({ userLoggedIn:loggedIn })
     })
-
-    OrgStore.on('change', () =>{
-      console.log(OrgStore.getAll().org)
+    OrgStore.on('change', () => {
+      let loggedIn = !_.isEmpty(OrgStore.getAll().org)
+      this.setState({ orgLoggedIn:loggedIn })
     })
-
   }
 
   mapNavHeaders(headerList){
@@ -74,7 +76,7 @@ export default class PageNav extends React.Component{
       headerList.map((headerItem, i) => {
         if(headerItem.navText == 'Log Out'){
           return(
-            <li key={i}><NavLink key={i} onClick={headerItem.logOut}>{headerItem.navText}</NavLink></li>
+            <li key={i}><a key={i} onClick={() => this.handleLogOut()}>{headerItem.navText}</a></li>
           )
         } else {
           return(
@@ -85,26 +87,23 @@ export default class PageNav extends React.Component{
     )
   }
 
+  handleLogOut(){
+    logOut()
+  }
+
     render(){
+      console.log(this.state)
+      let currNavTypes = this.state.userLoggedIn ? userNavTypes :
+                         this.state.orgLoggedIn  ? orgNavTypes  :
+                         guestNavTypes
       return(
         <div>
         <div id='nav-bar-strip'/>
         <Navbar brand={<NavLink to='/'>eVol</NavLink>} id='page-nav' right>
           {
-            this.mapNavHeaders(guestNavTypes)
+            this.mapNavHeaders(currNavTypes)
           }
-        <div style={{color:'red'}}>user logged in: {this.state.userLoggedIn ? 'true' : 'false'}</div>
         </Navbar>
-        <div className="content">
-          <Route path="/" exact component={MainView}/>
-          <Route path="/register" component={Register}/>
-          <Route path="/login" component={Login}/>
-          <Route path="/about" component={About}/>
-          <Route path="/contact" component={Contact}/>
-          <Route path="/orgview" component={OrgView}/>
-          <Route path="/userview" component={UserView}/>
-          <Route path="/newvolop" component={NewVolOp}/>
-        </div>
         </div>
       )
     }

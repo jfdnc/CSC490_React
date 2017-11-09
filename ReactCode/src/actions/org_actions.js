@@ -113,7 +113,9 @@ export function createOrg(org){
 }
 
 export function loginOrg(org){
-    //make API call to login user
+  //make API call to login user
+  //return promise to login in Login
+  return new Promise((resolve,reject) =>{
     const xhr = new XMLHttpRequest();
     xhr.open('post', '/auth/loginorg');
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -130,7 +132,8 @@ export function loginOrg(org){
             })
         }
     });
-    xhr.send(org);
+    xhr.send(org)
+  })
 }
 
 //return t/f on successful log out

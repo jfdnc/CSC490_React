@@ -14,6 +14,10 @@ class OrgStore extends EventEmitter {
         return this.state
     }
 
+    getAll(){
+      return this.state
+    }
+
     createVolOp(volOp){
         this.state.volOp = volOp
         this.emit("change")
