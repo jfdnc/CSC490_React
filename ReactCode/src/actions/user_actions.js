@@ -62,20 +62,23 @@ export function editPrefs(){
 
 export function createUser(user){
   return new Promise((resolve, reject) => {
-    let myReq = new Request('/auth/signup', {method:'POST', body: JSON.stringify(user),
-        headers: {"Content-Type": "application/json"}})
-    fetch(myReq)
-        .then(function(res){
-            console.log(res)
-        })
-        .catch(function(err){
-            console.log(err)
-        })
-
-    dispatcher.dispatch({
-        type: UserActionTypes.CREATE_USER,
-        user: user
-    })
+      const xhr = new XMLHttpRequest();
+      xhr.open('post', '/auth/signup');
+      xhr.setRequestHeader('Content-type', 'application/json');
+      xhr.responseType = 'json';
+      xhr.addEventListener('load', () => {
+          if (xhr.status === 200) {
+              // success so save the token
+              localStorage.setItem('token', xhr.response.token);
+              localStorage.setItem('userInfo', JSON.stringify(xhr.response.user))
+              //send to dispatcher
+              dispatcher.dispatch({
+                  type: UserActionTypes.CREATE_USER,
+                  user: xhr.response.user
+              })
+          }
+      });
+      xhr.send(JSON.stringify(user))
   })
 }
 
