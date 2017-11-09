@@ -9,13 +9,15 @@ body{
   color: var(--blue-1);
   background: var(--off-white);
 }
-
+.container{
+  color: black;
+}
 #app-container{
 }
 
 #main-container{
   width: 100vw;
-  min-height: 800px;
+  min-height: 520px;
   display: flex;
   flex-direction: column;
 }
@@ -123,7 +125,7 @@ ul> li > a:hover{
 .main-content{
   margin: 10px auto;
   padding: 10px;
-  height: 400px;
+  min-height: 400px;
   width: 95%;
   min-width: 320px;
   max-width: 840px;
@@ -183,24 +185,7 @@ ul> li > a:hover{
   box-shadow: 0 -2px 5px rgba(0,0,0,0.3);
   background: var(--header-footer-color);
 }
-#footer-links{
-  grid-column: 1;
-}
-.footer-link{
-  width: 40%;
-  min-width: 120px;
-  padding: 10px;
-  cursor: pointer
-}
-.footer-link:hover{
-  color: #ccc;
-}
-#footer-about{
-}
-#footer-contact{
-}
-#footer-tou{
-}
+
 #social-links{
   margin-top: 10px;
   margin-left: 10px;
@@ -254,9 +239,7 @@ ul> li > a:hover{
 
 .view-container{
   text-align: center;
-  margin-bottom: -1000px;
-  padding-bottom: 1000px;
-  min-height: 700px;
+  min-height: 520px;
   position: relative;
   overflow: scroll;
 }

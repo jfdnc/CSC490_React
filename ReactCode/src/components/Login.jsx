@@ -5,7 +5,6 @@ import { loginOrg } from '../actions/org_actions'
 import UserStore from '../data/stores/UserStore'
 
 const Login =  (props) => {
-
   const handleSubmit = () => {
     let inputArr = [],
         inputObj = {},
@@ -24,12 +23,12 @@ const Login =  (props) => {
       if(userType.toLowerCase() == 'user'){
         const formData = `email=${email}&pwHash=${password}`;
         console.log("Logging in user...")
-        loginUser(formData)
+        loginUser(formData).then(props.history.push('/'))
       }
       else if(userType.toLowerCase() == 'organization'){
         const formData = `orgEmail=${email}&orgPwHash=${password}`;
         console.log("Logging in organization...")
-        loginOrg(formData)
+        loginOrg(formData).then(props.history.push('/'))
       }
     } else {
       console.log('must provide email and pw')

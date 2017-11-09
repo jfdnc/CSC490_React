@@ -76,7 +76,9 @@ export function createUser(user){
 }
 
 export function loginUser(user){
-    //make API call to login user
+  //make API call to login user
+  //return promise to login in Login
+  return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open('post', '/auth/loginuser');
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -93,7 +95,8 @@ export function loginUser(user){
             })
         }
     });
-    xhr.send(user);
+    xhr.send(user)
+  })
 }
 
 /* to export all functions
