@@ -21,7 +21,7 @@ router.post('/emailRequest', function(req, res){
 
     const mailOptions={
         from: 'evolunteersuncg@gmail.com',
-        to: 'mario.month@gmail.com',
+        to: 'evolunteersuncg@gmail.com',
         subject: 'eVol: New Organization Registration',
         html: 'A new organization has registered for access to eVol. ' +
         'Please click the link below to view more details.<br><br>' +
