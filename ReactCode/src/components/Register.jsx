@@ -40,7 +40,7 @@ const Register = (props) => {
       };
 
         createOrg(inputObj).then(props.history.push('/'))
-        
+
     } else {
       console.log('enter values in all fields!')
     }
