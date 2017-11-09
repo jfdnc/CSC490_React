@@ -147,4 +147,19 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
+
+
+
+/*
+router.get('/facebook', passport.authenticate('facebook-login', { scope : 'email' }));
+
+    // handle the callback after facebook has authenticated the user
+router.get('/facebook/callback',
+        passport.authenticate('facebook-login', {
+            successRedirect : '/',
+            failureRedirect : '/'
+        }));
+
+*/
+
 module.exports = router;

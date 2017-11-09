@@ -8,7 +8,7 @@ class UserStore extends EventEmitter {
     constructor(props) {
         super(props)
       
-        this.user = {}
+        this.state = { user: {} }
     }
 
     createUser(user){
@@ -16,10 +16,27 @@ class UserStore extends EventEmitter {
         this.emit("change")
     }
 
+    initUser(){
+       var url_string = window.location.href
+       var url = new URL(url_string);
+       var newUser = {
+        firstName:  url.searchParams.get("firstName"),
+        lastName: url.searchParams.get("lastName"),
+        email: url.searchParams.get("email")
+       }
+       this.state.user = newUser
+
+       console.log(this.state.user.email)
+       this.emit("change")
+    }
+
     handleActions(action) {
       switch (action.type) {
         case UserActionTypes.CREATE_USER:
             this.createUser(action.user);
+            break
+        case UserActionTypes.INIT_FBUSER:
+            this.initUser();
             break
         }
     }

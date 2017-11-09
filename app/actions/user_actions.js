@@ -6,6 +6,16 @@ import UserActionTypes from '../action_types/UserActionTypes'
 
 //const config = { headers: { 'Content-Type': 'multipart/form-data' } };
 
+
+
+export function initState(){
+    console.log('in user action')
+    dispatcher.dispatch({
+        //only use actions from ActionTypes - consistent communication!
+        type: UserActionTypes.INIT_FBUSER
+    })
+}
+
 //return t/f on loggedIn state
 export function getLogState(){
     dispatcher.dispatch({

@@ -78,6 +78,14 @@ router.put('/users/:id', function(req, res, next){
     });
 });
 
+// delete a user from the db
+router.delete('/users/:id', function(req, res, next){
+    User.findByIdAndRemove({_id: req.params.id}).then(function(user){
+        res.send(user);
+    });
+    res.send({type: 'DELETE'});
+});
+
 /*
 // add volOp to user profile
 router.put('users/:userId/:volOpId', function(req, res, next){
@@ -141,8 +149,10 @@ router.delete('/volOps/:id', function(req, res, next){
 
 
 // --- Events---
+//create route
 router.get('/emailEvent/', function(req, res, next){
-    
+
+//manually create test event    
 var eventObj = {
   start: new Date("December 17, 2017 12:00:00"),
   end: new Date("December 17, 2017 13:00:00"),
@@ -153,10 +163,11 @@ var eventObj = {
   location: 'Goa'
 }
 
+//creat calendar object
 var cal = ical();
-
 cal.setDomain('http://www.google.com/').setName('My ical invite');
 
+//create ICS event
 cal.addEvent({
   start: eventObj.start,
   end: eventObj.end,
@@ -172,14 +183,16 @@ cal.addEvent({
   method: 'request'
 });
 
+//path to save ICS file and reference when attaching to email
 var myPath = __dirname + '/uploads/'+ eventObj.id + '.ics';
 
 //fix path in windows (make sure slashes are right)
 var correctedPath = path.normalize(myPath);
 
+//save ICS file to server
 cal.saveSync(correctedPath);
 
-
+//setup sender email auth
 var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -187,6 +200,8 @@ var transporter = nodemailer.createTransport({
         pass: "evolunteerspassword"
     }
 });
+
+//setup email
 var mailObj = {
   from: "evolunteersuncg@gmail.com",
     to: "bwjoyce@uncg.edu",
@@ -195,21 +210,19 @@ var mailObj = {
   attachments: {path: correctedPath}
 };
 
-
+//send email
 transporter.sendMail(mailObj, function(err, info){
        if(err===null){
-          console.log(correctedPath);
-          console.log("iff")
+          console.log(correctedPath);          
        } else{
-          //console.log(err,info);
-          console.log(correctedPath);
+          console.log(err,info);          
        }
        
 });
 
 
-
-      res.send("Sent"+[correctedPath]);
+      //send success message
+      res.send("Sent");
     
 });
 

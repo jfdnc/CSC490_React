@@ -3,6 +3,8 @@ import Fade from './Fade'
 import { updateDisplayUserType } from '../actions/display_actions'
 import { Form, FormGroup, FormControl,
          Col, ControlLabel, Button} from 'react-bootstrap'
+import * as UserActions from '../actions/user_actions'
+import * as UserStore from '../data/stores/UserStore'
 
 
 const Login =  (props) => {
@@ -31,6 +33,11 @@ const Login =  (props) => {
     }
   }
 
+ function check(e) {
+    e.preventDefault()    
+    this.initState()    
+  }
+
   return(
     <Fade>
       <div id='login-view' className='view-container'>
@@ -54,8 +61,13 @@ const Login =  (props) => {
         </Form>
       </div>
       <div id='offsite'>
-        offsite login
+        offsite login  
+          <div>
+          <a href="/auth2/facebook" class="btn btn-primary" onClick={()=>{UserActions.initState()}}><span class="fa fa-facebook"></span> Facebook</a>
+          <input type="submit" value="myTest" className="btn" onClick={() => {UserActions.initState()}}/>
+          </div>      
       </div>
+
       </div>
     </Fade>
     )
