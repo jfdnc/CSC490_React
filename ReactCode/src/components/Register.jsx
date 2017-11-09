@@ -12,6 +12,9 @@ const Register = (props) => {
     for(let i=0; i<inputs.length; i++){
       inputs[i].value ? inputArr.push(inputs[i].value) : null
     }
+
+    console.log(userType, inputArr)
+
     if(userType == 'user' && inputArr.length == 6){
       [ inputObj.firstName,
         inputObj.lastName,
@@ -82,7 +85,7 @@ const Register = (props) => {
               <Input s={6} label="State"></Input>
               <Input s={6} label="Zip"></Input>
             </Row>
-              <Input s={12} label="Description" type='textarea'></Input>
+              <Input s={12} label="Description" type='text'></Input>
             <Row>
               <Input s={6} label="Phone"></Input>
               <Input s={6} label="Website"></Input>
