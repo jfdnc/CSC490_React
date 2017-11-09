@@ -68,9 +68,6 @@ export function createUser(user){
       xhr.responseType = 'json';
       xhr.addEventListener('load', () => {
           if (xhr.status === 200) {
-              // success so save the token
-              localStorage.setItem('token', xhr.response.token);
-              localStorage.setItem('userInfo', JSON.stringify(xhr.response.user))
               //send to dispatcher
               dispatcher.dispatch({
                   type: UserActionTypes.CREATE_USER,
@@ -92,6 +89,9 @@ export function loginUser(user){
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
         if (xhr.status === 200) {
+            // success so save the token
+            localStorage.setItem('token', xhr.response.token);
+            localStorage.setItem('userInfo', JSON.stringify(xhr.response.user))
             //send to dispatcher
             dispatcher.dispatch({
                 type: UserActionTypes.LOGIN_USER,
