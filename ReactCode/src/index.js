@@ -10,6 +10,3 @@ ReactDOM.render(
   </BrowserRouter>,
   document.getElementById('root')
 );
-
-//comment out before building
-//module.hot.accept();

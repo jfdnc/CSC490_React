@@ -1,7 +1,8 @@
 import React from 'react'
 import { Navbar, NavItem } from 'react-materialize'
 import { NavLink, Route } from 'react-router-dom'
-import { logOut } from '../actions/user_actions'
+import { logOut as userLogOut } from '../actions/user_actions'
+import { logOut as orgLogOut } from '../actions/org_actions'
 import UserStore from '../data/stores/UserStore'
 import OrgStore from '../data/stores/OrgStore'
 import _ from 'lodash'
@@ -100,7 +101,11 @@ export default class PageNav extends React.Component{
   }
 
   handleLogOut(){
-    logOut()
+    if(this.state.userLoggedIn){
+      userLogOut()
+    } else if(this.state.orgLoggedIn){
+      orgLogOut()
+    }
   }
 
     render(){
