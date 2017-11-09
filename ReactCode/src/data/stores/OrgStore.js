@@ -4,13 +4,14 @@ import { EventEmitter } from 'events'
 import OrgActionTypes from '../../action_types/OrgActionTypes'
 
 class OrgStore extends EventEmitter {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
 
-        this.state = {
-            org: {},
-            volOp: {}
-        }
+        this.state = {org: {}, volOp: {} }
+    }
+
+    getAll(){
+        return this.state
     }
 
     createVolOp(volOp){
@@ -42,6 +43,7 @@ class OrgStore extends EventEmitter {
     }
 
     loginOrg(org){
+        console.log(org)
         this.state.org = org
         this.emit("change")
     }

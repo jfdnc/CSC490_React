@@ -125,7 +125,7 @@ export function loginOrg(org){
 
             //send to dispatcher
             dispatcher.dispatch({
-                type: OrgActionTypes.LOGIN_USER,
+                type: OrgActionTypes.LOGIN_ORG,
                 org: xhr.response.org
             })
         }

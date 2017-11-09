@@ -3,11 +3,15 @@ import { Navbar, NavItem } from 'react-materialize'
 import { NavLink, Route } from 'react-router-dom'
 import { logOut } from '../actions/user_actions'
 import UserStore from '../data/stores/UserStore'
+import OrgStore from '../data/stores/OrgStore'
 import Register from './Register'
 import Login from './Login'
 import About from './About'
 import Contact from './Contact'
 import MainView from './MainView'
+import OrgView from './OrgView'
+import UserView from './UserView'
+import NewVolOp from './NewVolOp'
 
 
 let guestNavTypes = [
@@ -53,9 +57,14 @@ export default class PageNav extends React.Component{
   componentWillMount(){
     let userLoggedIn = false
     console.log(UserStore.getAll().user)
+    console.log(OrgStore.getAll().org)
 
     UserStore.on('change', () => {
       console.log(UserStore.getAll().user)
+    })
+
+    OrgStore.on('change', () =>{
+      console.log(OrgStore.getAll().org)
     })
 
   }
@@ -92,6 +101,9 @@ export default class PageNav extends React.Component{
           <Route path="/login" component={Login}/>
           <Route path="/about" component={About}/>
           <Route path="/contact" component={Contact}/>
+          <Route path="/orgview" component={OrgView}/>
+          <Route path="/userview" component={UserView}/>
+          <Route path="/newvolop" component={NewVolOp}/>
         </div>
         </div>
       )
