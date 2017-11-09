@@ -102,15 +102,3 @@ export function loginUser(user){
     xhr.send(user)
   })
 }
-
-/* to export all functions
-export default {
-  getLogState,
-  getUserType,
-  logOut,
-  viewVolopUser,
-  saveVolop,
-  shareVolop,
-  editPrefs
-}
-*/

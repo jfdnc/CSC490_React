@@ -38,13 +38,3 @@ export function catZipSearch(){
     type: GuestActionTypes.CAT_ZIP_SEARCH
   })
 }
-
-/* to export all functions
-export default {
-  getLogState,
-  getUserType,
-  logInOrg,
-  logInUser,
-  catZipSearch
-}
-*/

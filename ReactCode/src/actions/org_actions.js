@@ -149,19 +149,3 @@ export function logOut(){
         type: OrgActionTypes.LOG_OUT
     })
 }
-
-
-/*to export all functions
-export default {
-  getLogState,
-  getUserType,
-  logOut,
-  createVolop,
-  deleteVolop,
-  updateVolop,
-  viewVolopOrg,
-  msgVolunteer,
-  VIEW_ORG_INFO,
-  editOrgInfo
-}
-*/
