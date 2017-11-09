@@ -1,6 +1,6 @@
 import React from 'react'
 import { Tabs, Tab, Button, Col, Row, Input } from 'react-materialize'
-import { createUser } from '../actions/user_actions'
+import { createUser, loginUser } from '../actions/user_actions'
 import { createOrg } from '../actions/org_actions'
 import Fade from './Fade'
 
@@ -12,9 +12,6 @@ const Register = (props) => {
     for(let i=0; i<inputs.length; i++){
       inputs[i].value ? inputArr.push(inputs[i].value) : null
     }
-
-    console.log(userType, inputArr)
-
     if(userType == 'user' && inputArr.length == 6){
       [ inputObj.firstName,
         inputObj.lastName,
@@ -22,7 +19,9 @@ const Register = (props) => {
         inputObj.email,
         inputObj.pwHash ] = [...inputArr]
 
-      createUser(inputObj).then(props.history.push('/'))
+      createUser(inputObj).then(
+        loginUser({email:inputObj.email,pwHash:inputObj.pwHash})
+      ).then(props.history.push('/'))
 
     } else if( userType == 'org' && inputArr.length == 12){
 
@@ -85,7 +84,7 @@ const Register = (props) => {
               <Input s={6} label="State"></Input>
               <Input s={6} label="Zip"></Input>
             </Row>
-              <Input s={12} label="Description" type='text'></Input>
+              <Input s={12} label="Description" type='textarea'></Input>
             <Row>
               <Input s={6} label="Phone"></Input>
               <Input s={6} label="Website"></Input>
