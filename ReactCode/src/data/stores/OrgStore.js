@@ -47,7 +47,6 @@ class OrgStore extends EventEmitter {
     }
 
     loginOrg(org){
-        console.log(org)
         this.state.org = org
         this.emit("change")
     }

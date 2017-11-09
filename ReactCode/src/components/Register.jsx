@@ -19,10 +19,8 @@ const Register = (props) => {
         inputObj.email,
         inputObj.pwHash ] = [...inputArr]
 
-        //testing -- remove
-        //console.log('registering user with info:', inputObj)
+      createUser(inputObj).then(props.history.push('/'))
 
-      createUser(inputObj)
     } else if( userType == 'org' && inputArr.length == 12){
 
       inputObj = {
@@ -41,10 +39,8 @@ const Register = (props) => {
         orgContactPerson: inputArr[11]
       };
 
-      //testing -- remove
-      console.log('sending org registration request info:', inputObj)
-
-        createOrg(inputObj)
+        createOrg(inputObj).then(props.history.push('/'))
+        
     } else {
       console.log('enter values in all fields!')
     }

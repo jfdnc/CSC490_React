@@ -28,7 +28,7 @@ const NewVolOp = (props) => {
             volOpCategories: inputArr[12]
         };
 
-        createVolop(inputObj)
+        createVolop(inputObj).then(props.history.push('/'))
     }
 
     return(

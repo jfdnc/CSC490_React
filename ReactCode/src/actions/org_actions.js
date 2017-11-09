@@ -21,6 +21,7 @@ export function getUserType(){
 
 //Create a new volop in database
 export function createVolop(volOp){
+  return new Promise((resolve, reject) => {
     let myReq = new Request('/api/volOps', {method:'POST', body: JSON.stringify(volOp),
         headers: {"Content-Type": "application/json"}})
     fetch(myReq)
@@ -31,9 +32,10 @@ export function createVolop(volOp){
             console.log(err)
         })
 
-  dispatcher.dispatch({
-    type: OrgActionTypes.CREATE_VOLOP,
-    volOp: volOp
+    dispatcher.dispatch({
+      type: OrgActionTypes.CREATE_VOLOP,
+      volOp: volOp
+    })
   })
 }
 
@@ -88,6 +90,7 @@ export function editOrgInfo(){
 
 //create an organization
 export function createOrg(org){
+  return new Promise((resolve, reject) => {
     let myReq = new Request('/api/orgrequests', {method:'POST', body: JSON.stringify(org),
         headers: {"Content-Type": "application/json"}})
     fetch(myReq)
@@ -110,6 +113,7 @@ export function createOrg(org){
     dispatcher.dispatch({
         type: OrgActionTypes.CREATE_ORG,
     })
+  })
 }
 
 export function loginOrg(org){

@@ -61,6 +61,7 @@ export function editPrefs(){
 }
 
 export function createUser(user){
+  return new Promise((resolve, reject) => {
     let myReq = new Request('/auth/signup', {method:'POST', body: JSON.stringify(user),
         headers: {"Content-Type": "application/json"}})
     fetch(myReq)
@@ -75,7 +76,7 @@ export function createUser(user){
         type: UserActionTypes.CREATE_USER,
         user: user
     })
-
+  })
 }
 
 export function loginUser(user){

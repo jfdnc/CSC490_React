@@ -63,8 +63,8 @@ export default class PageNav extends React.Component{
 
   componentWillMount(){
     let token    = localStorage.getItem('token')    || false,
-        userInfo = localStorage.getItem('orgInfo')  || false,
-        orgInfo  = localStorage.getItem('userInfo') || false
+        userInfo = localStorage.getItem('userInfo')  || false,
+        orgInfo  = localStorage.getItem('orgInfo') || false
     if(token){
       if(userInfo){
         this.setState({ userLoggedIn: true })
@@ -101,8 +101,10 @@ export default class PageNav extends React.Component{
 
   handleLogOut(){
     if(this.state.userLoggedIn){
+      console.log('user logout')
       userLogOut()
     } else if(this.state.orgLoggedIn){
+      console.log('org logout')
       orgLogOut()
     }
   }
