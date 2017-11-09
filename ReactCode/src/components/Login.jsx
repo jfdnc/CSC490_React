@@ -3,6 +3,7 @@ import { Input, Row, Icon, Col, Button, Form } from 'react-materialize'
 import { loginUser } from '../actions/user_actions'
 import { loginOrg } from '../actions/org_actions'
 import UserStore from '../data/stores/UserStore'
+import Fade from './Fade'
 
 const Login =  (props) => {
   const handleSubmit = () => {
@@ -37,6 +38,7 @@ const Login =  (props) => {
 
   return(
     <div>
+    <Fade>
       <div id='login-view' className='view-container'>
       <div id='onsite'>
         <Row>
@@ -56,6 +58,7 @@ const Login =  (props) => {
         offsite login
       </div>
       </div>
+      </Fade>
     </div>
     )
 }

@@ -61,6 +61,18 @@ export default class PageNav extends React.Component{
   }
 
   componentWillMount(){
+
+    let token    = localStorage.getItem('token')    || false,
+        userInfo = localStorage.getItem('orgInfo')  || false,
+        orgInfo  = localStorage.getItem('userInfo') || false
+    if(token){
+      if(userInfo){
+        this.setState({ userLoggedIn: true })
+      } else if(orgInfo){
+        this.setState({ orgLoggedIn: true })
+      }
+    }
+
     UserStore.on('change', () => {
       let loggedIn = !_.isEmpty(UserStore.getAll().user)
       this.setState({ userLoggedIn:loggedIn })

@@ -124,7 +124,7 @@ export function loginOrg(org){
         if (xhr.status === 200) {
             // success so save the token
             localStorage.setItem('token', xhr.response.token);
-
+            localStorage.setItem('orgInfo', JSON.stringify(xhr.response.org))
             //send to dispatcher
             dispatcher.dispatch({
                 type: OrgActionTypes.LOGIN_ORG,
@@ -140,7 +140,7 @@ export function loginOrg(org){
 export function logOut(){
     //remove the token from local storage
     localStorage.removeItem('token')
-
+    localStorage.removeItem('orgInfo')
     dispatcher.dispatch({
         type: OrgActionTypes.LOG_OUT
     })

@@ -116,7 +116,7 @@ ul> li > a:hover{
 }
 #content-container{
   position: relative;
-  margin: 56px 0 0 0;
+  margin: 0 0 0 0;
 }
 #main-content-wrap{
   display: flex;
@@ -216,7 +216,6 @@ ul> li > a:hover{
 .social-link:hover{
 }
 
-
 #footer-side-info{
   grid-column: 2;
   display: grid;
@@ -239,7 +238,7 @@ ul> li > a:hover{
 
 .view-container{
   text-align: center;
-  min-height: 520px;
+  min-height: 550px;
   position: relative;
   overflow: scroll;
 }
@@ -295,7 +294,16 @@ button.btn.btn-primary:hover{
   box-shadow: 0 2px 2px rgba(0,0,0,0.6);
 }
 
+/*fullscreen*/
 @media screen and (min-width: 750px) {
+  #splash-container{
+    position: absolute;
+    z-index: -1;
+  }
+  #splash-container > .splash-img{
+    width: 100vw;
+    max-height: 800px;
+  }
 
   #guest-view{
     display: grid;
@@ -303,12 +311,10 @@ button.btn.btn-primary:hover{
   }
   #guest-left{
     position: relative;
-    margin-top: 56px;
     grid-column: 1;
   }
   #guest-right{
     position: relative;
-    margin-top: 56px;
     grid-column: 2;
   }
 

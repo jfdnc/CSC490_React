@@ -2,6 +2,7 @@ import React from 'react'
 import { Tabs, Tab, Button, Col, Row, Input } from 'react-materialize'
 import { createUser } from '../actions/user_actions'
 import { createOrg } from '../actions/org_actions'
+import Fade from './Fade'
 
 const Register = (props) => {
   const handleSubmit = (userType) => {
@@ -51,6 +52,7 @@ const Register = (props) => {
 
   return(
     <div>
+      <Fade>
       <div id='register-view' className='view-container'>
         <div id='onsite'>
           <Tabs defaultActiveKey={1} id='registration-tabs'>
@@ -98,6 +100,7 @@ const Register = (props) => {
           offsite registration
         </div>
       </div>
+      </Fade>
     </div>
   )
 }

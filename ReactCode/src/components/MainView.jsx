@@ -1,6 +1,9 @@
 import React from 'react'
 import UserStore from '../data/stores/UserStore'
 import OrgStore from '../data/stores/OrgStore'
+import GuestView from './GuestView'
+import UserView from './UserView'
+import OrgView from './OrgView'
 import _ from 'lodash'
 
 export default class MainView extends React.Component {
@@ -59,7 +62,8 @@ export default class MainView extends React.Component {
     return(
       <div id='main-container'>
         <div id="content-container">
-          {proparr.map((prop,i) => <div key={i}>{prop.propName}:{prop.propContent}</div>)}
+          {/*{proparr.map((prop,i) => <div key={i}>{prop.propName}:{prop.propContent}</div>)}*/}
+          <GuestView />
         </div>
       </div>
     )
