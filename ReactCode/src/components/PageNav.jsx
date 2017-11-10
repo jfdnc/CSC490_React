@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar, NavItem } from 'react-materialize'
+import { Navbar, NavItem, SideNav, SideNavItem } from 'react-materialize'
 import { NavLink, Route } from 'react-router-dom'
 import { logOut as userLogOut } from '../actions/user_actions'
 import { logOut as orgLogOut } from '../actions/org_actions'
@@ -18,10 +18,8 @@ let guestNavTypes = [
     navUrl: '/login',
     navText: 'Log In'
   },{
-    navUrl: '/about',
     navText: 'About'
   },{
-    navUrl: '/contact',
     navText: 'Contact'
   },
 ]
@@ -29,10 +27,8 @@ let userNavTypes = [
     {
       navText: 'Log Out'
     },{
-      navUrl: '/about',
       navText: 'About'
     },{
-      navUrl: '/contact',
       navText: 'Contact'
     }
 ]
@@ -40,10 +36,8 @@ let orgNavTypes = [
     {
       navText: 'Log Out'
     },{
-      navUrl: '/about',
       navText: 'About'
     },{
-      navUrl: '/contact',
       navText: 'Contact'
     }
 ]
@@ -84,11 +78,24 @@ export default class PageNav extends React.Component{
   }
 
   mapNavHeaders(headerList){
+    //messy -- make this a switch statement and abstract sidenav out to
+    //about and contact components
     return(
       headerList.map((headerItem, i) => {
         if(headerItem.navText == 'Log Out'){
           return(
             <li key={i}><a key={i} onClick={() => this.handleLogOut()}>{headerItem.navText}</a></li>
+          )
+        } else if(headerItem.navText == 'About' || headerItem.navText == 'Contact'){
+          return(
+            <SideNav
+            	trigger={<li><a>{headerItem.navText}</a></li>}
+            	options={{ closeOnClick: true, edge: 'right', menuWidth:'450px'}}
+            	>
+              <SideNavItem>{headerItem.navText}</SideNavItem>
+            	<SideNavItem divider />
+            	<SideNavItem subheader>Subheader</SideNavItem>
+            </SideNav>
           )
         } else {
           return(
