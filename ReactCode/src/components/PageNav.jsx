@@ -7,39 +7,25 @@ import UserStore from '../data/stores/UserStore'
 import OrgStore from '../data/stores/OrgStore'
 import _ from 'lodash'
 
-import MainView from './MainView'
 
+import About from './About'
+import Contact from './Contact'
 
 let guestNavTypes = [
-  {
-    navUrl: '/register',
-    navText: 'Register'
-  },{
-    navUrl: '/login',
-    navText: 'Log In'
-  },{
-    navText: 'About'
-  },{
-    navText: 'Contact'
-  },
+  'Register',
+  'Log In',
+  'About',
+  'Contact'
 ]
 let userNavTypes = [
-    {
-      navText: 'Log Out'
-    },{
-      navText: 'About'
-    },{
-      navText: 'Contact'
-    }
+    'Log Out',
+    'About',
+    'Contact'
 ]
 let orgNavTypes = [
-    {
-      navText: 'Log Out'
-    },{
-      navText: 'About'
-    },{
-      navText: 'Contact'
-    }
+    'Log Out',
+    'About',
+    'Contact'
 ]
 
 export default class PageNav extends React.Component{
@@ -78,29 +64,30 @@ export default class PageNav extends React.Component{
   }
 
   mapNavHeaders(headerList){
-    //messy -- make this a switch statement and abstract sidenav out to
-    //about and contact components
     return(
       headerList.map((headerItem, i) => {
-        if(headerItem.navText == 'Log Out'){
-          return(
-            <li key={i}><a key={i} onClick={() => this.handleLogOut()}>{headerItem.navText}</a></li>
-          )
-        } else if(headerItem.navText == 'About' || headerItem.navText == 'Contact'){
-          return(
-            <SideNav
-            	trigger={<li><a>{headerItem.navText}</a></li>}
-            	options={{ closeOnClick: true, edge: 'right', menuWidth:'450px'}}
-            	>
-              <SideNavItem>{headerItem.navText}</SideNavItem>
-            	<SideNavItem divider />
-            	<SideNavItem subheader>Subheader</SideNavItem>
-            </SideNav>
-          )
-        } else {
-          return(
-            <li key={i}><NavLink key={i} to={headerItem.navUrl}>{headerItem.navText}</NavLink></li>
-          )
+        switch(headerItem){
+          case 'Register':
+            return(
+              <li key={i}><NavLink key={i} to='/register'>Register</NavLink></li>
+            )
+            break
+          case 'Log In':
+            return(
+              <li key={i}><NavLink key={i} to='/login'>Log In</NavLink></li>
+            )
+            break
+          case 'Log Out':
+            return(
+              <li key={i}><a key={i} onClick={() => this.handleLogOut()}>Log Out</a></li>
+            )
+            break
+          case 'About':
+            return( <About /> )
+            break
+          case 'Contact':
+            return( <Contact /> )
+            break
         }
       })
     )

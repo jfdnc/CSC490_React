@@ -35,7 +35,7 @@ body{
 
 #nav-bar-strip{
   height: 5px;
-  width: 100vw;
+  width: 100%;
   background: linear-gradient(to right, var(--blue-1), var(--blue-2));
 }
 #page-nav{

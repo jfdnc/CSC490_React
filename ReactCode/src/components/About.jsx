@@ -1,13 +1,33 @@
 import React from 'react'
-import Fade from './Fade'
+import { SideNav, SideNavItem } from 'react-materialize'
+import MediaQuery from 'react-responsive'
 
 const About = (props) => {
     return(
-      <Fade>
-        <div id='about-view' className='view-container'>
-          ABOUT PAGE GOES HERE
-        </div>
-      </Fade>
+      <li>
+        <MediaQuery query="(max-width: 992px)">
+          <SideNav
+            trigger={<li><a>About</a></li>}
+            options={{ closeOnClick: true, edge: 'left' }}
+            >
+            <div id='nav-bar-strip'/>
+            <SideNavItem>About</SideNavItem>
+            <SideNavItem divider />
+            <SideNavItem subheader>Subheader</SideNavItem>
+          </SideNav>
+        </MediaQuery>
+        <MediaQuery query="(min-width: 992px)">
+          <SideNav
+            trigger={<li><a>About</a></li>}
+            options={{ closeOnClick: true, edge: 'right', menuWidth:'450px'}}
+            >
+            <div id='nav-bar-strip'/>
+            <SideNavItem>About</SideNavItem>
+            <SideNavItem divider />
+            <SideNavItem subheader>Subheader</SideNavItem>
+          </SideNav>
+        </MediaQuery>
+      </li>
     )
 }
 
