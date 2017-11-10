@@ -11,17 +11,20 @@ export default class GuestDashboardLayout extends React.Component{
     return(
       <div class='dashboard-layout' id='dashboard-guest'>
         <div class='dashboard-side-content'>
-          <Link to='/register'><Button>Sign Up</Button></Link>
-          <Link to='/login'><Button>Log In</Button></Link>
+          <div id='guest-side-content-header'>
+            We want to help you connect to volunteer opportunies in your community! Sign up or sign in below, or search for local volunteer opportunities near you!
+            <div id='reg-log-links'>
+              <Link to='/register'><Button>Sign Up</Button></Link>
+              <Link to='/login'><Button>Log In</Button></Link>
+            </div>
+          </div>
+
         </div>
         <div class='dashboard-main-content'>
-          <div id='dashboard-guest-main-content-header'>
-            <h5>Find Local Volunteer Opportunities</h5>
-          </div>
           <div id='dashboard-guest-main-content-content'>
-            Select the categories that you are passionate about, enter your location, and search for volunteer opportunies near you!
+            <h5>Find Local Volunteer Opportunities</h5>
             <hr/>
-            NVM
+            **SEARCH COMPONENT HERE**
           </div>
         </div>
       </div>

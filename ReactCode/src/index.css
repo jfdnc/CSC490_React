@@ -60,6 +60,10 @@ span > li > a {
   color: var(--blue-1);
   font-size: 18px;
 }
+#nav-mobile > li > span > li > a {
+  color: var(--blue-1);
+  font-size: 18px;
+}
 #nav-mobile > li > a {
   font-size: 20px;
   margin: 10px 0;
@@ -285,7 +289,7 @@ button.btn:hover{
   padding: 6px;
   display: grid;
   grid-template-rows: 21% 79%;
-  height: 100vh;
+  height: 800px;
 }
 .dashboard-side-content{
   grid-row: 1;
@@ -293,6 +297,23 @@ button.btn:hover{
 .dashboard-main-content{
   grid-row: 2;
 }
+#dashboard-guest .dashboard-side-content{
+  display: grid;
+  grid-template-rows: 20% auto 35%;
+  margin: 10px;
+}
+#guest-side-content-header{
+  padding: 6px;
+  text-align: center;
+  grid-row: 2;
+  color: white;
+  background: rgba(0,0,0,0.6);
+  border-radius: 3px;
+}
+#reg-log-links{
+  margin-top:15px;
+}
+
 #dashboard-guest .dashboard-main-content{
   display: grid;
   grid-template-rows: 10% 90%;
@@ -305,17 +326,19 @@ button.btn:hover{
   grid-row: 2;
   color: var(--off-white);
   background: rgba(0,0,0,0.6);
+  border-radius: 3px;
 }
 #dashboard-guest a > button.btn{
   margin: 10px;
-  height: 40px;
+  height: 50px;
+  width: 150px;
 }
 #splash-container{
   position: absolute;
   z-index: -1;
 }
 #splash-container > .splash-img{
-  max-height: 800px;
+  max-height: 1000px;
   min-height: 600px;
   min-width: 900px;
   transform: translate(-330px,-50px);
@@ -359,6 +382,15 @@ button.btn:hover{
   .dashboard-side-content{
     grid-column: 1;
     grid-row: 1;
+  }
+
+  #reg-log-links{
+    margin: 5px;
+  }
+
+  #dashboard-guest a > button.btn{
+    margin: 6px;
+    height: 40px;
   }
 
   #dashboard-user{
