@@ -371,6 +371,7 @@ button.btn:hover{
 #search-container{
   color: var(--blue-1);
   display: grid;
+  grid-template-rows: 200px auto;
   background: var(--off-white);
   border-radius: 3px;
   box-shadow: 0 0 5px rgba(0,0,0,0.3);
@@ -381,8 +382,21 @@ button.btn:hover{
   overflow-y: scroll;
 }
 #search-options{
+  display: grid;
+  grid-template-rows: auto 50px;
+}
+#search-radio-buttons{
+  grid-row: 1;
+  font-size: 10px;
+}
+#search-zip-container{
+  grid-row: 2;
+}
+#search-submit{
+  padding-top: 25px;
 }
 #search-results{
+  margin-top: 68px;
 }
 /*fullscreen*//*************************************************************/
 @media screen and (min-width: 750px) {
@@ -432,6 +446,9 @@ button.btn:hover{
   }
   #search-container{
     height: 400px;
+  }
+  #search-results{
+    margin-top: 44px;
   }
 
   #dashboard-user{
