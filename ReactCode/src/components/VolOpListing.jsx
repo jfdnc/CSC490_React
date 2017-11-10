@@ -1,8 +1,11 @@
 import React from 'react'
+import { CardPanel } from 'react-materialize'
 
 const VolOpListing = (props) => {
   return(
-    <div> VolOp Listing </div>
+    <CardPanel className="white black-text">
+						VolopListing
+		</CardPanel>
   )
 }
 
