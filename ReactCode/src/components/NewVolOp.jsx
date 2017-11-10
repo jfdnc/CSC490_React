@@ -7,6 +7,9 @@ const NewVolOp = (props) => {
         let inputArr = [],
             inputObj = {},
             inputs = document.getElementsByTagName('input')
+
+        const orgObj = JSON.parse(localStorage.getItem('orgInfo'))
+
         for(let i=0; i<inputs.length; i++){
             inputs[i].value ? inputArr.push(inputs[i].value) : null
         }
@@ -25,9 +28,9 @@ const NewVolOp = (props) => {
             volOpTod: inputArr[9],
             volOpSpotsAvailable: inputArr[10],
             volOpDetails: inputArr[11],
-            volOpCategories: inputArr[12]
+            volOpCategories: inputArr[12],
+            orgName: orgObj.orgName
         };
-
         createVolop(inputObj).then(props.history.push('/'))
     }
 
