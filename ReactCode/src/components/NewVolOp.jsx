@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Row, Input } from 'react-materialize'
-import { createVolop } from "../actions/org_actions";
+import { createVolop, editOrgInfo } from "../actions/org_actions";
 
 const NewVolOp = (props) => {
     const handleSubmit = () => {
@@ -31,7 +31,9 @@ const NewVolOp = (props) => {
             volOpCategories: inputArr[12],
             orgName: orgObj.orgName
         };
-        createVolop(inputObj).then(props.history.push('/'))
+        createVolop(inputObj)
+            .then(result => {orgObj.orgVolOps.push(result._id);editOrgInfo(orgObj)})
+            .then(props.history.push('/'))
     }
 
     return(
