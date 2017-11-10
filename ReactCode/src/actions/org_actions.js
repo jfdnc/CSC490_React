@@ -140,12 +140,13 @@ export function loginOrg(org){
   })
 }
 
-//return t/f on successful log out
 export function logOut(){
+  return new Promise((resolve, reject) => {
     //remove the token from local storage
     localStorage.removeItem('token')
     localStorage.removeItem('orgInfo')
     dispatcher.dispatch({
         type: OrgActionTypes.LOG_OUT
     })
+  })
 }

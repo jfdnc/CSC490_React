@@ -1,9 +1,10 @@
 import React from 'react'
+import Dashboard from './Dashboard'
 
 const UserView = (props) => {
   return(
     <div className='view-container'>
-      <h1>User Logged In View</h1>
+      <Dashboard type='user'/>
     </div>
   )
 }

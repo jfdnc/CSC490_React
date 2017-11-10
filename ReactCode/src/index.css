@@ -303,19 +303,30 @@ button.btn.btn-primary:hover{
   #splash-container > .splash-img{
     width: 100vw;
     max-height: 800px;
+    min-height: 600px;
+    min-width: 900px;
+    transform: translateY(-50px);
   }
 
   #guest-view{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    overflow: hidden;
   }
-  #guest-left{
+
+  #dashboard-container{
     position: relative;
-    grid-column: 1;
+    height: 500px;
+    width: 1000px;
+    min-width: 1000px;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,0.6);
+    background: rgba(256,256,256,0.6);
+    margin: auto auto;
+    transition: background-color 150ms ease;
   }
-  #guest-right{
-    position: relative;
-    grid-column: 2;
+  #dashboard-container:hover{
+    background: var(--off-white);
+    cursor: pointer;
   }
 
   #register-view, #login-view{

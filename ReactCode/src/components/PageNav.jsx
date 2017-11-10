@@ -101,11 +101,9 @@ export default class PageNav extends React.Component{
 
   handleLogOut(){
     if(this.state.userLoggedIn){
-      console.log('user logout')
-      userLogOut()
+      userLogOut().then(this.props.history.push('/'))
     } else if(this.state.orgLoggedIn){
-      console.log('org logout')
-      orgLogOut()
+      orgLogOut().then(this.props.history.push('/'))
     }
   }
 
