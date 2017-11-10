@@ -1,6 +1,5 @@
 import React from 'react'
 import Fade from './Fade'
-import { Button, Carousel } from 'react-bootstrap'
 import Dashboard from './Dashboard'
 import volimg1 from '../assets/images/vol1.JPG'
 

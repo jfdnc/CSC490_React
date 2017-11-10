@@ -1,5 +1,5 @@
 import React from 'react'
-
+import GuestDashboardLayout from './GuestDashboardLayout'
 export default class Dashboard extends React.Component {
   constructor(props){
     super(props)
@@ -11,9 +11,15 @@ export default class Dashboard extends React.Component {
   }
 
   render(){
+    let currLayout
+    switch(this.state.type){
+      case 'guest':
+        currLayout = <GuestDashboardLayout />
+        break
+    }
     return(
-      <div className='dashboard-container' id={`dashboard-${this.state.type}`}>
-        {this.state.type}
+      <div className='dashboard-container'>
+        {currLayout}
       </div>
     )
   }
