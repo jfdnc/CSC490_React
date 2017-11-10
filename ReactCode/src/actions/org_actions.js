@@ -26,7 +26,7 @@ export function createVolop(volOp){
         headers: {"Content-Type": "application/json"}})
     fetch(myReq)
         .then(function(res){
-            console.log(res)
+            resolve(res.json())
         })
         .catch(function(err){
             console.log(err)
@@ -82,10 +82,26 @@ export function viewOrgInfo(){
   })
 }
 //edit org info
-export function editOrgInfo(){
-  dispatcher.dispatch({
-    type: OrgActionTypes.EDIT_ORG_INFO
-  })
+export function editOrgInfo(org){
+    return new Promise((resolve, reject) => {
+        let myReq = new Request('/api/organizations/' + org._id, {method:'PUT', body: JSON.stringify(org),
+            headers: {"Content-Type": "application/json"}})
+        console.log("ORG")
+        console.log(JSON.stringify(org))
+        fetch(myReq)
+            .then(function(res){
+                console.log(res)
+                localStorage.setItem('orgInfo', JSON.stringify(org))
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+
+        dispatcher.dispatch({
+            type: OrgActionTypes.EDIT_ORG_INFO,
+            org: org
+        })
+    })
 }
 
 //create an organization
