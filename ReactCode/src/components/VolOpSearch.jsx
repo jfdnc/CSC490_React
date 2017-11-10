@@ -13,11 +13,13 @@ export default class VolOpSearch extends React.Component{
         elderly: false,
         homeless: false,
         kids: false
-      }
+      },
+      volOpList:[]
     }
 
     this.handleRadioClicked = this.handleRadioClicked.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+    this.populateVolOpList = this .populateVolOpList.bind(this)
   }
 
   handleRadioClicked(e){
@@ -35,11 +37,35 @@ export default class VolOpSearch extends React.Component{
         categoriesSelected.push(category)
       }
     }
+
+    let searchInfo = {
+      zip: searchZip,
+      cats: categoriesSelected
+    }
+
+    let volOpList
+    let getVolops = new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('get', '/api/volops');
+      xhr.responseType = 'json';
+      xhr.addEventListener('load', () => {
+          if (xhr.status === 200) {
+              this.populateVolOpList(xhr.response, searchInfo)
+          }
+      });
+      xhr.send(); //eslint-disable-line
+    });
+
+    getVolops()
   }
 
+  populateVolOpList(volops, searchInfo){
+    let volOpList = volops
+
+    this.setState({ volOpList })
+  }
   render(){
     console.log(this.state)
-    let searchResults = 'nothing yet'
     return(
       <div id='volop-search-container'>
         <div id='search-container'>
@@ -66,6 +92,11 @@ export default class VolOpSearch extends React.Component{
           </div>
           <div id='search-results'>
           <hr/>
+          {this.state.volOpList.map(volop =>{
+            return(
+              <VolOpListing {...volop}/>
+            )
+          })}
           </div>
         </div>
       </div>
