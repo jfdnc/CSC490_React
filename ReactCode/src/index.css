@@ -313,20 +313,29 @@ button.btn.btn-primary:hover{
     overflow: hidden;
   }
 
-  #dashboard-container{
+  .dashboard-container{
     position: relative;
     height: 500px;
     width: 1000px;
     min-width: 1000px;
     border-radius: 3px;
     border: 1px solid rgba(0,0,0,0.6);
-    background: rgba(256,256,256,0.6);
     margin: auto auto;
     transition: background-color 150ms ease;
   }
-  #dashboard-container:hover{
+  .dashboard-container:hover{
     background: var(--off-white);
     cursor: pointer;
+  }
+
+  #dashboard-guest{
+    background: green;
+  }
+  #dashboard-user{
+    background: purple;
+  }
+  #dashboard-org{
+    background: blue;
   }
 
   #register-view, #login-view{

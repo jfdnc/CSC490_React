@@ -12,7 +12,7 @@ export default class Dashboard extends React.Component {
 
   render(){
     return(
-      <div id='dashboard-container'>
+      <div className='dashboard-container' id={`dashboard-${this.state.type}`}>
         {this.state.type}
       </div>
     )
