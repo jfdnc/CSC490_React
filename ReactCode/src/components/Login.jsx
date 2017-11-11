@@ -4,7 +4,7 @@ import { loginUser } from '../actions/user_actions'
 import { loginOrg } from '../actions/org_actions'
 import Fade from './Fade'
 import UserStore from '../data/stores/UserStore'
-import { editUser } from '../actions/user_actions'
+import { editPrefs, saveVolop } from '../actions/user_actions'
 
 
 const Login =  (props) => {
@@ -63,7 +63,7 @@ const Login =  (props) => {
       <div id='offsite'>
         offsite login
           <div>
-          <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>          
+          <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>                   
           </div>
       </div>
       </div>
