@@ -107,10 +107,12 @@ export function addToCal(volOpID){
 
 }
 
-
+/**
+user._id needs to be defined.  This is the Mongo id of the user
+*/
 export function editUser(user){
   return new Promise((resolve, reject) => {
-    let myReq = new Request('/api/users', {method:'PUT', body: JSON.stringify(user),
+    let myReq = new Request('/api/users/'+user._id, {method:'PUT', body: JSON.stringify(user),
         headers: {"Content-Type": "application/json"}})
     fetch(myReq)
         .then(function(res){
@@ -121,7 +123,7 @@ export function editUser(user){
         })
 
     dispatcher.dispatch({
-        type: UserActionTypes.CREATE_USER,
+        type: UserActionTypes.EDIT_PREFS,
         user: user
     })
 
