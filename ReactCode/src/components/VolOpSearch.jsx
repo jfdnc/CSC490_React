@@ -82,7 +82,7 @@ export default class VolOpSearch extends React.Component{
 
     let volOpList = volops
     volOpList = volOpList.map(op => {
-      if(op.volOpAddress.zip == searchInfo.zip){
+      if(op.volOpAddress.zip.substr(0,3) == searchInfo.zip.substr(0,3)){
         return op
       }
     })
