@@ -75,18 +75,32 @@ export default class PageNav extends React.Component{
   }
 
   mapNavHeaders(headerList){
+    let currPage = this.props.history.location.pathname
     return(
       headerList.map((headerItem, i) => {
         switch(headerItem){
           case 'Register':
-            return(
-              <li key={i}><NavLink key={i} to='/register'>Register</NavLink></li>
-            )
+            if(currPage == '/register'){
+              return(
+                <li key={i}><a style={{color:'#137cc1',background:'#e7e7e7'}}>Register</a></li>
+              )
+            } else {
+              return(
+                <li key={i}><NavLink key={i} to='/register'>Register</NavLink></li>
+              )
+            }
+
             break
           case 'Log In':
-            return(
-              <li key={i}><NavLink key={i} to='/login'>Log In</NavLink></li>
-            )
+            if(currPage == '/login'){
+              return(
+                <li key={i}><a style={{color:'#137cc1',background:'#e7e7e7'}}>Log In</a></li>
+              )
+            } else {
+              return(
+                <li key={i}><NavLink key={i} to='/login'>Log In</NavLink></li>
+              )
+            }
             break
           case 'Log Out':
             return(

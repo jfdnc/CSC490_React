@@ -98,21 +98,25 @@ a.brand-logo:hover{
 span > li > a {
   color: var(--blue-1);
   font-size: 18px;
+  user-select: none;
 }
 #nav-mobile > li > span > li > a {
   color: var(--blue-1);
   font-size: 20px;
+  user-select: none;
 }
 #nav-mobile > li > a {
   font-size: 20px;
   margin: 10px 0;
   color: var(--blue-1);
+  user-select: none;
 }
 
 #nav-mobile > span > li > a {
   font-size: 20px;
   margin: 10px 0;
   color: var(--blue-1);
+  user-select: none;
 }
 #nav-mobile.side-nav::before{
   content:'';
@@ -129,11 +133,13 @@ span > li > a {
 ul> li > a{
   font-size: 18px;
   color: var(--blue-1);
+  user-select: none;
 }
 ul> li > a:hover{
   background: var(--off-white);
   color: var(--blue-2);
   text-decoration: none;
+  user-select: none;
 }
 
 #content-div{
