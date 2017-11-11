@@ -57,7 +57,7 @@ const testvolops =[
   },{
   "_id":"qbiq9uespn0ph6scgm4a1625",
   "volOpName":"Volunteers Needed -- Several Positions Available",
-  "volOpDescription":"",
+  "volOpDescription":"GSO Urban Ministy is seeking capable volunteers for a variety of positions. It is our mission to serve the local community through outreach and intervention, with an emphasis on combating homelessness in our city.",
   "volOpOngoing":true,
   "volOpStartDate":"",
   "volOpEndDate":"",
