@@ -110,12 +110,8 @@ router.get('/facebookLogin/callback',
             if(req.user.email!=null){
                 var myId = 0
                 
-                 User.findOne({email: req.user.email}).then(function(user){
-                    console.log(JSON.stringify(user))
-                    console.log(user.lastName)
-                    console.log(user._id)
-                     myId = user._id
-                     console.log(myId+" hey")
+                User.findOne({email: req.user.email}).then(function(user){                    
+                     myId = user._id                     
                 res.redirect('/?email='+req.user.email+'&firstName='+req.user.firstName+'&lastName='+req.user.lastName+'&jwt='+token2+'&id='+myId+'&facebookStuff=')
                 });
                 

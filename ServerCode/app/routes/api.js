@@ -121,8 +121,18 @@ router.put('/users/:id', function(req, res, next){
 // update a user's savedVolOps in db
 router.put('/users/:userId/:volOpId', function(req, res, next){
   User.findByIdAndUpdate({_id: req.params.userId},
-    {$push: {savedVolOps: req.params.volOpId}}).then(function(){
+    {$addToSet: {savedVolOps: req.params.volOpId}}).then(function(){
       User.findOne({_id: req.params.userId}).then(function(user){
+        res.send(user);
+      });
+    });
+});
+
+// update a user's savedVolOps in db
+router.put('/userVol', function(req, res, next){
+  User.findByIdAndUpdate({_id: req.body.userId},
+    {$addToSet: {savedVolOps: req.body.volOpId}}).then(function(){
+      User.findOne({_id: req.body.userId}).then(function(user){
         res.send(user);
       });
     });
