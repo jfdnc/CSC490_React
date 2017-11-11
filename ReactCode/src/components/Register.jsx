@@ -6,30 +6,17 @@ import Fade from './Fade'
 import UserStore from '../data/stores/UserStore'
 
 const Register = (props) => {
-  let criticalVals = {
-    user:{
-      zip: '',
-      email: '',
-      pw: '',
-      pwconf: ''
-    },
-    org:{
-      email: '',
-      zip: '',
-      phone: '',
-      website: '',
-      pw: '',
-      pwconf: ''
+
+  //stupid but it works to make both not display at once
+  let orgTabClicked = false
+  const handleFirstClick = () =>{
+    if(!orgTabClicked){
+      let tempTabId = document.getElementsByClassName('active')[3].href.split('_')[1]
+      document.getElementById(`tab_${tempTabId}`).style.display = 'none'
+      orgTabClicked = true
     }
   }
 
-  //checking input values as they are typed
-  //TODOhandle backspace correctly
-  //TODOcause DOM changes per values
-  const handleKeyDown = (e,userType,valType) => {
-    criticalVals[userType][valType] += e.key
-    console.log(`value of ${valType} in ${userType}: ${criticalVals[userType][valType]}`)
-  }
   const handleSubmit = (userType) => {
     let inputArr = [],
         inputObj = {},
@@ -79,23 +66,23 @@ const Register = (props) => {
       <Fade>
       <div id='register-view' className='view-container'>
         <div id='onsite'>
-          <Tabs defaultActiveKey={1} id='registration-tabs'>
+          <Tabs  id='registration-tabs' onChange={() => handleFirstClick()}>
             {/*user fields*/}
-            <Tab eventKey={1} title='User' active>
+            <Tab key={1} title='User' id='user-reg-tab' active>
               <Row>
                 <Input s={6} label="First Name"></Input>
                 <Input s={6} label="Last Name"></Input>
               </Row>
               <Row>
-                <Input s={6} label="ZIP" onKeyDown={(e)=>handleKeyDown(e,'user','zip')}></Input>
-                <Input s={6} label="Email" onKeyDown={(e)=>handleKeyDown(e,'user','email')} type='email' validate></Input>
+                <Input s={6} label="ZIP"></Input>
+                <Input s={6} label="Email" type='email' validate></Input>
               </Row>
-                <Input s={12} label="Password" onKeyDown={(e)=>handleKeyDown(e,'user','pw')} type='password'></Input>
-                <Input s={12} label="Confirm Password" onKeyDown={(e)=>handleKeyDown(e,'user','pwconf')} type='password'></Input>
+                <Input s={12} label="Password" type='password'></Input>
+                <Input s={12} label="Confirm Password" type='password'></Input>
               <Button onClick={()=>handleSubmit('user')}>Submit</Button>
             </Tab>
             {/*org fields*/}
-            <Tab eventKey={2} title='Organization'>
+            <Tab  key={2} title='Organization'>
             <Row>
               <Input s={6} label="Org Name"></Input>
               <Input s={6} label="Org Email" type='email' validate></Input>
@@ -123,7 +110,7 @@ const Register = (props) => {
         <div id='offsite'>
           offsite registration
           <div>
-          <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>          
+          <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>
           </div>
         </div>
       </div>

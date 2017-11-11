@@ -6,27 +6,25 @@ import { Route } from 'react-router-dom'
 import Register from './Register'
 import Login from './Login'
 import NewVolOp from './NewVolOp'
-
-import * as UserActions from '../actions/user_actions'
+import { initFBState } from '../actions/user_actions'
 
 const App = (props) => {
 
-window.onload = function () {
+  window.onload = function () {
     var url_string = window.location.href
-      var url = new URL(url_string);
-      var jwtToken = url.searchParams.get("jwt")
+    var url = new URL(url_string);
+    var jwtToken = url.searchParams.get("jwt")
 
-      if(jwtToken!=null){
-        var newUser = {
-          firstName:  url.searchParams.get("firstName"),
-          lastName: url.searchParams.get("lastName"),
-          email: url.searchParams.get("email")
-        }
-          UserActions.initFBState(jwtToken,newUser)
-          window.history.replaceState({}, document.title, "/");
-
+    if(jwtToken!=null){
+      var newUser = {
+        firstName:  url.searchParams.get("firstName"),
+        lastName: url.searchParams.get("lastName"),
+        email: url.searchParams.get("email")
       }
-}
+        initFBState(jwtToken,newUser)
+        window.history.replaceState({}, document.title, "/");
+    }
+  }
   return(
       <div id='app-container'>
         <div className="content">
@@ -42,5 +40,3 @@ window.onload = function () {
 }
 
 export default App
-
-

@@ -26,6 +26,7 @@ export default class MainView extends React.Component {
   }
 
   render(){
+    /*
     let proparr   = [],
         userState = this.state.userState,
         orgState  = this.state.orgState
@@ -54,21 +55,22 @@ export default class MainView extends React.Component {
           }
         }
       }
-    }
+    }*/
     //at this point proparr contains all info for logged in user/org
     //just spitting it out for now, but we can use it for something!
     //likely we will just check if the objects are populated, and use
     //their properties by name... but whatever for right now.
 
+    let userState = this.state.userState,
+        orgState  = this.state.orgState
+
     let currView = !_.isEmpty(userState) ? <UserView /> :
                    !_.isEmpty(orgState)  ? <OrgView />  :
                    <GuestView />
-
     return(
 
       <div id='main-container'>
         <div id="content-container">
-          {/*{proparr.map((prop,i) => <div key={i}>{prop.propName}:{prop.propContent}</div>)}*/}
           {currView}
         </div>
       </div>

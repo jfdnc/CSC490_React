@@ -1,6 +1,7 @@
 import React from 'react'
 import VolOpListing from './VolOpListing'
 import { Input, Col, Row, Button } from 'react-materialize'
+import _ from 'lodash'
 
 export default class VolOpSearch extends React.Component{
   constructor(props){
@@ -30,42 +31,69 @@ export default class VolOpSearch extends React.Component{
 
   handleSearch(){
     let searchZip = document.getElementById('search-zip').value
-    let currState = this.state.radioState
-    let categoriesSelected = []
-    for(let category in currState){
-      if(currState[category]){
-        categoriesSelected.push(category)
+    let searchErrorWarning = document.getElementById('search-error-warning')
+    let searchNotfoundWarning = document.getElementById('search-notfound-warning')
+
+    if(searchZip.length == 5){
+      searchErrorWarning.style.opacity = '0'
+      searchErrorWarning.style.visibility = 'hidden'
+
+      searchNotfoundWarning.style.opacity = '0'
+      searchNotfoundWarning.style.visibility = 'hidden'
+
+      let currState = this.state.radioState
+      let categoriesSelected = []
+      for(let category in currState){
+        if(currState[category]){
+          categoriesSelected.push(category)
+        }
       }
-    }
 
-    let searchInfo = {
-      zip: searchZip,
-      cats: categoriesSelected
-    }
+      let searchInfo = {
+        zip: searchZip,
+        cats: categoriesSelected
+      }
 
-    let volOpList
-    let getVolops = new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open('get', '/api/volops');
-      xhr.responseType = 'json';
-      xhr.addEventListener('load', () => {
-          if (xhr.status === 200) {
-              this.populateVolOpList(xhr.response, searchInfo)
-          }
+      let volOpList
+      let getVolops = new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('get', '/api/volops');
+        xhr.responseType = 'json';
+        xhr.addEventListener('load', () => {
+            if (xhr.status === 200) {
+                this.populateVolOpList(xhr.response, searchInfo)
+            }
+        });
+        xhr.send(); //eslint-disable-line
       });
-      xhr.send(); //eslint-disable-line
-    });
 
-    getVolops()
+      getVolops()
+    } else {
+      searchNotfoundWarning.style.opacity = '0'
+      searchNotfoundWarning.style.visibility = 'hidden'
+      searchErrorWarning.style.visibility = 'visible'
+      searchErrorWarning.style.opacity = '1'
+
+    }
   }
 
   populateVolOpList(volops, searchInfo){
-    let volOpList = volops
+    let searchNotfoundWarning = document.getElementById('search-notfound-warning')
 
+    let volOpList = volops
+    volOpList = volOpList.map(op => {
+      if(op.volOpAddress.zip.substr(0,3) == searchInfo.zip.substr(0,3)){
+        return op
+      }
+    })
+    volOpList = _.compact(volOpList)
+    if(volOpList.length == 0){
+      searchNotfoundWarning.style.opacity = '1'
+      searchNotfoundWarning.style.visibility = 'visible'
+    }
     this.setState({ volOpList })
   }
   render(){
-    console.log(this.state)
     return(
       <div id='volop-search-container'>
         <div id='search-container'>
@@ -91,7 +119,15 @@ export default class VolOpSearch extends React.Component{
             </div>
           </div>
           <div id='search-results'>
+          <br/>
+          <br/>
+          <div id='search-error-warning'>
+            Enter 5-digit ZIP
+          </div>
           <hr/>
+          <div id='search-notfound-warning'>
+            No volunteer opportunities found in that area. Try another ZIP.
+          </div>
           {this.state.volOpList.map(volop =>{
             return(
               <VolOpListing {...volop}/>

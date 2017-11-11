@@ -1,8 +1,14 @@
 import React from 'react'
 import { Navbar, NavItem, SideNav, SideNavItem } from 'react-materialize'
 import { NavLink, Route } from 'react-router-dom'
-import { logOut as userLogOut } from '../actions/user_actions'
-import { logOut as orgLogOut } from '../actions/org_actions'
+import {
+  logOut as userLogOut,
+  populateFromLocalStorage as populateUserFromLocalStorage
+} from '../actions/user_actions'
+import {
+  logOut as orgLogOut,
+  populateFromLocalStorage as populateOrgFromLocalStorage
+} from '../actions/org_actions'
 import UserStore from '../data/stores/UserStore'
 import OrgStore from '../data/stores/OrgStore'
 import _ from 'lodash'
@@ -45,37 +51,56 @@ export default class PageNav extends React.Component{
     let token    = localStorage.getItem('token')    || false,
         userInfo = localStorage.getItem('userInfo')  || false,
         orgInfo  = localStorage.getItem('orgInfo') || false
+
     if(token){
       if(userInfo){
         this.setState({ userLoggedIn: true })
-      } else if(orgInfo){
+        populateUserFromLocalStorage()
+      }
+      if(orgInfo){
         this.setState({ orgLoggedIn: true })
+        populateOrgFromLocalStorage()
       }
     }
 
+    let loggedIn
     UserStore.on('change', () => {
-      let loggedIn = !_.isEmpty(UserStore.getAll().user)
+      loggedIn = !_.isEmpty(UserStore.getAll().user)
       this.setState({ userLoggedIn:loggedIn })
     })
     OrgStore.on('change', () => {
-      let loggedIn = !_.isEmpty(OrgStore.getAll().org)
+      loggedIn = !_.isEmpty(OrgStore.getAll().org)
       this.setState({ orgLoggedIn:loggedIn })
     })
   }
 
   mapNavHeaders(headerList){
+    let currPage = this.props.history.location.pathname
     return(
       headerList.map((headerItem, i) => {
         switch(headerItem){
           case 'Register':
-            return(
-              <li key={i}><NavLink key={i} to='/register'>Register</NavLink></li>
-            )
+            if(currPage == '/register'){
+              return(
+                <li key={i}><a style={{color:'#137cc1',background:'#e7e7e7'}}>Register</a></li>
+              )
+            } else {
+              return(
+                <li key={i}><NavLink key={i} to='/register'>Register</NavLink></li>
+              )
+            }
+
             break
           case 'Log In':
-            return(
-              <li key={i}><NavLink key={i} to='/login'>Log In</NavLink></li>
-            )
+            if(currPage == '/login'){
+              return(
+                <li key={i}><a style={{color:'#137cc1',background:'#e7e7e7'}}>Log In</a></li>
+              )
+            } else {
+              return(
+                <li key={i}><NavLink key={i} to='/login'>Log In</NavLink></li>
+              )
+            }
             break
           case 'Log Out':
             return(

@@ -129,68 +129,29 @@ export function editUser(user){
 }
 
 
+export function initFBState(token,user){
+  return new Promise((resolve, reject) => {
+              // success so save the token
+              localStorage.setItem('token', token);
+              localStorage.setItem('userInfo', JSON.stringify(user))
 
-/*
-export function editUser(user){
- return new Promise((resolve, reject) => {
-    var xhr = new XMLHttpRequest();
-    var idNum = null
-    xhr.open('get', '/api/user'+user.email);
-    xhr.setRequestHeader('Content-type', 'application/json');
-    xhr.responseType = 'json';
-    xhr.addEventListener('load', () => {
-        if (xhr.status === 200) {
-            // success so save the token
-            idNum = xhr.response.user.id);
-            if(id!=null){
-              xhr.open('put', '/api/user'+idNum);
-              xhr.setRequestHeader('Content-type', 'application/json');
-              xhr.responseType = 'json';
-
+              //send to dispatcher
               dispatcher.dispatch({
-                type: UserActionTypes.LOGIN_USER,
-                user: xhr.response.user
-            })
-            }
-            //send to dispatcher
-            
-        }
-    });
-    */
+                  type: UserActionTypes.INIT_FBUSER,
+                  user: user
 
-
-
-
-
-
-
-    xmlhttp.send(JSON.stringify(user));
-
-    dispatcher.dispatch({
-                type: UserActionTypes.EDIT_PREFS,
-                user: user
-            })
-  })
-
+              })
+    })
 }
 
-export function initFBState(token,user){
-    
-    
-return new Promise((resolve, reject) => {
-        
-        
-            // success so save the token
-            localStorage.setItem('token', token);
-            localStorage.setItem('userInfo', JSON.stringify(user))
-            
-
-            //send to dispatcher            
-            
-            dispatcher.dispatch({
-                type: UserActionTypes.INIT_FBUSER,
-                user: user
-                
-            })  
+export function populateFromLocalStorage(){
+  return new Promise((resolve, reject) => {
+    let savedUserState = localStorage.getItem('userInfo') || false
+    if(savedUserState){
+      dispatcher.dispatch({
+        type: UserActionTypes.POPULATE_FROM_LOCAL_STORAGE,
+        user: savedUserState
+      })
+    }
   })
 }

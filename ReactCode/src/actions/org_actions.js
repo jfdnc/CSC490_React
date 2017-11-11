@@ -86,11 +86,8 @@ export function editOrgInfo(org){
     return new Promise((resolve, reject) => {
         let myReq = new Request('/api/organizations/' + org._id, {method:'PUT', body: JSON.stringify(org),
             headers: {"Content-Type": "application/json"}})
-        console.log("ORG")
-        console.log(JSON.stringify(org))
         fetch(myReq)
             .then(function(res){
-                console.log(res)
                 localStorage.setItem('orgInfo', JSON.stringify(org))
             })
             .catch(function(err){
@@ -110,16 +107,12 @@ export function createOrg(org){
     let myReq = new Request('/api/orgrequests', {method:'POST', body: JSON.stringify(org),
         headers: {"Content-Type": "application/json"}})
     fetch(myReq)
-        .then(function(res){
-            console.log(res)
+        .then(function(){
             let myReq1 = new Request('/emailRequest', {method: 'POST', body: JSON.stringify(org),
                 headers: {'Content-Type': 'application/json'}})
             fetch(myReq1)
-                .then(function(res1){
-                    console.log(res1)
-                })
-                .catch(function(err1){
-                    console.log(err1)
+                .catch(function(err){
+                    console.log(err)
                 })
         })
         .catch(function(err){
@@ -164,5 +157,38 @@ export function logOut(){
     dispatcher.dispatch({
         type: OrgActionTypes.LOG_OUT
     })
+  })
+}
+
+export function getAllVolOpsByOrg(volOpIds){
+    return new Promise((resolve, reject) =>{
+        let volOpArr = []
+        for(var i=0; i<volOpIds.length; i++){
+            let myReq = new Request('/api/volOps/' + volOpIds[i], {method:'GET', headers: {"Content-Type": "application/json"}})
+            fetch(myReq)
+                .then(res => res.json())
+                .then(resJSON => {
+                    volOpArr.push(resJSON)
+                })
+                .catch(function(err){
+                    console.log(err)
+                })
+        }
+        dispatcher.dispatch({
+            type: OrgActionTypes.GET_ALL_VOLOPS_BY_ORG,
+            allVolOps: volOpArr
+        })
+    })
+}
+
+export function populateFromLocalStorage(){
+  return new Promise((resolve, reject) => {
+    let savedOrgState = localStorage.getItem('orgInfo') || false
+    if(savedOrgState){
+      dispatcher.dispatch({
+        type: OrgActionTypes.POPULATE_FROM_LOCAL_STORAGE,
+        org: savedOrgState
+      })
+    }
   })
 }
