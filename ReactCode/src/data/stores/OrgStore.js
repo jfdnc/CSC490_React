@@ -59,7 +59,7 @@ class OrgStore extends EventEmitter {
     }
 
     getAllVolOpsByOrg(allVolOps){
-      //this.state.allVolOps = allVolOps
+      this.state.allVolOps = allVolOps
       this.emit("change")
     }
 
