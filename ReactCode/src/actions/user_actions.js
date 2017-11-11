@@ -36,7 +36,7 @@ export function shareVolop(){
     })
 }
 
-export function editPrefs(){
+export function editPrefs(user){
     return new Promise((resolve, reject) => {
     let myReq = new Request('/api/users/'+user._id, {method:'PUT', body: JSON.stringify(user),
         headers: {"Content-Type": "application/json"}})

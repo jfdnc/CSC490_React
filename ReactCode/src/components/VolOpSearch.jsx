@@ -3,6 +3,8 @@ import VolOpListing from './VolOpListing'
 import { Input, Col, Row, Button } from 'react-materialize'
 import _ from 'lodash'
 
+let testvolops = require('./testvolops')
+
 export default class VolOpSearch extends React.Component{
   constructor(props){
     super(props)
@@ -94,6 +96,7 @@ export default class VolOpSearch extends React.Component{
     this.setState({ volOpList })
   }
   render(){
+    console.log(testvolops)
     return(
       <div id='volop-search-container'>
         <div id='search-container'>

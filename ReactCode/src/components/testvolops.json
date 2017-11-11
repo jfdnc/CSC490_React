@@ -1,0 +1,20 @@
+
+{
+  "_id":"5a0680249f2d1e1ed8509fe8",
+  "volOpName":"Dinner Under The Bridge",
+  "volOpDescription":"We are serving home cooked dinner meals to everyone! We need capable volunteers to help serve food.",
+  "volOpOngoing":true,
+  "volOpStartDate":"18 November, 2017",
+  "volOpEndDate":"18 November, 2017",
+  "volOpTod":"4:00 PM-7:00 PM",
+  "volOpSpotsAvailable":10,
+  "orgName":"Vol R Us",
+  "__v":0,
+  "volOpCategories":["homeless"],
+  "volOpDetails":["No extra details"],
+  "volOpAddress":{
+    "street":"3627 Tate St.",
+    "city":"Greensboro",
+    "state":"NC",
+    "zip":"27403"}
+}
