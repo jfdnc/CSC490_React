@@ -125,6 +125,7 @@ span > li > a {
 #nav-mobile.side-nav{
   background: var(--off-white);
 }
+
 ul> li > a{
   font-size: 18px;
   color: var(--blue-1);
@@ -268,7 +269,8 @@ ul> li > a:hover{
 }
 #onsite{
   grid-row: 1/2;
-  min-height: 512px;
+  height: 512px;
+  overflow: scroll;
   padding: 10px;
   border-right: 1px solid rgba(0,0,0,0.3);
 }
