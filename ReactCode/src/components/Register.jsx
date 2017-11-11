@@ -5,6 +5,30 @@ import { createOrg } from '../actions/org_actions'
 import Fade from './Fade'
 
 const Register = (props) => {
+  let criticalVals = {
+    user:{
+      zip: '',
+      email: '',
+      pw: '',
+      pwconf: ''
+    },
+    org:{
+      email: '',
+      zip: '',
+      phone: '',
+      website: '',
+      pw: '',
+      pwconf: ''
+    }
+  }
+
+  //checking input values as they are typed
+  //TODOhandle backspace correctly
+  //TODOcause DOM changes per values
+  const handleKeyDown = (e,userType,valType) => {
+    criticalVals[userType][valType] += e.key
+    console.log(`value of ${valType} in ${userType}: ${criticalVals[userType][valType]}`)
+  }
   const handleSubmit = (userType) => {
     let inputArr = [],
         inputObj = {},
@@ -62,11 +86,11 @@ const Register = (props) => {
                 <Input s={6} label="Last Name"></Input>
               </Row>
               <Row>
-                <Input s={6} label="ZIP"></Input>
-                <Input s={6} label="Email"></Input>
+                <Input s={6} label="ZIP" onKeyDown={(e)=>handleKeyDown(e,'user','zip')}></Input>
+                <Input s={6} label="Email" onKeyDown={(e)=>handleKeyDown(e,'user','email')} type='email' validate></Input>
               </Row>
-                <Input s={12} label="Password" type='password'></Input>
-                <Input s={12} label="Confirm Password" type='password'></Input>
+                <Input s={12} label="Password" onKeyDown={(e)=>handleKeyDown(e,'user','pw')} type='password'></Input>
+                <Input s={12} label="Confirm Password" onKeyDown={(e)=>handleKeyDown(e,'user','pwconf')} type='password'></Input>
               <Button onClick={()=>handleSubmit('user')}>Submit</Button>
             </Tab>
             {/*org fields*/}
