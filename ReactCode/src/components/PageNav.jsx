@@ -76,13 +76,17 @@ export default class PageNav extends React.Component{
 
   mapNavHeaders(headerList){
     let currPage = this.props.history.location.pathname
+    let activeNavStyle = {
+      color:'#137cc1',
+      backgroundColor: '#e7e7e7'
+    }
     return(
       headerList.map((headerItem, i) => {
         switch(headerItem){
           case 'Register':
             if(currPage == '/register'){
               return(
-                <li key={i}><a style={{color:'#137cc1',background:'#e7e7e7'}}>Register</a></li>
+                <li key={i}><a style={activeNavStyle}>Register</a></li>
               )
             } else {
               return(
@@ -94,7 +98,7 @@ export default class PageNav extends React.Component{
           case 'Log In':
             if(currPage == '/login'){
               return(
-                <li key={i}><a style={{color:'#137cc1',background:'#e7e7e7'}}>Log In</a></li>
+                <li key={i}><a style={activeNavStyle}>Log In</a></li>
               )
             } else {
               return(

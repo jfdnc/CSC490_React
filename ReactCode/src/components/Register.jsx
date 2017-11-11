@@ -11,7 +11,7 @@ const Register = (props) => {
   let orgTabClicked = false
   const handleFirstClick = () =>{
     if(!orgTabClicked){
-      let tempTabId = document.getElementsByClassName('active')[3].href.split('_')[1]
+      let tempTabId = document.getElementsByClassName('active')[1].href.split('_')[1]
       document.getElementById(`tab_${tempTabId}`).style.display = 'none'
       orgTabClicked = true
     }
@@ -66,7 +66,7 @@ const Register = (props) => {
       <Fade>
       <div id='register-view' className='view-container'>
         <div id='onsite'>
-          <Tabs  id='registration-tabs' onChange={() => handleFirstClick()}>
+          <Tabs defaultActiveKey={1}  id='registration-tabs' onChange={() => handleFirstClick()}>
             {/*user fields*/}
             <Tab key={1} title='User' id='user-reg-tab' active>
               <Row>
