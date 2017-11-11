@@ -30,33 +30,42 @@ export default class VolOpSearch extends React.Component{
 
   handleSearch(){
     let searchZip = document.getElementById('search-zip').value
-    let currState = this.state.radioState
-    let categoriesSelected = []
-    for(let category in currState){
-      if(currState[category]){
-        categoriesSelected.push(category)
+    let warning = document.getElementById('search-error-warning')
+
+    if(searchZip.length == 5){
+      warning.style.opacity = '0'
+      warning.style.visibility = 'hidden'
+      let currState = this.state.radioState
+      let categoriesSelected = []
+      for(let category in currState){
+        if(currState[category]){
+          categoriesSelected.push(category)
+        }
       }
-    }
 
-    let searchInfo = {
-      zip: searchZip,
-      cats: categoriesSelected
-    }
+      let searchInfo = {
+        zip: searchZip,
+        cats: categoriesSelected
+      }
 
-    let volOpList
-    let getVolops = new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open('get', '/api/volops');
-      xhr.responseType = 'json';
-      xhr.addEventListener('load', () => {
-          if (xhr.status === 200) {
-              this.populateVolOpList(xhr.response, searchInfo)
-          }
+      let volOpList
+      let getVolops = new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('get', '/api/volops');
+        xhr.responseType = 'json';
+        xhr.addEventListener('load', () => {
+            if (xhr.status === 200) {
+                this.populateVolOpList(xhr.response, searchInfo)
+            }
+        });
+        xhr.send(); //eslint-disable-line
       });
-      xhr.send(); //eslint-disable-line
-    });
 
-    getVolops()
+      getVolops()
+    } else {
+      warning.style.visibility = 'visible'
+      warning.style.opacity = '1'
+    }
   }
 
   populateVolOpList(volops, searchInfo){
@@ -65,7 +74,6 @@ export default class VolOpSearch extends React.Component{
     this.setState({ volOpList })
   }
   render(){
-    console.log(this.state)
     return(
       <div id='volop-search-container'>
         <div id='search-container'>
@@ -91,6 +99,9 @@ export default class VolOpSearch extends React.Component{
             </div>
           </div>
           <div id='search-results'>
+          <div id='search-error-warning'>
+            Enter 5-digit ZIP
+          </div>
           <hr/>
           {this.state.volOpList.map(volop =>{
             return(

@@ -488,6 +488,12 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
 #search-results{
   margin-top: 68px;
 }
+#search-error-warning{
+  visibility: hidden;
+  color: rgba(230,0,0,0.6);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
 /*fullscreen*//*************************************************************/
 @media screen and (min-width: 750px) {
 

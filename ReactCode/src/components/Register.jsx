@@ -6,30 +6,6 @@ import Fade from './Fade'
 import UserStore from '../data/stores/UserStore'
 
 const Register = (props) => {
-  let criticalVals = {
-    user:{
-      zip: '',
-      email: '',
-      pw: '',
-      pwconf: ''
-    },
-    org:{
-      email: '',
-      zip: '',
-      phone: '',
-      website: '',
-      pw: '',
-      pwconf: ''
-    }
-  }
-
-  //checking input values as they are typed
-  //TODOhandle backspace correctly
-  //TODOcause DOM changes per values
-  const handleKeyDown = (e,userType,valType) => {
-    criticalVals[userType][valType] += e.key
-    console.log(`value of ${valType} in ${userType}: ${criticalVals[userType][valType]}`)
-  }
   const handleSubmit = (userType) => {
     let inputArr = [],
         inputObj = {},
@@ -87,11 +63,11 @@ const Register = (props) => {
                 <Input s={6} label="Last Name"></Input>
               </Row>
               <Row>
-                <Input s={6} label="ZIP" onKeyDown={(e)=>handleKeyDown(e,'user','zip')}></Input>
-                <Input s={6} label="Email" onKeyDown={(e)=>handleKeyDown(e,'user','email')} type='email' validate></Input>
+                <Input s={6} label="ZIP"></Input>
+                <Input s={6} label="Email" type='email' validate></Input>
               </Row>
-                <Input s={12} label="Password" onKeyDown={(e)=>handleKeyDown(e,'user','pw')} type='password'></Input>
-                <Input s={12} label="Confirm Password" onKeyDown={(e)=>handleKeyDown(e,'user','pwconf')} type='password'></Input>
+                <Input s={12} label="Password" type='password'></Input>
+                <Input s={12} label="Confirm Password" type='password'></Input>
               <Button onClick={()=>handleSubmit('user')}>Submit</Button>
             </Tab>
             {/*org fields*/}
@@ -123,7 +99,7 @@ const Register = (props) => {
         <div id='offsite'>
           offsite registration
           <div>
-          <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>          
+          <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>
           </div>
         </div>
       </div>
