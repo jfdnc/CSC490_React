@@ -1,7 +1,7 @@
 import React from 'react'
 import { CardPanel, Icon } from 'react-materialize'
 import ReactToolTip from 'react-tooltip'
-
+import gmappalceholder from '../assets/images/gmapplaceholder.jpg'
 const VolOpListing = (props) => {
   var icons = {
     animals:<Icon>pets</Icon>,
@@ -49,10 +49,10 @@ const VolOpListing = (props) => {
         </div>
         <div className='volop-map-container'>
           <div className='volop-map'>
-            <b>map goes here!</b>
+            <img src={gmappalceholder}/>
           </div>
           <div className='volop-address'>
-            {`${props.volOpAddress.city}, ${props.volOpAddress.state}, ${props.volOpAddress.street}, ${props.volOpAddress.zip}`}
+            {/*`${props.volOpAddress.city}, ${props.volOpAddress.state}, ${props.volOpAddress.street}, ${props.volOpAddress.zip}`*/}
           </div>
         </div>
         <div className='volop-footer'>
