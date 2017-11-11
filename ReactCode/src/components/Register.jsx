@@ -11,7 +11,7 @@ const Register = (props) => {
   let orgTabClicked = false
   const handleFirstClick = () =>{
     if(!orgTabClicked){
-      let tempTabId = document.getElementsByClassName('active')[3].href.slice(-3)
+      let tempTabId = document.getElementsByClassName('active')[3].href.split('_')[1]
       document.getElementById(`tab_${tempTabId}`).style.display = 'none'
       orgTabClicked = true
     }
