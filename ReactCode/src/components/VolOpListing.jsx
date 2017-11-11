@@ -1,24 +1,47 @@
 import React from 'react'
-import { CardPanel } from 'react-materialize'
+import { CardPanel, Icon } from 'react-materialize'
+import ReactToolTip from 'react-tooltip'
 
 const VolOpListing = (props) => {
+  var icons = {
+    animals:<Icon>pets</Icon>,
+    community:<Icon>domain</Icon>,
+    elderly:<Icon>accessible</Icon>,
+    homeless:<Icon>wc</Icon>,
+    kids:<Icon>face</Icon>
+  }
   return(
     <CardPanel className="white black-text">
       <div className='volop-listing-container'>
         <div className='volop-listing-header'>
           <div className='volop-orgname'>
-            {props.orgName}
+            <b>{props.orgName}</b>
           </div>
           <div className='volop-name'>
             {props.volOpName}
           </div>
           <div className='volop-numspots'>
-            {props.volOpSpotsAvailable}
+            <div data-tip='Spots Remaining' className='volop-numspots-icon'>
+              <Icon>account_box</Icon>
+            </div>
+            <ReactToolTip class='tooltip'/>
+            <div className='volop-numspots-num'>
+                <b>{props.volOpSpotsAvailable}</b>
+            </div>
           </div>
           <div className='volop-ongoing'>
             {props.volOpOngoing ?
-              <b>Ongoing Opportunity</b>:
-              <b>Single Event</b>}
+              <b>Ongoing</b>:
+              <div>
+              {/*make a parseDate funciton for this*/}
+              <b data-tip={
+                `${props.volOpStartDate == props.volOpEndDate ?
+                                props.volOpStartDate :
+                                `${props.volOpStartDate} to ${props.volOpEndDate}` } from ${props.volOpTod}`}>One-Time Event</b>
+              <ReactToolTip class='tooltip'/>
+              </div>
+            }
+              <hr/>
           </div>
         </div>
         <div className='volop-description'>
@@ -29,22 +52,29 @@ const VolOpListing = (props) => {
             <b>map goes here!</b>
           </div>
           <div className='volop-address'>
-            {props.volOpAddress.state}
-            {props.volOpAddress.city}
-            {props.volOpAddress.street}
-            {props.volOpAddress.zip}
+            {`${props.volOpAddress.city}, ${props.volOpAddress.state}, ${props.volOpAddress.street}, ${props.volOpAddress.zip}`}
           </div>
         </div>
         <div className='volop-footer'>
           <div className='volop-categories'>
+            <ul>
             {props.volOpCategories.map(cat => {
-              return(<b>{cat}</b>)
-            })}
+                return(
+                  <li data-tip={cat}
+                      style={{display:'inline'}}>
+                      {icons[cat]}
+                      <ReactToolTip class='tooltip'/>
+                  </li>)
+              })
+            }
+            </ul>
           </div>
           <div className='volop-details'>
+            <ul>
             {props.volOpDetails.map(detail => {
-              return(<b>{detail}</b>)
+              return(<li>{detail}</li>)
             })}
+            </ul>
           </div>
         </div>
       </div>

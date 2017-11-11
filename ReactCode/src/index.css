@@ -526,71 +526,102 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
 .card-panel{
   padding: 0;
   border-radius: 3px;
+  max-width: 570px;
+  margin: 0 auto 21px auto;
 }
 .volop-listing-container{
-  min-height:500px;
+  height:600px;
   border-radius: 3px;
   display: grid;
-  grid-template-rows: 100px 100px 200px 100px;
+  grid-template-rows: 100px 100px 300px 100px;
+}
+.volop-listing-container > div > div{
+  padding: 5px;
+  text-align: left;
 }
 .volop-listing-header{
   grid-row: 1;
   display: grid;
   grid-template-rows: repeat(2,1fr);
   grid-template-columns: 75% 25%;
-  background: pink;
-}
-.volop-orgname{
-  grid-row: 1;
-  grid-column: 1;
-  background: orange;
 }
 .volop-name{
+  grid-row: 1;
+  grid-column: 1;
+  font-size: 3.5vw;
+  font-weight: bold;
+  color: var(--blue-1);
+}
+.volop-orgname{
   grid-row: 2;
   grid-column: 1;
-  background: yellow;
+  font-size: 3.6vw;
+  color: var(--blue-2);
 }
 .volop-numspots{
   grid-row: 1;
   grid-column: 2;
-  background: teal;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+.volop-numspots-icon{
+  grid-column: 1;
+}
+i.material-icons:hover{
+  color: var(--blue-2);
+  cursor: default;
+}
+.volop-numspots-num{
+  grid-column: 2;
+  font-size: 1.4em;
 }
 .volop-ongoing{
   grid-row: 2;
   grid-column: 2;
-  background: brown;
+  color: var(--blue-1);
+}
+.volop-ongoing:hover{
+  color: var(--blue-2);
+  cursor: default;
 }
 .volop-description{
   grid-row: 2;
-  background: green;
+  padding: 6px;
+  text-align: left;
+  overflow: scroll;
+  font-size: 1.1em;
+  color: #666666;
 }
 .volop-map-container{
   grid-row: 3;
   display: grid;
   grid-template-rows: 80% 20%;
-  background: red;
 }
 .volop-map{
   grid row: 1;
-  background: #aa6617;
+  width: 300px;
+  height: 300px;
+  margin: auto;
 }
 .volop-address{
   grid row: 2;
-  background: #7ac6b3;
+  text-align: center;
 }
 .volop-footer{
   grid-row: 4;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  background: blue;
 }
 .volop-categories{
   grid-column: 1;
-  background: #910c91;
 }
 .volop-details{
   grid-column: 2;
-  background: #55a677;
+  font-weight: bold;
+  color: var(--blue-2);
+  overflow: scroll;
+}
+.tooltip{
 }
 /*fullscreen*//*************************************************************/
 @media screen and (min-width: 750px) {
@@ -672,11 +703,13 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
   }
 
   .card-panel{
-    padding: 0;
+    padding: 6px;
     border-radius: 3px;
+    margin: 0 auto 21px auto;
+    max-width: inherit;
   }
   .volop-listing-container{
-    min-height:500px;
+    height:500px;
     border-radius: 3px;
     display: grid;
     grid-template-rows: 100px 300px 100px;
@@ -685,13 +718,12 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
   .volop-listing-header{
     grid-row: 1;
     grid-column: 1/3;
-    background: pink
   }
   .volop-orgname{
-
+    font-size: 20px;
   }
   .volop-name{
-
+    font-size: 22px;
   }
   .volop-numspots{
 
@@ -702,12 +734,10 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
   .volop-description{
     grid-row: 2;
     grid-column: 1;
-    background: green;
   }
   .volop-map-container{
     grid-row: 2;
     grid-column: 2;
-    background: red;
   }
   .volop-map{
 
@@ -718,7 +748,6 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
   .volop-footer{
     grid-row: 3;
     grid-column: 1/3;
-    background: blue;
   }
   .volop-categories{
 

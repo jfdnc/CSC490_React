@@ -38,7 +38,7 @@ const testvolops =[
     "zip":"27405"}
   },{
   "_id":"ddkti1b4r2tsqkzcbk578176",
-  "volOpName":"No-Holds-Barred Extreme Senior Wrestling",
+  "volOpName":"No-Holds-Barred Senior Wrestling",
   "volOpDescription":"Come help our lively seniors get some excercise!",
   "volOpOngoing":false,
   "volOpStartDate":"14 December, 2017",
@@ -56,7 +56,7 @@ const testvolops =[
     "zip":"27410"}
   },{
   "_id":"qbiq9uespn0ph6scgm4a1625",
-  "volOpName":"Volunteers Needed -- Several Positions Available",
+  "volOpName":"Volunteers Needed",
   "volOpDescription":"GSO Urban Ministy is seeking capable volunteers for a variety of positions. It is our mission to serve the local community through outreach and intervention, with an emphasis on combating homelessness in our city.",
   "volOpOngoing":true,
   "volOpStartDate":"",
@@ -65,8 +65,8 @@ const testvolops =[
   "volOpSpotsAvailable":71,
   "orgName":"Greensboro Urban Ministry",
   "__v":0,
-  "volOpCategories":["homeless"],
-  "volOpDetails":["Emergency Assistance","Food Pantry","Commuity Kitchen","Night Shelter"],
+  "volOpCategories":["homeless","community"],
+  "volOpDetails":["Emergency Assistance","Food Pantry","Commuity Kitchen"],
   "volOpAddress":{
     "street":"305 W Gate City Blvd",
     "city":"Greensboro",
@@ -74,7 +74,7 @@ const testvolops =[
     "zip":"27406"}
   },{
   "_id":"u35ryrz22st8pjn2ojvkyb3i",
-  "volOpName":"Community Youth Basketball Tournament",
+  "volOpName":"Youth Basketball Tournament",
   "volOpDescription":"Looking for referees and volunteers for our annual community youth basketball tournament",
   "volOpOngoing":false,
   "volOpStartDate":"29 November, 2017",
@@ -83,7 +83,7 @@ const testvolops =[
   "volOpSpotsAvailable":12,
   "orgName":"Youth Focus Inc",
   "__v":0,
-  "volOpCategories":["kids"],
+  "volOpCategories":["kids","community"],
   "volOpDetails":["Referees must be qualified.","Age Restriction: 18-45"],
   "volOpAddress":{
     "street":"401 Parkway Ave",
