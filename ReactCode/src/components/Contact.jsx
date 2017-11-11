@@ -11,7 +11,10 @@ const Contact = (props) => {
             options={{ closeOnClick: true, edge: 'left'}}
             >
             <div id='nav-bar-strip'/>
-            <SideNavItem>Contact</SideNavItem>
+            <SideNavItem onClick={(e) => {
+              e.preventDefault()
+              return false
+            }}>Contact</SideNavItem>
             <SideNavItem divider />
             <SideNavItem subheader>Subheader</SideNavItem>
           </SideNav>
@@ -22,7 +25,10 @@ const Contact = (props) => {
             options={{ closeOnClick: true, edge: 'right', menuWidth:'450px'}}
             >
             <div id='nav-bar-strip'/>
-            <SideNavItem>Contact</SideNavItem>
+            <SideNavItem onClick={(e) => {
+              e.preventDefault()
+              return false
+            }}>Contact</SideNavItem>
             <SideNavItem divider />
             <SideNavItem subheader>Subheader</SideNavItem>
           </SideNav>

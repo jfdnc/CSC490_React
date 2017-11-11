@@ -11,7 +11,10 @@ const About = (props) => {
             options={{ closeOnClick: true, edge: 'left' }}
             >
             <div id='nav-bar-strip'/>
-            <SideNavItem>About</SideNavItem>
+            <SideNavItem onClick={(e) => {
+              e.preventDefault()
+              return false
+            }}>About</SideNavItem>
             <SideNavItem divider />
             <SideNavItem subheader>Subheader</SideNavItem>
           </SideNav>
@@ -22,7 +25,10 @@ const About = (props) => {
             options={{ closeOnClick: true, edge: 'right', menuWidth:'450px'}}
             >
             <div id='nav-bar-strip'/>
-            <SideNavItem>About</SideNavItem>
+            <SideNavItem onClick={(e) => {
+              e.preventDefault()
+              return false
+            }}>About</SideNavItem>
             <SideNavItem divider />
             <SideNavItem subheader>Subheader</SideNavItem>
           </SideNav>
