@@ -278,12 +278,48 @@ button.btn:hover{
   transform: translateY(-1px);
   box-shadow: 0 2px 2px rgba(0,0,0,0.6);
 }
+label{
+  color: var(--blue-1);
+}
 button.btn:focus{
   background: var(--blue-2);
 }
 [type="checkbox"]:checked+label:before{
      border-right-color: var(--blue-2);
      border-bottom-color: var(--blue-2);
+}
+input[type='text']:not(.browser-default):focus:not([readonly]){
+  border-bottom: 1px solid var(--blue-2);
+  box-shadow: 0 1px 0 0 var(--blue-2);
+}
+input[type='text']:not(.browser-default):focus:not([readonly])+label{
+  color: var(--blue-2);
+}
+input[type='password']:not(.browser-default):focus:not([readonly]){
+  border-bottom: 1px solid var(--blue-2);
+  box-shadow: 0 1px 0 0 var(--blue-2);
+}
+input[type='password']:not(.browser-default):focus:not([readonly]) + label{
+  color: var(--blue-2);
+}
+input[type='email']:not(.browser-default):focus:not([readonly]){
+  border-bottom: 1px solid var(--blue-2);
+  box-shadow: 0 1px 0 0 var(--blue-2);
+}
+input[type='email']:not(.browser-default):focus:not([readonly]) + label{
+  color: var(--blue-2);
+}
+.dropdown-content>li>span{
+  color:var(--blue-2);
+}
+.tabs .tab a {
+  color: var(--blue-1);
+}
+.tabs .tab a:hover, .tabs .tab a.active{
+  color: var(--blue-2);
+}
+.tabs .indicator{
+  background-color: var(--blue-2);
 }
 
 
