@@ -4,6 +4,7 @@ const httpProxy = require('http-proxy');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const config = require('./config');
+const session = require('express-session')
 
 // load models and connect to db
 require('./app/models').connect(config.dbUri);
@@ -27,9 +28,27 @@ app.use(passport.initialize());
 const localSignupStrategy = require('./server/passport/local-signup');
 const localUserLoginStrategy = require('./server/passport/local-login-user');
 const localOrgLoginStrategy = require('./server/passport/local-login-org')
+const myFacebookStrategy = require('./server/passport/facebook-login')//(app, passport)
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login-user', localUserLoginStrategy);
 passport.use('local-login-org', localOrgLoginStrategy);
+passport.use('facebook-login', myFacebookStrategy);
+
+//START
+//might not need this
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+//setup express session, may need to delete later.  Use for Facebook login
+app.use(session({
+    secret: 'da illest developer',
+    resave: true,
+    saveUninitialized: true
+}))
+//END
 
 // set up authentication middleware
 //const authCheckMiddleware = require('./server/middleware/auth-check');

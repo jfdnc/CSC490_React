@@ -13,6 +13,12 @@ const UserSchema = new Schema({
       required: [true, 'user.email field is required'],
       unique: true
     },
+    facebook         : {
+        id           : String,
+        token        : String,
+        email        : String,
+        name         : String
+    },
     pwHash: String,
     preferences: [String],
     savedVolOps: [mongoose.Schema.ObjectId] // store id of volOp

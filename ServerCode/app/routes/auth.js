@@ -1,5 +1,7 @@
 const express = require('express');
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const config = require('../../config');
 
 const router = new express.Router();
 
@@ -84,5 +86,32 @@ router.post('/loginorg', (req, res, next) => {
         });
     })(req, res, next);
 });
+
+
+router.get('/facebookLogin', passport.authenticate('facebook-login', { scope : 'email' }));
+
+    // handle the callback after facebook has authenticated the user
+router.get('/facebookLogin/callback',
+        passport.authenticate('facebook-login', {
+            session : false,
+            //successRedirect : '/?itworked=2',
+            failureRedirect : '/'
+        })
+
+        ,function(req, res) {
+            const payload = {
+                        sub: req.user.id
+                    };
+
+                    // Create a token string
+                    const token2 = jwt.sign(payload, config.jwtSecret);
+                    
+            if(req.user.email!=null){
+                res.redirect('/?email='+req.user.email+'&firstName='+req.user.firstName+'&lastName='+req.user.lastName+'&jwt='+token2+'&facebookStuff=')
+            } else{
+                res.redirect('/')
+            }
+        }
+        );
 
 module.exports = router;
