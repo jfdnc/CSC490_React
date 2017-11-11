@@ -55,9 +55,22 @@ export function shareVolop(){
 }
 
 export function editPrefs(){
+    return new Promise((resolve, reject) => {
+    let myReq = new Request('/api/users/'+user._id, {method:'PUT', body: JSON.stringify(user),
+        headers: {"Content-Type": "application/json"}})
+    fetch(myReq)
+        .then(function(res){
+            console.log(res)
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+
     dispatcher.dispatch({
-        type: UserActionTypes.EDIT_PREFS
+        type: UserActionTypes.EDIT_PREFS,
+        user: user
     })
+  })
 }
 
 export function createUser(user){
