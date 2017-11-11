@@ -5,8 +5,6 @@ that can be sent from view components
 
 const OrgActionTypes = {
   //Log actions
-  GET_LOG_STATE: 'GET_LOG_STATE',
-  GET_USER_TYPE: 'GET_USER_TYPE',
   LOG_OUT: 'LOG_OUT',
   //org unique actions
   CREATE_VOLOP: 'CREATE_VOLOP',

@@ -4,24 +4,6 @@ this file will contain actions for UI components to emit
 import dispatcher from '../data/Dispatcher'
 import UserActionTypes from '../action_types/UserActionTypes'
 
-//const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-
-//return t/f on loggedIn state
-export function getLogState(){
-    dispatcher.dispatch({
-        //only use actions from ActionTypes - consistent communication!
-        type: UserActionTypes.GET_LOG_STATE
-    })
-}
-
-//return string on user type state (guest, user, org)
-export function getUserType(){
-    dispatcher.dispatch({
-        type: UserActionTypes.GET_USER_TYPE
-    })
-}
-
-//return t/f on successful log out
 export function logOut(){
     //remove the token from local storage
     return new Promise((resolve, reject) =>{

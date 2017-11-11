@@ -14,8 +14,6 @@ class UserStore extends EventEmitter {
         }
     }
 
-    
-
     getAll(){
         return this.state
     }
@@ -46,7 +44,7 @@ class UserStore extends EventEmitter {
     }
 
     initUser(user){
-       this.state.user = user       
+       this.state.user = user
        this.emit("change")
     }
 
