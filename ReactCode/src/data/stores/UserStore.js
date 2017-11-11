@@ -5,14 +5,14 @@ import { EventEmitter } from 'events'
 import UserActionTypes from '../../action_types/UserActionTypes'
 
 class UserStore extends EventEmitter {
-    constructor(props) {
+constructor(props) {
         super(props)
 
         this.state = {
             user: {},
-            facebookURL: "/auth/facebookLogin",            
+            facebookURL: "/auth/facebookLogin"
         }
-      } 
+    }
 
     getAll(){
         return this.state
@@ -43,8 +43,8 @@ class UserStore extends EventEmitter {
        this.emit("change")
     }
 
-    initUser(user){
-       this.state.user = user         
+     initUser(user){
+       this.state.user = user
        this.emit("change")
     }
 

@@ -4,7 +4,6 @@ this file will contain actions for UI components to emit
 import dispatcher from '../data/Dispatcher'
 import UserActionTypes from '../action_types/UserActionTypes'
 
-//const config = { headers: { 'Content-Type': 'multipart/form-data' } };
 
 //return t/f on loggedIn state
 export function getLogState(){
@@ -21,7 +20,6 @@ export function getUserType(){
   })
 }
 
-//return t/f on successful log out
 export function logOut(){
     //remove the token from local storage
     return new Promise((resolve, reject) =>{
@@ -29,10 +27,10 @@ export function logOut(){
       localStorage.removeItem('userInfo')
 
       dispatcher.dispatch({
-        type: UserActionTypes.LOG_OUT
+          type: UserActionTypes.LOG_OUT
       })
-    })
-  }
+  })
+}
 
 //return more info about selected volop for user view
 export function viewVolopUser(){
@@ -75,7 +73,7 @@ export function shareVolop(){
 }
 
 export function editPrefs(user){
-  return new Promise((resolve, reject) => {
+ return new Promise((resolve, reject) => {
     let myReq = new Request('/api/users/'+user._id, {method:'PUT', body: JSON.stringify(user),
       headers: {"Content-Type": "application/json"}})
     fetch(myReq)
