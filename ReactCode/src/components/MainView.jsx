@@ -5,7 +5,6 @@ import GuestView from './GuestView'
 import UserView from './UserView'
 import OrgView from './OrgView'
 import _ from 'lodash'
-import NewVolOp from './NewVolOp'
 
 export default class MainView extends React.Component {
   constructor(props){
@@ -70,7 +69,7 @@ export default class MainView extends React.Component {
       <div id='main-container'>
         <div id="content-container">
           {/*{proparr.map((prop,i) => <div key={i}>{prop.propName}:{prop.propContent}</div>)}*/}
-          <NewVolOp/>
+          {currView}
         </div>
       </div>
     )

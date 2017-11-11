@@ -62,15 +62,20 @@ body{
 .picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected{
   background: var(--blue-1);
 }
-.picker__nav--prev:hover, .picker__nav--next:hover{
-  background: var(--blue-2);
-}
-.picker__nav--next:before{
-  border-left: 0.75em solid var(--blue-2);
-}
-.picker__nav--prev:before{
+.picker__nav--prev::before{
   border-right: 0.75em solid var(--blue-2);
 }
+.picker__nav--prev:hover{
+  background: rgba(0,0,0,0);
+}
+.picker__nav--next::before{
+  border-left: 0.75em solid var(--blue-2);
+}
+.picker__nav--next:hover{
+  background: rgba(0,0,0,0);
+}
+
+
 .picker{
   color: var(--blue-1);
 }
