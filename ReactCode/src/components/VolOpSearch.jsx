@@ -2,8 +2,9 @@ import React from 'react'
 import VolOpListing from './VolOpListing'
 import { Input, Col, Row, Button } from 'react-materialize'
 import _ from 'lodash'
-
-import testvolops from './testvolops.js'
+//
+import testvolops from '../util/testvolops.js'
+import gapiKey from '../util/gmapsapikey.js'
 
 export default class VolOpSearch extends React.Component{
   constructor(props){
@@ -18,8 +19,8 @@ export default class VolOpSearch extends React.Component{
         kids: false
       },
       //testvolops just for testing -- remove before building
-      //volOpList:[...testvolops]
-      volOpList:[]
+      volOpList:[...testvolops]
+      //volOpList:[]
     }
 
     this.handleRadioClicked = this.handleRadioClicked.bind(this)
