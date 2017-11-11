@@ -3,7 +3,7 @@ import VolOpListing from './VolOpListing'
 import { Input, Col, Row, Button } from 'react-materialize'
 import _ from 'lodash'
 
-let testvolops = require('./testvolops')
+import testvolops from './testvolops.js'
 
 export default class VolOpSearch extends React.Component{
   constructor(props){
@@ -17,6 +17,8 @@ export default class VolOpSearch extends React.Component{
         homeless: false,
         kids: false
       },
+      //testvolops just for testing -- remove before building
+      //volOpList:[...testvolops]
       volOpList:[]
     }
 
