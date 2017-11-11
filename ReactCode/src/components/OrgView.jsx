@@ -3,7 +3,8 @@ import OrgStore from  '../data/stores/OrgStore'
 import { Link } from 'react-router-dom'
 import Dashboard from './Dashboard'
 import {getAllVolOpsByOrg} from "../actions/org_actions";
-import VolOpListing from "./VolOpListing"
+import VolOpListingOrg from "./VolOpListingOrg"
+import { Button } from 'react-materialize'
 
 export default class OrgView extends React.Component {
     constructor(props) {
@@ -32,11 +33,11 @@ export default class OrgView extends React.Component {
         return(
             <div id='org-view' className='view-container'>
                 <Dashboard type='org' />
-                <Link to='/newvolop' className='btn btn-success'>New Volunteer Opportunity</Link>
+                <Link to='/newvolop'><Button>New Volunteer Opportunity</Button></Link>
                 <div id='org-view-volops'>
                     {allVolOps.map(volop =>{
                         return(
-                            <VolOpListing {...volop}/>
+                            <VolOpListingOrg {...volop}/>
                         )
                     })}
                 </div>
