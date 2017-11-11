@@ -104,26 +104,20 @@ export function loginUser(user){
 }
 
 export function addToCal(volOpID){
-  
+
 }
 
 export function initFBState(token,user){
-    
-    
-return new Promise((resolve, reject) => {
-        
-        
-            // success so save the token
-            localStorage.setItem('token', token);
-            localStorage.setItem('userInfo', JSON.stringify(user))
-            
+  return new Promise((resolve, reject) => {
+              // success so save the token
+              localStorage.setItem('token', token);
+              localStorage.setItem('userInfo', JSON.stringify(user))
 
-            //send to dispatcher            
-            
-            dispatcher.dispatch({
-                type: UserActionTypes.INIT_FBUSER,
-                user: user
-                
-            })  
-  })
+              //send to dispatcher            
+              dispatcher.dispatch({
+                  type: UserActionTypes.INIT_FBUSER,
+                  user: user
+
+              })
+    })
 }
