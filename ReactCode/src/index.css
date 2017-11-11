@@ -44,6 +44,40 @@ body{
 .nav-wrapper{
   padding: 0 10px 10px 10px;
 }
+.picker__date-display{
+  background: var(--blue-1);
+}
+.picker__year-display{
+  color: var(--blue-2);
+}
+.picker__today{
+  color: var(--blue-2);
+}
+.picker__close{
+  color: var(--blue-2);
+}
+.picker__day.picker__day--today{
+  color: var(--blue-2);
+}
+.picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected{
+  background: var(--blue-1);
+}
+.picker__nav--prev:hover, .picker__nav--next:hover{
+  background: var(--blue-2);
+}
+.picker__nav--next:before{
+  border-left: 0.75em solid var(--blue-2);
+}
+.picker__nav--prev:before{
+  border-right: 0.75em solid var(--blue-2);
+}
+.picker{
+  color: var(--blue-1);
+}
+button.picker__today:focus, button.picker__clear:focus, button.picker__close:focus{
+  background: var(--blue-1);
+}
+
 i.material-icons{
   color: var(--blue-1);
   font-size: 35px !important;
@@ -307,6 +341,13 @@ input[type='email']:not(.browser-default):focus:not([readonly]){
   box-shadow: 0 1px 0 0 var(--blue-2);
 }
 input[type='email']:not(.browser-default):focus:not([readonly]) + label{
+  color: var(--blue-2);
+}
+input[type='number']:not(.browser-default):focus:not([readonly]){
+  border-bottom: 1px solid var(--blue-2);
+  box-shadow: 0 1px 0 0 var(--blue-2);
+}
+input[type='number']:not(.browser-default):focus:not([readonly]) + label{
   color: var(--blue-2);
 }
 .dropdown-content>li>span{
