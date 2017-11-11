@@ -14,6 +14,11 @@ class OrgStore extends EventEmitter {
         return this.state
     }
 
+    populateFromLocalStorage(savedOrgState){
+      this.state.org = savedOrgState
+      this.emit("change")
+    }
+
     createVolOp(volOp){
         this.state.volOp = volOp
         this.state.allVolOps.unshift(volOp)
@@ -54,8 +59,8 @@ class OrgStore extends EventEmitter {
     }
 
     getAllVolOpsByOrg(allVolOps){
-        this.state.allVolOps = allVolOps
-        this.emit("change")
+      //this.state.allVolOps = allVolOps
+      this.emit("change")
     }
 
     handleActions(action) {

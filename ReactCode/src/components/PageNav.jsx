@@ -45,20 +45,25 @@ export default class PageNav extends React.Component{
     let token    = localStorage.getItem('token')    || false,
         userInfo = localStorage.getItem('userInfo')  || false,
         orgInfo  = localStorage.getItem('orgInfo') || false
+
     if(token){
       if(userInfo){
         this.setState({ userLoggedIn: true })
-      } else if(orgInfo){
+        UserStore.populateFromLocalStorage(JSON.parse(userInfo))
+      }
+      if(orgInfo){
         this.setState({ orgLoggedIn: true })
+        OrgStore.populateFromLocalStorage(JSON.parse(orgInfo))
       }
     }
 
+    let loggedIn
     UserStore.on('change', () => {
-      let loggedIn = !_.isEmpty(UserStore.getAll().user)
+      loggedIn = !_.isEmpty(UserStore.getAll().user)
       this.setState({ userLoggedIn:loggedIn })
     })
     OrgStore.on('change', () => {
-      let loggedIn = !_.isEmpty(OrgStore.getAll().org)
+      loggedIn = !_.isEmpty(OrgStore.getAll().org)
       this.setState({ orgLoggedIn:loggedIn })
     })
   }

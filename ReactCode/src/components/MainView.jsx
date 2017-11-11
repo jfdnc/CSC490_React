@@ -67,7 +67,6 @@ export default class MainView extends React.Component {
     let currView = !_.isEmpty(userState) ? <UserView /> :
                    !_.isEmpty(orgState)  ? <OrgView />  :
                    <GuestView />
-
     return(
 
       <div id='main-container'>

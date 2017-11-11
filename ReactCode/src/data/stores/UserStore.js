@@ -18,6 +18,11 @@ class UserStore extends EventEmitter {
         return this.state
     }
 
+    populateFromLocalStorage(savedUserState){
+      this.state.user = savedUserState
+      this.emit("change")
+    }
+
     createUser(user){
         //this.state.user = user
         this.emit("change")
