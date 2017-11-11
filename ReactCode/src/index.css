@@ -486,9 +486,15 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
   padding-top: 25px;
 }
 #search-results{
-  margin-top: 68px;
+  margin-top: 50px;
 }
 #search-error-warning{
+  visibility: hidden;
+  color: rgba(230,0,0,0.6);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+#search-notfound-warning{
   visibility: hidden;
   color: rgba(230,0,0,0.6);
   opacity: 0;
@@ -544,7 +550,7 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
     height: 400px;
   }
   #search-results{
-    margin-top: 44px;
+    margin-top: 0px;
   }
 
   #dashboard-user{

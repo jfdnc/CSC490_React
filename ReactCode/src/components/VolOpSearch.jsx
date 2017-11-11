@@ -1,6 +1,7 @@
 import React from 'react'
 import VolOpListing from './VolOpListing'
 import { Input, Col, Row, Button } from 'react-materialize'
+import _ from 'lodash'
 
 export default class VolOpSearch extends React.Component{
   constructor(props){
@@ -30,11 +31,16 @@ export default class VolOpSearch extends React.Component{
 
   handleSearch(){
     let searchZip = document.getElementById('search-zip').value
-    let warning = document.getElementById('search-error-warning')
+    let searchErrorWarning = document.getElementById('search-error-warning')
+    let searchNotfoundWarning = document.getElementById('search-notfound-warning')
 
     if(searchZip.length == 5){
-      warning.style.opacity = '0'
-      warning.style.visibility = 'hidden'
+      searchErrorWarning.style.opacity = '0'
+      searchErrorWarning.style.visibility = 'hidden'
+
+      searchNotfoundWarning.style.opacity = '0'
+      searchNotfoundWarning.style.visibility = 'hidden'
+
       let currState = this.state.radioState
       let categoriesSelected = []
       for(let category in currState){
@@ -63,14 +69,28 @@ export default class VolOpSearch extends React.Component{
 
       getVolops()
     } else {
-      warning.style.visibility = 'visible'
-      warning.style.opacity = '1'
+      searchNotfoundWarning.style.opacity = '0'
+      searchNotfoundWarning.style.visibility = 'hidden'
+      searchErrorWarning.style.visibility = 'visible'
+      searchErrorWarning.style.opacity = '1'
+
     }
   }
 
   populateVolOpList(volops, searchInfo){
-    let volOpList = volops
+    let searchNotfoundWarning = document.getElementById('search-notfound-warning')
 
+    let volOpList = volops
+    volOpList = volOpList.map(op => {
+      if(op.volOpAddress.zip.substr(0,3) == searchInfo.zip.substr(0,3)){
+        return op
+      }
+    })
+    volOpList = _.compact(volOpList)
+    if(volOpList.length == 0){
+      searchNotfoundWarning.style.opacity = '1'
+      searchNotfoundWarning.style.visibility = 'visible'
+    }
     this.setState({ volOpList })
   }
   render(){
@@ -99,10 +119,15 @@ export default class VolOpSearch extends React.Component{
             </div>
           </div>
           <div id='search-results'>
+          <br/>
+          <br/>
           <div id='search-error-warning'>
             Enter 5-digit ZIP
           </div>
           <hr/>
+          <div id='search-notfound-warning'>
+            No volunteer opportunities found in that area. Try another ZIP.
+          </div>
           {this.state.volOpList.map(volop =>{
             return(
               <VolOpListing {...volop}/>
