@@ -17,7 +17,8 @@ const OrgActionTypes = {
   VIEW_ORG_INFO: 'VIEW_ORG_INFO',
   EDIT_ORG_INFO: 'EDIT_ORG_INFO',
   CREATE_ORG: 'CREATE_ORG',
-  LOGIN_ORG: 'LOGIN_ORG'
+  LOGIN_ORG: 'LOGIN_ORG',
+  GET_ALL_VOLOPS_BY_ORG: 'GET_ALL_VOLOPS_BY_ORG'
 }
 
 export default OrgActionTypes
