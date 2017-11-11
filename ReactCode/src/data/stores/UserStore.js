@@ -57,6 +57,9 @@ class UserStore extends EventEmitter {
         case UserActionTypes.INIT_FBUSER:
             this.initFBUser(action.user);
             break
+        case UserActionTypes.POPULATE_FROM_LOCAL_STORAGE:
+            this.populateFromLocalStorage(action.user)
+            break
         }
     }
 }

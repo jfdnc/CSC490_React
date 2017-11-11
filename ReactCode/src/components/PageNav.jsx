@@ -1,8 +1,14 @@
 import React from 'react'
 import { Navbar, NavItem, SideNav, SideNavItem } from 'react-materialize'
 import { NavLink, Route } from 'react-router-dom'
-import { logOut as userLogOut } from '../actions/user_actions'
-import { logOut as orgLogOut } from '../actions/org_actions'
+import {
+  logOut as userLogOut,
+  populateFromLocalStorage as populateUserFromLocalStorage
+} from '../actions/user_actions'
+import {
+  logOut as orgLogOut,
+  populateFromLocalStorage as populateOrgFromLocalStorage
+} from '../actions/org_actions'
 import UserStore from '../data/stores/UserStore'
 import OrgStore from '../data/stores/OrgStore'
 import _ from 'lodash'
@@ -49,11 +55,11 @@ export default class PageNav extends React.Component{
     if(token){
       if(userInfo){
         this.setState({ userLoggedIn: true })
-        UserStore.populateFromLocalStorage(JSON.parse(userInfo))
+        populateUserFromLocalStorage()
       }
       if(orgInfo){
         this.setState({ orgLoggedIn: true })
-        OrgStore.populateFromLocalStorage(JSON.parse(orgInfo))
+        populateOrgFromLocalStorage()
       }
     }
 

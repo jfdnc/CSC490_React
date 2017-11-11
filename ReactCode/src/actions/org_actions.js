@@ -180,3 +180,15 @@ export function getAllVolOpsByOrg(volOpIds){
         })
     })
 }
+
+export function populateFromLocalStorage(){
+  return new Promise((resolve, reject) => {
+    let savedOrgState = localStorage.getItem('orgInfo') || false
+    if(savedOrgState){
+      dispatcher.dispatch({
+        type: OrgActionTypes.POPULATE_FROM_LOCAL_STORAGE,
+        org: savedOrgState
+      })
+    }
+  })
+}

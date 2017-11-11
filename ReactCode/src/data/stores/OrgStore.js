@@ -92,6 +92,9 @@ class OrgStore extends EventEmitter {
             case OrgActionTypes.GET_ALL_VOLOPS_BY_ORG:
                 this.getAllVolOpsByOrg(action.allVolOps);
                 break
+            case OrgActionTypes.POPULATE_FROM_LOCAL_STORAGE:
+                this.populateFromLocalStorage(action.org)
+                break
         }
     }
 }

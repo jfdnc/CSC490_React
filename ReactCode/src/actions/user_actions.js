@@ -113,11 +113,23 @@ export function initFBState(token,user){
               localStorage.setItem('token', token);
               localStorage.setItem('userInfo', JSON.stringify(user))
 
-              //send to dispatcher            
+              //send to dispatcher
               dispatcher.dispatch({
                   type: UserActionTypes.INIT_FBUSER,
                   user: user
 
               })
     })
+}
+
+export function populateFromLocalStorage(){
+  return new Promise((resolve, reject) => {
+    let savedUserState = localStorage.getItem('userInfo') || false
+    if(savedUserState){
+      dispatcher.dispatch({
+        type: UserActionTypes.POPULATE_FROM_LOCAL_STORAGE,
+        user: savedUserState
+      })
+    }
+  })
 }
