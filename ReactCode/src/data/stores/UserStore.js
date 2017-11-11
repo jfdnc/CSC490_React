@@ -14,6 +14,8 @@ class UserStore extends EventEmitter {
         }
     }
 
+    
+
     getAll(){
         return this.state
     }
@@ -43,6 +45,11 @@ class UserStore extends EventEmitter {
        this.emit("change")
     }
 
+    initUser(user){
+       this.state.user = user       
+       this.emit("change")
+    }
+
     handleActions(action) {
       switch (action.type) {
         case UserActionTypes.CREATE_USER:
@@ -59,6 +66,9 @@ class UserStore extends EventEmitter {
             break
         case UserActionTypes.POPULATE_FROM_LOCAL_STORAGE:
             this.populateFromLocalStorage(action.user)
+            break
+        case UserActionTypes.EDIT_PREFS:
+            this.initUser(action.user);
             break
         }
     }

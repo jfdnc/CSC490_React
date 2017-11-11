@@ -19,7 +19,8 @@ const App = (props) => {
       var newUser = {
         firstName:  url.searchParams.get("firstName"),
         lastName: url.searchParams.get("lastName"),
-        email: url.searchParams.get("email")
+        email: url.searchParams.get("email"),
+        _id: url.searchParams.get("id")
       }
         initFBState(jwtToken,newUser)
         window.history.replaceState({}, document.title, "/");
