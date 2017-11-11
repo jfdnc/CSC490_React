@@ -3,6 +3,7 @@ import { Tabs, Tab, Button, Col, Row, Input } from 'react-materialize'
 import { createUser, loginUser } from '../actions/user_actions'
 import { createOrg } from '../actions/org_actions'
 import Fade from './Fade'
+import UserStore from '../data/stores/UserStore'
 
 const Register = (props) => {
   let criticalVals = {
@@ -121,6 +122,9 @@ const Register = (props) => {
         </div>
         <div id='offsite'>
           offsite registration
+          <div>
+          <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>          
+          </div>
         </div>
       </div>
       </Fade>

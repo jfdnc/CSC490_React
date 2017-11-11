@@ -15,6 +15,8 @@ const UserActionTypes = {
   EDIT_PREFS: 'EDIT_PREFS',
   CREATE_USER: 'CREATE_USER',
   LOGIN_USER: 'LOGIN_USER',
+  INIT_FBUSER: 'INIT_FBUSER',
+  ADD_CAL: 'ADD_CAL',
 }
 
 export default UserActionTypes

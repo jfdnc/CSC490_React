@@ -8,7 +8,10 @@ class UserStore extends EventEmitter {
     constructor(props) {
         super(props)
 
-        this.state = { user: {} }
+        this.state = { 
+            user: {},
+            facebookURL: "/auth/facebookLogin" 
+        }
     }
 
     getAll(){
@@ -30,6 +33,13 @@ class UserStore extends EventEmitter {
         this.emit("change")
     }
 
+    initFBUser(user){
+      
+       this.state.user = user
+       
+       this.emit("change")
+    }
+
     handleActions(action) {
       switch (action.type) {
         case UserActionTypes.CREATE_USER:
@@ -40,6 +50,9 @@ class UserStore extends EventEmitter {
             break
         case UserActionTypes.LOG_OUT:
             this.logOut();
+            break
+        case UserActionTypes.INIT_FBUSER:
+            this.initFBUser(action.user);
             break
 
         }

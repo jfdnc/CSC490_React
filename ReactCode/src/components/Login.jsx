@@ -2,8 +2,10 @@ import React from 'react'
 import { Input, Row, Icon, Col, Button, Form } from 'react-materialize'
 import { loginUser } from '../actions/user_actions'
 import { loginOrg } from '../actions/org_actions'
-import UserStore from '../data/stores/UserStore'
 import Fade from './Fade'
+import * as UserActions from '../actions/user_actions'
+import UserStore from '../data/stores/UserStore'
+
 
 const Login =  (props) => {
   const handleSubmit = () => {
@@ -36,6 +38,8 @@ const Login =  (props) => {
     }
   }
 
+  const facebookURL = UserStore.getAll().facebookURL
+
   return(
     <div>
     <Fade>
@@ -56,6 +60,9 @@ const Login =  (props) => {
       </div>
       <div id='offsite'>
         offsite login
+          <div>
+          <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>                
+          </div>
       </div>
       </div>
       </Fade>
