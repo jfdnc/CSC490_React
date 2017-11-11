@@ -104,7 +104,74 @@ export function loginUser(user){
 }
 
 export function addToCal(volOpID){
-  
+
+}
+
+
+export function editUser(user){
+  return new Promise((resolve, reject) => {
+    let myReq = new Request('/api/users', {method:'PUT', body: JSON.stringify(user),
+        headers: {"Content-Type": "application/json"}})
+    fetch(myReq)
+        .then(function(res){
+            console.log(res)
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+
+    dispatcher.dispatch({
+        type: UserActionTypes.CREATE_USER,
+        user: user
+    })
+
+  })
+}
+
+
+
+/*
+export function editUser(user){
+ return new Promise((resolve, reject) => {
+    var xhr = new XMLHttpRequest();
+    var idNum = null
+    xhr.open('get', '/api/user'+user.email);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', () => {
+        if (xhr.status === 200) {
+            // success so save the token
+            idNum = xhr.response.user.id);
+            if(id!=null){
+              xhr.open('put', '/api/user'+idNum);
+              xhr.setRequestHeader('Content-type', 'application/json');
+              xhr.responseType = 'json';
+
+              dispatcher.dispatch({
+                type: UserActionTypes.LOGIN_USER,
+                user: xhr.response.user
+            })
+            }
+            //send to dispatcher
+            
+        }
+    });
+    */
+
+
+
+
+
+
+
+    xmlhttp.send(JSON.stringify(user));
+
+    dispatcher.dispatch({
+                type: UserActionTypes.EDIT_PREFS,
+                user: user
+            })
+  })
+
 }
 
 export function initFBState(token,user){
