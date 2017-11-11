@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../../config');
+const User = require('../models/userModel');
 
 const router = new express.Router();
 
@@ -107,7 +108,18 @@ router.get('/facebookLogin/callback',
                     const token2 = jwt.sign(payload, config.jwtSecret);
                     
             if(req.user.email!=null){
-                res.redirect('/?email='+req.user.email+'&firstName='+req.user.firstName+'&lastName='+req.user.lastName+'&jwt='+token2+'&facebookStuff=')
+                var myId = 0
+                
+                 User.findOne({email: req.user.email}).then(function(user){
+                    console.log(JSON.stringify(user))
+                    console.log(user.lastName)
+                    console.log(user._id)
+                     myId = user._id
+                     console.log(myId+" hey")
+                res.redirect('/?email='+req.user.email+'&firstName='+req.user.firstName+'&lastName='+req.user.lastName+'&jwt='+token2+'&id='+myId+'&facebookStuff=')
+                });
+                
+                 
             } else{
                 res.redirect('/')
             }
