@@ -107,6 +107,28 @@ export function addToCal(volOpID){
 
 }
 
+
+export function editUser(user){
+  return new Promise((resolve, reject) => {
+    let myReq = new Request('/api/users', {method:'PUT', body: JSON.stringify(user),
+        headers: {"Content-Type": "application/json"}})
+    fetch(myReq)
+        .then(function(res){
+            console.log(res)
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+
+    dispatcher.dispatch({
+        type: UserActionTypes.CREATE_USER,
+        user: user
+    })
+
+  })
+}
+
+
 export function initFBState(token,user){
   return new Promise((resolve, reject) => {
               // success so save the token
