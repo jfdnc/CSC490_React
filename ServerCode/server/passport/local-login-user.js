@@ -48,7 +48,8 @@ module.exports = new PassportLocalStrategy({
                 lastName: user.lastName,
                 zipCode: user.zipCode,
                 preferences: user.preferences,
-                savedVolOps: user.savedVolOps
+                savedVolOps: user.savedVolOps,
+                _id: user._id
             };
             return done(null, token, data);
         });
