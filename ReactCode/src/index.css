@@ -535,19 +535,30 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
 }
 .volop-listing-header{
   grid-row: 1;
-  background: pink
+  display: grid;
+  grid-template-rows: repeat(2,1fr);
+  grid-template-columns: 75% 25%;
+  background: pink;
 }
 .volop-orgname{
-
+  grid-row: 1;
+  grid-column: 1;
+  background: orange;
 }
 .volop-name{
-
+  grid-row: 2;
+  grid-column: 1;
+  background: yellow;
 }
 .volop-numspots{
-
+  grid-row: 1;
+  grid-column: 2;
+  background: teal;
 }
 .volop-ongoing{
-
+  grid-row: 2;
+  grid-column: 2;
+  background: brown;
 }
 .volop-description{
   grid-row: 2;
@@ -555,23 +566,31 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
 }
 .volop-map-container{
   grid-row: 3;
+  display: grid;
+  grid-template-rows: 80% 20%;
   background: red;
 }
 .volop-map{
-
+  grid row: 1;
+  background: #aa6617;
 }
 .volop-address{
-
+  grid row: 2;
+  background: #7ac6b3;
 }
 .volop-footer{
   grid-row: 4;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   background: blue;
 }
 .volop-categories{
-
+  grid-column: 1;
+  background: #910c91;
 }
 .volop-details{
-
+  grid-column: 2;
+  background: #55a677;
 }
 /*fullscreen*//*************************************************************/
 @media screen and (min-width: 750px) {
