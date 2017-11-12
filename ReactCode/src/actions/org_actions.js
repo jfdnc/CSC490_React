@@ -26,8 +26,19 @@ export function createVolop(volOp){
 
 //delete a volop from database
 export function deleteVolOp(id){
-  dispatcher.dispatch({
-    type: OrgActionTypes.DELETE_VOLOP
+    return new Promise((resolve, reject) =>{
+        let myReq = new Request('/api/volOps/' + id, {method:'DELETE'})
+        fetch(myReq)
+            .then(function(res){
+                resolve(res.json())
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+
+        dispatcher.dispatch({
+            type: OrgActionTypes.DELETE_VOLOP
+    })
   })
 }
 
@@ -57,8 +68,9 @@ export function editOrgInfo(org){
         let myReq = new Request('/api/organizations/' + org._id, {method:'PUT', body: JSON.stringify(org),
             headers: {"Content-Type": "application/json"}})
         fetch(myReq)
-            .then(function(res){
-                localStorage.setItem('orgInfo', JSON.stringify(org))
+            .then(res => res.json())
+            .then(resJSON =>{
+                localStorage.setItem('orgInfo', JSON.stringify(resJSON))
             })
             .catch(function(err){
                 console.log(err)
@@ -74,6 +86,8 @@ export function editOrgInfo(org){
 //create an organization
 export function createOrg(org){
   return new Promise((resolve, reject) => {
+      console.log("Creating org")
+        console.log(org)
     let myReq = new Request('/api/orgrequests', {method:'POST', body: JSON.stringify(org),
         headers: {"Content-Type": "application/json"}})
     fetch(myReq)
@@ -124,6 +138,7 @@ export function logOut(){
     //remove the token from local storage
     localStorage.removeItem('token')
     localStorage.removeItem('orgInfo')
+    localStorage.removeItem('volOpInfo')
     dispatcher.dispatch({
         type: OrgActionTypes.LOG_OUT
     })

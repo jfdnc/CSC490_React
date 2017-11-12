@@ -32,8 +32,8 @@ const NewVolOp = (props) => {
             orgName: orgObj.orgName
         };
         createVolop(inputObj)
-            .then(result => {orgObj.orgVolOps.push(result._id);editOrgInfo(orgObj)})
-            .then(props.history.push('/'))
+            .then(result => {orgObj.orgVolOps.push(result._id);editOrgInfo(orgObj).then(props.history.push('/')).catch(function(err){console.log(err)})})
+            .catch(function(err){console.log(err)})
     }
 
     return(
