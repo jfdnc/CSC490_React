@@ -258,7 +258,7 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
   position: relative;
   margin: auto auto;
   width: 93%;
-  min-width: 400px;
+  min-width: 320px;
 }
 .dashboard-layout{
   padding: 6px;
@@ -288,6 +288,10 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
 #reg-log-links{
   margin-top:15px;
 }
+#dashboard-guest a > button.btn{
+  width: 22vw !important;
+  font-size: 2.1vw !important;
+}
 
 #dashboard-guest .dashboard-main-content{
   display: grid;
@@ -306,11 +310,12 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
 }
 #dashboard-guest-main-content-content > #content-header{
   grid-row: 1;
+  font-size: 4vw;
+  margin: auto 0;
 }
 #dashboard-guest-main-content-content > #content-search{
   grid-row: 2;
 }
-
 
 #dashboard-guest a > button.btn{
   margin: 10px;
@@ -492,6 +497,13 @@ ul:not(.browser-default)>li{
 }
 
 @media screen and (min-width: 750px) {
+  #dashboard-guest-main-content-content > #content-header{
+    font-size: 30px;
+  }
+  #dashboard-guest a > button.btn{
+    width: 165px !important;
+    font-size: 14px !important;
+  }
   .volop-orgname{
     font-size: 22.75px;
   }
@@ -507,6 +519,13 @@ ul:not(.browser-default)>li{
   }
 }
 @media screen and (max-width: 450px) {
+  #dashboard-guest-main-content-content > #content-header{
+    font-size: 18px;
+  }
+  #dashboard-guest a > button.btn{
+    width: 120px !important;
+    font-size: 12px !important;
+  }
   .volop-orgname{
     font-size: 16px;
   }
@@ -679,6 +698,7 @@ ul:not(.browser-default)>li{
   }
   .volop-categories i.material-icons {
     font-size: 50px !important;
+    margin-right: 18px;
   }
 
   .volop-details{
