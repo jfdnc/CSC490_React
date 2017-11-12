@@ -45,7 +45,7 @@ export default class EditVolOp extends React.Component {
             orgName: orgObj.orgName,
             _id: id
         };
-        updateVolOp(inputObj).then(this.props.history.push('/orgview')).catch(function(err){console.log(err)})
+        updateVolOp(inputObj).then(this.props.history.push('/')).catch(function(err){console.log(err)})
     }
 
     render() {
