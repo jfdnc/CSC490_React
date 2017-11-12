@@ -21,6 +21,12 @@ const loaderStyle = {
   display: 'flex',
   flexDirection: 'column'
 }
+const loadingMessageStyle = {
+  fontSize: '24px',
+  margin:"0 auto 24px auto",
+  fontWeight: 'bold'
+
+}
 const Loading = (props) => {
   return(
     <div id="loader-overlay" style={loaderOverlayStyle}>
@@ -28,8 +34,7 @@ const Loading = (props) => {
         <div style={{margin:"auto"}}>
           <Preloader size='big'/>
         </div>
-        <div style={{margin:"0 auto"}}>
-          <h5>Logging In...</h5>
+        <div id='loading-message' style={loadingMessageStyle}>
         </div>
       </div>
     </div>

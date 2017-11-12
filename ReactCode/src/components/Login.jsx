@@ -27,6 +27,7 @@ const Login =  (props) => {
         console.log("Logging in user...")
         loginUser(formData)
         let loader = document.getElementById('loader-overlay')
+        document.getElementById('loading-message').innerHTML ='Logging in...'
         loader.style.visibility ='visible'
         setTimeout(() => {
           if(localStorage.getItem('userInfo')){
@@ -44,6 +45,7 @@ const Login =  (props) => {
         console.log("Logging in organization...")
         loginOrg(formData)
           let loader = document.getElementById('loader-overlay')
+          document.getElementById('loading-message').innerHTML ='Logging in...'
           loader.style.visibility ='visible'
           setTimeout(() => {
             if(localStorage.getItem('orgInfo')){

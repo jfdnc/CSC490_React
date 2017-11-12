@@ -39,7 +39,20 @@ export default class EditOrg extends React.Component {
             _id: this.state.org._id
         };
 
-        editOrgInfo(inputObj).then(this.props.history.push('/'))
+        editOrgInfo(inputObj)
+        let loader = document.getElementById('loader-overlay')
+        document.getElementById('loading-message').innerHTML ='Updating...'
+        loader.style.visibility ='visible'
+        setTimeout(() => {
+          if(localStorage.getItem('orgInfo')){
+            loader.style.visibility ='hidden'
+            this.props.history.push('/')
+          } else {
+            //add error message here
+            loader.style.visibility ='hidden'
+            console.log('Error updating Org info')
+          }
+        }, 500)
 
     }
 

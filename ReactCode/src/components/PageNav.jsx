@@ -121,11 +121,18 @@ export default class PageNav extends React.Component{
   }
 
   handleLogOut(){
+    let loader = document.getElementById('loader-overlay')
+    document.getElementById('loading-message').innerHTML ='Logging out...'
+    loader.style.visibility ='visible'
+    setTimeout(() => {
     if(this.state.userLoggedIn){
+      loader.style.visibility ='hidden'
       userLogOut().then(this.props.history.push('/'))
     } else if(this.state.orgLoggedIn){
+      loader.style.visibility ='hidden'
       orgLogOut().then(this.props.history.push('/'))
     }
+    }, 1000)
   }
 
     render(){
