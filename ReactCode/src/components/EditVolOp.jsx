@@ -1,10 +1,22 @@
 import React from 'react'
 import { Button, Row, Input } from 'react-materialize'
 import { updateVolOp } from "../actions/org_actions";
-import { withRouter } from 'react-router-dom'
 
-const EditVolOp = (props) => {
-    const handleSubmit = (id) => {
+export default class EditVolOp extends React.Component {
+    constructor(props){
+        super(props)
+
+        this.state = { volOp: {} }
+
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    componentWillMount(){
+        const volOpInfo = JSON.parse(localStorage.getItem('volOpInfo'))
+        this.setState({volOp: volOpInfo})
+    }
+
+    handleSubmit(id){
         let inputArr = [],
             inputObj = {},
             inputs = document.getElementsByTagName('input')
@@ -33,39 +45,40 @@ const EditVolOp = (props) => {
             orgName: orgObj.orgName,
             _id: id
         };
-        updateVolOp(inputObj).then(this.props.history.push('/'))
+        updateVolOp(inputObj).then(this.props.history.push('/orgview')).catch(function(err){console.log(err)})
     }
 
-    let volOp = JSON.parse(localStorage.getItem('volOpInfo'))
-    return (
-        <div className='view-container'>
-            <h1>EditVolOp</h1>
-            <div id='editvolop'>
-                <Input s={6} label="Name" defaultValue={volOp.volOpName}></Input>
-                <Input s={6} label="Description" type="text" defaultValue={volOp.volOpDescription}></Input>
-                <Row>
-                    <Input s={6} label="Street" defaultValue={volOp.volOpAddress.street}></Input>
-                    <Input s={6} label="City" defaultValue={volOp.volOpAddress.city}></Input>
-                </Row>
-                <Row>
-                    <Input s={6} label="State" defaultValue={volOp.volOpAddress.state}></Input>
-                    <Input s={6} label="Zip" defaultValue={volOp.volOpAddress.zip}></Input>
-                </Row>
-                <Input s={6} label="This Event is Ongoing" type="checkbox" defaultValue={volOp.volOpOngoing}></Input>
-                <Row>
-                    <Input s={6} label="Start Date" type="date" defaultValue={volOp.volOpStartDate}></Input>
-                    <Input s={6} label="End Date" type="date" defaultValue={volOp.volOpEndDate}></Input>
-                </Row>
-                <Row>
-                    <Input s={6} label="Time of Day" defaultValue={volOp.volOpTod}></Input>
-                    <Input s={6} label="Spots Available" type="number" defaultValue={volOp.volOpSpotsAvailable}></Input>
-                </Row>
-                <Input s={12} label="Details" defaultValue={volOp.volOpDetails}></Input>
-                <Input s={12} label="Categories" defaultValue={volOp.volOpCategories}></Input>
-                <Button onClick={() => handleSubmit(volOp._id)}>Submit</Button>
+    render() {
+        const volOp = this.state.volOp
+        return (
+            <div className='view-container'>
+                <h1>EditVolOp</h1>
+                <div id='editvolop'>
+                    <Input s={6} label="Name" defaultValue={volOp.volOpName}></Input>
+                    <Input s={6} label="Description" type="text" defaultValue={volOp.volOpDescription}></Input>
+                    <Row>
+                        <Input s={6} label="Street" defaultValue={volOp.volOpAddress.street}></Input>
+                        <Input s={6} label="City" defaultValue={volOp.volOpAddress.city}></Input>
+                    </Row>
+                    <Row>
+                        <Input s={6} label="State" defaultValue={volOp.volOpAddress.state}></Input>
+                        <Input s={6} label="Zip" defaultValue={volOp.volOpAddress.zip}></Input>
+                    </Row>
+                    <Input s={6} label="This Event is Ongoing" type="checkbox" defaultValue={volOp.volOpOngoing}></Input>
+                    <Row>
+                        <Input s={6} label="Start Date" type="date" defaultValue={volOp.volOpStartDate}></Input>
+                        <Input s={6} label="End Date" type="date" defaultValue={volOp.volOpEndDate}></Input>
+                    </Row>
+                    <Row>
+                        <Input s={6} label="Time of Day" defaultValue={volOp.volOpTod}></Input>
+                        <Input s={6} label="Spots Available" type="number"
+                               defaultValue={volOp.volOpSpotsAvailable}></Input>
+                    </Row>
+                    <Input s={12} label="Details" defaultValue={volOp.volOpDetails}></Input>
+                    <Input s={12} label="Categories" defaultValue={volOp.volOpCategories}></Input>
+                    <Button onClick={() => this.handleSubmit(volOp._id)}>Submit</Button>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
-
-export default withRouter(EditVolOp)

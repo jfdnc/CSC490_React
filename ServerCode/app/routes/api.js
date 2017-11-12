@@ -12,7 +12,7 @@ const nodemailer = require('nodemailer');
 //get a list of all requests from the db
 router.get('/orgrequests', function(req, res, next){
     OrgRequest.find().then(function(orgRequest){
-        res.send({orgRequest});
+        res.send(orgRequest);
     });
 });
 
@@ -45,14 +45,14 @@ router.delete('/orgrequests/:id', function(req, res, next){
 //get a list of organizations from the db
 router.get('/organizations', function(req, res, next){
   Organization.find().then(function(organization){
-    res.send({organization});
+    res.send(organization);
   });
 });
 
 // get a specific organization from the db using orgEmail as key
 router.get('/organizations/:email', function(req, res, next){
     Organization.findOne({orgEmail: req.params.email}).then(function(organization){
-      res.send({organization});
+      res.send(organization);
     });
 });
 
@@ -67,7 +67,7 @@ router.post('/organizations', function(req, res, next){
 router.put('/organizations/:id', function(req, res, next){
     Organization.findByIdAndUpdate({_id: req.params.id}, req.body).then(function(){
         Organization.findOne({_id: req.params.id}).then(function(organization){
-            res.send({organization});
+            res.send(organization);
         });
     });
 });
@@ -196,7 +196,6 @@ router.delete('/volOps/:id', function(req, res, next){
     VolOp.findByIdAndRemove({_id: req.params.id}).then(function(volOp){
         res.send(volOp);
     });
-    res.send({type: 'DELETE'});
 });
 
 module.exports = router;
