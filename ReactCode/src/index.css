@@ -87,9 +87,6 @@ span > li > a {
 }
 span > li > a:hover {
   color: var(--blue-2);
-  background-color: rgba(0,0,0,0);
-  font-size: 18px;
-  user-select: none;
 }
 #nav-mobile > li > span > li > a {
   color: var(--blue-1);
@@ -127,6 +124,7 @@ span > li > a:hover {
 #nav-mobile.side-nav{
   background: var(--off-white);
 }
+
 ul> li > a{
   font-size: 18px;
   color: var(--blue-1);

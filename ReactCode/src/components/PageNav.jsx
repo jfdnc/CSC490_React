@@ -78,7 +78,6 @@ export default class PageNav extends React.Component{
     let currPage = this.props.history.location.pathname
     let activeNavStyle = {
       color:'#137cc1',
-      backgroundColor: '#e7e7e7'
     }
     return(
       headerList.map((headerItem, i) => {
