@@ -3,8 +3,8 @@ import { Button, Row, Input } from 'react-materialize'
 import { updateVolOp } from "../actions/org_actions";
 import { withRouter } from 'react-router-dom'
 
-const EditVolOp = (prop) => {
-    const handleSubmit = () => {
+const EditVolOp = (props) => {
+    const handleSubmit = (id) => {
         let inputArr = [],
             inputObj = {},
             inputs = document.getElementsByTagName('input')
@@ -30,7 +30,8 @@ const EditVolOp = (prop) => {
             volOpSpotsAvailable: inputArr[10],
             volOpDetails: inputArr[11],
             volOpCategories: inputArr[12],
-            orgName: orgObj.orgName
+            orgName: orgObj.orgName,
+            _id: id
         };
         updateVolOp(inputObj).then(this.props.history.push('/'))
     }
@@ -61,7 +62,7 @@ const EditVolOp = (prop) => {
                 </Row>
                 <Input s={12} label="Details" defaultValue={volOp.volOpDetails}></Input>
                 <Input s={12} label="Categories" defaultValue={volOp.volOpCategories}></Input>
-                <Button onClick={() => handleSubmit()}>Submit</Button>
+                <Button onClick={() => handleSubmit(volOp._id)}>Submit</Button>
             </div>
         </div>
     )

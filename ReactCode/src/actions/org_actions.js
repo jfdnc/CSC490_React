@@ -151,8 +151,8 @@ export function getAllVolOpsByOrg(volOpIds){
     })
 }
 
-export function getVolOpById(id){
-    return new Promise((resolve, reject) =>{
+export function getVolOpById(id) {
+    return new Promise((resolve, reject) => {
         let myReq = new Request('/api/volOps/' + id, {method: 'GET', headers: {'Content-Type': 'application/json'}})
         fetch(myReq)
             .then(res => res.json())
@@ -163,10 +163,11 @@ export function getVolOpById(id){
                     volOp: resJSON
                 })
             })
-            .catch(function(err){
+            .catch(function (err) {
                 console.log(err)
             })
     })
+}
   
 export function populateFromLocalStorage(){
   return new Promise((resolve, reject) => {
