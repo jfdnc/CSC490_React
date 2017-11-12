@@ -170,7 +170,7 @@ router.get('/volOps/', function(req, res, next){
 
 // get a specific volOp from the db
 router.get('/volOps/:id', function(req, res, next){
-  VolOp.findOne({_id: req.params.id}).then(function(volOp){
+  VolOp.findById({_id: req.params.id}).then(function(volOp){
     res.send(volOp);
   });
 });

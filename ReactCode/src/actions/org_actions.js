@@ -25,47 +25,32 @@ export function createVolop(volOp){
 }
 
 //delete a volop from database
-export function deleteVolop(){
+export function deleteVolOp(id){
   dispatcher.dispatch({
     type: OrgActionTypes.DELETE_VOLOP
   })
 }
 
 //update a volop in database
-export function updateVolop(volOp){
-    let myReq = new Request('/api/volOps/' + volOp._id, {method:'PUT', body: JSON.stringify(volOp),
-        headers: {"Content-Type": "application/json"}})
-    fetch(myReq)
-        .then(function(res){
-            console.log(res)
-        })
-        .catch(function(err){
-            console.log(err)
-        })
+export function updateVolOp(volOp){
+    return new Promise((resolve, reject) =>{
+        let myReq = new Request('/api/volOps/' + volOp._id, {method:'PUT', body: JSON.stringify(volOp),
+            headers: {"Content-Type": "application/json"}})
+        fetch(myReq)
+            .then(function(res){
+                console.log(res)
+            })
+            .catch(function(err){
+                console.log(err)
+            })
 
-  dispatcher.dispatch({
-    type: OrgActionTypes.UPDATE_VOLOP,
-    volOp: volOp
-  })
+        dispatcher.dispatch({
+            type: OrgActionTypes.UPDATE_VOLOP,
+            volOp: volOp
+        })
+    })
 }
-//view a volop
-export function viewVolopOrg(){
-  dispatcher.dispatch({
-    type: OrgActionTypes.VIEW_VOLOP_ORG
-  })
-}
-//message previous volunteers (probably removing)
-export function msgVolunteer(){
-  dispatcher.dispatch({
-    type: OrgActionTypes.MSG_VOLUNTEER
-  })
-}
-//view org info
-export function viewOrgInfo(){
-  dispatcher.dispatch({
-    type: OrgActionTypes.VIEW_ORG_INFO
-  })
-}
+
 //edit org info
 export function editOrgInfo(org){
     return new Promise((resolve, reject) => {
@@ -166,6 +151,23 @@ export function getAllVolOpsByOrg(volOpIds){
     })
 }
 
+export function getVolOpById(id){
+    return new Promise((resolve, reject) =>{
+        let myReq = new Request('/api/volOps/' + id, {method: 'GET', headers: {'Content-Type': 'application/json'}})
+        fetch(myReq)
+            .then(res => res.json())
+            .then(resJSON => {
+                localStorage.setItem('volOpInfo', JSON.stringify(resJSON))
+                dispatcher.dispatch({
+                    type: OrgActionTypes.GET_VOLOP_BY_ID,
+                    volOp: resJSON
+                })
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+    })
+  
 export function populateFromLocalStorage(){
   return new Promise((resolve, reject) => {
     let savedOrgState = localStorage.getItem('orgInfo') || false

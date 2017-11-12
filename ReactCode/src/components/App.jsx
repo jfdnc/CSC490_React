@@ -6,6 +6,8 @@ import { Route } from 'react-router-dom'
 import Register from './Register'
 import Login from './Login'
 import NewVolOp from './NewVolOp'
+import EditVolOp from './EditVolOp'
+import { initFBState } from '../actions/user_actions'
 import { initFBState,initVolOps,saveVolop } from '../actions/user_actions'
 
 const App = (props) => {
@@ -46,6 +48,7 @@ const App = (props) => {
           <Route path="/register" component={Register}/>
           <Route path="/login" component={Login}/>
           <Route path="/newvolop" component={NewVolOp}/>
+          <Route path="/editvolop" component={EditVolOp}/>
         </div>
         <Footer/>
       </div>
