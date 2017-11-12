@@ -58,6 +58,12 @@ class OrgStore extends EventEmitter {
         this.emit("change")
     }
 
+    getVolOpById(volOp){
+        this.state.volOp = volOp
+        this.emit("change")
+    }
+
+
     handleActions(action) {
         switch (action.type) {
             case OrgActionTypes.CREATE_VOLOP:
@@ -86,6 +92,9 @@ class OrgStore extends EventEmitter {
                 break
             case OrgActionTypes.GET_ALL_VOLOPS_BY_ORG:
                 this.getAllVolOpsByOrg(action.allVolOps);
+                break
+            case OrgActionTypes.GET_VOLOP_BY_ID:
+                this.getVolOpById(action.volOp);
                 break
         }
     }
