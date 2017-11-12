@@ -65,7 +65,7 @@ export default class MainView extends React.Component {
         orgState  = this.state.orgState
 
     let currView = !_.isEmpty(userState) ? <UserView /> :
-                   !_.isEmpty(orgState)  ? <OrgView />  :
+                   !_.isEmpty(orgState)  ? <OrgView {...(JSON.parse(this.state.orgState))} />  :
                    <GuestView />
     return(
 

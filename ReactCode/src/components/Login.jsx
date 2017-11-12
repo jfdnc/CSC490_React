@@ -6,7 +6,6 @@ import Fade from './Fade'
 import UserStore from '../data/stores/UserStore'
 import { editPrefs, saveVolop } from '../actions/user_actions'
 
-
 const Login =  (props) => {
   const handleSubmit = () => {
     let inputArr = [],
@@ -26,12 +25,36 @@ const Login =  (props) => {
       if(userType.toLowerCase() == 'user'){
         const formData = `email=${email}&pwHash=${password}`;
         console.log("Logging in user...")
-        loginUser(formData).then(props.history.push('/'))
+        loginUser(formData)
+        let loader = document.getElementById('loader-overlay')
+        loader.style.visibility ='visible'
+        setTimeout(() => {
+          if(localStorage.getItem('userInfo')){
+            loader.style.visibility ='hidden'
+            props.history.push('/')
+          } else {
+            //add error message here
+            loader.style.visibility ='hidden'
+            console.log('login unsuccessful')
+          }
+        }, 1000)
       }
       else if(userType.toLowerCase() == 'organization'){
         const formData = `orgEmail=${email}&orgPwHash=${password}`;
         console.log("Logging in organization...")
-        loginOrg(formData).then(props.history.push('/'))
+        loginOrg(formData)
+          let loader = document.getElementById('loader-overlay')
+          loader.style.visibility ='visible'
+          setTimeout(() => {
+            if(localStorage.getItem('orgInfo')){
+              loader.style.visibility ='hidden'
+              props.history.push('/')
+            } else {
+              //add error message here
+              loader.style.visibility ='hidden'
+              console.log('login unsuccessful')
+            }
+          }, 1000)
       }
     } else {
       console.log('must provide email and pw')
@@ -63,7 +86,7 @@ const Login =  (props) => {
       <div id='offsite'>
         offsite login
           <div>
-          <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>                   
+          <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>
           </div>
       </div>
       </div>

@@ -1,0 +1,21 @@
+{
+  "_id":"5a0892dd69dade1778b2d857",
+  "volOpName":"T",
+  "volOpDescription":"T",
+  "volOpOngoing":true,
+  "volOpStartDate":"12 November, 2017",
+  "volOpEndDate":"12 November, 2017",
+  "volOpTod":"T",
+  "volOpSpotsAvailable":1,
+  "orgName":"Vol R Us",
+  "__v":0,
+  "volOpCategories":["T"],
+  "volOpDetails":["T"],
+  "volOpAddress":
+    {
+      "street":"T",
+      "city":"T",
+      "state":"T",
+      "zip":"1"
+    }
+  }

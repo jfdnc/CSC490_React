@@ -8,6 +8,7 @@ import Login from './Login'
 import NewVolOp from './NewVolOp'
 import EditVolOp from './EditVolOp'
 import { initFBState } from '../actions/user_actions'
+import Loading from './Loading'
 //import { initFBState,initVolOps,saveVolop } from '../actions/user_actions'
 
 const App = (props) => {
@@ -26,9 +27,9 @@ const App = (props) => {
 
       }
         initFBState(jwtToken,newUser)
-        
+
         window.history.replaceState({}, document.title, "/");
-        
+
     }
 
       /*
@@ -42,6 +43,7 @@ const App = (props) => {
   }
   return(
       <div id='app-container'>
+        <Loading />
         <div className="content">
           <Route path="/" component={PageNav}/>
           <Route path="/" exact component={MainView}/>

@@ -1,5 +1,6 @@
 import React from 'react'
 import GuestDashboardLayout from './GuestDashboardLayout'
+import OrgDashBoardLayout from './OrgDashBoardLayout'
 export default class Dashboard extends React.Component {
   constructor(props){
     super(props)
@@ -15,6 +16,9 @@ export default class Dashboard extends React.Component {
     switch(this.state.type){
       case 'guest':
         currLayout = <GuestDashboardLayout />
+        break
+      case 'org':
+        currLayout = <OrgDashBoardLayout />
         break
     }
     return(

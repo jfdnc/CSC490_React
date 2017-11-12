@@ -183,7 +183,7 @@ export function getVolOpById(id) {
             })
     })
 }
-  
+
 export function populateFromLocalStorage(){
   return new Promise((resolve, reject) => {
     let savedOrgState = localStorage.getItem('orgInfo') || false
