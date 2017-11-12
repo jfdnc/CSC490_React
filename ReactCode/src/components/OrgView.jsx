@@ -34,6 +34,7 @@ export default class OrgView extends React.Component {
             <div id='org-view' className='view-container'>
                 <Dashboard type='org' />
                 <Link to='/newvolop'><Button>New Volunteer Opportunity</Button></Link>
+                <Link to='/editorg'><Button>Edit Profile</Button></Link>
                 <div id='org-view-volops'>
                     {allVolOps.map(volop =>{
                         return(
