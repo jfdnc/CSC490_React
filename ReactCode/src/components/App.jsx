@@ -7,6 +7,7 @@ import Register from './Register'
 import Login from './Login'
 import NewVolOp from './NewVolOp'
 import EditVolOp from './EditVolOp'
+import EditOrg from './EditOrg'
 import { initFBState } from '../actions/user_actions'
 //import { initFBState,initVolOps,saveVolop } from '../actions/user_actions'
 
@@ -49,6 +50,7 @@ const App = (props) => {
           <Route path="/login" component={Login}/>
           <Route path="/newvolop" component={NewVolOp}/>
           <Route path="/editvolop" component={EditVolOp}/>
+          <Route path="/editorg" component={EditOrg}/>
         </div>
         <Footer/>
       </div>
