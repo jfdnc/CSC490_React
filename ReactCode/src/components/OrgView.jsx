@@ -2,7 +2,7 @@ import React from 'react'
 import OrgStore from  '../data/stores/OrgStore'
 import { Link } from 'react-router-dom'
 import Dashboard from './Dashboard'
-import {getAllVolOpsByOrg} from "../actions/org_actions";
+import { getAllVolOpsByOrg } from "../actions/org_actions";
 import VolOpListingOrg from "./VolOpListingOrg"
 import { Button } from 'react-materialize'
 

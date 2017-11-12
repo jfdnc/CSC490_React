@@ -6,6 +6,17 @@ import Fade from './Fade'
 import UserStore from '../data/stores/UserStore'
 
 const Register = (props) => {
+
+  //stupid but it works to make both not display at once
+  let orgTabClicked = false
+  const handleFirstClick = () =>{
+    if(!orgTabClicked){
+      let tempTabId = document.getElementsByClassName('active')[1].href.split('_')[1]
+      document.getElementById(`tab_${tempTabId}`).style.display = 'none'
+      orgTabClicked = true
+    }
+  }
+
   const handleSubmit = (userType) => {
     let inputArr = [],
         inputObj = {},
@@ -55,9 +66,9 @@ const Register = (props) => {
       <Fade>
       <div id='register-view' className='view-container'>
         <div id='onsite'>
-          <Tabs defaultActiveKey={1} id='registration-tabs'>
+          <Tabs defaultActiveKey={1}  id='registration-tabs' onChange={() => handleFirstClick()}>
             {/*user fields*/}
-            <Tab eventKey={1} title='User' active>
+            <Tab key={1} title='User' id='user-reg-tab' active>
               <Row>
                 <Input s={6} label="First Name"></Input>
                 <Input s={6} label="Last Name"></Input>
@@ -71,7 +82,7 @@ const Register = (props) => {
               <Button onClick={()=>handleSubmit('user')}>Submit</Button>
             </Tab>
             {/*org fields*/}
-            <Tab eventKey={2} title='Organization'>
+            <Tab  key={2} title='Organization'>
             <Row>
               <Input s={6} label="Org Name"></Input>
               <Input s={6} label="Org Email" type='email' validate></Input>

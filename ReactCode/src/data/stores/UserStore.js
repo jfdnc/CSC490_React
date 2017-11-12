@@ -5,7 +5,7 @@ import { EventEmitter } from 'events'
 import UserActionTypes from '../../action_types/UserActionTypes'
 
 class UserStore extends EventEmitter {
-    constructor(props) {
+constructor(props) {
         super(props)
 
         this.state = {
@@ -16,6 +16,11 @@ class UserStore extends EventEmitter {
 
     getAll(){
         return this.state
+    }
+
+    populateFromLocalStorage(savedUserState){
+      this.state.user = savedUserState
+      this.emit("change")
     }
 
     createUser(user){
@@ -34,10 +39,30 @@ class UserStore extends EventEmitter {
     }
 
     initFBUser(user){
+       this.state.user = user      
+       this.emit("change")
+    }
+
+     initUser(user){
        this.state.user = user
        this.emit("change")
     }
 
+    initVolOps(volOps){
+       this.state.user.savedVolOps = volOps             
+       this.emit("change")
+    }
+
+     addVolOp(volOpID){     
+        
+       this.state.user.savedVolOps.push(volOpID) 
+       let unique = [...new Set(this.state.user.savedVolOps)] 
+       this.state.user.savedVolOps=  unique        
+       this.emit("change")
+
+    }
+
+    
     handleActions(action) {
       switch (action.type) {
         case UserActionTypes.CREATE_USER:
@@ -51,6 +76,18 @@ class UserStore extends EventEmitter {
             break
         case UserActionTypes.INIT_FBUSER:
             this.initFBUser(action.user);
+            break
+        case UserActionTypes.POPULATE_FROM_LOCAL_STORAGE:
+            this.populateFromLocalStorage(action.user)
+            break
+        case UserActionTypes.EDIT_PREFS:
+            this.initUser(action.user);
+            break
+        case UserActionTypes.SAVE_VOLOP:
+            this.addVolOp(action.volOpID);
+            break
+        case UserActionTypes.INIT_VOLOPS:
+            this.initVolOps(action.volOps);
             break
         }
     }

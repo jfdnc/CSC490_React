@@ -8,6 +8,7 @@ import Login from './Login'
 import NewVolOp from './NewVolOp'
 import EditVolOp from './EditVolOp'
 import { initFBState } from '../actions/user_actions'
+import { initFBState,initVolOps,saveVolop } from '../actions/user_actions'
 
 const App = (props) => {
 
@@ -20,11 +21,24 @@ const App = (props) => {
       var newUser = {
         firstName:  url.searchParams.get("firstName"),
         lastName: url.searchParams.get("lastName"),
-        email: url.searchParams.get("email")
+        email: url.searchParams.get("email"),
+        _id: url.searchParams.get("id")
+
       }
         initFBState(jwtToken,newUser)
+        
         window.history.replaceState({}, document.title, "/");
+        
     }
+
+      /*
+    let savedUserState = localStorage.getItem('userInfo') || false
+    if(savedUserState){
+      console.log(JSON.parse(savedUserState)+"in app")
+      var myUser = JSON.parse(savedUserState)
+      initVolOps(myUser.email)
+    }
+    */
   }
   return(
       <div id='app-container'>

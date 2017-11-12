@@ -14,6 +14,11 @@ class OrgStore extends EventEmitter {
         return this.state
     }
 
+    populateFromLocalStorage(savedOrgState){
+      this.state.org = savedOrgState
+      this.emit("change")
+    }
+
     createVolOp(volOp){
         this.state.volOp = volOp
         this.state.allVolOps.unshift(volOp)
@@ -54,8 +59,8 @@ class OrgStore extends EventEmitter {
     }
 
     getAllVolOpsByOrg(allVolOps){
-        this.state.allVolOps = allVolOps
-        this.emit("change")
+      this.state.allVolOps = allVolOps
+      this.emit("change")
     }
 
     getVolOpById(volOp){
@@ -95,6 +100,8 @@ class OrgStore extends EventEmitter {
                 break
             case OrgActionTypes.GET_VOLOP_BY_ID:
                 this.getVolOpById(action.volOp);
+            case OrgActionTypes.POPULATE_FROM_LOCAL_STORAGE:
+                this.populateFromLocalStorage(action.org)
                 break
         }
     }

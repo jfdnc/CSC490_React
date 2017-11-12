@@ -4,21 +4,6 @@ this file will contain actions for UI components to emit
 import dispatcher from '../data/Dispatcher'
 import OrgActionTypes from '../action_types/OrgActionTypes'
 
-//return t/f on loggedIn state
-export function getLogState(){
-  dispatcher.dispatch({
-    //only use actions from ActionTypes - consistent communication!
-    type: OrgActionTypes.GET_LOG_STATE
-  })
-}
-
-//return string on user type state (guest, user, org)
-export function getUserType(){
-  dispatcher.dispatch({
-    type: OrgActionTypes.GET_USER_TYPE
-  })
-}
-
 //Create a new volop in database
 export function createVolop(volOp){
   return new Promise((resolve, reject) => {
@@ -182,4 +167,15 @@ export function getVolOpById(id){
                 console.log(err)
             })
     })
+  
+export function populateFromLocalStorage(){
+  return new Promise((resolve, reject) => {
+    let savedOrgState = localStorage.getItem('orgInfo') || false
+    if(savedOrgState){
+      dispatcher.dispatch({
+        type: OrgActionTypes.POPULATE_FROM_LOCAL_STORAGE,
+        org: savedOrgState
+      })
+    }
+  })
 }
