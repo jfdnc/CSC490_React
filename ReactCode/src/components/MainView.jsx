@@ -70,9 +70,7 @@ export default class MainView extends React.Component {
     return(
 
       <div id='main-container'>
-        <div id="content-container">
           {currView}
-        </div>
       </div>
     )
   }

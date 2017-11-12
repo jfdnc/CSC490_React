@@ -93,7 +93,6 @@ export default class PageNav extends React.Component{
                 <li key={i}><NavLink key={i} to='/register'>Register</NavLink></li>
               )
             }
-
             break
           case 'Log In':
             if(currPage == '/login'){
