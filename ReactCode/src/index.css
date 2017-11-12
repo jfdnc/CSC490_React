@@ -408,6 +408,7 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
   color: var(--blue-2);
   padding: 6px;
   font-size: 3.5vw;
+  transform: translateY(-30px);
 }
 
 .volop-numspots-icon{
@@ -510,7 +511,7 @@ ul:not(.browser-default)>li{
     font-size: 16px;
   }
   .volop-name{
-    font-size: 13px;
+    font-size: 15px;
   }
   .volop-ongoing{
     font-size: 8.7px;
@@ -631,6 +632,7 @@ ul:not(.browser-default)>li{
     font-size: 22px;
     grid-row: 2;
     grid-column: 1/9;
+    transform: translateY(-12px);
   }
   .volop-numspots-icon{
     grid-row: 1;

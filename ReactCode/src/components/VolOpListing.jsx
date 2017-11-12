@@ -24,7 +24,7 @@ const VolOpListing = (props) => {
           {props.volOpName}
         </div>
         <div className='volop-numspots-icon'>
-          <div data-tip='Spots Remaining'>
+          <div data-tip={`${props.volOpSpotsAvailable} Spots Remaining`}>
             <Icon>account_box</Icon>
           </div>
         </div>
