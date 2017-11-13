@@ -135,7 +135,7 @@ export default class VolOpSearch extends React.Component{
           </div>
           {this.state.volOpList.map(volop =>{
             return(
-              <VolOpListing userType={this.props.userType} {...volop}/>
+              <VolOpListing userType={this.props.userType} volop={volop} {...this.props}/>
             )
           })}
           </div>

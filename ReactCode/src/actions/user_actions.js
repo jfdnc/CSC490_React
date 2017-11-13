@@ -78,7 +78,7 @@ export function editPrefs(user){
       headers: {"Content-Type": "application/json"}})
     fetch(myReq)
     .then(function(res){
-            //console.log(res)            
+            //console.log(res)
           })
     .catch(function(err){
       console.log(err)
@@ -99,12 +99,15 @@ export function createUser(user){
     xhr.responseType = 'json';
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
-              //send to dispatcher
-              dispatcher.dispatch({
-                type: UserActionTypes.CREATE_USER,
-                user: xhr.response.user
-              })
-            }
+        //send to dispatcher
+        dispatcher.dispatch({
+          type: UserActionTypes.CREATE_USER,
+          user: xhr.response.user
+        })
+        resolve(xhr.status)
+      } else {
+        resolve(xhr.status)
+      }
           });
     xhr.send(JSON.stringify(user))
   })
@@ -163,7 +166,7 @@ export function editUser(user){
 
 
 export function initFBState(token,user){
-  
+
   return new Promise((resolve, reject) => {
 
 
@@ -182,7 +185,7 @@ export function initFBState(token,user){
       user: data
     })
   })
-})               
+})
 saveVolop('5a06872b3a5af5342c3e0d0f','5a0685a6a4a20024b40cf80d')
 }
 
@@ -201,7 +204,7 @@ export function initVolOps(userEmail){
       volOps: data.savedVolOps
     })
   })
-}) 
+})
 }
 
 export function populateFromLocalStorage(){

@@ -28,7 +28,7 @@ export default class GuestDashboardLayout extends React.Component{
               Find Local Volunteer Opportunities
             </div>
             <div id='content-search'>
-              <VolOpSearch userType='guest'/>
+              <VolOpSearch userType='guest' {...this.props}/>
             </div>
           </div>
         </div>

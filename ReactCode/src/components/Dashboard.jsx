@@ -15,10 +15,10 @@ export default class Dashboard extends React.Component {
     let currLayout
     switch(this.state.type){
       case 'guest':
-        currLayout = <GuestDashboardLayout />
+        currLayout = <GuestDashboardLayout {...this.props} />
         break
       case 'org':
-        currLayout = <OrgDashBoardLayout />
+        currLayout = <OrgDashBoardLayout {...this.props} />
         break
     }
     return(

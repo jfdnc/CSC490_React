@@ -4,6 +4,8 @@ import ReactToolTip from 'react-tooltip'
 import gmappalceholder from '../assets/images/gmapplaceholder.jpg'
 
 const VolOpListing = (props) => {
+  let volop = props.volop
+
   var icons = {
     animals:<Icon>pets</Icon>,
     community:<Icon>domain</Icon>,
@@ -11,52 +13,56 @@ const VolOpListing = (props) => {
     homeless:<Icon>wc</Icon>,
     kids:<Icon>face</Icon>
   }
-  var userType = props.userType
 
-  console.log(userType)
+  const handleClick = () => {
+    localStorage.setItem('tempVolOp', JSON.stringify(volop))
+    props.history.push('/register')
+  }
+
+
   return(
     <CardPanel className="white black-text">
       <div className='volop-listing-container'>
         <div className='volop-orgname'>
-          <b>{props.orgName}</b>
+          <b>{volop.orgName}</b>
         </div>
         <div className='volop-name'>
-          {props.volOpName}
+          {volop.volOpName}
         </div>
         <div className='volop-numspots-icon'>
-          <div data-tip={`${props.volOpSpotsAvailable} Spots Remaining`}>
+          <div data-tip={`${volop.volOpSpotsAvailable} Spots Remaining`}>
             <Icon>account_box</Icon>
           </div>
         </div>
         <ReactToolTip class='tooltip'/>
         <div className='volop-numspots-num'>
-            <div>{props.volOpSpotsAvailable}</div>
+            <div>{volop.volOpSpotsAvailable}</div>
         </div>
           <div className='volop-ongoing'>
-            {props.volOpOngoing ?
+            {volop.volOpOngoing ?
               <b>Ongoing</b>:
               <div>
               <b data-tip={
-                `${props.volOpStartDate == props.volOpEndDate ?
-                                props.volOpStartDate :
-                                `${props.volOpStartDate} to ${props.volOpEndDate}` } from ${props.volOpTod}`}>One-Time Event</b>
+                `${volop.volOpStartDate == volop.volOpEndDate ?
+                                volop.volOpStartDate :
+                                `${volop.volOpStartDate} to ${volop.volOpEndDate}` } from ${volop.volOpTod}`}>One-Time Event</b>
               <ReactToolTip class='tooltip'/>
               </div>
             }
             <hr/>
           </div>
         <div className='volop-description'>
-          {props.volOpDescription}
+          {volop.volOpDescription}
         </div>
         <div className='volop-map'>
           <img src={gmappalceholder}/>
         </div>
         <div className='volop-address'>
-          {/*`${props.volOpAddress.city}, ${props.volOpAddress.state}, ${props.volOpAddress.street}, ${props.volOpAddress.zip}`*/}
+          {/*`${volop.volOpAddress.city}, ${volop.volOpAddress.state}, ${volop.volOpAddress.street}, ${volop.volOpAddress.zip}`*/}
         </div>
         <div className='volop-categories'>
           <ul>
-          {props.volOpCategories.map(cat => {
+          {volop.volOpCategories.map(cat => {
               return(
                 <li data-tip={cat}
                     style={{display:'inline'}}>
@@ -69,13 +75,13 @@ const VolOpListing = (props) => {
         </div>
         <div className='volop-details'>
           <ul>
-          {props.volOpDetails.map(detail => {
+          {volop.volOpDetails.map(detail => {
             return(<li>{detail}</li>)
           })}
           </ul>
         </div>
         <div className='volop-save-button'>
-          <Button>{props.userType == 'guest' ? 'Log In and Save' : 'Save'}</Button>
+          <Button onClick={()=>handleClick()}>{props.userType == 'guest' ? 'Sign Up and Save' : 'Save'}</Button>
         </div>
       </div>
 		</CardPanel>

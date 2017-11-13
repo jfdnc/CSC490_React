@@ -34,8 +34,8 @@ const Login =  (props) => {
             loader.style.visibility ='hidden'
             props.history.push('/')
           } else {
-            //add error message here
             loader.style.visibility ='hidden'
+            //add info about error
             console.log('login unsuccessful')
           }
         }, 1000)

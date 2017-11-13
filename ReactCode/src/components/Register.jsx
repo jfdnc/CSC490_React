@@ -32,9 +32,32 @@ const Register = (props) => {
         inputObj.email,
         inputObj.pwHash ] = [...inputArr]
 
-      createUser(inputObj).then(
-        loginUser({email:inputObj.email,pwHash:inputObj.pwHash})
-      ).then(props.history.push('/'))
+      let registerResponse
+      createUser(inputObj).then(res => registerResponse = res)
+      let loader = document.getElementById('loader-overlay')
+      let loadingMessage = document.getElementById('loading-message')
+      loadingMessage.innerHTML ='Registering...'
+      loader.style.visibility ='visible'
+      setTimeout(() => {
+        if(registerResponse == 200){
+          loadingMessage.innerHTML ='Logging In...'
+          loginUser({email:inputObj.email,pwHash:inputObj.pwHash})
+          setTimeout(() => {
+            if(localStorage.getItem('token')){
+              loader.style.visibility ='hidden'
+              props.history.push('/')
+            } else {
+              //display login error
+              console.log('login error')
+            }
+          }, 1000)
+        } else {
+          loader.style.visibility ='hidden'
+          //display registration error
+          console.log("registration error")
+        }
+      }, 1000)
+
 
     } else if( userType == 'org' && inputArr.length == 12){
 

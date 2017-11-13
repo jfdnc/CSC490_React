@@ -10,7 +10,7 @@ const GuestView = (props) => {
           <div id='splash-container'>
             <img className='splash-img' src={volimg1}/>
           </div>
-          <Dashboard type='guest' />
+          <Dashboard type='guest' {...props} />
         </div>
       </Fade>
     )
