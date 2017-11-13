@@ -46,6 +46,7 @@ module.exports = new PassportLocalStrategy({
             const data = {
                 _id: org._id,
                 orgName: org.orgName,
+                orgEmail: org.orgEmail,
                 orgAddress: {
                     street: org.orgAddress.street,
                     city: org.orgAddress.city,
