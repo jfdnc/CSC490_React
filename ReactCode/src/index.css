@@ -462,6 +462,8 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
   grid-row: 3/8;
   grid-column: 1/11;
   margin: 0 auto;
+  width: 300px;
+  height: 300px;
   box-shadow: .5px 0 5px rgba(0,0,0,0.5);
 }
 .volop-categories{

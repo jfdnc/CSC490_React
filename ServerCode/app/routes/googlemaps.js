@@ -3,7 +3,7 @@ const gmap = require('googlemaps');
 const parser = require('parse-address');
 const router = express.Router();
 const VolOp = require('../models/volOpModel');
-let gmapsapikey = "AIzaSyD3TJgKgvbdS5bQbM3Qd41DmEwB-W_3nRU"
+
 // Helper function for compound street and city names
 function parseString(input){
   var str = input;
@@ -19,6 +19,7 @@ function parseString(input){
 // ---Retrieve static map of volOp address---
 router.get('/volOps/:id', function(req, res, next){
   VolOp.findById({_id: req.params.id}).then(function(volOp){
+    console.log(volOp)
     var parsed = parser.parseLocation(volOp.volOpAddress.street);
     var number = parsed.number;
     if(typeof prefix === 'undefined'){
