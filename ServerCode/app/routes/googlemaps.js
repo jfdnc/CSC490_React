@@ -3,7 +3,7 @@ const gmap = require('googlemaps');
 const parser = require('parse-address');
 const router = express.Router();
 const VolOp = require('../models/volOpModel');
-
+let gmapsapikey = "AIzaSyD3TJgKgvbdS5bQbM3Qd41DmEwB-W_3nRU"
 // Helper function for compound street and city names
 function parseString(input){
   var str = input;
@@ -31,10 +31,13 @@ router.get('/volOps/:id', function(req, res, next){
     var city = parseString(volOp.volOpAddress.city);
     var state = volOp.volOpAddress.state;
     var zip = volOp.volOpAddress.zip;
-    var fullAddress = number + prefix + "+" + street + "+" + city + "+" + state;
-    var marker = "&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C" + fullAddress + "\"";
-    var addressAndParams = fullAddress + "&zoom=14&scale=1&size=300x300&maptype=roadmap&format=png&visual_refresh=true" + marker + "\"";
-    var clickableMap = "<a href=\"https://www.google.com/maps/dir/" + fullAddress + "\/\"><img src=\"https://maps.googleapis.com/maps/api/staticmap?center=" + addressAndParams + "\"" + "alt=\"Google Map of" + fullAddress + "\/></a>"
+    var fullAddress = `${street.slice(2)},${city},${state},${zip}`
+    var imgTag = `<img src="https://maps.googleapis.com/maps/api/staticmap?center=${fullAddress}&zoom=14&size=300x300&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C${fullAddress}&key=${gmapsapikey}"`
+    var clickableMap = `
+      <a href="https://www.google.com/maps/dir/${fullAddress}">
+        ${imgTag}
+      </a>
+      `
     //var parsedStr = parseString("High Point");
     res.send(clickableMap);
   });

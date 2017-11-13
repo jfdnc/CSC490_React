@@ -41,7 +41,7 @@ export default class EditOrg extends React.Component {
 
         editOrgInfo(inputObj)
         let loader = document.getElementById('loader-overlay')
-        document.getElementById('loading-message').innerHTML ='Updating...'
+        document.getElementById('loading-message').innerHTML ='Saving...'
         loader.style.visibility ='visible'
         setTimeout(() => {
           if(localStorage.getItem('orgInfo')){
