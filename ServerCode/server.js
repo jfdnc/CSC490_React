@@ -57,10 +57,12 @@ app.use(session({
 // initialize routes
 const authRoutes = require('./app/routes/auth');
 const apiRoutes = require('./app/routes/api');
-const pageRoutes = require('./app/routes/approutes')
+const pageRoutes = require('./app/routes/approutes');
+const mapRoutes = require('./app/routes/googlemaps');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 app.use('/', pageRoutes);
+app.use('/maps', mapRoutes);
 
 // We only want to run webpack when not in production
 if (!isProduction) {
