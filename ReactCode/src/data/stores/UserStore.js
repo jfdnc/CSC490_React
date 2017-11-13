@@ -10,7 +10,8 @@ constructor(props) {
 
         this.state = {
             user: {},
-            facebookURL: "/auth/facebookLogin"
+            facebookURL: "/auth/facebookLogin",
+            twitterURL: "/auth/twitter"
         }
     }
 

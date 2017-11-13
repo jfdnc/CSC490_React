@@ -89,6 +89,7 @@ const Login =  (props) => {
         offsite login
           <div>
           <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>
+          <a href={UserStore.getAll().twitterURL} class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
           </div>
       </div>
       </div>
