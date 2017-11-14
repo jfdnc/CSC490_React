@@ -10,7 +10,8 @@ constructor(props) {
 
         this.state = {
             user: {},
-            facebookURL: "/auth/facebookLogin"
+            facebookURL: "/auth/facebookLogin",
+            twitterURL: "/auth/twitter"
         }
     }
 
@@ -39,7 +40,8 @@ constructor(props) {
     }
 
     initFBUser(user){
-       this.state.user = user      
+       this.state.user = user
+       console.log(this.state.user.email)      
        this.emit("change")
     }
 
