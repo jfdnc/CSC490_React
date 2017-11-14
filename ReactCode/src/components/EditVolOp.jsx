@@ -71,10 +71,13 @@ export default class EditVolOp extends React.Component {
                     </Row>
                     <Row>
                         <Input s={6} label="Time of Day" defaultValue={volOp.volOpTod}></Input>
-                        <Input s={6} label="Spots Available" type="number"
-                               defaultValue={volOp.volOpSpotsAvailable}></Input>
+                        <Input s={6} label="Spots Available" type="number" defaultValue={volOp.volOpSpotsAvailable}></Input>
                     </Row>
-                    <Input s={12} label="Details" defaultValue={volOp.volOpDetails}></Input>
+                    {volOp.volOpDetails.map(detail =>{
+                        return(
+                            <Input s={12} label="Additional Details" defaultValue={detail}></Input>
+                        )
+                    })}
                     <Input s={12} label="Categories" defaultValue={volOp.volOpCategories}></Input>
                     <Button onClick={() => this.handleSubmit(volOp._id)}>Submit</Button>
                 </div>
