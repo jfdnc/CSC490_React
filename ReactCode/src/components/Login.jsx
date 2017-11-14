@@ -4,7 +4,7 @@ import { loginUser } from '../actions/user_actions'
 import { loginOrg } from '../actions/org_actions'
 import Fade from './Fade'
 import UserStore from '../data/stores/UserStore'
-import { editPrefs, saveVolop } from '../actions/user_actions'
+import { editPrefs, saveVolop, addToCal} from '../actions/user_actions'
 
 const Login =  (props) => {
   const handleSubmit = () => {
@@ -66,6 +66,8 @@ const Login =  (props) => {
 
 
   const facebookURL = UserStore.getAll().facebookURL
+  //5a0a1e7914bc600a8cb3b61b
+  //brandonsoccer22@gmail.com
 
   return(
     <div>
@@ -90,6 +92,17 @@ const Login =  (props) => {
           <div>
           <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>
           <a href={UserStore.getAll().twitterURL} class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
+          <Button onClick={()=>{
+            
+            var email = 'evolunteersuncg@gmail.com'
+            var id = '5a0a1e7914bc600a8cb3b61b'
+            var email = prompt("enter your email","email")
+            var id = prompt("enter volOpID","volOpID")
+
+            addToCal(id,email)
+
+
+        }}>Submit iCal Request</Button>
           </div>
       </div>
       </div>

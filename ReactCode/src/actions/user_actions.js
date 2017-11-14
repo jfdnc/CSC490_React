@@ -3,6 +3,7 @@ this file will contain actions for UI components to emit
 */
 import dispatcher from '../data/Dispatcher'
 import UserActionTypes from '../action_types/UserActionTypes'
+import UserStore from '../data/stores/UserStore'
 
 
 //return t/f on loggedIn state
@@ -137,7 +138,33 @@ export function loginUser(user){
   })
 }
 
-export function addToCal(volOpID){
+export function addToCalLoggedIn(volOpID){
+
+}
+
+export function addToCal(volOpID, userEmail){
+
+  var bundle = {
+    userEmail: userEmail,
+    id: volOpID,
+  }
+
+  return new Promise((resolve, reject) => {
+    let myReq = new Request('/emailEvent', {method:'POST', body: JSON.stringify(bundle),
+      headers: {"Content-Type": "application/json"}})
+    fetch(myReq)
+    .then(function(res){
+            //console.log(res)
+          })
+    .catch(function(err){
+      console.log(err)
+    })
+
+    //dispatcher.dispatch({
+      //type: UserActionTypes.EDIT_PREFS,
+      //user: user
+    //})
+  })
 
 }
 

@@ -33,7 +33,7 @@ const App = (props) => {
           //regex for email, return true if email is in proper format
           function validateEmail(email) {
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return re.test(email);
+            return re.test(email);
           }
           var newEmail = prompt("Please Enter an email address to continue")
           while(!validateEmail(email)){
@@ -50,23 +50,31 @@ const App = (props) => {
           fetch(myReq)
           .then(function(res){
             //console.log(res)
+            var newUser = {
+              firstName:  url.searchParams.get("firstName"),
+              lastName: url.searchParams.get("lastName"),
+              email: email,
+              _id: url.searchParams.get("id")
+
+            }
+            initFBState(jwtToken,newUser)
           })
           .catch(function(err){
             console.log(err)
           })
-        }
+        } else{
         //end hack, proceed normally
 
-      var newUser = {
-        firstName:  url.searchParams.get("firstName"),
-        lastName: url.searchParams.get("lastName"),
-        email: email,
-        _id: url.searchParams.get("id")
+        var newUser = {
+          firstName:  url.searchParams.get("firstName"),
+          lastName: url.searchParams.get("lastName"),
+          email: email,
+          _id: url.searchParams.get("id")
 
-      }
+        }
         initFBState(jwtToken,newUser)
-
-        window.history.replaceState({}, document.title, "/");
+      }
+      window.history.replaceState({}, document.title, "/");
 
     }
 

@@ -40,7 +40,8 @@ constructor(props) {
     }
 
     initFBUser(user){
-       this.state.user = user      
+       this.state.user = user
+       console.log(this.state.user.email)      
        this.emit("change")
     }
 
