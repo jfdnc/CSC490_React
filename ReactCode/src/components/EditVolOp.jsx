@@ -71,11 +71,39 @@ export default class EditVolOp extends React.Component {
                     </Row>
                     <Row>
                         <Input s={6} label="Time of Day" defaultValue={volOp.volOpTod}></Input>
-                        <Input s={6} label="Spots Available" type="number"
-                               defaultValue={volOp.volOpSpotsAvailable}></Input>
+                        <Input s={6} label="Spots Available" type="number" defaultValue={volOp.volOpSpotsAvailable}></Input>
                     </Row>
-                    <Input s={12} label="Details" defaultValue={volOp.volOpDetails}></Input>
-                    <Input s={12} label="Categories" defaultValue={volOp.volOpCategories}></Input>
+                    {volOp.volOpDetails.map(detail =>{
+                        return (
+                            <Input s={12} label="Additional Details" defaultValue={detail}></Input>
+                        )
+                        if(volOp.volOpDetails.length === 2) {
+                            return(
+                                <Input s={12} label="Additional Details"></Input>
+                            )
+                        } else if(volOp.volOpDetails.length === 1){
+                            return(
+                                <Input s={12} label="Additional Details"></Input>,
+                                <Input s={12} label="Additional Details"></Input>
+                            )
+                        } else {
+                            return(
+                                <Input s={12} label="Additional Details"></Input>,
+                                <Input s={12} label="Additional Details"></Input>,
+                                <Input s={12} label="Additional Details"></Input>
+                            )
+                        }
+                    })}
+                    Categories
+                    <Row>
+                        <Input s={4} label="Animals" value='animals' type="checkbox"></Input>
+                        <Input s={4} label="My Community" value='community' type="checkbox"></Input>
+                        <Input s={4} label="The Elderly" value='elderly' type="checkbox"></Input>
+                    </Row>
+                    <Row>
+                        <Input s={6} label="Homelessness" value='homeless' type="checkbox"></Input>
+                        <Input s={6} label="Kids" value='kids' type="checkbox"></Input>
+                    </Row>
                     <Button onClick={() => this.handleSubmit(volOp._id)}>Submit</Button>
                 </div>
             </div>
