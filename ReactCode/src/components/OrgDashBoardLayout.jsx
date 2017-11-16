@@ -13,20 +13,20 @@ export default class OrgDashBoardLayout extends React.Component{
     super(props)
 
     this.state = {
-      volops: []
-      //volops: [...testvolops]
+      //volops: []
+      volops: [...testvolops]
     }
 
   }
 
-  componentWillMount(){//comment out to test with testvolops
+  componentWillMount(){/*//comment out to test with testvolops
     OrgStore.on('change', () => {
       setTimeout(() => {
         this.setState({volops: OrgStore.getAll().allVolOps})
       }, 1200)
     })
     getAllVolOpsByOrg(this.props.orgVolOps)
-
+    //*/
   }
 
 

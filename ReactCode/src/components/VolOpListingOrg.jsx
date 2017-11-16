@@ -49,7 +49,15 @@ const VolOpListingOrg = (props) => {
               {props.volOpSpotsAvailable} Spots Remaining
             </div>
             <div className='org-listing-categories'>
-              {props.volOpCategories.map(cat => icons[cat])}
+              {props.volOpCategories.map(cat => {
+                return(
+                <li data-tip={cat}
+                    style={{display:'inline'}}>
+                    {icons[cat]}
+                    <ReactToolTip class='tooltip'/>
+                </li>
+                )
+              })}
             </div>
             <div className='org-listing-details'>
             <ul>
@@ -60,11 +68,13 @@ const VolOpListingOrg = (props) => {
               {props.volOpAddress.street}, {props.volOpAddress.city}, {props.volOpAddress.state}, {props.volOpAddress.zip}
             </div>
             <div className='org-listing-edit'>
-            <a onClick={()=>handleEdit()}><Icon right>edit</Icon>
+            <a data-tip='Edit VolOp Info' onClick={()=>handleEdit()}><Icon right>edit</Icon>
+            <ReactToolTip class='tooltip'/>
             </a>
             </div>
-            <div className='org-listing-delete'>
+            <div data-tip='Delete VolOp' className='org-listing-delete'>
             <a onClick={()=>handleDelete()}><Icon right>delete</Icon>
+            <ReactToolTip class='tooltip'/>
             </a>
             </div>
           </div>

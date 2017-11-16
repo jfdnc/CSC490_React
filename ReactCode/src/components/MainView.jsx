@@ -73,7 +73,7 @@ export default class MainView extends React.Component {
                    <GuestView {...this.props} />
 
     //testing////////////////
-    //currView = <OrgView {...testorg} />
+    currView = <OrgView {...testorg} />
     //delete////////////////
     return(
 

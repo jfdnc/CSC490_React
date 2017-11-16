@@ -566,7 +566,7 @@ ul:not(.browser-default)>li{
 
 }
 .org-listing-categories{
-
+  cursor: default;
 }
 .org-listing-details{
 
@@ -575,10 +575,10 @@ ul:not(.browser-default)>li{
 
 }
 .org-listing-edit{
-
+  cursor: pointer;
 }
 .org-listing-delete{
-
+  cursor: pointer;
 }
 
 /*font-size breaks*/
@@ -729,7 +729,7 @@ ul:not(.browser-default)>li{
   }
   .org-listing-name{
     grid-row: 1/2;
-    grid-column: 1/6;
+    grid-column: 1/9;
     font-size: 25px;
   }
   .org-listing-description{
