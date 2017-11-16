@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardPanel, Button, Icon } from 'react-materialize'
+import { CardPanel, Button, Icon, Preloader } from 'react-materialize'
 import { deleteVolOp, getVolOpById, editOrgInfo } from '../actions/org_actions'
 import { withRouter } from 'react-router-dom'
 import ReactToolTip from 'react-tooltip'
@@ -22,10 +22,17 @@ const VolOpListingOrg = (props) => {
     const handleDelete = () => {
         const orgObj = JSON.parse(localStorage.getItem('orgInfo'))
         deleteVolOp(props._id)
-            .then(result => {orgObj.orgVolOps.splice(orgObj.orgVolOps.indexOf(result._id), 1);editOrgInfo(orgObj)
-                .then(props.history.push('/'))
-                .catch(function(err){console.log(err)})})
-            .catch(function(err){console.log(err)})
+            .then(result => {
+              orgObj.orgVolOps.splice(orgObj.orgVolOps.indexOf(result._id), 1)
+              editOrgInfo(orgObj)
+            })
+                .then(() => {
+                  document.getElementById('delete-button').style.visibility = 'hidden'
+                  document.getElementById('delete-spinner').style.visibility = 'visible'
+                  setTimeout(() => {
+                  window.location.reload()
+                }, 1000)
+              })
     }
 
     return(
@@ -73,9 +80,14 @@ const VolOpListingOrg = (props) => {
             </a>
             </div>
             <div data-tip='Delete VolOp' className='org-listing-delete'>
-            <a onClick={()=>handleDelete()}><Icon right>delete</Icon>
-            <ReactToolTip class='tooltip'/>
+            <div style={{visibility: 'hidden'}} id='delete-spinner'>
+              <Preloader size='small'/>
+            </div>
+            <div id='delete-button'>
+              <a onClick={()=>handleDelete()}><Icon right>delete</Icon>
+              <ReactToolTip class='tooltip'/>
             </a>
+            </div>
             </div>
           </div>
         </CardPanel>

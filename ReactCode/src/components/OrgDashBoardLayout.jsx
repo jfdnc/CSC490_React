@@ -53,7 +53,7 @@ export default class OrgDashBoardLayout extends React.Component{
         <div id='org-volopfeed'>
           <h5>{loadingmsg}</h5>
           {this.state.volops.map(volop => {
-            return(<VolOpListingOrg {...volop} {...this.props} />)
+            return(<VolOpListingOrg {...volop}/>)
           })}
         </div>
       </div>

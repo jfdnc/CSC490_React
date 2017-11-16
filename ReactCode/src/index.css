@@ -772,6 +772,16 @@ ul:not(.browser-default)>li{
   .org-listing-delete{
     grid-row: 11;
     grid-column: 10/12;
+    display: grid;
+    text-align: right;
+  }
+  #delete-button{
+    grid-row: 2;
+    grid-column: 2;
+  }
+  #delete-spinner{
+    grid-row: 2;
+    grid-column: 2;
   }
   #dashboard-user{
     background: purple;
