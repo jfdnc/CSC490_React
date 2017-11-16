@@ -30,8 +30,44 @@ const VolOpListingOrg = (props) => {
 
     return(
         <CardPanel className="white black-text">
-            <h6>{props.orgName}</h6>
-            <div><Button onClick={()=>handleEdit()}>Edit<Icon right>edit</Icon></Button>    <Button onClick={()=>handleDelete()}>Delete<Icon right>delete</Icon></Button></div>
+          <div className="org-volop-listing-container">
+            <div className='org-listing-name'>
+              {props.volOpName}
+            </div>
+            <div className='org-listing-description'>
+              {props.volOpDescription}
+            </div>
+            <div className='org-listing-datetime'>
+              <div className='date-range'>
+                {props.volOpStartDate} to {props.volOpEndDate}
+              </div>
+              <div className='time-range'>
+                {props.volOpTod}
+              </div>
+            </div>
+            <div className='org-listing-spots'>
+              {props.volOpSpotsAvailable} Spots Remaining
+            </div>
+            <div className='org-listing-categories'>
+              {props.volOpCategories.map(cat => icons[cat])}
+            </div>
+            <div className='org-listing-details'>
+            <ul>
+              {props.volOpDetails.map(det => <li>{det}</li>)}
+            </ul>
+            </div>
+            <div className='org-listing-address'>
+              {props.volOpAddress.street}, {props.volOpAddress.city}, {props.volOpAddress.state}, {props.volOpAddress.zip}
+            </div>
+            <div className='org-listing-edit'>
+            <a onClick={()=>handleEdit()}><Icon right>edit</Icon>
+            </a>
+            </div>
+            <div className='org-listing-delete'>
+            <a onClick={()=>handleDelete()}><Icon right>delete</Icon>
+            </a>
+            </div>
+          </div>
         </CardPanel>
     )
 }

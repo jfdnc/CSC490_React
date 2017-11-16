@@ -6,6 +6,7 @@ import OrgStore from '../data/stores/OrgStore'
 import { getAllVolOpsByOrg } from '../actions/org_actions'
 import VolOpListingOrg from './VolOpListingOrg'
 import { Preloader } from 'react-materialize'
+import testvolops from '../util/testvolops'
 
 export default class OrgDashBoardLayout extends React.Component{
   constructor(props){
@@ -13,17 +14,19 @@ export default class OrgDashBoardLayout extends React.Component{
 
     this.state = {
       volops: []
+      //volops: [...testvolops]
     }
 
   }
 
-  componentWillMount(){
+  componentWillMount(){//comment out to test with testvolops
     OrgStore.on('change', () => {
       setTimeout(() => {
         this.setState({volops: OrgStore.getAll().allVolOps})
       }, 1200)
     })
     getAllVolOpsByOrg(this.props.orgVolOps)
+
   }
 
 
