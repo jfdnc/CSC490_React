@@ -21,7 +21,7 @@ export default class OrgView extends React.Component {
             <div id='org-view' className='view-container'>
               <div id='splash-container'>
               </div>
-              <Dashboard type='org' {...this.props} />
+              <Dashboard type='org' {...this.props} {...this.state}/>
             </div>
           </Fade>
         )

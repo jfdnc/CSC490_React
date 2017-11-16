@@ -1,10 +1,11 @@
 import React from 'react'
 import { Button } from 'react-materialize'
 import { Link } from 'react-router-dom'
-import VolOpSearch from './VolOpSearch'
 import EditOrg from './EditOrg'
 import OrgStore from '../data/stores/OrgStore'
 import { getAllVolOpsByOrg } from '../actions/org_actions'
+import VolOpListingOrg from './VolOpListingOrg'
+import { Preloader } from 'react-materialize'
 
 export default class OrgDashBoardLayout extends React.Component{
   constructor(props){
@@ -18,12 +19,16 @@ export default class OrgDashBoardLayout extends React.Component{
 
   componentWillMount(){
     OrgStore.on('change', () => {
-      this.setState({volops: OrgStore.getAll().allVolOps})
+      setTimeout(() => {
+        this.setState({volops: OrgStore.getAll().allVolOps})
+      }, 1200)
     })
     getAllVolOpsByOrg(this.props.orgVolOps)
   }
 
+
   render(){
+    let loadingmsg = this.state.volops.length ? "" : <Preloader size='big'/>
     return(
       <div id='dashboard-org'>
         <div id="org-info">
@@ -43,8 +48,9 @@ export default class OrgDashBoardLayout extends React.Component{
           <Link to='/newvolop'><Button>New Volunteer Opportunity</Button></Link>
         </div>
         <div id='org-volopfeed'>
+          <h5>{loadingmsg}</h5>
           {this.state.volops.map(volop => {
-            return(<h6>{volop._id}</h6>)
+            return(<VolOpListingOrg {...volop} {...this.props} />)
           })}
         </div>
       </div>
