@@ -6,10 +6,14 @@ export default class EditOrg extends React.Component {
     constructor(props){
         super(props)
 
-        this.state = { ...props }
+        this.state = { org: {} }
 
         this.handleSubmit = this.handleSubmit.bind(this)
-        console.log(props)
+    }
+
+    componentWillMount() {
+        const orgInfo = JSON.parse(localStorage.getItem('orgInfo'))
+        this.setState({org: orgInfo})
     }
 
     handleSubmit = () =>{
@@ -32,12 +36,12 @@ export default class EditOrg extends React.Component {
             orgPhone: inputArr[7],
             orgWebsite: inputArr[8],
             orgContactPerson: inputArr[9],
-            _id: this.state._id
+            _id: this.state.org._id
         };
 
         editOrgInfo(inputObj)
         let loader = document.getElementById('loader-overlay')
-        document.getElementById('loading-message').innerHTML ='Saving...'
+        document.getElementById('loading-message').innerHTML ='Updating...'
         loader.style.visibility ='visible'
         setTimeout(() => {
           if(localStorage.getItem('orgInfo')){
@@ -55,25 +59,25 @@ export default class EditOrg extends React.Component {
     render(){
         return(
             <div>
-                <div id='edit-org-view' className='view-container'>
+                <div id='register-view' className='view-container'>
                     <Row>
-                        <Input s={6} label="Org Name" defaultValue={this.state.orgName}></Input>
-                        <Input s={6} label="Org Email" type='email' validate defaultValue={this.state.orgEmail}></Input>
+                        <Input s={6} label="Org Name" defaultValue={this.state.org.orgName}></Input>
+                        <Input s={6} label="Org Email" type='email' validate defaultValue={this.state.org.orgEmail}></Input>
                     </Row>
                     <Row>
-                        <Input s={6} label="Street" defaultValue={this.state.orgAddress.street}></Input>
-                        <Input s={6} label="City" defaultValue={this.state.orgAddress.city}></Input>
+                        <Input s={6} label="Street" defaultValue={this.state.org.orgAddress.street}></Input>
+                        <Input s={6} label="City" defaultValue={this.state.org.orgAddress.city}></Input>
                     </Row>
                     <Row>
-                        <Input s={6} label="State" defaultValue={this.state.orgAddress.state}></Input>
-                        <Input s={6} label="Zip" defaultValue={this.state.orgAddress.zip}></Input>
+                        <Input s={6} label="State" defaultValue={this.state.org.orgAddress.state}></Input>
+                        <Input s={6} label="Zip" defaultValue={this.state.org.orgAddress.zip}></Input>
                     </Row>
-                    <Input s={12} label="Description" defaultValue={this.state.orgDescription}></Input>
+                    <Input s={12} label="Description" defaultValue={this.state.org.orgDescription}></Input>
                     <Row>
-                        <Input s={6} label="Phone" defaultValue={this.state.orgPhone}></Input>
-                        <Input s={6} label="Website" defaultValue={this.state.orgWebsite}></Input>
+                        <Input s={6} label="Phone" defaultValue={this.state.org.orgPhone}></Input>
+                        <Input s={6} label="Website" defaultValue={this.state.org.orgWebsite}></Input>
                     </Row>
-                    <Input s={12} label="Contact Name" type='text' defaultValue={this.state.orgContactPerson}></Input>
+                    <Input s={12} label="Contact Name" type='text' defaultValue={this.state.org.orgContactPerson}></Input>
                     <Button onClick={() => this.handleSubmit()}>Submit</Button>
                 </div>
             </div>
