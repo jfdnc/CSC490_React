@@ -337,7 +337,41 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
   display: flex;
   overflow: hidden;
 }
-
+/*org dashboard*/
+#dashboard-org {
+  background: white;
+  box-shadow: 0 0 5px rgba(0,0,0,0.6);
+  margin: 24px 0 24px 0;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  padding: 10px;
+  height: 900px;
+}
+#org-info{
+  grid-row: 1/4;
+  grid-column: 1/13;
+  text-align: left;
+  padding: 6px;
+  background: green;
+  margin-bottom: 12px;
+}
+#org-newvolop{
+  grid-row: 12;
+  grid-column: 1/13;
+  padding-top: 6px;
+}
+#org-editorg{
+  grid-row: 1;
+  grid-column: 8/13;
+  text-align: right;
+  padding: 6px;
+}
+#org-volopfeed{
+  grid-row: 4/12;
+  grid-column: 1/13;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.7);
+}
 /*volop search*/
 #volop-search-container{
   display: grid;
@@ -377,11 +411,14 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
 #search-results{
   margin-top: 50px;
 }
-#search-error-warning, #search-notfound-warning{
+#search-error-warning, #search-notfound-warning, #login-warning{
   visibility: hidden;
   color: rgba(230,0,0,0.6);
   opacity: 0;
   transition: opacity 200ms ease;
+}
+#login-warning{
+  margin-top: 24px;
 }
 
 /*volop listing*/
@@ -558,6 +595,10 @@ ul:not(.browser-default)>li{
 /*fullscreen*//*************************************************************/
 @media screen and (min-width: 750px) {
 
+  ul > li {
+    min-width: 80px;
+  }
+
   a.brand-logo>a{
     margin-left: 24px;
     font-size: 30px;
@@ -612,13 +653,37 @@ ul:not(.browser-default)>li{
   #search-results{
     margin-top: 0px;
   }
-
+  /*org dashboard*/
+  #dashboard-org{
+    height: 500px;
+  }
+  #org-info{
+    background: white;
+    grid-row: 2/13;
+    grid-column: 1/6;
+    text-align: left;
+    padding: 6px;
+  }
+  #org-newvolop{
+    background: white;
+    grid-row: 12;
+    grid-column: 6/13;
+    padding-top:6px;
+  }
+  #org-editorg{
+    background: white;
+    grid-row: 1;
+    grid-column: 4/6;
+    text-align: center;
+  }
+  #org-volopfeed{
+    background: var(--off-white);
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.5);
+    grid-row: 1/12;
+    grid-column: 6/13;
+  }
   #dashboard-user{
     background: purple;
-    border: 1px solid rgba(0,0,0,0.3);
-  }
-  #dashboard-org{
-    background: blue;
     border: 1px solid rgba(0,0,0,0.3);
   }
 

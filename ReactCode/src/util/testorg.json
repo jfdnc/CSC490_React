@@ -1,0 +1,37 @@
+{
+  "_id":"5a0876fc6d6b190ce0a05e05",
+  "orgName":"Vol R Us",
+  "orgEmail":"mario.month@gmail.com",
+  "orgPwHash":"$2a$10$f2Y38zvzY0oelPrw374Lz.LEBcJPfZsGh/KDrbdlxpHMmRS3E32ay",
+  "orgDescription":"Vol Org",
+  "orgPhone":"(336)123-1234",
+  "orgWebsite":"www.volrus.com",
+  "orgContactPerson":"Robert Schwanky",
+  "__v":0,
+  "orgVolOps":[
+    "5a0892dd69dade1778b2d857",
+    "5a089406689a7d138cc22bfa",
+    "5a0a1e7914bc600a8cb3b61b",
+    "5a0a208f0213731c406e7507",
+    "5a0a22f63384ed3548669f72",
+    "5a0a23b973ebbe32dc1688e3",
+    "5a0a26656eb31b32e0e5ef08",
+    "5a0a26a86eb31b32e0e5ef09",
+    "5a0a26fe6eb31b32e0e5ef0a",
+    "5a0a271b6eb31b32e0e5ef0b",
+    "5a0a28ca5ff29c2d94f6e295",
+    "5a0a2c7f096c2c077c7e69c9",
+    "5a0a2e02218bfa21b4fd9065",
+    "5a0a2e2d218bfa21b4fd9066",
+    "5a0a385a2908e313c87c31a0",
+    "5a0a3db7f2d8853280cf9d74",
+    "5a0a3e4914a5f51790338127"
+    ],
+    "orgAddress":
+    {"street":
+      "789 Test Rd.",
+      "city":"Greensboro",
+      "state":"NC",
+      "zip":"12344"
+      }
+}
