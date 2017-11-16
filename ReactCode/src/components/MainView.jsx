@@ -5,18 +5,14 @@ import GuestView from './GuestView'
 import UserView from './UserView'
 import OrgView from './OrgView'
 import _ from 'lodash'
-//test imports
-import testorg from '../util/testorg.json'
-import testuser from '../util/testuser.json'
-
 
 export default class MainView extends React.Component {
   constructor(props){
     super(props)
 
     this.state = {
-      userState: JSON.parse(localStorage.getItem('userInfo')) || {},
-      orgState: JSON.parse(localStorage.getItem('orgInfo')) || {}
+      userState: localStorage.getItem('userInfo') || {},
+      orgState: localStorage.getItem('orgInfo') || {}
     }
   }
 
@@ -68,13 +64,9 @@ export default class MainView extends React.Component {
     let userState = this.state.userState,
         orgState  = this.state.orgState
 
-    let currView = !_.isEmpty(userState) ? <UserView {...this.state.userState} /> :
-                   !_.isEmpty(orgState)  ? <OrgView {...this.state.orgState} />  :
+    let currView = !_.isEmpty(userState) ? <UserView /> :
+                   !_.isEmpty(orgState)  ? <OrgView {...(JSON.parse(this.state.orgState))} />  :
                    <GuestView {...this.props} />
-
-    //testing////////////////
-    //currView = <OrgView {...testorg} />
-    //delete////////////////
     return(
 
       <div id='main-container'>

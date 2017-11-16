@@ -19,6 +19,12 @@ const UserSchema = new Schema({
         email        : String,
         name         : String
     },
+    twitter          : {
+        id           : String,
+        token        : String,
+        displayName  : String,
+        username     : String
+    },
     pwHash: String,
     preferences: [String],
     savedVolOps: [mongoose.Schema.ObjectId] // store id of volOp

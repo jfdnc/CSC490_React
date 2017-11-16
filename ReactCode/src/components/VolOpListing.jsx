@@ -2,7 +2,6 @@ import React from 'react'
 import { CardPanel, Icon, Button } from 'react-materialize'
 import ReactToolTip from 'react-tooltip'
 import gmappalceholder from '../assets/images/gmapplaceholder.jpg'
-import gmapsapikey from '../util/gmapsapikey.js'
 
 const VolOpListing = (props) => {
   let volop = props.volop
@@ -20,10 +19,6 @@ const VolOpListing = (props) => {
     props.history.push('/register')
   }
 
-  let fullAddress = `${volop.volOpAddress.street.split(" ").join("+")},${volop.volOpAddress.city.split(" ").join("+")},${volop.volOpAddress.state.split(" ").join("+")},${volop.volOpAddress.zip}`
-  let imgDataTip = `${volop.volOpAddress.street}, ${volop.volOpAddress.city}, ${volop.volOpAddress.state}, ${volop.volOpAddress.zip}`
-  var imgTag = <img data-tip={imgDataTip} src={`https://maps.googleapis.com/maps/api/staticmap?center=${fullAddress}&zoom=14&size=300x300&markers=size:mid%7Ccolor:0xff0000%7Clabel:1%7C${fullAddress}&key=${gmapsapikey}`}/>
-  var clickableMap = <a href={`https://www.google.com/maps/dir/${fullAddress}`} target="_blank">{imgTag}</a>
 
   return(
     <CardPanel className="white black-text">
@@ -60,8 +55,7 @@ const VolOpListing = (props) => {
           {volop.volOpDescription}
         </div>
         <div className='volop-map'>
-          {clickableMap}
-          <ReactToolTip class='tooltip'/>
+          <img src={gmappalceholder}/>
         </div>
         <div className='volop-address'>
           {/*`${volop.volOpAddress.city}, ${volop.volOpAddress.state}, ${volop.volOpAddress.street}, ${volop.volOpAddress.zip}`*/}

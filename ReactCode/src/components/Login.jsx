@@ -4,11 +4,10 @@ import { loginUser } from '../actions/user_actions'
 import { loginOrg } from '../actions/org_actions'
 import Fade from './Fade'
 import UserStore from '../data/stores/UserStore'
-import { editPrefs, saveVolop } from '../actions/user_actions'
+import { editPrefs, saveVolop, addToCal} from '../actions/user_actions'
 
 const Login =  (props) => {
   const handleSubmit = () => {
-    loginWarning.hide()
     let inputArr = [],
         inputObj = {},
         inputs = document.getElementsByTagName('input')
@@ -36,7 +35,8 @@ const Login =  (props) => {
             props.history.push('/')
           } else {
             loader.style.visibility ='hidden'
-            loginWarning.fail('user')
+            //add info about error
+            console.log('login unsuccessful')
           }
         }, 1000)
       }
@@ -52,39 +52,22 @@ const Login =  (props) => {
               loader.style.visibility ='hidden'
               props.history.push('/')
             } else {
+              //add error message here
               loader.style.visibility ='hidden'
-              loginWarning.fail('org')
+              console.log('login unsuccessful')
             }
           }, 1000)
       }
     } else {
-      loginWarning.fieldError()
-      setTimeout(() => loginWarning.hide(), 2000)
+      console.log('must provide email and pw')
     }
   }
 
-  const loginWarning = {
-    fail: (userType) => {
-      let loginWarning = document.getElementById('login-warning')
-      loginWarning.style.visibility = 'visible'
-      loginWarning.innerHTML = `Failure logging in ${userType}. Check email and password.`
-      loginWarning.style.opacity = 1
-    },
-    fieldError: () => {
-      let loginWarning = document.getElementById('login-warning')
-      loginWarning.style.visibility = 'visible'
-      loginWarning.innerHTML = `Please provide email and password.`
-      loginWarning.style.opacity = 1
-    },
-    hide: () => {
-      let loginWarning = document.getElementById('login-warning')
-      loginWarning.style.opacity = 0
-      loginWarning.style.visibility = 'hidden'
-      loginWarning.innerHTML = ""
-    }
-  }
+
 
   const facebookURL = UserStore.getAll().facebookURL
+  //5a0a1e7914bc600a8cb3b61b
+  //brandonsoccer22@gmail.com
 
   return(
     <div>
@@ -103,12 +86,23 @@ const Login =  (props) => {
                 </Input>
             </Col>
           <Button onClick={()=>handleSubmit()}>Submit</Button>
-          <div id='login-warning'></div>
       </div>
       <div id='offsite'>
         offsite login
           <div>
           <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>
+          <a href={UserStore.getAll().twitterURL} class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
+          <Button onClick={()=>{
+            
+            var email = 'evolunteersuncg@gmail.com'
+            var id = '5a0a1e7914bc600a8cb3b61b'
+            var email = prompt("enter your email","email")
+            var id = prompt("enter volOpID","volOpID")
+
+            addToCal(id,email)
+
+
+        }}>Submit iCal Request</Button>
           </div>
       </div>
       </div>
