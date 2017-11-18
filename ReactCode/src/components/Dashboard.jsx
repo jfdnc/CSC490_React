@@ -1,7 +1,7 @@
 import React from 'react'
 import GuestDashboardLayout from './GuestDashboardLayout'
 import OrgDashBoardLayout from './OrgDashBoardLayout'
-import UserDashBoard from './UserDashBoard'
+import UserDashBoardLayout from './UserDashBoardLayout'
 
 export default class Dashboard extends React.Component {
   constructor(props){
@@ -23,7 +23,7 @@ export default class Dashboard extends React.Component {
         currLayout = <OrgDashBoardLayout {...this.props} />
         break
      case 'user':
-        currLayout = <UserDashBoard {...this.props} />
+        currLayout = <UserDashBoardLayout {...this.props} />
         break
     }
     return(

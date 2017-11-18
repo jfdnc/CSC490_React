@@ -103,8 +103,8 @@ router.get('/users', function(req, res, next){
 });
 
 // get a specific user from the db using email as key
-router.get('/users/:email', function(req, res, next){
-    User.findOne({email: req.params.email}).then(function(user){
+router.get('/users/:id', function(req, res, next){
+    User.findOne({_id: req.params.id}).then(function(user){
         res.send(user);
     });
 });

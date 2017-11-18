@@ -18,8 +18,6 @@ const App = (props) => {
   //Handle Social Media Login
 window.onload = function () {
 
-    
-
     var url_string = window.location.href
     var url = new URL(url_string);
     var jwtToken = url.searchParams.get("jwt")
@@ -27,11 +25,11 @@ window.onload = function () {
     if(jwtToken!=null){
       var changeEmail = url.searchParams.get("changeEmail")
       var email = url.searchParams.get("email")
-      
+
 
         //twitter hack to get email
         if(changeEmail==1){
-          
+
           //regex for email, return true if email is in proper format
           function validateEmail(email) {
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -84,7 +82,7 @@ window.onload = function () {
       }
       window.history.replaceState({}, document.title, "/");
 
-    }      
+    }
   }
   //END
 
