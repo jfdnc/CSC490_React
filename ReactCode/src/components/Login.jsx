@@ -5,7 +5,7 @@ import { loginOrg } from '../actions/org_actions'
 import Fade from './Fade'
 import UserStore from '../data/stores/UserStore'
 import { editPrefs, saveVolop,addToCal,deleteUser } from '../actions/user_actions'
-import 'font-awesome/css/font-awesome.css'
+
 
 
 
@@ -118,7 +118,7 @@ const Login =  (props) => {
           <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>
           <a href={UserStore.getAll().twitterURL} class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
           <Button onClick={()=>{
-            
+
             var email = 'evolunteersuncg@gmail.com'
             var id = '5a0e1285d5d0850478b05fec'
             var email = prompt("enter your email","email")
@@ -127,7 +127,7 @@ const Login =  (props) => {
             addToCal(id,email)
 
 
-        }}>Submit iCal Request</Button>       
+        }}>Submit iCal Request</Button>
           </div>
       </div>
       </div>
