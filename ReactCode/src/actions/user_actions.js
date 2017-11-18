@@ -66,10 +66,13 @@ export function saveVolop(userID, volOpID){
 
 }
 
-export function shareVolop(){
-  dispatcher.dispatch({
-    type: UserActionTypes.SHARE_VOLOP
-  })
+export function shareVolop(volOpID){
+  
+window.open("http://twitter.com/share?text=I am volunteering for eVol here&url=http://www.google.com&hashtags=evol,volunteer,UNCG")
+
+  //dispatcher.dispatch({
+   // type: UserActionTypes.SHARE_VOLOP
+ // })
 }
 
 export function editPrefs(user){
