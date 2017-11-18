@@ -5,6 +5,13 @@ import { loginOrg } from '../actions/org_actions'
 import Fade from './Fade'
 import UserStore from '../data/stores/UserStore'
 import { editPrefs, saveVolop,addToCal,deleteUser } from '../actions/user_actions'
+import 'font-awesome/css/font-awesome.css'
+
+
+
+
+
+
 
 const Login =  (props) => {
   const handleSubmit = () => {
@@ -120,14 +127,7 @@ const Login =  (props) => {
             addToCal(id,email)
 
 
-        }}>Submit iCal Request</Button>
-        <Button onClick={()=>{            
-            
-
-           deleteUser(UserStore.getAll().user._id)
-
-
-        }}>Delete Me</Button>
+        }}>Submit iCal Request</Button>       
           </div>
       </div>
       </div>

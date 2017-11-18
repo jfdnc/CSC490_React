@@ -8,13 +8,15 @@ import Login from './Login'
 import NewVolOp from './NewVolOp'
 import EditVolOp from './EditVolOp'
 import EditOrg from './EditOrg'
-import { initFBState } from '../actions/user_actions'
+import EditUser from './EditUser'
+import { initFBState,saveVolOp } from '../actions/user_actions'
 import Loading from './Loading'
 //import { initFBState,initVolOps,saveVolop } from '../actions/user_actions'
 
 const App = (props) => {
 
-  window.onload = function () {
+  //Handle Social Media Login
+window.onload = function () {
 
     
 
@@ -82,10 +84,11 @@ const App = (props) => {
       }
       window.history.replaceState({}, document.title, "/");
 
-    }
-
-      
+    }      
   }
+  //END
+
+
   return(
       <div id='app-container'>
         <Loading />
@@ -97,6 +100,7 @@ const App = (props) => {
           <Route path="/newvolop" component={NewVolOp}/>
           <Route path="/editvolop" component={EditVolOp}/>
           <Route path="/editorg" component={EditOrg}/>
+          <Route path="/edituser" component={EditUser}/>
         </div>
         <Footer/>
       </div>

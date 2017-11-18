@@ -177,7 +177,7 @@ var mailObj = {
   from: "evolunteersuncg@gmail.com",
     to: req.body.userEmail,
     subject: "Your eVol Calendar Reminder!",
-    text: "Thanks for agreeing to volunterring in you local community!\n\nDo not forget to add this event to your calendar :)\n\n-- The eVol team",
+    text: "Thanks for agreeing to volunteering in your local community!\n\nDo not forget to add this event to your calendar :)\n\n-- The eVol team",
   attachments: {path: correctedPath}
 };
 

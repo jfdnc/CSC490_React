@@ -183,8 +183,8 @@ export function editUser(user){
 
 export function deleteUser(userID){
   return new Promise((resolve, reject) => {
-    let myReq = new Request('/api/users/'+userID, {method:'DELETE'})//, body: JSON.stringify(user),
-      //headers: {"Content-Type": "application/json"}})
+    let myReq = new Request('/api/users/'+userID, {method:'DELETE', body: JSON.stringify({userID: userID}),
+      headers: {"Content-Type": "application/json"}})
     fetch(myReq)
     .then(function(res){
             //console.log(res)
