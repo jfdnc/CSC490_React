@@ -66,10 +66,13 @@ export function saveVolop(userID, volOpID){
 
 }
 
-export function shareVolop(){
-  dispatcher.dispatch({
-    type: UserActionTypes.SHARE_VOLOP
-  })
+export function shareVolop(volOpID){
+  
+window.open("http://twitter.com/share?text=I am volunteering for eVol here&url=http://www.google.com&hashtags=evol,volunteer,UNCG")
+
+  //dispatcher.dispatch({
+   // type: UserActionTypes.SHARE_VOLOP
+ // })
 }
 
 export function editPrefs(user){
@@ -137,7 +140,24 @@ export function loginUser(user){
   })
 }
 
-export function addToCal(volOpID){
+export function addToCal(volOpID, userEmail){
+
+  var bundle = {
+    userEmail: userEmail,
+    id: volOpID,
+  }
+
+  return new Promise((resolve, reject) => {
+    let myReq = new Request('/emailEvent', {method:'POST', body: JSON.stringify(bundle),
+      headers: {"Content-Type": "application/json"}})
+    fetch(myReq)
+    .then(function(res){
+            //console.log(res)
+          })
+    .catch(function(err){
+      console.log(err)
+    })    
+  })
 
 }
 
@@ -163,6 +183,28 @@ export function editUser(user){
 
   })
 }
+
+export function deleteUser(userID){
+  return new Promise((resolve, reject) => {
+    let myReq = new Request('/api/users/'+userID, {method:'DELETE', body: JSON.stringify({userID: userID}),
+      headers: {"Content-Type": "application/json"}})
+    fetch(myReq)
+    .then(function(res){
+            //console.log(res)
+      localStorage.removeItem('token')
+      localStorage.removeItem('userInfo')
+          })
+    .catch(function(err){
+      console.log(err)
+    })
+
+    dispatcher.dispatch({
+      type: UserActionTypes.LOG_OUT,      
+    })
+
+  })
+}
+
 
 
 export function initFBState(token,user){

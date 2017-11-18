@@ -10,7 +10,8 @@ constructor(props) {
 
         this.state = {
             user: {},
-            facebookURL: "/auth/facebookLogin"
+            facebookURL: "/auth/facebookLogin",
+            twitterURL: "/auth/twitter"
         }
     }
 
@@ -88,7 +89,7 @@ constructor(props) {
             break
         case UserActionTypes.INIT_VOLOPS:
             this.initVolOps(action.volOps);
-            break
+            break        
         }
     }
 }

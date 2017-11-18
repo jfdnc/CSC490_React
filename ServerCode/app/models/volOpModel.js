@@ -12,6 +12,7 @@ var volOpSchema = new mongoose.Schema({
     volOpName: String,
     volOpDescription: String,
     volOpSpotsAvailable: Number,
+    savedUsers: [String],
     volOpAddress: {
       street: {
         type: String,
