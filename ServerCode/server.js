@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const config = require('./config');
 const session = require('express-session')
+var cookieParser = require('cookie-parser');
 
 // load models and connect to db
 require('./app/models').connect(config.dbUri);
@@ -20,6 +21,8 @@ app.use(express.static(publicPath));
 // set up body-parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser()); // read cookies (needed for auth)
+
 
 // set up passport middleware
 app.use(passport.initialize());
@@ -28,11 +31,13 @@ app.use(passport.initialize());
 const localSignupStrategy = require('./server/passport/local-signup');
 const localUserLoginStrategy = require('./server/passport/local-login-user');
 const localOrgLoginStrategy = require('./server/passport/local-login-org')
-const myFacebookStrategy = require('./server/passport/facebook-login')//(app, passport)
+const myFacebookStrategy = require('./server/passport/facebook-login')
+const myTwitterStrategy = require('./server/passport/twitter-login')
 passport.use('local-signup', localSignupStrategy);
 passport.use('local-login-user', localUserLoginStrategy);
 passport.use('local-login-org', localOrgLoginStrategy);
 passport.use('facebook-login', myFacebookStrategy);
+passport.use('twitter-login', myTwitterStrategy);
 
 //START
 //might not need this

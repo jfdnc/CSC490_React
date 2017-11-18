@@ -118,7 +118,7 @@ router.put('/users/:id', function(req, res, next){
     });
 });
 
-// update a user's savedVolOps in db
+// update a user's savedVolOps in db (could not get this to work)
 router.put('/users/:userId/:volOpId', function(req, res, next){
   User.findByIdAndUpdate({_id: req.params.userId},
     {$addToSet: {savedVolOps: req.params.volOpId}}).then(function(){
@@ -128,7 +128,7 @@ router.put('/users/:userId/:volOpId', function(req, res, next){
     });
 });
 
-// update a user's savedVolOps in db
+// update a user's savedVolOps in db (working version)
 router.put('/userVol', function(req, res, next){
   User.findByIdAndUpdate({_id: req.body.userId},
     {$addToSet: {savedVolOps: req.body.volOpId}}).then(function(){

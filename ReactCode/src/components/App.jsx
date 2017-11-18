@@ -15,32 +15,76 @@ import Loading from './Loading'
 const App = (props) => {
 
   window.onload = function () {
+
+    
+
     var url_string = window.location.href
     var url = new URL(url_string);
     var jwtToken = url.searchParams.get("jwt")
 
     if(jwtToken!=null){
-      var newUser = {
-        firstName:  url.searchParams.get("firstName"),
-        lastName: url.searchParams.get("lastName"),
-        email: url.searchParams.get("email"),
-        _id: url.searchParams.get("id")
+      var changeEmail = url.searchParams.get("changeEmail")
+      var email = url.searchParams.get("email")
+      
 
-      }
+        //twitter hack to get email
+        if(changeEmail==1){
+          
+          //regex for email, return true if email is in proper format
+          function validateEmail(email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+          }
+          var newEmail = prompt("Please Enter an email address to continue")
+          while(!validateEmail(email)){
+            newEmail = prompt("Please Enter a valid email to continue")
+          }
+          email = newEmail
+          var oldUser = {
+            _id:  url.searchParams.get("id"),
+            email: email
+          }
+
+          let myReq = new Request('/api/users/'+oldUser._id, {method:'PUT', body: JSON.stringify(oldUser),
+            headers: {"Content-Type": "application/json"}})
+          fetch(myReq)
+          .then(function(res){
+            //console.log(res)
+            var newUser = {
+              firstName:  url.searchParams.get("firstName"),
+              lastName: url.searchParams.get("lastName"),
+              email: email,
+              _id: url.searchParams.get("id")
+
+            }
+            initFBState(jwtToken,newUser)
+            /*
+               let savedVolOP = localStorage.getItem('savedVolOP') || false
+              if(savedUserState){
+               saveVolOP(url.searchParams.get("id"),JSON.parse(saveVolop))
+             }
+           */
+          })
+          .catch(function(err){
+            console.log(err)
+          })
+        } else{
+        //end hack, proceed normally
+
+        var newUser = {
+          firstName:  url.searchParams.get("firstName"),
+          lastName: url.searchParams.get("lastName"),
+          email: email,
+          _id: url.searchParams.get("id")
+
+        }
         initFBState(jwtToken,newUser)
-
-        window.history.replaceState({}, document.title, "/");
+      }
+      window.history.replaceState({}, document.title, "/");
 
     }
 
-      /*
-    let savedUserState = localStorage.getItem('userInfo') || false
-    if(savedUserState){
-      console.log(JSON.parse(savedUserState)+"in app")
-      var myUser = JSON.parse(savedUserState)
-      initVolOps(myUser.email)
-    }
-    */
+      
   }
   return(
       <div id='app-container'>
