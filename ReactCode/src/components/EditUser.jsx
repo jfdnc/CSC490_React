@@ -75,9 +75,9 @@ export default class EditUser extends React.Component {
             return (
                 <div className = {"volOpColor"+(x%2)}>
                 <h2 style={{color: myColor}}>{volop.volOpName}</h2>
-                <h3>{volop.volOpStartDate}</h3>
-                <h3>{volops.volOpEndDate}</h3>
-                <h3>{volop.volOpTod}</h3>
+                <h3>Start Date: {volop.volOpStartDate}</h3>
+                <h3>End Date: {volop.volOpEndDate}</h3>
+                <h3>Time: {volop.volOpTod}</h3>
                 <Button onClick={()=>{
 
                     addToCal(volop._id, this.state.email)

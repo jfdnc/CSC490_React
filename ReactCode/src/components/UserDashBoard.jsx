@@ -17,15 +17,7 @@ export default class OrgDashBoardLayout extends React.Component{
           <div id='guest-side-content-header'>
             We want to help you connect to volunteer opportunies in your community! Edit your profile, or search for local volunteer opportunities near you!
             <div id='reg-log-links'>
-              <Link to='/edituser'><Button>View Profile</Button></Link>  
-              <Button onClick={()=>{
-            
-            console.log(UserStore.getAll().user)
-            console.log(UserStore.getAll().volOps)
-            UserStore.update()
-
-
-        }}>Show Info</Button>              
+              <Link to='/edituser'><Button onClick={()=>{ UserStore.update()}}>View Profile</Button></Link>                         
             </div>
           </div>
 

@@ -5,7 +5,8 @@ import { loginOrg } from '../actions/org_actions'
 import Fade from './Fade'
 import UserStore from '../data/stores/UserStore'
 import { editPrefs, saveVolop,addToCal,deleteUser, shareVolop } from '../actions/user_actions'
-import 'font-awesome/css/font-awesome.css'
+//import 'font-awesome/css/font-awesome.css'
+
 
 
 
@@ -116,31 +117,7 @@ const Login =  (props) => {
         offsite login
           <div>
           <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>
-          <a href={UserStore.getAll().twitterURL} class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
-          <Button onClick={()=>{
-            
-            var email = 'evolunteersuncg@gmail.com'
-            var id = '5a0e1285d5d0850478b05fec'
-            var email = prompt("enter your email","email")
-            var id = prompt("enter volOpID","5a0e1285d5d0850478b05fec")
-
-            addToCal(id,email)
-
-
-        }}>Submit iCal Request</Button>      
-        <Button onClick={()=>{
-            
-            shareVolop('5a0de3df88452c2630704824')
-            
-
-
-        }}>Submit two eVols</Button>  
-        <Button onClick={()=>{
-            
-            console.log(UserStore.getAll())
-
-
-        }}>Show Info</Button>  
+          <a href={UserStore.getAll().twitterURL} class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>          
           </div>
       </div>
       </div>

@@ -143,9 +143,19 @@ export function loginUser(user){
               type: UserActionTypes.LOGIN_USER,
               user: xhr.response.user
             })
+
+            let savedUserState = localStorage.getItem('userInfo') || false
+            if(savedUserState){ 
+            initVolOps(JSON.parse(savedUserState))
+            }
           }
         });
     xhr.send(user)
+
+
+    
+
+
   })
 }
 

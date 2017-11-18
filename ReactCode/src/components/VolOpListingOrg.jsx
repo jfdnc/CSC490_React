@@ -19,7 +19,7 @@ const VolOpListingOrg = (props) => {
         getVolOpById(props._id).then(props.history.push('/editvolop')).catch(function(err){console.log(err)})
     }
 
-    const handleDelete = () => {
+    const handleDelete = (id) => {
         const orgObj = JSON.parse(localStorage.getItem('orgInfo'))
         deleteVolOp(props._id)
             .then(result => {
@@ -27,8 +27,8 @@ const VolOpListingOrg = (props) => {
               editOrgInfo(orgObj)
             })
                 .then(() => {
-                  document.getElementById('delete-button').style.visibility = 'hidden'
-                  document.getElementById('delete-spinner').style.visibility = 'visible'
+                  document.getElementById(`delete-button-${id}`).style.visibility = 'hidden'
+                  document.getElementById(`delete-spinner-${id}`).style.visibility = 'visible'
                   setTimeout(() => {
                   window.location.reload()
                 }, 1000)
@@ -80,11 +80,11 @@ const VolOpListingOrg = (props) => {
             </a>
             </div>
             <div data-tip='Delete VolOp' className='org-listing-delete'>
-            <div style={{visibility: 'hidden'}} id='delete-spinner'>
+            <div style={{visibility: 'hidden'}} className='delete-spinner' id={`delete-spinner-${props._id}`}>
               <Preloader size='small'/>
             </div>
-            <div id='delete-button'>
-              <a onClick={()=>handleDelete()}><Icon right>delete</Icon>
+            <div className='delete-button' id={`delete-button-${props._id}`}>
+              <a onClick={()=>handleDelete(props._id)}><Icon right>delete</Icon>
               <ReactToolTip class='tooltip'/>
             </a>
             </div>
