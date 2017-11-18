@@ -25,8 +25,17 @@ window.onload = function () {
     var jwtToken = url.searchParams.get("jwt")
 
     if(jwtToken!=null){
+      localStorage.setItem('token', jwtToken);
       var changeEmail = url.searchParams.get("changeEmail")
       var email = url.searchParams.get("email")
+      var newUser = {
+              firstName:  url.searchParams.get("firstName"),
+              lastName: url.searchParams.get("lastName"),
+              email: email,
+              _id: url.searchParams.get("id")
+
+            }
+      localStorage.setItem('userInfo', JSON.stringify(newUser))
       
 
         //twitter hack to get email
@@ -52,14 +61,14 @@ window.onload = function () {
           fetch(myReq)
           .then(function(res){
             //console.log(res)
-            var newUser = {
+            var newUser2 = {
               firstName:  url.searchParams.get("firstName"),
               lastName: url.searchParams.get("lastName"),
               email: email,
               _id: url.searchParams.get("id")
 
             }
-            initFBState(jwtToken,newUser)
+            initFBState(jwtToken,newUser2)
             /*
                let savedVolOP = localStorage.getItem('savedVolOP') || false
               if(savedUserState){
@@ -82,9 +91,30 @@ window.onload = function () {
         }
         initFBState(jwtToken,newUser)
       }
-      window.history.replaceState({}, document.title, "/");
 
-    }      
+
+      let loader = document.getElementById('loader-overlay')
+          document.getElementById('loading-message').innerHTML ='Logging in...'
+          loader.style.visibility ='visible'
+          setTimeout(() => {
+            if(localStorage.getItem('userInfo')){
+              loader.style.visibility ='hidden'
+              
+              //props.history.push('/')
+            } else {
+              loader.style.visibility ='hidden'
+              //loginWarning.fail('user')
+              console.log("falied to login")
+            }
+          }, 1000)
+
+      window.history.replaceState({}, document.title, "/");
+      window.location.reload();
+
+
+    }  
+    //window.location.href = "http://localhost:3000"
+
   }
   //END
 

@@ -4,7 +4,7 @@ import { loginUser } from '../actions/user_actions'
 import { loginOrg } from '../actions/org_actions'
 import Fade from './Fade'
 import UserStore from '../data/stores/UserStore'
-import { editPrefs, saveVolop,addToCal,deleteUser } from '../actions/user_actions'
+import { editPrefs, saveVolop,addToCal,deleteUser, shareVolop } from '../actions/user_actions'
 import 'font-awesome/css/font-awesome.css'
 
 
@@ -127,7 +127,20 @@ const Login =  (props) => {
             addToCal(id,email)
 
 
-        }}>Submit iCal Request</Button>       
+        }}>Submit iCal Request</Button>      
+        <Button onClick={()=>{
+            
+            shareVolop('5a0de3df88452c2630704824')
+            
+
+
+        }}>Submit two eVols</Button>  
+        <Button onClick={()=>{
+            
+            console.log(UserStore.getAll())
+
+
+        }}>Show Info</Button>  
           </div>
       </div>
       </div>

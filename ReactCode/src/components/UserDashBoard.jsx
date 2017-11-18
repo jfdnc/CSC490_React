@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from 'react-materialize'
 import { Link } from 'react-router-dom'
 import VolOpSearch from './VolOpSearch'
+import UserStore from '../data/stores/UserStore'
 
 export default class OrgDashBoardLayout extends React.Component{
   constructor(props){
@@ -16,7 +17,15 @@ export default class OrgDashBoardLayout extends React.Component{
           <div id='guest-side-content-header'>
             We want to help you connect to volunteer opportunies in your community! Edit your profile, or search for local volunteer opportunities near you!
             <div id='reg-log-links'>
-              <Link to='/edituser'><Button>Edit Profile</Button></Link>              
+              <Link to='/edituser'><Button>View Profile</Button></Link>  
+              <Button onClick={()=>{
+            
+            console.log(UserStore.getAll().user)
+            console.log(UserStore.getAll().volOps)
+            UserStore.update()
+
+
+        }}>Show Info</Button>              
             </div>
           </div>
 

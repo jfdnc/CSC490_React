@@ -3,6 +3,7 @@ this file will contain actions for UI components to emit
 */
 import dispatcher from '../data/Dispatcher'
 import UserActionTypes from '../action_types/UserActionTypes'
+import _ from 'lodash'
 
 
 //return t/f on loggedIn state
@@ -40,7 +41,7 @@ export function viewVolopUser(){
 }
 
 //return t/f on volop saved
-export function saveVolop(userID, volOpID){
+export function saveVolop(userID, volOpID) {
 
  return new Promise((resolve, reject) => {
   var bundle = {
@@ -58,18 +59,29 @@ export function saveVolop(userID, volOpID){
     console.log(err)
   })
 
+  fetch('/api/volOps/'+volOpID)
+  .then((resp) => resp.json()) // Transform the data into json
+  .then(function(data) {
+
   dispatcher.dispatch({
     type: UserActionTypes.SAVE_VOLOP,
-    volOpID: volOpID
+    volOpID: volOpID,
+    volOp: data,
   })
 })
 
+})
+
+
 }
 
-export function shareVolop(){
-  dispatcher.dispatch({
-    type: UserActionTypes.SHARE_VOLOP
-  })
+export function shareVolop(volOpID){
+  
+window.open("http://twitter.com/share?text=I am volunteering for eVol here&url=http://www.google.com&hashtags=evol,volunteer,UNCG")
+
+  //dispatcher.dispatch({
+   // type: UserActionTypes.SHARE_VOLOP
+ // })
 }
 
 export function editPrefs(user){
@@ -208,41 +220,76 @@ export function initFBState(token,user){
 
   return new Promise((resolve, reject) => {
 
-
+    var userData = {}
+    var volOps = [{}]
     fetch('/api/users/'+user.email)
   .then((resp) => resp.json()) // Transform the data into json
   .then(function(data) {
       //data._id = user._id
-    localStorage.setItem('token', token);
-    localStorage.setItem('userInfo', JSON.stringify(data))
+      userData = data
+      //localStorage.setItem('token', token);
+      localStorage.setItem('userInfo', JSON.stringify(data))
 
+      var a = []
+      console.log(a.length+"=a")
+      console.log(userData)
+      console.log(userData.savedVolOps)
+      console.log(userData.savedVolOps.length)
 
+      if(userData.savedVolOps.length!=0){
+        volOps =  userData.savedVolOps.map((volOpID) =>{
+          console.log(volOpID+'in volOp')
+          fetch('/api/volOps/'+volOpID)
+  .then((resp) => resp.json()) // Transform the data into json
+  .then(function(data2) { 
+    console.log(JSON.stringify(data2)+" volOpin user actions")
 
-    //send to dispatcher
     dispatcher.dispatch({
-      type: UserActionTypes.INIT_FBUSER,
-      user: data
+      type: UserActionTypes.INIT_VOLOPS,
+      volOp: data2
     })
-  })
+    return data2
+  })  
 })
-saveVolop('5a06872b3a5af5342c3e0d0f','5a0685a6a4a20024b40cf80d')
+      }
+
+
+    })
+
+
+
+  console.log(volOps)
+  //send to dispatcher
+  dispatcher.dispatch({
+    type: UserActionTypes.INIT_FBUSER,
+    user: userData,    
+  })
+  //saveVolop('5a06872b3a5af5342c3e0d0f','5a0685a6a4a20024b40cf80d')
+})
 }
 
 
 /**
 this method relies on local storage to work
 */
-export function initVolOps(userEmail){
+export function initVolOps(userData){
   return new Promise((resolve, reject) => {
-   fetch('/api/users/'+userEmail)
+        if(userData.savedVolOps.length!=0){
+        var volOps =  userData.savedVolOps.map((volOpID) =>{
+          console.log(volOpID+'in volOp')
+          fetch('/api/volOps/'+volOpID)
   .then((resp) => resp.json()) // Transform the data into json
-  .then(function(data) {
-    //console.log(data.savedVolOps.toString())
+  .then(function(data2) { 
+    console.log(JSON.stringify(data2)+" volOpin user actions")
+
     dispatcher.dispatch({
       type: UserActionTypes.INIT_VOLOPS,
-      volOps: data.savedVolOps
+      volOp: data2
     })
-  })
+    return data2
+  })  
+})
+      }
 })
 }
 
@@ -254,6 +301,8 @@ export function populateFromLocalStorage(){
         type: UserActionTypes.POPULATE_FROM_LOCAL_STORAGE,
         user: JSON.parse(savedUserState)
       })
+
+      initVolOps(JSON.parse(savedUserState))
     }
   })
 }
