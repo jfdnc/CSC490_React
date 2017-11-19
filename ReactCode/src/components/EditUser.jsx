@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Row, Input } from 'react-materialize'
 import UserStore from '../data/stores/UserStore'
-import { editPrefs,addToCal} from '../actions/user_actions'
+import { editPrefs,addToCal, shareVolop} from '../actions/user_actions'
 import _ from 'lodash'
 
 export default class EditUser extends React.Component {
@@ -90,6 +90,12 @@ export default class EditUser extends React.Component {
 
 
                 }}>Delete</Button>
+                <Button className="twitter-share-button" onClick={()=>{
+
+                   shareVolop(volop._id)
+
+
+                }}>Tweet</Button>
                 </div>
                 )
         })

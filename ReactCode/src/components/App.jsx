@@ -10,6 +10,7 @@ import EditVolOp from './EditVolOp'
 import EditOrg from './EditOrg'
 import EditUser from './EditUser'
 import { initFBState,saveVolOp } from '../actions/user_actions'
+import UserStore from '../data/stores/UserStore'
 import Loading from './Loading'
 //import { initFBState,initVolOps,saveVolop } from '../actions/user_actions'
 
@@ -23,6 +24,13 @@ window.onload = function () {
     var url_string = window.location.href
     var url = new URL(url_string);
     var jwtToken = url.searchParams.get("jwt")
+
+    let volOpStorage = localStorage.getItem('VolOps') || false
+
+    if(volOpStorage){
+      UserStore.setVolOps(JSON.parse(volOpStorage))
+    }
+
 
     if(jwtToken!=null){
       localStorage.setItem('token', jwtToken);

@@ -76,8 +76,17 @@ export function saveVolop(userID, volOpID) {
 }
 
 export function shareVolop(volOpID){
+
+   fetch('/api/volOps/'+volOpID)
+  .then((resp) => resp.json()) // Transform the data into json
+  .then(function(data2) { 
+    console.log(JSON.stringify(data2)+" volOpin user actions")
+
+    window.open("http://twitter.com/share?text=I am volunteering at "+data2.volOpName+" Join me by visiting &url=http://127.0.0.1:3000/?volOpID="+data2._id+"&hashtags=eVol,volunteer,UNCG")
+        return data2
+  })
   
-window.open("http://twitter.com/share?text=I am volunteering for eVol here&url=http://www.google.com&hashtags=evol,volunteer,UNCG")
+
 
   //dispatcher.dispatch({
    // type: UserActionTypes.SHARE_VOLOP

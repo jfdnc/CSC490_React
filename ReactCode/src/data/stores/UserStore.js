@@ -77,6 +77,11 @@ constructor(props) {
     }
     */
 
+    setVolOps(volOps){
+      this.state.volOps = volOps
+      this.emit("change")
+    }
+
     initVolOps(volOp){
        this.state.volOps.push(volOp) 
        //let unique2 = [...new Set(this.state.volOps)] 
@@ -100,6 +105,7 @@ constructor(props) {
        
        if(size+1==this.state.user.savedVolOps.length ){
        this.state.volOps.push(volOp) 
+       localStorage.setItem('VolOps', JSON.stringify(this.state.volOps))
        //let unique2 = [...new Set(this.state.volOps)] 
        //this.state.volOps=  unique2 
        }
