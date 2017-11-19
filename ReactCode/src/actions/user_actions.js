@@ -86,7 +86,7 @@ export function editPrefs(user){
     .catch(function(err){
       console.log(err)
     })
-    
+
     localStorage.setItem('userInfo',JSON.stringify(user))
 
     dispatcher.dispatch({

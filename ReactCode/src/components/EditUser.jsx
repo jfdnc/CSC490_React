@@ -9,7 +9,6 @@ export default class EditOrg extends React.Component {
 
         this.state = {...props}
 
-
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
@@ -26,7 +25,9 @@ export default class EditOrg extends React.Component {
             lastName: inputArr[j++],
             email: inputArr[j++],
             zipCode: inputArr[j++],
-            _id: this.state._id
+            _id: this.state._id,
+            preferences: this.state.preferences,
+            savedVolOps: this.state.savedVolOps
         };
 
         editPrefs(inputObj)
@@ -56,7 +57,7 @@ export default class EditOrg extends React.Component {
                         <Input s={6} label="Email" type='email' validate defaultValue={this.state.email}></Input>
                         <Input s={6} label="Zip" defaultValue={this.state.zipCode}></Input>
                     </Row>
-                    <Button onClick={() => this.handleSubmit()}>Submit</Button>
+                    <Button onClick={() => this.handleSubmit()}>Save</Button>
                 </div>
             </div>
         )

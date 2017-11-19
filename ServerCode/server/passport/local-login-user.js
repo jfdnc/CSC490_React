@@ -46,6 +46,7 @@ module.exports = new PassportLocalStrategy({
             const data = {
                 firstName: user.firstName,
                 lastName: user.lastName,
+                email: user.email,
                 zipCode: user.zipCode,
                 preferences: user.preferences,
                 savedVolOps: user.savedVolOps,

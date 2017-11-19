@@ -9,12 +9,13 @@ export default class UserDashBoardLayout extends React.Component{
     super(props)
 
     this.state = {
-      user: this.props.userState,
+      user: JSON.parse(localStorage.getItem('userInfo')),
       view: 'saved'
     }
 
     this.handleClick = this.handleClick.bind(this)
     this.populateSavedVolops = this.populateSavedVolops.bind(this)
+    this.populateWindowView = this.populateWindowView.bind(this)
   }
 
   handleClick(type){
@@ -22,9 +23,38 @@ export default class UserDashBoardLayout extends React.Component{
   }
 
   populateSavedVolops(){
+    let savedVolOps = this.state.user.savedVolOps
     return(
-      <h1>list of saved volops</h1>
+      <div id='user-saved-volops'>
+        <a id='user-switch-volop-view' onClick={()=>this.handleClick('volop-search')}>Find new volunteer opportunities</a>
+        <div id='user-saved-volop-list'>
+        {savedVolOps.length ? <h1>some volops here</h1> :
+                              <h5>no volops saved yet</h5>}
+        </div>
+      </div>
     )
+  }
+  populateWindowView(){
+    switch(this.state.view){
+      case 'saved':
+        return(this.populateSavedVolops())
+        break
+      case 'volop-search':
+        return(
+          <div>
+          <a id='user-switch-saved-view' onClick={()=>this.handleClick('saved')}>View saved volunteer opportunities</a>
+          <VolOpSearch userType='user' {...this.props}/>
+          </div>
+        )
+        break
+      case 'edit':
+        return(
+          <div id='edit-user-container'>
+            <a id='user-back' onClick={()=>this.handleClick('saved')}>Back</a>
+            <EditUser {...this.state.user}/>
+          </div>
+        )
+    }
   }
 
 
@@ -45,9 +75,7 @@ export default class UserDashBoardLayout extends React.Component{
         <div id='user-feed'>
         </div>
         <div id='user-volop-container'>
-          {this.state.view === 'saved' ? this.populateSavedVolops() :
-                               'edit'  ? <EditUser {...this.state.user}/> :
-          <VolOpSearch userType='guest' {...this.props}/>}
+          {this.populateWindowView()}
         </div>
       </div>
     )
