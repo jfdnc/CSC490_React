@@ -7,11 +7,10 @@ export default class EditOrg extends React.Component {
     constructor(props){
         super(props)
 
-        this.state = UserStore.getAll().user
+        this.state = {...props}
 
 
         this.handleSubmit = this.handleSubmit.bind(this)
-        console.log(this.state)
     }
 
     handleSubmit = () =>{
@@ -37,11 +36,11 @@ export default class EditOrg extends React.Component {
         setTimeout(() => {
           if(localStorage.getItem('userInfo')){
             loader.style.visibility ='hidden'
-            this.props.history.push('/')
+            window.location.reload()
           } else {
             //add error message here
             loader.style.visibility ='hidden'
-            console.log('Error updating Org info')
+            console.log('Error updating User info')
           }
         }, 500)
 
@@ -56,7 +55,7 @@ export default class EditOrg extends React.Component {
                         <Input s={6} label="Last Name" defaultValue={this.state.lastName}></Input>
                         <Input s={6} label="Email" type='email' validate defaultValue={this.state.email}></Input>
                         <Input s={6} label="Zip" defaultValue={this.state.zipCode}></Input>
-                    </Row>                    
+                    </Row>
                     <Button onClick={() => this.handleSubmit()}>Submit</Button>
                 </div>
             </div>

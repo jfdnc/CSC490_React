@@ -67,7 +67,7 @@ export function saveVolop(userID, volOpID){
 }
 
 export function shareVolop(volOpID){
-  
+
 window.open("http://twitter.com/share?text=I am volunteering for eVol here&url=http://www.google.com&hashtags=evol,volunteer,UNCG")
 
   //dispatcher.dispatch({
@@ -86,6 +86,8 @@ export function editPrefs(user){
     .catch(function(err){
       console.log(err)
     })
+    
+    localStorage.setItem('userInfo',JSON.stringify(user))
 
     dispatcher.dispatch({
       type: UserActionTypes.EDIT_PREFS,
@@ -156,7 +158,7 @@ export function addToCal(volOpID, userEmail){
           })
     .catch(function(err){
       console.log(err)
-    })    
+    })
   })
 
 }
@@ -199,7 +201,7 @@ export function deleteUser(userID){
     })
 
     dispatcher.dispatch({
-      type: UserActionTypes.LOG_OUT,      
+      type: UserActionTypes.LOG_OUT,
     })
 
   })
