@@ -87,7 +87,7 @@ export default class VolOpSearch extends React.Component{
     let searchContainer = document.getElementById('search-container')
     searchContainer.style.overflowY = 'hidden'
     let loader = document.getElementById('search-volop-loader')
-    loader.style.height = '300px'
+    loader.style.height = '500px'
     let volOpList = volops
     volOpList = volOpList.map(op => {
       if(op.volOpAddress.zip.substr(0,3) == searchInfo.zip.substr(0,3)){

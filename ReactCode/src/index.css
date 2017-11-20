@@ -337,6 +337,11 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
   display: flex;
   overflow: hidden;
 }
+#search-volop-loader{
+  height: 0px;
+  overflow: hidden;
+  transition: height 550ms ease;
+}
 /*org dashboard*/
 #dashboard-org {
   background: white;
@@ -509,7 +514,7 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
 }
 .volop-categories{
   grid-row: 2;
-  grid-column: 1/5;
+  grid-column: 1/8;
   padding-left: 6px;
 }
 .volop-categories i.material-icons {
@@ -689,9 +694,6 @@ ul:not(.browser-default)>li{
     height: 40px;
   }
   #search-volop-loader{
-    height: 0px;
-    overflow: hidden;
-    transition: height 550ms ease;
   }
   #search-container{
     height: 400px;
