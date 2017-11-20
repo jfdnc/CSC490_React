@@ -79,7 +79,8 @@ export default class NewVolOp extends React.Component {
         document.getElementById('loading-message').innerHTML ='Saving...'
         loader.style.visibility ='visible'
         setTimeout(() => {
-            if(localStorage.getItem('volOpInfo')){
+            //defaulting to true this for now
+            if(true){
                 loader.style.visibility ='hidden'
                 this.props.history.push('/')
             } else {
