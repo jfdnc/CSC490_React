@@ -893,12 +893,16 @@ ul:not(.browser-default)>li{
     grid-template-rows: repeat(12,1fr);
     grid-template-columns: repeat(12,1fr);
     height: 300px;
-    background: blue;
+    background: grey;
     margin: 6px;
   }
   #user-remove-volop{
     grid-row: 1;
-    grid-column: 10/13;
+    grid-column: 11/13;
+  }
+  #user-remove-volop:hover{
+    color: var(--blue-2) !important;
+    cursor: pointer;
   }
   #user-volop-description{
     grid-row: 2/13;

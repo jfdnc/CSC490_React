@@ -23,7 +23,6 @@ export function getUserType(){
 export function logOut(){
     //remove the token from local storage
     return new Promise((resolve, reject) =>{
-      editUser(JSON.parse(localStorage.getItem('userInfo')))
       localStorage.removeItem('token')
       localStorage.removeItem('userInfo')
 
@@ -168,6 +167,7 @@ export function addToCal(volOpID, userEmail){
 user._id needs to be defined.  This is the Mongo id of the user
 */
 export function editUser(user){
+  console.log(user)
   return new Promise((resolve, reject) => {
     let myReq = new Request('/api/users/'+user._id, {method:'PUT', body: JSON.stringify(user),
       headers: {"Content-Type": "application/json"}})

@@ -2,6 +2,7 @@ import React from 'react'
 import UserStore from '../data/stores/UserStore'
 import VolOpSearch from './VolOpSearch'
 import EditUser from './EditUser'
+import { editUser } from '../actions/user_actions'
 import { Icon } from 'react-materialize'
 
 export default class UserDashBoardLayout extends React.Component{
@@ -32,7 +33,7 @@ export default class UserDashBoardLayout extends React.Component{
         {savedVolOps.length ? savedVolOps.map(id => {
           return(
             <div id='user-volop'>
-              <div id='user-remove-volop'>
+              <div id='user-remove-volop' onClick={()=> this.removeSavedVolOp(id)}>
                 <Icon>delete</Icon>
               </div>
               <div id='user-volop-description'>
@@ -70,7 +71,11 @@ export default class UserDashBoardLayout extends React.Component{
   }
 
   removeSavedVolOp(id){
-
+    let newUserState = Object.assign({}, this.state.user)
+    newUserState.savedVolOps = newUserState.savedVolOps.filter(volopid => volopid != id)
+    editUser(newUserState)
+    localStorage.setItem('userInfo', JSON.stringify(newUserState))
+    this.setState({ user: newUserState })
   }
 
 
