@@ -92,10 +92,16 @@ export default class VolOpSearch extends React.Component{
       }
     })
     volOpList = _.compact(volOpList)
+
+    volOpList.sort((a,b)=>{
+      let catCheck = searchInfo.cats.map(cat => b.volOpCategories.includes(cat))
+      return(catCheck.indexOf(true) != -1)
+    })
     if(volOpList.length == 0){
       searchNotfoundWarning.style.opacity = '1'
       searchNotfoundWarning.style.visibility = 'visible'
     }
+
     this.setState({ volOpList })
   }
   render(){
