@@ -3,6 +3,7 @@ import { CardPanel, Icon, Button } from 'react-materialize'
 import ReactToolTip from 'react-tooltip'
 import gmappalceholder from '../assets/images/gmapplaceholder.jpg'
 import gmapsapikey from '../util/gmapsapikey.js'
+import { saveVolop } from '../actions/user_actions'
 
 const VolOpListing = (props) => {
   let volop = props.volop
@@ -16,8 +17,16 @@ const VolOpListing = (props) => {
   }
 
   const handleClick = () => {
-    localStorage.setItem('tempVolOp', JSON.stringify(volop))
-    props.history.push('/register')
+    if(props.userType === 'guest'){
+      localStorage.setItem('tempVolOp', JSON.stringify(volop))
+      props.history.push('/register')
+    } else {
+      saveVolop(props.userState._id,volop._id)
+      let userInfo = JSON.parse(localStorage.getItem('userInfo'))
+      userInfo.savedVolOps.push(volop._id)
+      localStorage.setItem('userInfo', JSON.stringify(userInfo))
+      window.location.reload()
+    }
   }
 
   let fullAddress = `${volop.volOpAddress.street.split(" ").join("+")},${volop.volOpAddress.city.split(" ").join("+")},${volop.volOpAddress.state.split(" ").join("+")},${volop.volOpAddress.zip}`

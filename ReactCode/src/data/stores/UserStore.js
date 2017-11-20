@@ -40,7 +40,7 @@ constructor(props) {
     }
 
     initFBUser(user){
-       this.state.user = user      
+       this.state.user = user
        this.emit("change")
     }
 
@@ -50,20 +50,18 @@ constructor(props) {
     }
 
     initVolOps(volOps){
-       this.state.user.savedVolOps = volOps             
+       this.state.user.savedVolOps = volOps
        this.emit("change")
     }
 
-     addVolOp(volOpID){     
-        
-       this.state.user.savedVolOps.push(volOpID) 
-       let unique = [...new Set(this.state.user.savedVolOps)] 
-       this.state.user.savedVolOps=  unique        
+     addVolOp(volOpID){
+       this.state.user.savedVolOps.push(volOpID)
+       let unique = [...new Set(this.state.user.savedVolOps)]
+       this.state.user.savedVolOps=  unique
        this.emit("change")
-
     }
 
-    
+
     handleActions(action) {
       switch (action.type) {
         case UserActionTypes.CREATE_USER:
@@ -89,7 +87,7 @@ constructor(props) {
             break
         case UserActionTypes.INIT_VOLOPS:
             this.initVolOps(action.volOps);
-            break        
+            break
         }
     }
 }

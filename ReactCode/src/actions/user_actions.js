@@ -23,6 +23,7 @@ export function getUserType(){
 export function logOut(){
     //remove the token from local storage
     return new Promise((resolve, reject) =>{
+      editUser(JSON.parse(localStorage.getItem('userInfo')))
       localStorage.removeItem('token')
       localStorage.removeItem('userInfo')
 

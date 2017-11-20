@@ -16,6 +16,7 @@ export default class UserDashBoardLayout extends React.Component{
     this.handleClick = this.handleClick.bind(this)
     this.populateSavedVolops = this.populateSavedVolops.bind(this)
     this.populateWindowView = this.populateWindowView.bind(this)
+    this.removeSavedVolOp = this.removeSavedVolOp.bind(this)
   }
 
   handleClick(type){
@@ -28,8 +29,19 @@ export default class UserDashBoardLayout extends React.Component{
       <div id='user-saved-volops'>
         <a id='user-switch-volop-view' onClick={()=>this.handleClick('volop-search')}>Find new volunteer opportunities</a>
         <div id='user-saved-volop-list'>
-        {savedVolOps.length ? <h1>some volops here</h1> :
-                              <h5>no volops saved yet</h5>}
+        {savedVolOps.length ? savedVolOps.map(id => {
+          return(
+            <div id='user-volop'>
+              <div id='user-remove-volop'>
+                <Icon>delete</Icon>
+              </div>
+              <div id='user-volop-description'>
+                {id}
+              </div>
+            </div>
+          )
+        }) :
+            <h5>no volops saved yet</h5>}
         </div>
       </div>
     )
@@ -42,8 +54,8 @@ export default class UserDashBoardLayout extends React.Component{
       case 'volop-search':
         return(
           <div>
-          <a id='user-switch-saved-view' onClick={()=>this.handleClick('saved')}>View saved volunteer opportunities</a>
-          <VolOpSearch userType='user' {...this.props}/>
+            <a id='user-switch-saved-view' onClick={()=>this.handleClick('saved')}>View saved volunteer opportunities</a>
+            <VolOpSearch userType='user' {...this.props}/>
           </div>
         )
         break
@@ -55,6 +67,10 @@ export default class UserDashBoardLayout extends React.Component{
           </div>
         )
     }
+  }
+
+  removeSavedVolOp(id){
+
   }
 
 
