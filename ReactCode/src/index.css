@@ -688,6 +688,11 @@ ul:not(.browser-default)>li{
     margin: 6px;
     height: 40px;
   }
+  #search-volop-loader{
+    height: 0px;
+    overflow: hidden;
+    transition: height 550ms ease;
+  }
   #search-container{
     height: 400px;
   }

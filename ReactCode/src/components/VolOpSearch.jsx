@@ -1,6 +1,6 @@
 import React from 'react'
 import VolOpListing from './VolOpListing'
-import { Input, Col, Row, Button } from 'react-materialize'
+import { Input, Col, Row, Button, Preloader } from 'react-materialize'
 import _ from 'lodash'
 //
 import testvolops from '../util/testvolops.js'
@@ -84,7 +84,10 @@ export default class VolOpSearch extends React.Component{
 
   populateVolOpList(volops, searchInfo){
     let searchNotfoundWarning = document.getElementById('search-notfound-warning')
-
+    let searchContainer = document.getElementById('search-container')
+    searchContainer.style.overflowY = 'hidden'
+    let loader = document.getElementById('search-volop-loader')
+    loader.style.height = '300px'
     let volOpList = volops
     volOpList = volOpList.map(op => {
       if(op.volOpAddress.zip.substr(0,3) == searchInfo.zip.substr(0,3)){
@@ -102,7 +105,11 @@ export default class VolOpSearch extends React.Component{
       searchNotfoundWarning.style.visibility = 'visible'
     }
 
-    this.setState({ volOpList })
+    setTimeout(()=>{
+      loader.style.height = '0px'
+      searchContainer.style.overflowY = 'scroll'
+      this.setState({ volOpList })
+    },1000);
   }
   render(){
     return(
@@ -138,6 +145,9 @@ export default class VolOpSearch extends React.Component{
           <hr/>
           <div id='search-notfound-warning'>
             No volunteer opportunities found in that area. Try another ZIP.
+          </div>
+          <div id='search-volop-loader'>
+            <Preloader size='big'/>
           </div>
           {this.state.volOpList.map(volop =>{
             return(
