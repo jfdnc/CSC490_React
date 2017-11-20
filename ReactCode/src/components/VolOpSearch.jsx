@@ -19,8 +19,8 @@ export default class VolOpSearch extends React.Component{
         kids: false
       },
       //testvolops just for testing -- remove before building
-      volOpList:[...testvolops]
-      //volOpList:[]
+      //volOpList:[...testvolops]
+      volOpList:[]
     }
 
     this.handleRadioClicked = this.handleRadioClicked.bind(this)

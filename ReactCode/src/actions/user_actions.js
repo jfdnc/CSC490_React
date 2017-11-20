@@ -130,7 +130,13 @@ export function loginUser(user){
       if (xhr.status === 200) {
             // success so save the token
             localStorage.setItem('token', xhr.response.token);
-            localStorage.setItem('userInfo', JSON.stringify(xhr.response.user))
+            let userInfo = xhr.response.user
+            let tempVolOp = localStorage.getItem('tempVolOp')
+            if(tempVolOp){
+              userInfo.savedVolOps.push(JSON.parse(tempVolOp)._id)
+              localStorage.removeItem('tempVolOp')
+            }
+            localStorage.setItem('userInfo', JSON.stringify(userInfo))
             //send to dispatcher
             dispatcher.dispatch({
               type: UserActionTypes.LOGIN_USER,

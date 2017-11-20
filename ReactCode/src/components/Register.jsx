@@ -4,6 +4,7 @@ import { createUser, loginUser } from '../actions/user_actions'
 import { createOrg } from '../actions/org_actions'
 import Fade from './Fade'
 import UserStore from '../data/stores/UserStore'
+import { saveVolop } from '../actions/user_actions.js'
 
 const Register = (props) => {
 
@@ -41,7 +42,8 @@ const Register = (props) => {
       setTimeout(() => {
         if(registerResponse == 200){
           loadingMessage.innerHTML ='Logging In...'
-          loginUser({email:inputObj.email,pwHash:inputObj.pwHash})
+          const formData = `email=${inputObj.email}&pwHash=${inputObj.pwHash}`
+          loginUser(formData)
           setTimeout(() => {
             if(localStorage.getItem('token')){
               loader.style.visibility ='hidden'
