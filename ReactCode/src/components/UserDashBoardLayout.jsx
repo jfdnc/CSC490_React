@@ -5,6 +5,8 @@ import EditUser from './EditUser'
 import { editUser } from '../actions/user_actions'
 import { Icon,Button } from 'react-materialize'
 import { editPrefs,addToCal, shareVolop, viewVolopUser,deleteUser,deleteVolOp} from '../actions/user_actions'
+import 'font-awesome/css/font-awesome.css'
+
 
 export default class UserDashBoardLayout extends React.Component{
   constructor(props){
@@ -42,9 +44,9 @@ export default class UserDashBoardLayout extends React.Component{
                 <Icon>delete</Icon>                
               </div>
               <div>
-              <Button id="twitter" onClick={()=>{
+              <a href="#" className="btn btn-info" onClick={()=>{
                    shareVolop(volOp._id)
-                }}>Tweet</Button>
+                }}><span class="fa fa-twitter"></span>Tweet</a>
                 </div>
                 <div>
                 <Button onClick={()=>{
