@@ -68,7 +68,14 @@ export function saveVolop(userID, volOpID){
 
 export function shareVolop(volOpID){
 
-window.open("http://twitter.com/share?text=I am volunteering for eVol here&url=http://www.google.com&hashtags=evol,volunteer,UNCG")
+ fetch('/api/volOps/'+volOpID)
+  .then((resp) => resp.json()) // Transform the data into json
+  .then(function(data2) { 
+    console.log(JSON.stringify(data2)+" volOpin user actions")
+
+    window.open("http://twitter.com/share?text=I am volunteering at "+data2.volOpName+" Join me by visiting &url=http://127.0.0.1:3000/?volOpID="+data2._id+"&hashtags=eVol,volunteer,UNCG")
+        return data2
+  })
 
   //dispatcher.dispatch({
    // type: UserActionTypes.SHARE_VOLOP
@@ -221,7 +228,7 @@ export function initFBState(token,user){
   return new Promise((resolve, reject) => {
 
 
-    fetch('/api/users/'+user.email)
+    fetch('/api/users/'+user._id)
   .then((resp) => resp.json()) // Transform the data into json
   .then(function(data) {
       //data._id = user._id
@@ -237,7 +244,6 @@ export function initFBState(token,user){
     })
   })
 })
-saveVolop('5a06872b3a5af5342c3e0d0f','5a0685a6a4a20024b40cf80d')
 }
 
 
