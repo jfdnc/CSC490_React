@@ -108,6 +108,7 @@ router.get('/facebookLogin/callback',
                     const token2 = jwt.sign(payload, config.jwtSecret);
                     
             if(req.user.email!=null){
+                
                 var myId = 0
                 
                 User.findOne({email: req.user.email}).then(function(user){                    
@@ -118,6 +119,7 @@ router.get('/facebookLogin/callback',
                  
             } else{
                 res.redirect('/')
+                
             }
         }
         );

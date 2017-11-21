@@ -25,6 +25,7 @@ export function logOut(){
     return new Promise((resolve, reject) =>{
       localStorage.removeItem('token')
       localStorage.removeItem('userInfo')
+      localStorage.removeItem('VolOps')
 
       dispatcher.dispatch({
           type: UserActionTypes.LOG_OUT
@@ -236,7 +237,7 @@ export function deleteVolOp(userID,volOpID){
     .catch(function(err){
       console.log(err)
     })
-    
+
     dispatcher.dispatch({
       type: UserActionTypes.DEL_VOL,
       volOpID: volOpID
