@@ -109,6 +109,13 @@ router.get('/users/:id', function(req, res, next){
     });
 });
 
+// get a specific user from the db using email as key
+router.get('/user/:email', function(req, res, next){
+    User.findOne({email: req.params.email}).then(function(user){
+        res.send(user);
+    });
+});
+
 // update a user in the db
 router.put('/users/:id', function(req, res, next){
     User.findByIdAndUpdate({_id: req.params.id}, req.body).then(function(){
@@ -133,6 +140,16 @@ router.put('/userVol', function(req, res, next){
   User.findByIdAndUpdate({_id: req.body.userId},
     {$addToSet: {savedVolOps: req.body.volOpId}}).then(function(){
       User.findOne({_id: req.body.userId}).then(function(user){
+        res.send(user);
+      });
+    });
+});
+
+// update a user's savedVolOps in db (working version)
+router.delete('/deleteVol', function(req, res, next){
+  User.findByIdAndUpdate({_id: req.body.userID},
+    {$pull: {savedVolOps: req.body.volOpID}}).then(function(){
+      User.findOne({_id: req.body.userID}).then(function(user){
         res.send(user);
       });
     });

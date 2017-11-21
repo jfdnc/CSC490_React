@@ -33,9 +33,12 @@ export function logOut(){
 }
 
 //return more info about selected volop for user view
-export function viewVolopUser(){
-  dispatcher.dispatch({
-    type: UserActionTypes.VIEW_VOLOP_USER
+export function viewVolopUser(volOpID){
+   fetch('/api/volOps/'+volOpID)
+  .then((resp) => resp.json()) // Transform the data into json
+  .then(function(data2) { 
+      
+        return data2
   })
 }
 
@@ -68,7 +71,14 @@ export function saveVolop(userID, volOpID){
 
 export function shareVolop(volOpID){
 
-window.open("http://twitter.com/share?text=I am volunteering for eVol here&url=http://www.google.com&hashtags=evol,volunteer,UNCG")
+ fetch('/api/volOps/'+volOpID)
+  .then((resp) => resp.json()) // Transform the data into json
+  .then(function(data2) { 
+    console.log(JSON.stringify(data2)+" volOpin user actions")
+
+    window.open("http://twitter.com/share?text=I am volunteering at "+data2.volOpName+" Join me by visiting &url=http://127.0.0.1:3000/?volOpID="+data2._id+"&hashtags=eVol,volunteer,UNCG")
+        return data2
+  })
 
   //dispatcher.dispatch({
    // type: UserActionTypes.SHARE_VOLOP
@@ -173,7 +183,7 @@ export function addToCal(volOpID, userEmail){
 user._id needs to be defined.  This is the Mongo id of the user
 */
 export function editUser(user){
-  console.log(user)
+  
   return new Promise((resolve, reject) => {
     let myReq = new Request('/api/users/'+user._id, {method:'PUT', body: JSON.stringify(user),
       headers: {"Content-Type": "application/json"}})
@@ -215,13 +225,35 @@ export function deleteUser(userID){
 }
 
 
+export function deleteVolOp(userID,volOpID){
+  return new Promise((resolve, reject) => {
+    let myReq = new Request('/api/deleteVol/', {method:'DELETE', body: JSON.stringify({userID: userID,volOpID: volOpID, }),
+      headers: {"Content-Type": "application/json"}})
+    fetch(myReq)
+    .then(function(res){
+            //console.log(res)      
+          })
+    .catch(function(err){
+      console.log(err)
+    })
+    
+    dispatcher.dispatch({
+      type: UserActionTypes.DEL_VOL,
+      volOpID: volOpID
+    })
+
+  })
+}
+
+
+
 
 export function initFBState(token,user){
 
   return new Promise((resolve, reject) => {
 
 
-    fetch('/api/users/'+user.email)
+    fetch('/api/users/'+user._id)
   .then((resp) => resp.json()) // Transform the data into json
   .then(function(data) {
       //data._id = user._id
@@ -237,7 +269,6 @@ export function initFBState(token,user){
     })
   })
 })
-saveVolop('5a06872b3a5af5342c3e0d0f','5a0685a6a4a20024b40cf80d')
 }
 
 
@@ -246,7 +277,7 @@ this method relies on local storage to work
 */
 export function initVolOps(userEmail){
   return new Promise((resolve, reject) => {
-   fetch('/api/users/'+userEmail)
+   fetch('/api/user/'+userEmail)
   .then((resp) => resp.json()) // Transform the data into json
   .then(function(data) {
     //console.log(data.savedVolOps.toString())

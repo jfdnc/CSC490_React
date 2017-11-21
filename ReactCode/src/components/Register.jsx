@@ -5,6 +5,7 @@ import { createOrg } from '../actions/org_actions'
 import Fade from './Fade'
 import UserStore from '../data/stores/UserStore'
 import { saveVolop } from '../actions/user_actions.js'
+import 'font-awesome/css/font-awesome.css'
 
 const Register = (props) => {
 
@@ -86,7 +87,7 @@ const Register = (props) => {
     }
   }
 
-  return(
+  return(    
     <div>
       <Fade>
       <div id='register-view' className='view-container'>

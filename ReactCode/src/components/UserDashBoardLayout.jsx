@@ -3,7 +3,8 @@ import UserStore from '../data/stores/UserStore'
 import VolOpSearch from './VolOpSearch'
 import EditUser from './EditUser'
 import { editUser } from '../actions/user_actions'
-import { Icon } from 'react-materialize'
+import { Icon,Button } from 'react-materialize'
+import { editPrefs,addToCal, shareVolop, viewVolopUser,deleteUser,deleteVolOp} from '../actions/user_actions'
 
 export default class UserDashBoardLayout extends React.Component{
   constructor(props){
@@ -26,20 +27,39 @@ export default class UserDashBoardLayout extends React.Component{
 
   populateSavedVolops(){
     let savedVolOps = this.state.user.savedVolOps
+    let volOps = UserStore.getAll().volOps
+
+
+
     return(
       <div id='user-saved-volops'>
-        <a id='user-switch-volop-view' onClick={()=>this.handleClick('volop-search')}>Find new volunteer opportunities</a>
-        <div id='user-saved-volop-list'>
-        {savedVolOps.length ? savedVolOps.map(id => {
+        <a href="#" id='user-switch-volop-view' onClick={()=>this.handleClick('volop-search')}>Find new volunteer opportunities</a>
+        <div id='user-saved-volop-list'>        
+        {volOps.length ? volOps.map(volOp => {
           return(
             <div id='user-volop'>
-              <div id='user-remove-volop' onClick={()=> this.removeSavedVolOp(id)}>
-                <Icon>delete</Icon>
+              <div id='user-remove-volop' onClick={()=> this.removeSavedVolOp(volOp._id)}>
+                <Icon>delete</Icon>                
+              </div>
+              <div>
+              <Button id="twitter" onClick={()=>{
+                   shareVolop(volOp._id)
+                }}>Tweet</Button>
+                </div>
+                <div>
+                <Button onClick={()=>{
+                    addToCal(volOp._id, UserStore.getAll().user.email)
+                }}>Calendar</Button> 
               </div>
               <div id='user-volop-description'>
-                {id}
+                <h5>Name: {volOp.volOpName}</h5> 
+                Start Date: {volOp.volOpStartDate}, 
+                End Date: {volOp.volOpEndDate}, 
+                Time: {volOp.volOpTod}
               </div>
+              <hr></hr>              
             </div>
+            
           )
         }) :
             <h5>no volops saved yet</h5>}
@@ -70,9 +90,11 @@ export default class UserDashBoardLayout extends React.Component{
     }
   }
 
-  removeSavedVolOp(id){
+  removeSavedVolOp(id){    
     let newUserState = Object.assign({}, this.state.user)
+    deleteVolOp(UserStore.getAll().user._id,id)
     newUserState.savedVolOps = newUserState.savedVolOps.filter(volopid => volopid != id)
+    
     editUser(newUserState)
     localStorage.setItem('userInfo', JSON.stringify(newUserState))
     this.setState({ user: newUserState })
@@ -87,8 +109,8 @@ export default class UserDashBoardLayout extends React.Component{
             <Icon>account_circle</Icon>
           </div>
           <div id='user-edit'>
-            <a onClick={()=>this.handleClick('edit')}>Edit Details</a>
-          </div>
+            <a href="#" onClick={()=>this.handleClick('edit')}>Edit Details</a>
+          </div>          
           <div id='user-header'>
             Welcome back, {this.state.user.firstName}!
           </div>
@@ -97,6 +119,9 @@ export default class UserDashBoardLayout extends React.Component{
         </div>
         <div id='user-volop-container'>
           {this.populateWindowView()}
+        </div>
+        <div>
+            <a href="#" onClick={()=>deleteUser(this.state.user._id)}>Delete Profile</a>
         </div>
       </div>
     )

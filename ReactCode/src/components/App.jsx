@@ -81,6 +81,7 @@ window.onload = function () {
         initFBState(jwtToken,newUser)
       }
       window.history.replaceState({}, document.title, "/");
+      window.location.reload();
 
     }
   }

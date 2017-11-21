@@ -116,18 +116,7 @@ const Login =  (props) => {
         offsite login
           <div>
           <a href={UserStore.getAll().facebookURL} className="btn btn-primary"><span className="fa fa-facebook"></span> Facebook</a>
-          <a href={UserStore.getAll().twitterURL} class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
-          <Button onClick={()=>{
-
-            var email = 'evolunteersuncg@gmail.com'
-            var id = '5a0e1285d5d0850478b05fec'
-            var email = prompt("enter your email","email")
-            var id = prompt("enter volOpID","5a0e1285d5d0850478b05fec")
-
-            addToCal(id,email)
-
-
-        }}>Submit iCal Request</Button>
+          <a href={UserStore.getAll().twitterURL} class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>         
           </div>
       </div>
       </div>
