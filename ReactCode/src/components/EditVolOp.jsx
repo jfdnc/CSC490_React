@@ -6,7 +6,17 @@ export default class EditVolOp extends React.Component {
     constructor(props){
         super(props)
 
-        this.state = { volOp: {} }
+        this.state = {
+            volOp: {},
+            categoryState: {
+                animals: false,
+                community: false,
+                elderly: false,
+                homeless: false,
+                kids: false
+            },
+            ongoingState: false
+        }
 
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -24,7 +34,7 @@ export default class EditVolOp extends React.Component {
         const orgObj = JSON.parse(localStorage.getItem('orgInfo'))
 
         for (let i = 0; i < inputs.length; i++) {
-            inputs[i].value ? inputArr.push(inputs[i].value) : null
+            inputs[i].value.length !== 0 ? inputArr.push(inputs[i].value) : null
         }
         inputObj = {
             volOpName: inputArr[0],
@@ -45,14 +55,15 @@ export default class EditVolOp extends React.Component {
             orgName: orgObj.orgName,
             _id: id
         };
-        updateVolOp(inputObj).then(this.props.history.push('/')).catch(function(err){console.log(err)})
+        updateVolOp(inputObj)
+        this.props.changeView('browse')
     }
 
     render() {
         const volOp = this.state.volOp
         return (
             <div className='view-container'>
-                <h1>EditVolOp</h1>
+                <h4>Edit Volunteer Opportunity</h4>
                 <div id='editvolop'>
                     <Input s={6} label="Name" defaultValue={volOp.volOpName}></Input>
                     <Input s={6} label="Description" type="text" defaultValue={volOp.volOpDescription}></Input>
@@ -66,8 +77,8 @@ export default class EditVolOp extends React.Component {
                     </Row>
                     <Input s={6} label="This Event is Ongoing" type="checkbox" defaultValue={volOp.volOpOngoing}></Input>
                     <Row>
-                        <Input s={6} label="Start Date" type="date" defaultValue={volOp.volOpStartDate}></Input>
-                        <Input s={6} label="End Date" type="date" defaultValue={volOp.volOpEndDate}></Input>
+                        <Input s={6} label="Start Date (MM-DD-YYYY)" defaultValue={volOp.volOpStartDate}></Input>
+                        <Input s={6} label="End Date (MM-DD-YYYY)" defaultValue={volOp.volOpEndDate}></Input>
                     </Row>
                     <Row>
                         <Input s={6} label="Time of Day" defaultValue={volOp.volOpTod}></Input>

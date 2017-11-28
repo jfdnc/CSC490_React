@@ -41,7 +41,7 @@ export default class NewVolOp extends React.Component {
         const orgObj = JSON.parse(localStorage.getItem('orgInfo'))
 
         for(let i=0; i<inputs.length; i++){
-            inputs[i].value ? inputArr.push(inputs[i].value) : null
+            inputs[i].value.length != 0 ? inputArr.push(inputs[i].value) : null
         }
         let currState = this.state.categoryState
         let categoriesSelected = []
@@ -74,21 +74,7 @@ export default class NewVolOp extends React.Component {
             volOpCategories: categoriesSelected,
             orgName: orgObj.orgName
         };
-        createVolop(inputObj).then(result => {orgObj.orgVolOps.push(result._id);editOrgInfo(orgObj)})
-        let loader = document.getElementById('loader-overlay')
-        document.getElementById('loading-message').innerHTML ='Saving...'
-        loader.style.visibility ='visible'
-        setTimeout(() => {
-            //defaulting to true this for now
-            if(true){
-                loader.style.visibility ='hidden'
-                this.props.history.push('/')
-            } else {
-                //add error message here
-                loader.style.visibility ='hidden'
-                console.log('Error creating volunteer opportunity')
-            }
-        }, 500)
+        createVolop(inputObj).then(result => {orgObj.orgVolOps.push(result._id);editOrgInfo(orgObj);this.props.changeView('browse')})
     }
 
     render() {
@@ -108,8 +94,8 @@ export default class NewVolOp extends React.Component {
                     </Row>
                     <Input s={6} label="This Event is Ongoing" onClick={()=>this.handleRadioClicked()} type="checkbox"></Input>
                     <Row>
-                        <Input s={6} label="Start Date" type="date"></Input>
-                        <Input s={6} label="End Date" type="date"></Input>
+                        <Input s={6} label="Start Date (MM-DD-YYYY)"></Input>
+                        <Input s={6} label="End Date (MM-DD-YYYY)"></Input>
                     </Row>
                     <Row>
                         <Input s={6} label="Time of Day"></Input>

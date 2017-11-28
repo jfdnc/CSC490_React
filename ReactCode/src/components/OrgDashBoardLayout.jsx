@@ -1,25 +1,30 @@
 import React from 'react'
 import { Button } from 'react-materialize'
-import { Link } from 'react-router-dom'
 import EditOrg from './EditOrg'
 import OrgStore from '../data/stores/OrgStore'
 import { getAllVolOpsByOrg } from '../actions/org_actions'
 import VolOpListingOrg from './VolOpListingOrg'
+import EditVolOp from './EditVolOp'
+import NewVolOp from './NewVolOp'
 import { Preloader } from 'react-materialize'
-import testvolops from '../util/testvolops'
 
 export default class OrgDashBoardLayout extends React.Component{
   constructor(props){
     super(props)
 
     this.state = {
-      volops: []
-      //volops: [...testvolops]
+      volops: [],
+      editvolop: {},
+      view: 'browse'
     }
+
+    this.populateWindow = this.populateWindow.bind(this)
+    this.populateEditVolOp = this.populateEditVolOp.bind(this)
+    this.changeView = this.changeView.bind(this)
 
   }
 
-  componentWillMount(){//comment out to test with testvolops
+  componentWillMount(){
     OrgStore.on('change', () => {
       setTimeout(() => {
         this.setState({volops: OrgStore.getAll().allVolOps})
@@ -29,9 +34,46 @@ export default class OrgDashBoardLayout extends React.Component{
     //
   }
 
+  populateWindow(){
+      switch(this.state.view){
+          case 'browse':
+              let loadingmsg = this.state.volops.length ? "" : <Preloader size='big'/>
+              return(
+                  <div>
+                  <h5>{loadingmsg}</h5>
+                  {this.state.volops.map(volop => {
+                      return(<VolOpListingOrg {...volop} changeView={this.changeView} populateEditVolOp={this.populateEditVolOp}/>)
+                  })}
+                  </div>
+              )
+              break
+          case 'edit':
+              return(
+                  <div id='edit-user-container'>
+                      <EditVolOp {...this.state.editvolop} changeView={this.changeView}/>
+                  </div>
+              )
+              break
+          case 'new':
+              return(
+                  <div id='edit-user-container'>
+                      <NewVolOp changeView={this.changeView}/>
+                  </div>
+              )
+              break
+      }
+  }
+
+  populateEditVolOp(){
+      this.setState({editvolop: JSON.parse(localStorage.getItem('volOpInfo'))})
+  }
+
+  changeView(type){
+      this.setState({view: type})
+  }
+
 
   render(){
-    let loadingmsg = this.state.volops.length ? "" : <Preloader size='big'/>
     return(
       <div id='dashboard-org'>
         <div id="org-info">
@@ -45,17 +87,14 @@ export default class OrgDashBoardLayout extends React.Component{
         </div>
         </div>
         <div id='org-editorg'>
-          <Link to='/editorg'><a>Edit Profile</a></Link>
+          <a>Edit Profile</a>
         </div>
         <div id='org-newvolop'>
-          <Link to='/newvolop'><Button>New Volunteer Opportunity</Button></Link>
+          <Button onClick={() => this.changeView('new')}>New Volunteer Opportunity</Button>
         </div>
-        <div id='org-volopfeed'>
-          <h5>{loadingmsg}</h5>
-          {this.state.volops.map(volop => {
-            return(<VolOpListingOrg {...volop}/>)
-          })}
-        </div>
+          <div id='org-volopfeed'>
+              {this.populateWindow()}
+          </div>
       </div>
     )
   }
