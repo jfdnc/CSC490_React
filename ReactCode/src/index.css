@@ -833,7 +833,18 @@ ul:not(.browser-default)>li{
   #user-feed{
     grid-row: 4/13;
     grid-column: 1/7;
-    background: purple;
+    border: 1px solid #ccc;
+    border-radius: 1px;
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+    overflow-y: scroll;
+    text-align: left;
+    padding: 16px;
+  }
+
+  #example-user-feed{
+    display: grid;
+    grid-template-rows: auto 30px;
+    height: 100%;
   }
   #user-volop-container{
     grid-row: 1/13;
@@ -900,7 +911,9 @@ ul:not(.browser-default)>li{
     grid-template-rows: repeat(12,1fr);
     grid-template-columns: repeat(12,1fr);
     height: 300px;
-    background: grey;
+    background: white;
+    border-radius: 3px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.7);
     margin: 6px;
   }
   #user-remove-volop{
