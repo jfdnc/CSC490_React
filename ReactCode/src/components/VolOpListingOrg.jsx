@@ -1,12 +1,9 @@
 import React from 'react'
 import { CardPanel, Button, Icon, Preloader } from 'react-materialize'
 import { deleteVolOp, getVolOpById, editOrgInfo } from '../actions/org_actions'
-import { withRouter } from 'react-router-dom'
 import ReactToolTip from 'react-tooltip'
-import gmappalceholder from '../assets/images/gmapplaceholder.jpg'
 
 const VolOpListingOrg = (props) => {
-  console.log(props)
     var icons = {
         animals:<Icon>pets</Icon>,
         community:<Icon>domain</Icon>,
@@ -16,7 +13,9 @@ const VolOpListingOrg = (props) => {
     }
 
     const handleEdit = () =>{
-        getVolOpById(props._id).then(props.history.push('/editvolop')).catch(function(err){console.log(err)})
+        localStorage.setItem('volOpInfo', JSON.stringify(props))
+        props.populateEditVolOp()
+        props.changeView('edit')
     }
 
     const handleDelete = (id) => {
@@ -94,4 +93,4 @@ const VolOpListingOrg = (props) => {
     )
 }
 
-export default withRouter(VolOpListingOrg)
+export default VolOpListingOrg

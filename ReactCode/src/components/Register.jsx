@@ -107,7 +107,7 @@ const Register = (props) => {
               <Button onClick={()=>handleSubmit('user')}>Submit</Button>
             </Tab>
             {/*org fields*/}
-            <Tab  key={2} title='Organization'>
+            <Tab key={2} title='Organization' id='org-reg-tab'>
             <Row>
               <Input s={6} label="Org Name"></Input>
               <Input s={6} label="Org Email" type='email' validate></Input>
