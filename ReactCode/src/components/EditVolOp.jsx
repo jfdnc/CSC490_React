@@ -46,6 +46,10 @@ export default class EditVolOp extends React.Component {
             }
         }
         this.state.categoryState = categoriesChecked
+
+        if(volOpInfo.volOpOngoing){
+            this.state.ongoingState = true
+        }
     }
 
     handleCategoryClicked(e){
