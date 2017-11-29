@@ -83,7 +83,7 @@ export default class NewVolOp extends React.Component {
     render() {
         return (
             <div className='view-container'>
-                <h2>New Volunteer Opportunity</h2>
+                <h5 id='new-volop-header'>Create New Volunteer Opportunity</h5>
                 <div id='newvolop'>
                     <Input s={6} label="Name"></Input>
                     <Input s={6} label="Description" type="text"></Input>
@@ -117,8 +117,10 @@ export default class NewVolOp extends React.Component {
                         <Input s={6} label="Homelessness" value='homeless' onClick={(e)=>this.handleCategoryClicked(e)} type="checkbox"></Input>
                         <Input s={6} label="Kids" value='kids' onClick={(e)=>this.handleCategoryClicked(e)} type="checkbox"></Input>
                     </Row>
-                    <Button onClick={() => this.handleSubmit()}>Submit</Button>
-                    <Button onClick={() => this.handleCancel()}>Cancel</Button>
+                    <div id='org-form-buttons'>
+                      <Button onClick={() => this.handleSubmit()}>Submit</Button>
+                      <Button onClick={() => this.handleCancel()}>Cancel</Button>
+                    </div>
                 </div>
             </div>
         )

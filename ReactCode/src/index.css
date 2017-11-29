@@ -358,7 +358,6 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
   grid-column: 1/13;
   text-align: left;
   padding: 6px;
-  background: green;
   margin-bottom: 12px;
 }
 #org-newvolop{
@@ -371,6 +370,9 @@ input[type='number']:not(.browser-default):focus:not([readonly]) + label{
   grid-column: 8/13;
   text-align: right;
   padding: 6px;
+}
+#org-editorg > a:hover{
+  cursor: pointer;
 }
 #org-volopfeed{
   grid-row: 4/12;
@@ -638,6 +640,12 @@ ul:not(.browser-default)>li{
   }
 }
 
+#org-form-buttons > button{
+  margin: 0 12px 30px 0;
+  width: 120px;
+  margin-top: 18px;
+}
+
 /*fullscreen*//*************************************************************/
 @media screen and (min-width: 750px) {
 
@@ -890,7 +898,15 @@ ul:not(.browser-default)>li{
     color: var(--blue-1);
   }
   #edit-user-container{
+    padding: 12px;
     text-align: right;
+  }
+  #org-form-buttons > button{
+    margin: 0 24px;
+    width: 160px;
+    margin-top: 18px;
+  }
+  #new-volop-header{
   }
   #user-saved-volop-list{
     grid-row: 2;

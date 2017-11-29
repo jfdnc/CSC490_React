@@ -63,8 +63,10 @@ export default class EditOrg extends React.Component {
                         <Input s={6} label="Website" defaultValue={this.state.orgWebsite}></Input>
                     </Row>
                     <Input s={12} label="Contact Name" type='text' defaultValue={this.state.orgContactPerson}></Input>
-                    <Button onClick={() => this.handleSubmit()}>Submit</Button>
-                    <Button onClick={() => this.handleCancel()}>Cancel</Button>
+                    <div id='org-form-buttons'>
+                      <Button onClick={() => this.handleSubmit()}>Submit</Button>
+                      <Button onClick={() => this.handleCancel()}>Cancel</Button>
+                    </div>
                 </div>
             </div>
         )

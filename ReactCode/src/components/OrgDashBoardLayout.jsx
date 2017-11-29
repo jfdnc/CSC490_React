@@ -36,7 +36,7 @@ export default class OrgDashBoardLayout extends React.Component{
   populateWindow(){
       switch(this.state.view){
           case 'browse':
-              let loadingmsg = this.state.volops.length ? "" : <Preloader size='big'/>
+              let loadingmsg = (this.state.volops.length || OrgStore.getAll().org.length) ? "" : <Preloader size='big'/>
               return(
                   <div>
                   <h5>{loadingmsg}</h5>

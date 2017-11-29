@@ -10,7 +10,7 @@ export default class UserDashBoardLayout extends React.Component{
     super(props)
 
     this.state = {
-      user: JSON.parse(localStorage.getItem('userInfo')),
+      user: UserStore.getAll().user,
       view: 'saved'
     }
 
@@ -21,20 +21,27 @@ export default class UserDashBoardLayout extends React.Component{
     this.populateUserFeed = this.populateUserFeed.bind(this)
   }
 
+  componentWillMount(){
+    console.log(UserStore.getAll().user)
+    UserStore.on('change', function() {
+      console.log(UserStore.getAll())
+    })
+  }
+
   handleClick(type){
     this.setState({view:type})
   }
 
   populateSavedVolops(){
     let savedVolOps = this.state.user.savedVolOps
-    console.log(UserStore.getAll)
+    console.log(savedVolOps)
     return(
       <div id='user-saved-volops'>
         <a id='user-switch-volop-view' onClick={()=>this.handleClick('volop-search')}>Find new volunteer opportunities</a>
         <div id='user-saved-volop-list'>
-        {savedVolOps.length ? savedVolOps.map(id => {
+        {savedVolOps.length ? savedVolOps.map((id,i) => {
           return(
-            <div id='user-volop'>
+            <div id='user-volop' key={i}>
               <div id='user-remove-volop' onClick={()=> this.removeSavedVolOp(id)}>
                 <Icon>delete</Icon>
               </div>
