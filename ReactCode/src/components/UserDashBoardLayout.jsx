@@ -3,7 +3,7 @@ import UserStore from '../data/stores/UserStore'
 import VolOpSearch from './VolOpSearch'
 import EditUser from './EditUser'
 import { editUser } from '../actions/user_actions'
-import { Icon } from 'react-materialize'
+import { Icon, Button } from 'react-materialize'
 
 export default class UserDashBoardLayout extends React.Component{
   constructor(props){
@@ -18,6 +18,7 @@ export default class UserDashBoardLayout extends React.Component{
     this.populateSavedVolops = this.populateSavedVolops.bind(this)
     this.populateWindowView = this.populateWindowView.bind(this)
     this.removeSavedVolOp = this.removeSavedVolOp.bind(this)
+    this.populateUserFeed = this.populateUserFeed.bind(this)
   }
 
   handleClick(type){
@@ -26,6 +27,7 @@ export default class UserDashBoardLayout extends React.Component{
 
   populateSavedVolops(){
     let savedVolOps = this.state.user.savedVolOps
+    console.log(UserStore.getAll)
     return(
       <div id='user-saved-volops'>
         <a id='user-switch-volop-view' onClick={()=>this.handleClick('volop-search')}>Find new volunteer opportunities</a>
@@ -47,6 +49,18 @@ export default class UserDashBoardLayout extends React.Component{
       </div>
     )
   }
+
+  populateUserFeed(){
+    return(
+      <div id='example-user-feed'>
+        <div id='share-volops-to-twitter' style={{gridRow:2,display:'grid',gridGap:'6px',gridTemplateColumns:'1fr 1fr'}}>
+          <Button onClick={() => console.log('Share to Twitter!')}>Tell Your Friends!</Button>
+          <Button onClick={() => console.log('Share to Twitter!')}> Share to Twitter</Button>
+        </div>
+      </div>
+    )
+  }
+
   populateWindowView(){
     switch(this.state.view){
       case 'saved':
@@ -94,6 +108,7 @@ export default class UserDashBoardLayout extends React.Component{
           </div>
         </div>
         <div id='user-feed'>
+          {this.populateUserFeed()}
         </div>
         <div id='user-volop-container'>
           {this.populateWindowView()}
