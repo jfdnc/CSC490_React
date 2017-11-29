@@ -20,6 +20,7 @@ export default class NewVolOp extends React.Component {
         this.handleRadioClicked = this.handleRadioClicked.bind(this)
         this.handleCategoryClicked = this.handleCategoryClicked.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleCancel = this.handleCancel.bind(this)
     }
 
     handleCategoryClicked(e){
@@ -41,7 +42,7 @@ export default class NewVolOp extends React.Component {
         const orgObj = JSON.parse(localStorage.getItem('orgInfo'))
 
         for(let i=0; i<inputs.length; i++){
-            inputs[i].value.length != 0 ? inputArr.push(inputs[i].value) : null
+            inputs[i].value.length != 0 ? inputArr.push(inputs[i].value) : inputArr.push('')
         }
         let currState = this.state.categoryState
         let categoriesSelected = []
@@ -52,9 +53,7 @@ export default class NewVolOp extends React.Component {
         }
         let details = []
         for(let i=11; i<14; i++){
-            if(!inputArr[i].isEmpty){
-                details.push(inputArr[i])
-            }
+            details.push(inputArr[i])
         }
         inputObj = {
             volOpName: inputArr[0],
@@ -74,7 +73,11 @@ export default class NewVolOp extends React.Component {
             volOpCategories: categoriesSelected,
             orgName: orgObj.orgName
         };
-        createVolop(inputObj).then(result => {orgObj.orgVolOps.push(result._id);editOrgInfo(orgObj);this.props.changeView('browse')})
+        createVolop(inputObj).then(result => {orgObj.orgVolOps.push(result._id);editOrgInfo(orgObj).then(result => {localStorage.setItem('orgInfo', JSON.stringify(result))});this.props.changeView('browse')})
+    }
+
+    handleCancel(){
+        this.props.changeView('browse')
     }
 
     render() {
@@ -115,6 +118,7 @@ export default class NewVolOp extends React.Component {
                         <Input s={6} label="Kids" value='kids' onClick={(e)=>this.handleCategoryClicked(e)} type="checkbox"></Input>
                     </Row>
                     <Button onClick={() => this.handleSubmit()}>Submit</Button>
+                    <Button onClick={() => this.handleCancel()}>Cancel</Button>
                 </div>
             </div>
         )

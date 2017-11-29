@@ -68,9 +68,8 @@ export function editOrgInfo(org){
         let myReq = new Request('/api/organizations/' + org._id, {method:'PUT', body: JSON.stringify(org),
             headers: {"Content-Type": "application/json"}})
         fetch(myReq)
-            .then(res => res.json())
-            .then(resJSON =>{
-                localStorage.setItem('orgInfo', JSON.stringify(resJSON))
+            .then(function(res){
+                resolve(res.json())
             })
             .catch(function(err){
                 console.log(err)

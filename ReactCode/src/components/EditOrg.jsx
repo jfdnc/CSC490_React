@@ -9,7 +9,7 @@ export default class EditOrg extends React.Component {
         this.state = { ...props }
 
         this.handleSubmit = this.handleSubmit.bind(this)
-        console.log(props)
+        this.handleCancel = this.handleCancel.bind(this)
     }
 
     handleSubmit = () =>{
@@ -17,7 +17,7 @@ export default class EditOrg extends React.Component {
             inputObj = {},
             inputs = document.getElementsByTagName('input')
         for(let i=0; i<inputs.length; i++){
-            inputs[i].value ? inputArr.push(inputs[i].value) : null
+            inputs[i].value.length !== 0 ? inputArr.push(inputs[i].value) : inputArr.push('')
         }
         inputObj = {
             orgName: inputArr[0],
@@ -34,22 +34,12 @@ export default class EditOrg extends React.Component {
             orgContactPerson: inputArr[9],
             _id: this.state._id
         };
+        editOrgInfo(inputObj).then(result => {localStorage.setItem('orgInfo', JSON.stringify(result)); window.location.reload()})
+        //window.location.reload()
+    }
 
-        editOrgInfo(inputObj)
-        let loader = document.getElementById('loader-overlay')
-        document.getElementById('loading-message').innerHTML ='Saving...'
-        loader.style.visibility ='visible'
-        setTimeout(() => {
-          if(localStorage.getItem('orgInfo')){
-            loader.style.visibility ='hidden'
-            this.props.history.push('/')
-          } else {
-            //add error message here
-            loader.style.visibility ='hidden'
-            console.log('Error updating Org info')
-          }
-        }, 500)
-
+    handleCancel(){
+        this.props.changeView('browse')
     }
 
     render(){
@@ -75,6 +65,7 @@ export default class EditOrg extends React.Component {
                     </Row>
                     <Input s={12} label="Contact Name" type='text' defaultValue={this.state.orgContactPerson}></Input>
                     <Button onClick={() => this.handleSubmit()}>Submit</Button>
+                    <Button onClick={() => this.handleCancel()}>Cancel</Button>
                 </div>
             </div>
         )

@@ -19,11 +19,49 @@ export default class EditVolOp extends React.Component {
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleCancel = this.handleCancel.bind(this)
+        this.handleRadioClicked = this.handleRadioClicked.bind(this)
+        this.handleCategoryClicked = this.handleCategoryClicked.bind(this)
     }
 
     componentWillMount(){
         const volOpInfo = JSON.parse(localStorage.getItem('volOpInfo'))
         this.setState({volOp: volOpInfo})
+
+        //check if category checkboxes need to be 'checked' on load
+        //prob better way to do this but oh well...
+        let categories = volOpInfo.volOpCategories
+        let categoriesChecked = {...this.state.categoryState}
+        for(let i = 0; i<categories.length; i++){
+            if(categories[i] === 'animals'){
+                categoriesChecked.animals = true
+            } else if(categories[i] === 'community'){
+                categoriesChecked.community = true
+            } else if(categories[i] === 'elderly'){
+                categoriesChecked.elderly = true
+            } else if(categories[i] === 'homeless'){
+                categoriesChecked.homeless = true
+            } else if(categories[i] === 'kids'){
+                categoriesChecked.kids = true
+            }
+        }
+        this.state.categoryState = categoriesChecked
+    }
+
+    handleCategoryClicked(e){
+        let categoryState = Object.assign({},this.state.categoryState)
+        categoryState[e.target.value] = !categoryState[e.target.value]
+        this.setState({categoryState})
+    }
+
+    handleRadioClicked(){
+        let ongoingState = this.state.volOp.volOpOngoing
+        if(ongoingState){
+            ongoingState = false
+        } else {
+            ongoingState = true
+        }
+        this.setState({ongoingState})
     }
 
     handleSubmit(id){
@@ -34,7 +72,18 @@ export default class EditVolOp extends React.Component {
         const orgObj = JSON.parse(localStorage.getItem('orgInfo'))
 
         for (let i = 0; i < inputs.length; i++) {
-            inputs[i].value.length !== 0 ? inputArr.push(inputs[i].value) : null
+            inputs[i].value.length !== 0 ? inputArr.push(inputs[i].value) : inputArr.push('')
+        }
+        let currState = this.state.categoryState
+        let categoriesSelected = []
+        for(let category in currState){
+            if(currState[category]){
+                categoriesSelected.push(category)
+            }
+        }
+        let details = []
+        for(let i=11; i<14; i++){
+            details.push(inputArr[i])
         }
         inputObj = {
             volOpName: inputArr[0],
@@ -45,17 +94,22 @@ export default class EditVolOp extends React.Component {
                 state: inputArr[4],
                 zip: inputArr[5]
             },
-            volOpOngoing: inputArr[6],
+            volOpOngoing: this.state.ongoingState,
             volOpStartDate: inputArr[7],
             volOpEndDate: inputArr[8],
             volOpTod: inputArr[9],
             volOpSpotsAvailable: inputArr[10],
-            volOpDetails: inputArr[11],
-            volOpCategories: inputArr[12],
+            volOpDetails: details,
+            volOpCategories: categoriesSelected,
             orgName: orgObj.orgName,
             _id: id
         };
         updateVolOp(inputObj)
+        localStorage.removeItem('volOpInfo')
+        window.location.reload()
+    }
+
+    handleCancel(){
         this.props.changeView('browse')
     }
 
@@ -75,7 +129,7 @@ export default class EditVolOp extends React.Component {
                         <Input s={6} label="State" defaultValue={volOp.volOpAddress.state}></Input>
                         <Input s={6} label="Zip" defaultValue={volOp.volOpAddress.zip}></Input>
                     </Row>
-                    <Input s={6} label="This Event is Ongoing" type="checkbox" defaultValue={volOp.volOpOngoing}></Input>
+                    <Input s={6} label="This Event is Ongoing" type="checkbox" onClick={()=>this.handleRadioClicked()} defaultChecked={volOp.volOpOngoing}></Input>
                     <Row>
                         <Input s={6} label="Start Date (MM-DD-YYYY)" defaultValue={volOp.volOpStartDate}></Input>
                         <Input s={6} label="End Date (MM-DD-YYYY)" defaultValue={volOp.volOpEndDate}></Input>
@@ -88,34 +142,19 @@ export default class EditVolOp extends React.Component {
                         return (
                             <Input s={12} label="Additional Details" defaultValue={detail}></Input>
                         )
-                        if(volOp.volOpDetails.length === 2) {
-                            return(
-                                <Input s={12} label="Additional Details"></Input>
-                            )
-                        } else if(volOp.volOpDetails.length === 1){
-                            return(
-                                <Input s={12} label="Additional Details"></Input>,
-                                <Input s={12} label="Additional Details"></Input>
-                            )
-                        } else {
-                            return(
-                                <Input s={12} label="Additional Details"></Input>,
-                                <Input s={12} label="Additional Details"></Input>,
-                                <Input s={12} label="Additional Details"></Input>
-                            )
-                        }
                     })}
                     Categories
                     <Row>
-                        <Input s={4} label="Animals" value='animals' type="checkbox"></Input>
-                        <Input s={4} label="My Community" value='community' type="checkbox"></Input>
-                        <Input s={4} label="The Elderly" value='elderly' type="checkbox"></Input>
+                        <Input s={4} label="Animals" value='animals' type="checkbox" onClick={(e)=>this.handleCategoryClicked(e)} defaultChecked={this.state.categoryState.animals}></Input>
+                        <Input s={4} label="My Community" value='community' type="checkbox" onClick={(e)=>this.handleCategoryClicked(e)} defaultChecked={this.state.categoryState.community}></Input>
+                        <Input s={4} label="The Elderly" value='elderly' type="checkbox" onClick={(e)=>this.handleCategoryClicked(e)} defaultChecked={this.state.categoryState.elderly}></Input>
                     </Row>
                     <Row>
-                        <Input s={6} label="Homelessness" value='homeless' type="checkbox"></Input>
-                        <Input s={6} label="Kids" value='kids' type="checkbox"></Input>
+                        <Input s={6} label="Homelessness" value='homeless' type="checkbox" onClick={(e)=>this.handleCategoryClicked(e)} defaultChecked={this.state.categoryState.homeless}></Input>
+                        <Input s={6} label="Kids" value='kids' type="checkbox" onClick={(e)=>this.handleCategoryClicked(e)} defaultChecked={this.state.categoryState.kids}></Input>
                     </Row>
                     <Button onClick={() => this.handleSubmit(volOp._id)}>Submit</Button>
+                    <Button onClick={() => this.handleCancel()}>Cancel</Button>
                 </div>
             </div>
         )

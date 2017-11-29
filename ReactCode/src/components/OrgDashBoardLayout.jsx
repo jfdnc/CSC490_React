@@ -1,11 +1,11 @@
 import React from 'react'
 import { Button } from 'react-materialize'
-import EditOrg from './EditOrg'
 import OrgStore from '../data/stores/OrgStore'
 import { getAllVolOpsByOrg } from '../actions/org_actions'
 import VolOpListingOrg from './VolOpListingOrg'
 import EditVolOp from './EditVolOp'
 import NewVolOp from './NewVolOp'
+import EditOrg from './EditOrg'
 import { Preloader } from 'react-materialize'
 
 export default class OrgDashBoardLayout extends React.Component{
@@ -31,7 +31,6 @@ export default class OrgDashBoardLayout extends React.Component{
       }, 1200)
     })
     getAllVolOpsByOrg(this.props.orgVolOps)
-    //
   }
 
   populateWindow(){
@@ -61,6 +60,13 @@ export default class OrgDashBoardLayout extends React.Component{
                   </div>
               )
               break
+          case 'profile':
+              return(
+                  <div id='edit-user-container'>
+                      <EditOrg {...JSON.parse(localStorage.getItem('orgInfo'))} changeView={this.changeView}/>
+                  </div>
+              )
+              break
       }
   }
 
@@ -87,7 +93,7 @@ export default class OrgDashBoardLayout extends React.Component{
         </div>
         </div>
         <div id='org-editorg'>
-          <a>Edit Profile</a>
+          <a onClick={() => this.changeView('profile')}>Edit Profile</a>
         </div>
         <div id='org-newvolop'>
           <Button onClick={() => this.changeView('new')}>New Volunteer Opportunity</Button>

@@ -23,7 +23,7 @@ const VolOpListingOrg = (props) => {
         deleteVolOp(props._id)
             .then(result => {
               orgObj.orgVolOps.splice(orgObj.orgVolOps.indexOf(result._id), 1)
-              editOrgInfo(orgObj)
+              editOrgInfo(orgObj).then(result => {localStorage.setItem('orgInfo', JSON.stringify(result))})
             })
                 .then(() => {
                   document.getElementById(`delete-button-${id}`).style.visibility = 'hidden'
@@ -32,6 +32,22 @@ const VolOpListingOrg = (props) => {
                   window.location.reload()
                 }, 1000)
               })
+    }
+
+    const populateDate = () => {
+        if(props.volOpOngoing){
+            return(
+                <div className='date-range'>
+                    Ongoing
+                </div>
+            )
+        } else {
+            return(
+                <div className='date-range'>
+                    {props.volOpStartDate} to {props.volOpEndDate}
+                </div>
+            )
+        }
     }
 
     return(
@@ -44,9 +60,7 @@ const VolOpListingOrg = (props) => {
               {props.volOpDescription}
             </div>
             <div className='org-listing-datetime'>
-              <div className='date-range'>
-                {props.volOpStartDate} to {props.volOpEndDate}
-              </div>
+                {populateDate()}
               <div className='time-range'>
                 {props.volOpTod}
               </div>
