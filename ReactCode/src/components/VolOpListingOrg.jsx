@@ -1,6 +1,6 @@
 import React from 'react'
-import { CardPanel, Button, Icon, Preloader } from 'react-materialize'
-import { deleteVolOp, getVolOpById, editOrgInfo } from '../actions/org_actions'
+import { CardPanel, Icon, Preloader } from 'react-materialize'
+import { deleteVolOp, editOrgInfo } from '../actions/org_actions'
 import ReactToolTip from 'react-tooltip'
 
 const VolOpListingOrg = (props) => {

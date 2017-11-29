@@ -35,7 +35,6 @@ export default class EditOrg extends React.Component {
             _id: this.state._id
         };
         editOrgInfo(inputObj).then(result => {localStorage.setItem('orgInfo', JSON.stringify(result)); window.location.reload()})
-        //window.location.reload()
     }
 
     handleCancel(){

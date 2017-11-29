@@ -1,6 +1,3 @@
-/*
-this file will contain actions for UI components to emit
-*/
 import dispatcher from '../data/Dispatcher'
 import OrgActionTypes from '../action_types/OrgActionTypes'
 
@@ -108,9 +105,8 @@ export function createOrg(org){
   })
 }
 
+//login organization
 export function loginOrg(org){
-  //make API call to login user
-  //return promise to login in Login
   return new Promise((resolve,reject) =>{
     const xhr = new XMLHttpRequest();
     xhr.open('post', '/auth/loginorg');
@@ -132,12 +128,12 @@ export function loginOrg(org){
   })
 }
 
+//logout organization
 export function logOut(){
   return new Promise((resolve, reject) => {
     //remove the token from local storage
     localStorage.removeItem('token')
     localStorage.removeItem('orgInfo')
-    localStorage.removeItem('volOpInfo')
     dispatcher.dispatch({
         type: OrgActionTypes.LOG_OUT
     })
@@ -162,24 +158,6 @@ export function getAllVolOpsByOrg(volOpIds){
             type: OrgActionTypes.GET_ALL_VOLOPS_BY_ORG,
             allVolOps: volOpArr
         })
-    })
-}
-
-export function getVolOpById(id) {
-    return new Promise((resolve, reject) => {
-        let myReq = new Request('/api/volOps/' + id, {method: 'GET', headers: {'Content-Type': 'application/json'}})
-        fetch(myReq)
-            .then(res => res.json())
-            .then(resJSON => {
-                localStorage.setItem('volOpInfo', JSON.stringify(resJSON))
-                dispatcher.dispatch({
-                    type: OrgActionTypes.GET_VOLOP_BY_ID,
-                    volOp: resJSON
-                })
-            })
-            .catch(function (err) {
-                console.log(err)
-            })
     })
 }
 

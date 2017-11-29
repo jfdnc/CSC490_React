@@ -1,12 +1,12 @@
 import React from 'react'
 import { Button } from 'react-materialize'
+import { Preloader } from 'react-materialize'
 import OrgStore from '../data/stores/OrgStore'
 import { getAllVolOpsByOrg } from '../actions/org_actions'
 import VolOpListingOrg from './VolOpListingOrg'
 import EditVolOp from './EditVolOp'
 import NewVolOp from './NewVolOp'
 import EditOrg from './EditOrg'
-import { Preloader } from 'react-materialize'
 
 export default class OrgDashBoardLayout extends React.Component{
   constructor(props){
